@@ -42,13 +42,14 @@
     b.type = 'button';
     b.textContent = String(i);
     b.setAttribute('aria-label', 'Step ' + i + ': ' + titleOf(i));
+    b.title = titleOf(i);
     b.setAttribute('data-step', String(i));
     steps.push(b);
   }
-  var caption = document.createElement('p');
+  var caption = document.createElement('div');
   caption.className = 'viz-caption';
   caption.setAttribute('data-viz-caption', '');
-  figure.insertBefore(caption, controls.nextSibling);
+  figure.insertBefore(caption, stage);
   figure.querySelector('[data-viz-frames]').hidden = true;
 
   function stop() { clearTimeout(timer); timer = 0; running = false; }
@@ -71,7 +72,12 @@
     var li = items[frame - 1];
     caption.textContent = '';
     mk('span', 'viz-step', caption).textContent = 'Step ' + frame + ' of ' + COUNT;
-    for (var c = li.firstChild; c; c = c.nextSibling) { caption.appendChild(c.cloneNode(true)); }
+    mk('h3', 'viz-title', caption).textContent = titleOf(frame);
+    var text = mk('p', 'viz-text', caption);
+    for (var c = li.firstChild; c; c = c.nextSibling) {
+      if (c.nodeName !== 'STRONG') { text.appendChild(c.cloneNode(true)); }
+    }
+    text.firstChild.nodeValue = text.firstChild.nodeValue.replace(/^\s+/, '');
     steps.forEach(function (s, k) {
       if (k + 1 === frame) { s.setAttribute('aria-current', 'step'); } else { s.removeAttribute('aria-current'); }
     });

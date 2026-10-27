@@ -63,9 +63,21 @@
 .viz-controls button[aria-current="step"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
 .viz-controls button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .viz-controls .viz-sep { flex: 1 1 8px; }
-.viz-caption { margin: 14px 0 0; min-height: 4.5em; }
-.viz-caption .viz-step { display: block; font-size: .85em; color: var(--muted); }
+.viz-intro { margin: 0 0 14px; color: var(--muted); }
+.viz[data-viz-ready] { display: grid; gap: 12px 20px; grid-template-columns: 1fr; grid-template-areas: "cap" "stage" "ctl"; }
+.viz[data-viz-ready] .viz-caption { grid-area: cap; }
+.viz[data-viz-ready] .viz-stage { grid-area: stage; }
+.viz[data-viz-ready] .viz-controls { grid-area: ctl; margin: 0; }
+.viz-caption { margin: 0; padding: 14px 16px; min-height: 11.5em; background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius); }
+.viz-caption .viz-step { display: block; font-size: .8em; color: var(--muted); }
+.viz-caption .viz-title { margin: 2px 0 6px; font-size: 1.4em; font-weight: 700; line-height: 1.2; }
+.viz-caption .viz-text { margin: 0; }
+@media (min-width: 900px) {
+  .viz[data-viz-ready] { grid-template-columns: 320px minmax(0, 1fr); grid-template-areas: "cap stage" "cap ctl"; align-items: start; }
+  .viz-caption { min-height: 0; }
+}
 .viz-frames { padding-left: 1.2em; }
+.viz-frames li { margin-bottom: .5em; }
 .viz + p { margin-top: 1.5rem; }
 
 @media (max-width: 600px) {
