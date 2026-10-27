@@ -70,7 +70,7 @@
 <h2>4. Open a device by its name</h2>
 <p>On the device with the web interface, open the network's Shared services (ports) tab and publish the port, shared with all members or selected ones. Only programs running on that device itself can be shared.</p>
 <p>Each device has a name: two random words by default, such as finch-unwary. The Ports shared with you tab shows the exact link. To use a short name such as nas, set node.name in the settings file.</p>
-<p>On your computer, set the browser to use the node's proxy: address <code>127.0.0.1</code>, port <code>1080</code> (it speaks HTTP and SOCKS5). Then type the address with http://, for example <code>http://nas.meshtown</code>. The Ports shared with you tab shows each link. While the proxy is set, the browser reaches every site through the node, so keep Mesh Town running; if you stop it, remove the proxy.</p>
+<p>On your computer, in your system's proxy settings, turn on automatic proxy configuration and paste <code>http://127.0.0.1:1080/proxy.pac</code> (Firefox: Settings → General → Network Settings → Automatic proxy configuration URL). Then type the address with http://, for example <code>http://nas.meshtown</code>. The Ports shared with you tab shows each link. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped; <code>*.meshtown</code> addresses work only through the node.</p>
 <p>For SSH, RDP and other programs, use Open on this computer: a member's port gets a local port, for example 22 becomes <code>127.0.0.1:2022</code>.</p>
 <h2>Update</h2>
 <p>Download the file again from the same link; the files without a version in the name are always the latest build.</p>

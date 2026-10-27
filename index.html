@@ -106,7 +106,7 @@
     <ol>
       <li>Install with Homebrew:<pre class="cmd"><code>brew install mesh-town/meshtown/meshtown</code></pre>Or download the app for Apple silicon or Intel from the <a href="install/macos/index.html">full guide</a>.</li>
       <li>Run <code>meshtown</code>. Open the node page from the menu bar icon and set a password.</li>
-      <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. The node page shows an invite as a link and a QR code (<em>Invite a member</em>). Then set the browser's proxy to <code>127.0.0.1</code>, port <code>1080</code>, and shared web interfaces open at <code>http://&lt;device-name&gt;.meshtown</code>. While the proxy is set, the browser reaches every site through the node, so keep Mesh Town running; if you stop it, remove the proxy.</li>
+      <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. The node page shows an invite as a link and a QR code (<em>Invite a member</em>). Then in your system's proxy settings turn on automatic proxy configuration and paste <code>http://127.0.0.1:1080/proxy.pac</code>, and shared web interfaces open at <code>http://&lt;device-name&gt;.meshtown</code>. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped.</li>
     </ol>
     <p><a href="install/macos/index.html">Full macOS guide →</a></p>
   </div>
@@ -116,7 +116,7 @@
     <ol>
       <li>Download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown.exe">meshtown.exe</a>. It is not signed, so SmartScreen may warn on the first launch.</li>
       <li>Run it. Open the node page from the tray icon and set a password.</li>
-      <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. The node page shows an invite as a link and a QR code (<em>Invite a member</em>). Then set the browser's proxy to <code>127.0.0.1</code>, port <code>1080</code>, and shared web interfaces open at <code>http://&lt;device-name&gt;.meshtown</code>. While the proxy is set, the browser reaches every site through the node, so keep Mesh Town running; if you stop it, remove the proxy.</li>
+      <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. The node page shows an invite as a link and a QR code (<em>Invite a member</em>). Then in your system's proxy settings turn on automatic proxy configuration and paste <code>http://127.0.0.1:1080/proxy.pac</code>, and shared web interfaces open at <code>http://&lt;device-name&gt;.meshtown</code>. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped.</li>
     </ol>
     <p><a href="install/windows/index.html">Full Windows guide →</a></p>
   </div>
@@ -127,7 +127,7 @@
       <li>Debian or Ubuntu (64-bit x86):<pre class="cmd"><code>wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_amd64.deb
 sudo apt install ./meshtown_amd64.deb</code></pre>ARM64 and other distributions: see the <a href="install/linux/index.html">full guide</a>.</li>
       <li>Run <code>meshtown</code> for the tray app, or <code>meshtown-cli</code> on a server, and open the node page with the sign-in link it prints.</li>
-      <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. The node page shows an invite as a link and a QR code (<em>Invite a member</em>). Then set the browser's proxy to <code>127.0.0.1</code>, port <code>1080</code>, and shared web interfaces open at <code>http://&lt;device-name&gt;.meshtown</code>. While the proxy is set, the browser reaches every site through the node, so keep Mesh Town running; if you stop it, remove the proxy.</li>
+      <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. The node page shows an invite as a link and a QR code (<em>Invite a member</em>). Then in your system's proxy settings turn on automatic proxy configuration and paste <code>http://127.0.0.1:1080/proxy.pac</code>, and shared web interfaces open at <code>http://&lt;device-name&gt;.meshtown</code>. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped.</li>
     </ol>
     <p><a href="install/linux/index.html">Full Linux guide →</a></p>
   </div>
@@ -225,6 +225,7 @@ meshtown config-path                      # where the settings file is</code></p
 
 <section id="faq" class="section">
   <h2>Questions</h2>
+  <details><summary>How does the browser setting behave?</summary><p>The address <code>http://127.0.0.1:1080/proxy.pac</code> is an automatic proxy configuration (PAC) file served by the node. Ordinary sites go through the node, with a fallback to a direct connection while Mesh Town is stopped; <code>*.meshtown</code> addresses always go through the node, and local addresses go direct. Strict mode (Settings → proxy) removes the direct fallback, so a site never opens outside the chosen exit.</p></details>
   <details><summary>Does it route all my traffic?</summary><p>No. Mesh Town connects ports of programs: a program reaches the network through the node's proxy or a local port. There is no virtual network interface, and other traffic is not touched.</p></details>
   <details><summary>Do I need a server, a public IP or an account?</summary><p>No. Nodes find each other on the public DHT and connect directly. A network is a secret key plus a member list kept by the members.</p></details>
   <details><summary>What if two devices cannot connect directly?</summary><p>They stay unconnected: there is no relay to fall back on. Behind home routers and most NATs it works; some mobile operators prevent it.</p></details>

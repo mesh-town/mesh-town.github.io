@@ -34,7 +34,7 @@ DESKTOP_NETWORK = [
 DESKTOP_OPEN = [
     ("p", "On the device with the web interface, open the network's Shared services (ports) tab and publish the port, shared with all members or selected ones. Only programs running on that device itself can be shared."),
     ("p", "Each device has a name: two random words by default, such as finch-unwary. The Ports shared with you tab shows the exact link. To use a short name such as nas, set node.name in the settings file."),
-    ("p", "On your computer, set the browser to use the node's proxy: address `127.0.0.1`, port `1080` (it speaks HTTP and SOCKS5). Then type the address with http://, for example `http://nas.meshtown`. The Ports shared with you tab shows each link. While the proxy is set, the browser reaches every site through the node, so keep Mesh Town running; if you stop it, remove the proxy."),
+    ("p", "On your computer, in your system's proxy settings, turn on automatic proxy configuration and paste `http://127.0.0.1:1080/proxy.pac` (Firefox: Settings → General → Network Settings → Automatic proxy configuration URL). Then type the address with http://, for example `http://nas.meshtown`. The Ports shared with you tab shows each link. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped; `*.meshtown` addresses work only through the node."),
     ("p", "For SSH, RDP and other programs, use Open on this computer: a member's port gets a local port, for example 22 becomes `127.0.0.1:2022`."),
 ]
 
@@ -45,10 +45,17 @@ ANDROID_NETWORK = [
 ANDROID_OPEN = [
     ("p", "The phone is a member of the network like any other device. For details, see the [usage reference](" + BLOB + "docs/USAGE.md)."),
 ]
-ROUTER_NETWORK = [
-    ("p", "A router node usually joins a network you already have. Ask a member for a single-use invite, then follow the router notes to join and to share the router's web panel with the network."),
+def router_network(stop, cmd):
+    return [
+    ("p", "A router node usually joins a network you already have. Ask a member for a single-use invite (Invite a member on their node page), then run this once" + stop + ":"),
+    ("cmd", cmd),
+    ("p", "The command saves the network to the settings file, so after a restart the service stays in the network without the invite. Stop it with Ctrl+C once it reports joining, then start the service. To share the router's web panel with the network, see the router notes."),
     ("p", "[Router notes](" + DOCS_ROUTER[1] + ") · [Usage reference](" + BLOB + "docs/USAGE.md" + ")"),
-]
+    ]
+
+
+ROUTER_NETWORK = router_network(" while the service is stopped", "/etc/init.d/meshtown stop\nmeshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…")
+KEENETIC_NETWORK = router_network(" while the service is stopped", "/opt/etc/init.d/S99meshtown stop\nmeshtown run --config /opt/etc/meshtown/. --invite mesh-invite2-…")
 
 NO_DIRECT = "one of the networks may prevent direct connections; try another network"
 KEEP = " Keep config.json private."
@@ -112,7 +119,8 @@ OSES = [
             ("cmd", "wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_amd64.deb\nsudo apt install ./meshtown_amd64.deb"),
             ("p", "ARM64:"),
             ("cmd", "wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_arm64.deb\nsudo apt install ./meshtown_arm64.deb"),
-            ("p", "The package adds a signed apt repository, so later updates come with apt. It also installs a meshtown service, stopped. On a server, start it:"),
+            ("p", "The package adds a signed apt repository, so later updates come with apt. It also installs a meshtown service, stopped. On a server, first join your network with an invite from a member (it is saved to the service's settings file), stop it with Ctrl+C once it reports joining, then start the service:"),
+            ("cmd", "sudo meshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…"),
             ("cmd", "sudo systemctl enable --now meshtown"),
             ("p", "The service reads `/etc/meshtown/config.json`. On a desktop with the tray app, leave the service off."),
             ("h3", "Any distribution (static build)"),
@@ -192,7 +200,7 @@ OSES = [
             ("p", "The node runs as the service `/opt/etc/init.d/S99meshtown`."),
         ],
         "check": [],
-        "network": ("2. Join your network", ROUTER_NETWORK),
+        "network": ("2. Join your network", KEENETIC_NETWORK),
         "open": None,
         "update": [("cmd", "opkg update && opkg upgrade meshtown")],
         "remove": [],
