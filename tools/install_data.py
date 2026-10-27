@@ -1,6 +1,8 @@
 """Data for the install pages of the Mesh Town site (one-off generator input).
 
-Blocks are tuples: ("h3", text) ("p", text) ("cmd", code) ("warn", text) ("ol", [text, ...]).
+Blocks are tuples: ("h3", text) ("p", text) ("cmd", code) ("warn", text) ("ol", [text, ...])
+("tabs", (group, [(key, label, [blocks]), ...])): variants of one OS as tabs; the same group name keeps
+the choice in sync across the page.
 Inline markup inside text: `code` and [label](url).
 """
 
@@ -57,6 +59,12 @@ def router_network(stop, cmd):
 ROUTER_NETWORK = router_network(" while the service is stopped", "/etc/init.d/meshtown stop\nmeshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…")
 KEENETIC_NETWORK = router_network(" while the service is stopped", "/opt/etc/init.d/S99meshtown stop\nmeshtown run --config /opt/etc/meshtown/config.json --invite mesh-invite2-…")
 
+DEB_CMD = ("A=$(dpkg --print-architecture)\n"
+           "wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_${A}.deb\n"
+           "sudo apt install ./meshtown_${A}.deb")
+TAR_CMD = ("curl -LO https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-linux-$(uname -m).tar.gz\n"
+           "tar -xzf meshtown-linux-$(uname -m).tar.gz")
+
 NO_DIRECT = "one of the networks may prevent direct connections; try another network"
 KEEP = " Keep config.json private."
 
@@ -67,18 +75,28 @@ OSES = [
         "description": "Install Mesh Town on a Mac with Homebrew or as an app, and connect it to your private network.",
         "lede": "For Macs with Apple silicon or Intel.",
         "install": [
-            ("h3", "With Homebrew (recommended)"),
-            ("cmd", "brew install mesh-town/macos/meshtown\nmeshtown"),
-            ("p", "`meshtown` starts the menu bar app; `meshtown-cli` runs the node in a terminal. A Homebrew install is not marked as downloaded from the internet, so macOS does not stop the first launch."),
-            ("h3", "As an app"),
-            ("p", "Download for [Apple silicon](" + DIST + "macos/MeshTown-macos-arm64.zip) or for [Intel](" + DIST + "macos/MeshTown-macos-x86_64.zip), unzip and move MeshTown.app to Applications."),
-            ("warn", "The app is signed ad hoc and is not notarized, so Gatekeeper stops the first launch of a zip downloaded in a browser. Open System Settings → Privacy & Security and press Open Anyway, or run:"),
-            ("cmd", "xattr -dr com.apple.quarantine /Applications/MeshTown.app"),
+            ("tabs", ("macos", [
+                ("brew", "Homebrew", [
+                    ("cmd", "brew install mesh-town/macos/meshtown\nmeshtown"),
+                    ("p", "`meshtown` starts the menu bar app; `meshtown-cli` runs the node in a terminal. A Homebrew install is not marked as downloaded from the internet, so macOS does not stop the first launch."),
+                ]),
+                ("app", "App", [
+                    ("p", "Download for [Apple silicon](" + DIST + "macos/MeshTown-macos-arm64.zip) or for [Intel](" + DIST + "macos/MeshTown-macos-x86_64.zip), unzip and move MeshTown.app to Applications."),
+                    ("warn", "The app is signed ad hoc and is not notarized, so Gatekeeper stops the first launch of a zip downloaded in a browser. Open System Settings → Privacy & Security and press Open Anyway, or run:"),
+                    ("cmd", "xattr -dr com.apple.quarantine /Applications/MeshTown.app"),
+                ]),
+            ])),
         ],
         "check": DESKTOP_CHECK_MAC, "network": ("3. Create or join a network", DESKTOP_NETWORK),
         "open": ("4. Open a device by its name", DESKTOP_OPEN),
-        "update": [("cmd", "brew upgrade meshtown")],
-        "remove": [("cmd", "brew uninstall meshtown")],
+        "update": [("tabs", ("macos", [
+            ("brew", "Homebrew", [("cmd", "brew upgrade meshtown")]),
+            ("app", "App", [("p", "Download the zip again from the same link and replace MeshTown.app in Applications.")]),
+        ]))],
+        "remove": [("tabs", ("macos", [
+            ("brew", "Homebrew", [("cmd", "brew uninstall meshtown")]),
+            ("app", "App", [("p", "Quit Mesh Town and move MeshTown.app to the Trash.")]),
+        ]))],
         "trouble": [
             ("Homebrew refuses the formula after brew tap", "Newer Homebrew versions do not trust a new tap until you run:\n`brew trust mesh-town/macos`"),
             ("\"MeshTown\" cannot be opened", "See the Gatekeeper note above: Open Anyway, or remove the quarantine mark."),
@@ -112,27 +130,32 @@ OSES = [
         "slug": "linux", "name": "Linux",
         "title": "Install Mesh Town on Linux",
         "description": "Install Mesh Town on Debian, Ubuntu or any Linux, as a desktop app or a server.",
-        "lede": "For 64-bit x86 and ARM. Debian and Ubuntu get an apt package; other distributions use a static build.",
+        "lede": "For 64-bit x86 and ARM.",
         "install": [
-            ("h3", "Debian and Ubuntu (apt)"),
-            ("p", "x86_64:"),
-            ("cmd", "wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_amd64.deb\nsudo apt install ./meshtown_amd64.deb"),
-            ("p", "ARM64:"),
-            ("cmd", "wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_arm64.deb\nsudo apt install ./meshtown_arm64.deb"),
-            ("p", "The package adds a signed apt repository, so later updates come with apt. It also installs a meshtown service, stopped. On a server, first join your network with an invite from a member (it is saved to the service's settings file), stop it with Ctrl+C once it reports joining, then start the service:"),
-            ("cmd", "sudo meshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…"),
-            ("cmd", "sudo systemctl enable --now meshtown"),
-            ("p", "The service reads `/etc/meshtown/config.json`. On a desktop with the tray app, leave the service off."),
-            ("h3", "Any distribution (static build)"),
-            ("p", "Tray app: [meshtown-linux-x86_64.tar.gz](" + DIST + "linux/meshtown-linux-x86_64.tar.gz) · [meshtown-linux-aarch64.tar.gz](" + DIST + "linux/meshtown-linux-aarch64.tar.gz)"),
-            ("p", "Console only: [meshtown-cli-linux-x86_64.tar.gz](" + DIST + "linux/meshtown-cli-linux-x86_64.tar.gz) · [meshtown-cli-linux-aarch64.tar.gz](" + DIST + "linux/meshtown-cli-linux-aarch64.tar.gz)"),
-            ("cmd", "curl -LO https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-linux-x86_64.tar.gz\ntar -xzf meshtown-linux-x86_64.tar.gz"),
-            ("p", "Run `meshtown` for the tray app, or `meshtown-cli` in a terminal or on a server."),
+            ("tabs", ("linux", [
+                ("apt", "Debian / Ubuntu", [
+                    ("cmd", DEB_CMD),
+                    ("p", "The package adds a signed apt repository, so later updates come with apt. It also installs a meshtown service, stopped. On a server, first join your network with an invite from a member (it is saved to the service's settings file), stop it with Ctrl+C once it reports joining, then start the service:"),
+                    ("cmd", "sudo meshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…"),
+                    ("cmd", "sudo systemctl enable --now meshtown"),
+                    ("p", "The service reads `/etc/meshtown/config.json`. On a desktop with the tray app, leave the service off."),
+                ]),
+                ("static", "Other Linux", [
+                    ("cmd", TAR_CMD),
+                    ("p", "Run `meshtown` for the tray app, or `meshtown-cli` in a terminal or on a server. For the console-only archive, use `meshtown-cli-linux-$(uname -m).tar.gz` in the same place."),
+                ]),
+            ])),
         ],
         "check": DESKTOP_CHECK_TRAY, "network": ("3. Create or join a network", DESKTOP_NETWORK),
         "open": ("4. Open a device by its name", DESKTOP_OPEN),
-        "update": [("cmd", "sudo apt update && sudo apt upgrade"), ("p", "For a static build, download the archive again.")],
-        "remove": [("cmd", "sudo apt remove meshtown")],
+        "update": [("tabs", ("linux", [
+            ("apt", "Debian / Ubuntu", [("cmd", "sudo apt update && sudo apt upgrade")]),
+            ("static", "Other Linux", [("p", "Download the archive again and unpack it over the old files.")]),
+        ]))],
+        "remove": [("tabs", ("linux", [
+            ("apt", "Debian / Ubuntu", [("cmd", "sudo apt remove meshtown")]),
+            ("static", "Other Linux", [("p", "Delete the unpacked files.")]),
+        ]))],
         "trouble": [
             ("The service does not start by itself", "It is installed stopped on purpose:\n`sudo systemctl enable --now meshtown`"),
             ("Where is the settings file?", "`/etc/meshtown/config.json` for the service, `~/.config/meshtown/config.json` for a user. Keep it private; `meshtown config-path` prints the one in use."),
@@ -218,9 +241,9 @@ INDEX = {
     "description": "Pick your system and install Mesh Town: macOS, Windows, Linux, Android, OpenWrt or Keenetic.",
     "lede": "Pick your system.",
     "cards": [
-        ("macos", "macOS", "Homebrew or app, Apple silicon and Intel"),
+        ("macos", "macOS", "Apple silicon and Intel"),
         ("windows", "Windows", "64-bit x86"),
-        ("linux", "Linux", "apt for Debian and Ubuntu, static builds for x86_64 and ARM64"),
+        ("linux", "Linux", "Debian, Ubuntu and other distributions"),
         ("android", "Android", "app from a file, Android 7.0 or newer"),
         ("openwrt", "OpenWrt", "routers on 24.10 and 25.12"),
         ("keenetic", "Keenetic", "routers with Entware (experimental)"),

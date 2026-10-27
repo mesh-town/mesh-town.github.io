@@ -33,7 +33,18 @@ def block(b):
         return '<pre class="cmd"><code>%s</code></pre>' % html.escape(val, quote=False)
     if kind == "ol":
         return "<ol>\n" + "\n".join("<li>%s</li>" % inline(x) for x in val) + "\n</ol>"
+    if kind == "tabs":
+        return tabs(*val)
     raise ValueError(kind)
+
+
+def tabs(group, variants):
+    bar = "\n".join('<button type="button" class="var-tab" data-var-tab="%s">%s</button>'
+                    % (k, html.escape(l)) for k, l, _ in variants)
+    panels = "\n".join('<div class="var-panel" data-var-panel="%s">\n<h3>%s</h3>\n%s\n</div>'
+                       % (k, html.escape(l), "\n".join(block(b) for b in bs)) for k, l, bs in variants)
+    return ('<div class="var-group" data-var-group="%s">\n<div class="var-tabs" data-var-tabs hidden>\n%s\n</div>\n%s\n</div>'
+            % (group, bar, panels))
 
 
 def section(title, blocks):
@@ -97,7 +108,7 @@ CHROME_BOTTOM = """</main>
 </footer>
 %(js)s</body>
 </html>
-""" % {"r": REPO, "js": '<script src="../../assets/js/copy.js" defer></script>\n'}
+""" % {"r": REPO, "js": '<script src="../../assets/js/variants.js" defer></script>\n<script src="../../assets/js/copy.js" defer></script>\n'}
 
 
 def os_strip(current):

@@ -130,8 +130,23 @@
   <div class="os-panel" data-os-panel="macos">
     <h3>macOS</h3>
     <ol>
-      <li>Install with Homebrew:<pre class="cmd"><code>brew install mesh-town/macos/meshtown</code></pre>Or download the app for Apple silicon or Intel from the <a href="install/macos/index.html">full guide</a>.</li>
-      <li>Run <code>meshtown</code>, open the node page from the menu bar icon and set a password.</li>
+      <li>Install:
+      <div class="var-group" data-var-group="macos">
+      <div class="var-tabs" data-var-tabs hidden>
+        <button type="button" class="var-tab" data-var-tab="brew">Homebrew</button>
+        <button type="button" class="var-tab" data-var-tab="app">App</button>
+      </div>
+      <div class="var-panel" data-var-panel="brew">
+        <h4>Homebrew</h4>
+        <pre class="cmd"><code>brew install mesh-town/macos/meshtown
+meshtown</code></pre>
+      </div>
+      <div class="var-panel" data-var-panel="app">
+        <h4>App</h4>
+        <p>Download for <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-arm64.zip">Apple silicon</a> or <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-x86_64.zip">Intel</a>, unzip and move MeshTown.app to Applications. The app is not notarized: on the first launch press <em>Open Anyway</em> in System Settings → Privacy &amp; Security.</p>
+      </div>
+      </div></li>
+      <li>Start Mesh Town, open the node page from the menu bar icon and set a password.</li>
       <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. To add the next device, press <em>Invite a member</em>: it shows a link and a QR code.</li>
     </ol>
     <details><summary>Open shared web panels by name</summary><p>In your system's proxy settings, turn on automatic proxy configuration (<abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr>) and paste <code>http://127.0.0.1:1080/proxy.pac</code>. A shared panel then opens at <code>http://&lt;device-name&gt;.meshtown</code>. For other programs, press <em>Open on this computer</em> next to a shared port on the node page.</p></details>
@@ -152,8 +167,24 @@
   <div class="os-panel" data-os-panel="linux">
     <h3>Linux</h3>
     <ol>
-      <li>Debian or Ubuntu (64-bit x86):<pre class="cmd"><code>wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_amd64.deb
-sudo apt install ./meshtown_amd64.deb</code></pre>ARM64 and other distributions: see the <a href="install/linux/index.html">full guide</a>.</li>
+      <li>Install:
+      <div class="var-group" data-var-group="linux">
+      <div class="var-tabs" data-var-tabs hidden>
+        <button type="button" class="var-tab" data-var-tab="apt">Debian / Ubuntu</button>
+        <button type="button" class="var-tab" data-var-tab="static">Other Linux</button>
+      </div>
+      <div class="var-panel" data-var-panel="apt">
+        <h4>Debian / Ubuntu</h4>
+        <pre class="cmd"><code>A=$(dpkg --print-architecture)
+wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_${A}.deb
+sudo apt install ./meshtown_${A}.deb</code></pre>
+      </div>
+      <div class="var-panel" data-var-panel="static">
+        <h4>Other Linux</h4>
+        <pre class="cmd"><code>curl -LO https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-linux-$(uname -m).tar.gz
+tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
+      </div>
+      </div></li>
       <li>Run <code>meshtown</code> for the tray app, or <code>meshtown-cli</code> on a server, and open the node page with the sign-in link it prints.</li>
       <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. To add the next device, press <em>Invite a member</em>: it shows a link and a QR code.</li>
     </ol>
@@ -174,7 +205,23 @@ sudo apt install ./meshtown_amd64.deb</code></pre>ARM64 and other distributions:
   <div class="os-panel" data-os-panel="router">
     <h3>Router</h3>
     <ol>
-      <li>OpenWrt 24.10 or 25.12, as root on the router:<pre class="cmd"><code>wget -O- https://mesh-town.github.io/meshtown-openwrt/install.sh | sh</code></pre>Keenetic with Entware, over SSH (experimental):<pre class="cmd"><code>wget -O- https://mesh-town.github.io/meshtown-keenetic/install.sh | sh</code></pre>The script adds the package feed and installs the meshtown service.</li>
+      <li>Install:
+      <div class="var-group" data-var-group="router">
+      <div class="var-tabs" data-var-tabs hidden>
+        <button type="button" class="var-tab" data-var-tab="openwrt">OpenWrt</button>
+        <button type="button" class="var-tab" data-var-tab="keenetic">Keenetic</button>
+      </div>
+      <div class="var-panel" data-var-panel="openwrt">
+        <h4>OpenWrt</h4>
+        <p>OpenWrt 24.10 or 25.12, as root on the router:</p>
+        <pre class="cmd"><code>wget -O- https://mesh-town.github.io/meshtown-openwrt/install.sh | sh</code></pre>
+      </div>
+      <div class="var-panel" data-var-panel="keenetic">
+        <h4>Keenetic</h4>
+        <p>Keenetic with Entware, over SSH (experimental):</p>
+        <pre class="cmd"><code>wget -O- https://mesh-town.github.io/meshtown-keenetic/install.sh | sh</code></pre>
+      </div>
+      </div>The script adds the package feed and installs the meshtown service.</li>
       <li>Join the router to your network with an invite from a member: see the router guide.</li>
     </ol>
     <p class="links-line"><a href="install/openwrt/index.html">OpenWrt guide →</a> <a href="install/keenetic/index.html">Keenetic guide →</a></p>
@@ -235,6 +282,7 @@ meshtown config-path                      # where the settings file is</code></p
   </div>
 </footer>
 <script src="assets/js/site.js" defer></script>
+<script src="assets/js/variants.js" defer></script>
 <script src="assets/js/copy.js" defer></script>
 <script src="assets/viz/scene.js" defer></script>
 <script src="assets/viz/player.js" defer></script>

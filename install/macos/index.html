@@ -53,14 +53,24 @@
 </ul>
 </nav>
 <h2>1. Install</h2>
-<h3>With Homebrew (recommended)</h3>
+<div class="var-group" data-var-group="macos">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="brew">Homebrew</button>
+<button type="button" class="var-tab" data-var-tab="app">App</button>
+</div>
+<div class="var-panel" data-var-panel="brew">
+<h3>Homebrew</h3>
 <pre class="cmd"><code>brew install mesh-town/macos/meshtown
 meshtown</code></pre>
 <p><code>meshtown</code> starts the menu bar app; <code>meshtown-cli</code> runs the node in a terminal. A Homebrew install is not marked as downloaded from the internet, so macOS does not stop the first launch.</p>
-<h3>As an app</h3>
+</div>
+<div class="var-panel" data-var-panel="app">
+<h3>App</h3>
 <p>Download for <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-arm64.zip">Apple silicon</a> or for <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-x86_64.zip">Intel</a>, unzip and move MeshTown.app to Applications.</p>
 <p class="note-warn"><strong>Note.</strong> The app is signed ad hoc and is not notarized, so Gatekeeper stops the first launch of a zip downloaded in a browser. Open System Settings → Privacy &amp; Security and press Open Anyway, or run:</p>
 <pre class="cmd"><code>xattr -dr com.apple.quarantine /Applications/MeshTown.app</code></pre>
+</div>
+</div>
 <h2>2. Make sure it works</h2>
 <p>The node page opens from the menu bar icon, or with the sign-in link printed at start:</p>
 <pre class="cmd"><code>Mesh Town page: http://127.0.0.1:7777/?token=…</code></pre>
@@ -78,9 +88,35 @@ meshtown</code></pre>
 <p>For SSH, RDP and other programs, use Open on this computer: a member's port gets a local port, for example 22 becomes <code>127.0.0.1:2022</code>.</p>
 <h2>Update and remove</h2>
 <p>Update:</p>
+<div class="var-group" data-var-group="macos">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="brew">Homebrew</button>
+<button type="button" class="var-tab" data-var-tab="app">App</button>
+</div>
+<div class="var-panel" data-var-panel="brew">
+<h3>Homebrew</h3>
 <pre class="cmd"><code>brew upgrade meshtown</code></pre>
+</div>
+<div class="var-panel" data-var-panel="app">
+<h3>App</h3>
+<p>Download the zip again from the same link and replace MeshTown.app in Applications.</p>
+</div>
+</div>
 <p>Remove:</p>
+<div class="var-group" data-var-group="macos">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="brew">Homebrew</button>
+<button type="button" class="var-tab" data-var-tab="app">App</button>
+</div>
+<div class="var-panel" data-var-panel="brew">
+<h3>Homebrew</h3>
 <pre class="cmd"><code>brew uninstall meshtown</code></pre>
+</div>
+<div class="var-panel" data-var-panel="app">
+<h3>App</h3>
+<p>Quit Mesh Town and move MeshTown.app to the Trash.</p>
+</div>
+</div>
 <h2>Troubleshooting</h2>
 <dl class="trouble">
 <dt>Homebrew refuses the formula after brew tap</dt>
@@ -104,6 +140,7 @@ meshtown</code></pre>
     </ul>
   </div>
 </footer>
+<script src="../../assets/js/variants.js" defer></script>
 <script src="../../assets/js/copy.js" defer></script>
 </body>
 </html>

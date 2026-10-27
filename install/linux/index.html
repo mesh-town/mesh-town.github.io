@@ -41,7 +41,7 @@
 </nav>
 
 <h1>Install Mesh Town on Linux</h1>
-<p class="lede">For 64-bit x86 and ARM. Debian and Ubuntu get an apt package; other distributions use a static build.</p>
+<p class="lede">For 64-bit x86 and ARM.</p>
 <nav class="os-strip" aria-label="Other systems">
 <ul>
 <li><a href="../macos/index.html">macOS</a></li>
@@ -53,23 +53,28 @@
 </ul>
 </nav>
 <h2>1. Install</h2>
-<h3>Debian and Ubuntu (apt)</h3>
-<p>x86_64:</p>
-<pre class="cmd"><code>wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_amd64.deb
-sudo apt install ./meshtown_amd64.deb</code></pre>
-<p>ARM64:</p>
-<pre class="cmd"><code>wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_arm64.deb
-sudo apt install ./meshtown_arm64.deb</code></pre>
+<div class="var-group" data-var-group="linux">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="apt">Debian / Ubuntu</button>
+<button type="button" class="var-tab" data-var-tab="static">Other Linux</button>
+</div>
+<div class="var-panel" data-var-panel="apt">
+<h3>Debian / Ubuntu</h3>
+<pre class="cmd"><code>A=$(dpkg --print-architecture)
+wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_${A}.deb
+sudo apt install ./meshtown_${A}.deb</code></pre>
 <p>The package adds a signed apt repository, so later updates come with apt. It also installs a meshtown service, stopped. On a server, first join your network with an invite from a member (it is saved to the service's settings file), stop it with Ctrl+C once it reports joining, then start the service:</p>
 <pre class="cmd"><code>sudo meshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…</code></pre>
 <pre class="cmd"><code>sudo systemctl enable --now meshtown</code></pre>
 <p>The service reads <code>/etc/meshtown/config.json</code>. On a desktop with the tray app, leave the service off.</p>
-<h3>Any distribution (static build)</h3>
-<p>Tray app: <a href="https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-linux-x86_64.tar.gz">meshtown-linux-x86_64.tar.gz</a> · <a href="https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-linux-aarch64.tar.gz">meshtown-linux-aarch64.tar.gz</a></p>
-<p>Console only: <a href="https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-cli-linux-x86_64.tar.gz">meshtown-cli-linux-x86_64.tar.gz</a> · <a href="https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-cli-linux-aarch64.tar.gz">meshtown-cli-linux-aarch64.tar.gz</a></p>
-<pre class="cmd"><code>curl -LO https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-linux-x86_64.tar.gz
-tar -xzf meshtown-linux-x86_64.tar.gz</code></pre>
-<p>Run <code>meshtown</code> for the tray app, or <code>meshtown-cli</code> in a terminal or on a server.</p>
+</div>
+<div class="var-panel" data-var-panel="static">
+<h3>Other Linux</h3>
+<pre class="cmd"><code>curl -LO https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-linux-$(uname -m).tar.gz
+tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
+<p>Run <code>meshtown</code> for the tray app, or <code>meshtown-cli</code> in a terminal or on a server. For the console-only archive, use <code>meshtown-cli-linux-$(uname -m).tar.gz</code> in the same place.</p>
+</div>
+</div>
 <h2>2. Make sure it works</h2>
 <p>The node page opens from the tray icon, or with the sign-in link printed at start:</p>
 <pre class="cmd"><code>Mesh Town page: http://127.0.0.1:7777/?token=…</code></pre>
@@ -87,10 +92,35 @@ tar -xzf meshtown-linux-x86_64.tar.gz</code></pre>
 <p>For SSH, RDP and other programs, use Open on this computer: a member's port gets a local port, for example 22 becomes <code>127.0.0.1:2022</code>.</p>
 <h2>Update and remove</h2>
 <p>Update:</p>
+<div class="var-group" data-var-group="linux">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="apt">Debian / Ubuntu</button>
+<button type="button" class="var-tab" data-var-tab="static">Other Linux</button>
+</div>
+<div class="var-panel" data-var-panel="apt">
+<h3>Debian / Ubuntu</h3>
 <pre class="cmd"><code>sudo apt update &amp;&amp; sudo apt upgrade</code></pre>
-<p>For a static build, download the archive again.</p>
+</div>
+<div class="var-panel" data-var-panel="static">
+<h3>Other Linux</h3>
+<p>Download the archive again and unpack it over the old files.</p>
+</div>
+</div>
 <p>Remove:</p>
+<div class="var-group" data-var-group="linux">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="apt">Debian / Ubuntu</button>
+<button type="button" class="var-tab" data-var-tab="static">Other Linux</button>
+</div>
+<div class="var-panel" data-var-panel="apt">
+<h3>Debian / Ubuntu</h3>
 <pre class="cmd"><code>sudo apt remove meshtown</code></pre>
+</div>
+<div class="var-panel" data-var-panel="static">
+<h3>Other Linux</h3>
+<p>Delete the unpacked files.</p>
+</div>
+</div>
 <h2>Troubleshooting</h2>
 <dl class="trouble">
 <dt>The service does not start by itself</dt>
@@ -114,6 +144,7 @@ tar -xzf meshtown-linux-x86_64.tar.gz</code></pre>
     </ul>
   </div>
 </footer>
+<script src="../../assets/js/variants.js" defer></script>
 <script src="../../assets/js/copy.js" defer></script>
 </body>
 </html>
