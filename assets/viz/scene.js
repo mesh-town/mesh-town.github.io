@@ -49,8 +49,8 @@
     el('path', { d: 'M' + (p.x + 164) + ' 240v-6M' + (p.x + 184) + ' 240v-6' }, g, 'v-antenna');
     text(g, p.x + 174, 272, 'NAT', 'v-nat');
     var key = el('g', { 'class': 'v-key' }, g);
-    el('rect', { x: cx - 48, y: 288, width: 96, height: 20, rx: 10 }, key, 'v-key-bg');
-    text(key, cx, 302, 'home-lab', 'v-key-text');
+    el('rect', { x: cx - 64, y: 284, width: 128, height: 30, rx: 15 }, key, 'v-key-bg');
+    text(key, cx, 305, 'home-lab', 'v-key-text');
     var node = el('g', { 'data-node': p.node }, g, 'v-node');
     el('rect', { x: cx - 50, y: 322, width: 100, height: 40, rx: 8 }, node, 'v-node-bg');
     text(node, cx, 347, p.node, 'v-node-text');
@@ -84,11 +84,11 @@
 
   function extras(svg) {
     var bar = el('g', {}, svg, 'v-addr');
-    el('rect', { x: 296, y: 186, width: 208, height: 30, rx: 15 }, bar, 'v-addr-bg');
-    text(bar, 400, 206, 'http://nas.meshtown', 'v-addr-text');
+    el('rect', { x: 256, y: 182, width: 288, height: 38, rx: 19 }, bar, 'v-addr-bg');
+    text(bar, 400, 207, 'http://nas.meshtown', 'v-addr-text');
     var panel = el('g', {}, svg, 'v-panel');
-    el('rect', { x: 50, y: 186, width: 180, height: 30, rx: 6 }, panel, 'v-panel-bg');
-    text(panel, 140, 206, 'NAS · web panel', 'v-panel-text');
+    el('rect', { x: 10, y: 182, width: 240, height: 38, rx: 8 }, panel, 'v-panel-bg');
+    text(panel, 130, 207, 'NAS · web panel', 'v-panel-text');
     el('circle', { cx: 196, cy: 342, r: 6 }, svg, 'v-packet');
   }
 
