@@ -55,7 +55,7 @@ def router_network(stop, cmd):
 
 
 ROUTER_NETWORK = router_network(" while the service is stopped", "/etc/init.d/meshtown stop\nmeshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…")
-KEENETIC_NETWORK = router_network(" while the service is stopped", "/opt/etc/init.d/S99meshtown stop\nmeshtown run --config /opt/etc/meshtown/. --invite mesh-invite2-…")
+KEENETIC_NETWORK = router_network(" while the service is stopped", "/opt/etc/init.d/S99meshtown stop\nmeshtown run --config /opt/etc/meshtown/config.json --invite mesh-invite2-…")
 
 NO_DIRECT = "one of the networks may prevent direct connections; try another network"
 KEEP = " Keep config.json private."
