@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <style>
+    .l { stroke: #0b6e63; stroke-width: 4; fill: none; stroke-linecap: round; }
+    .d { fill: #0b6e63; }
+    @media (prefers-color-scheme: dark) {
+      .l { stroke: #4fd1bd; }
+      .d { fill: #4fd1bd; }
+    }
+  </style>
+  <path class="l" d="M32 14 L12 50 L52 50 Z"/>
+  <circle class="d" cx="32" cy="14" r="9"/>
+  <circle class="d" cx="12" cy="50" r="9"/>
+  <circle class="d" cx="52" cy="50" r="9"/>
+</svg>

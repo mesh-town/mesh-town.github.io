@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://mesh-town.github.io/</loc></url>
+  <url><loc>https://mesh-town.github.io/install/</loc></url>
+  <url><loc>https://mesh-town.github.io/install/macos/</loc></url>
+  <url><loc>https://mesh-town.github.io/install/windows/</loc></url>
+  <url><loc>https://mesh-town.github.io/install/linux/</loc></url>
+  <url><loc>https://mesh-town.github.io/install/android/</loc></url>
+  <url><loc>https://mesh-town.github.io/install/openwrt/</loc></url>
+  <url><loc>https://mesh-town.github.io/install/keenetic/</loc></url>
+</urlset>

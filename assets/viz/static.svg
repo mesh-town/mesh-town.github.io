@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" role="img" aria-labelledby="t">
+<title id="t">Diagram: a NAS at home, a PC at the office and a laptop in a café, each behind its own router. They find each other on the public DHT and connect directly over encrypted links; the laptop opens http://nas.meshtown.</title>
+<style>
+svg{--bg:#ffffff;--surface:#f3f5f7;--border:#d3d9df;--fg:#1a1d21;--muted:#545c65;--accent:#0b6e63}
+@media (prefers-color-scheme:dark){svg{--bg:#0f1316;--surface:#182026;--border:#2c363f;--fg:#e6e9ec;--muted:#a3acb5;--accent:#4fd1bd}}
+.bg{fill:var(--bg)}.pl{fill:var(--surface);stroke:var(--border)}.rt{fill:var(--border)}
+.nd{fill:var(--bg);stroke:var(--accent);stroke-width:2}.ln{fill:none;stroke:var(--accent);stroke-width:3}
+.lk{fill:var(--bg);stroke:var(--accent);stroke-width:1.5}.lka{fill:none;stroke:var(--accent);stroke-width:2}.lkb{fill:var(--accent)}
+.cl{fill:var(--surface);stroke:var(--muted);stroke-width:2;opacity:.6}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:14px;fill:var(--fg);text-anchor:middle}
+.m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.mu{fill:var(--muted)}.ac{fill:var(--accent)}
+</style>
+<rect class="bg" width="800" height="460"/>
+<ellipse class="cl" cx="400" cy="66" rx="120" ry="34"/><text class="mu" x="400" y="71" font-weight="600">public DHT</text>
+<rect class="pl" x="30" y="230" width="220" height="210" rx="12"/>
+<text class="mu" x="44" y="254" style="text-anchor:start" font-weight="600">Home</text>
+<rect class="rt" x="182" y="240" width="44" height="16" rx="4"/><text class="mu" x="204" y="272" font-size="11">NAT</text>
+<rect class="bg" x="102" y="288" width="76" height="20" rx="10" stroke="var(--accent)" stroke-width="1.5"/><text class="m ac" x="140" y="302" font-size="12">home-lab</text>
+<rect class="nd" x="90" y="322" width="100" height="40" rx="8"/><text class="m" x="140" y="347" font-size="15">nas</text>
+<rect class="pl" x="290" y="230" width="220" height="210" rx="12"/>
+<text class="mu" x="304" y="254" style="text-anchor:start" font-weight="600">Café</text>
+<rect class="rt" x="442" y="240" width="44" height="16" rx="4"/><text class="mu" x="464" y="272" font-size="11">NAT</text>
+<rect class="bg" x="362" y="288" width="76" height="20" rx="10" stroke="var(--accent)" stroke-width="1.5"/><text class="m ac" x="400" y="302" font-size="12">home-lab</text>
+<rect class="nd" x="350" y="322" width="100" height="40" rx="8"/><text class="m" x="400" y="347" font-size="15">laptop</text>
+<rect class="pl" x="550" y="230" width="220" height="210" rx="12"/>
+<text class="mu" x="564" y="254" style="text-anchor:start" font-weight="600">Office</text>
+<rect class="rt" x="702" y="240" width="44" height="16" rx="4"/><text class="mu" x="724" y="272" font-size="11">NAT</text>
+<rect class="bg" x="622" y="288" width="76" height="20" rx="10" stroke="var(--accent)" stroke-width="1.5"/><text class="m ac" x="660" y="302" font-size="12">home-lab</text>
+<rect class="nd" x="610" y="322" width="100" height="40" rx="8"/><text class="m" x="660" y="347" font-size="15">pc</text>
+<path class="ln" d="M190 342H350"/><path class="ln" d="M450 342H610"/><path class="ln" d="M140 364Q400 450 660 364"/>
+<g transform="translate(270 342)"><circle class="lk" r="13"/><path class="lka" d="M-4 -1V-4a4 4 0 0 1 8 0V-1"/><rect class="lkb" x="-6" y="-1" width="12" height="9" rx="2"/></g>
+<g transform="translate(530 342)"><circle class="lk" r="13"/><path class="lka" d="M-4 -1V-4a4 4 0 0 1 8 0V-1"/><rect class="lkb" x="-6" y="-1" width="12" height="9" rx="2"/></g>
+<g transform="translate(400 407)"><circle class="lk" r="13"/><path class="lka" d="M-4 -1V-4a4 4 0 0 1 8 0V-1"/><rect class="lkb" x="-6" y="-1" width="12" height="9" rx="2"/></g>
+<rect class="bg" x="296" y="186" width="208" height="30" rx="15" stroke="var(--accent)" stroke-width="2"/><text class="m" x="400" y="206" font-size="13">http://nas.meshtown</text>
+</svg>

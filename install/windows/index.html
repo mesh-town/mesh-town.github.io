@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install Mesh Town on Windows — Mesh Town</title>
+<meta name="description" content="Download Mesh Town for Windows and connect your PC to your private network.">
+<link rel="canonical" href="https://mesh-town.github.io/install/windows/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mesh Town">
+<meta property="og:title" content="Install Mesh Town on Windows — Mesh Town">
+<meta property="og:description" content="Download Mesh Town for Windows and connect your PC to your private network.">
+<meta property="og:url" content="https://mesh-town.github.io/install/windows/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/css/theme.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<link rel="stylesheet" href="../../assets/css/sections.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../index.html">Mesh Town</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="../../index.html#how-it-works">How it works</a></li>
+        <li><a href="../index.html">Install</a></li>
+        <li><a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs</a></li>
+        <li><a href="https://github.com/mesh-town/meshtown">GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main" class="wrap page" tabindex="-1">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+<ol>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../index.html">Install</a></li>
+<li>Windows</li>
+</ol>
+</nav>
+
+<h1>Install Mesh Town on Windows</h1>
+<p class="lede">For 64-bit Windows on x86.</p>
+<nav class="os-strip" aria-label="Other systems">
+<ul>
+<li><a href="../macos/index.html">macOS</a></li>
+<li><a href="../windows/index.html" aria-current="page">Windows</a></li>
+<li><a href="../linux/index.html">Linux</a></li>
+<li><a href="../android/index.html">Android</a></li>
+<li><a href="../openwrt/index.html">OpenWrt</a></li>
+<li><a href="../keenetic/index.html">Keenetic</a></li>
+</ul>
+</nav>
+<h2>1. Install</h2>
+<h3>Download</h3>
+<p>Tray app: <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown.exe">meshtown.exe</a></p>
+<p>Console: <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown-cli.exe">meshtown-cli.exe</a>, for a terminal or a server.</p>
+<p class="note-warn"><strong>Note.</strong> The program is not signed, so SmartScreen may warn on the first launch. Choose More info, then Run anyway.</p>
+<h2>2. Make sure it works</h2>
+<p>The node page opens from the tray icon, or with the sign-in link printed at start:</p>
+<pre class="cmd"><code>Mesh Town page: http://127.0.0.1:7777/?token=…</code></pre>
+<p>On the first visit, the page asks you to set a password. The sign-in link works once and for 10 minutes; after that, sign in with that password.</p>
+<h2>3. Create or join a network</h2>
+<p>On the node page, press Create a new network and give it a name, for example <code>home-lab</code>. You become its first administrator; making a second administrator soon is a good idea.</p>
+<p>To add a device or a person, press Invite a member. You get a single-use string, valid for a day, that does not contain the network key. Hand it over in person.</p>
+<p>On the new device, press Join with an invite and paste the string. In a terminal:</p>
+<pre class="cmd"><code>meshtown run --invite mesh-invite2-…</code></pre>
+<p>If no member is online yet, the node shows that it is waiting for network members.</p>
+<h2>4. Open a device by its name</h2>
+<p>On the device with the web interface, open the network's Shared services (ports) tab and publish the port, shared with all members or selected ones. Only programs running on that device itself can be shared.</p>
+<p>Each device has a name: two random words by default, such as finch-unwary. The Ports shared with you tab shows the exact link. To use a short name such as nas, set node.name in the settings file.</p>
+<p>On your computer, set the browser to use the node's proxy: address <code>127.0.0.1</code>, port <code>1080</code> (it speaks HTTP and SOCKS5). Then type the address with http://, for example <code>http://nas.meshtown</code>. The Ports shared with you tab shows each link.</p>
+<p>For SSH, RDP and other programs, use Open on this computer: a member's port gets a local port, for example 22 becomes <code>127.0.0.1:2022</code>.</p>
+<h2>Update</h2>
+<p>Download the file again from the same link; the files without a version in the name are always the latest build.</p>
+<h2>Troubleshooting</h2>
+<dl class="trouble">
+<dt>SmartScreen warns</dt>
+<dd>See the note above.</dd>
+<dt>Where are the settings and logs?</dt>
+<dd><code>%APPDATA%\meshtown\</code> holds config.json and the logs meshtown.log and meshtown-tray.log. Keep config.json private.</dd>
+<dt>The other devices never appear</dt>
+<dd>One of the networks may prevent direct connections; try another network, such as home Wi-Fi.</dd>
+</dl>
+<h2>More details</h2>
+<p class="links-line"><a href="https://github.com/mesh-town/meshtown/blob/main/docs/INSTALL.md">Install reference</a> · <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference</a> · <a href="https://github.com/mesh-town/meshtown/blob/main/docs/CONFIG-FILE.md">Settings file</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <ul>
+      <li>Mesh Town</li>
+      <li><a href="https://github.com/mesh-town/meshtown">Source</a></li>
+      <li><a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs</a></li>
+      <li><a href="https://github.com/mesh-town/meshtown-dist">Downloads</a></li>
+      <li>License: <a href="https://github.com/mesh-town/meshtown/blob/main/LICENSE">AGPL-3.0-only</a></li>
+    </ul>
+  </div>
+</footer>
+<script src="../../assets/js/copy.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+/* Mesh Town explainer. Colors come only from the site theme variables. */
+.viz { margin: 0; }
+.viz-stage { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.viz-svg, .viz-static { display: block; width: 100%; height: auto; max-width: 100%; }
+.viz-svg text { font-family: var(--font-sans); font-size: 14px; fill: var(--fg); }
+.viz-svg .v-node-text, .viz-svg .v-key-text, .viz-svg .v-addr-text, .viz-svg .v-panel-text { font-family: var(--font-mono); }
+.viz-svg .v-place-bg { fill: var(--surface); stroke: var(--border); }
+.viz-svg .v-place-name { fill: var(--muted); font-weight: 600; }
+.viz-svg .v-router { fill: var(--border); }
+.viz-svg .v-antenna { stroke: var(--border); stroke-width: 3; stroke-linecap: round; fill: none; }
+.viz-svg .v-nat { font-size: 11px; fill: var(--muted); }
+.viz-svg .v-node-bg { fill: var(--bg); stroke: var(--muted); stroke-width: 2; transition: stroke .4s; }
+.viz-svg .v-node-text { font-size: 15px; }
+.viz-svg .v-key { opacity: 0; transition: opacity .5s; }
+.viz-svg .v-key-bg { fill: var(--bg); stroke: var(--accent); stroke-width: 1.5; }
+.viz-svg .v-key-text { font-size: 12px; fill: var(--accent); }
+.viz-svg .v-cloud { opacity: .45; transition: opacity .5s; }
+.viz-svg .v-cloud-bg { fill: var(--surface); stroke: var(--muted); stroke-width: 2; }
+.viz-svg .v-cloud-text { fill: var(--muted); font-weight: 600; }
+.viz-svg .v-dht-link { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 3 9; stroke-linecap: round; opacity: 0; transition: opacity .5s; }
+.viz-svg .v-dash, .viz-svg .v-solid { fill: none; stroke: var(--accent); stroke-width: 3; transition: opacity .5s, stroke .4s; }
+.viz-svg .v-dash { stroke-dasharray: 8 8; opacity: 0; }
+.viz-svg .v-solid { opacity: 0; }
+.viz-svg .v-lock, .viz-svg .v-cross, .viz-svg .v-dht-lock, .viz-svg .v-addr, .viz-svg .v-panel, .viz-svg .v-packet { opacity: 0; transition: opacity .5s; }
+.viz-svg .v-lock-bg, .viz-svg .v-cross-bg { fill: var(--bg); stroke: var(--accent); stroke-width: 1.5; }
+.viz-svg .v-lock-arc { fill: none; stroke: var(--accent); stroke-width: 2; }
+.viz-svg .v-lock-body { fill: var(--accent); }
+.viz-svg .v-cross-bg { stroke: var(--danger); }
+.viz-svg .v-cross-x { stroke: var(--danger); stroke-width: 2.5; stroke-linecap: round; }
+.viz-svg .v-addr-bg, .viz-svg .v-panel-bg { fill: var(--bg); stroke: var(--accent); stroke-width: 2; }
+.viz-svg .v-addr-text, .viz-svg .v-panel-text { font-size: 13px; }
+.viz-svg .v-packet { fill: var(--accent); }
+
+/* Frame states (classes set on the svg by scene.js). */
+.viz-svg.k .v-key { opacity: 1; }
+.viz-svg.up .v-cloud, .viz-svg.up .v-dht-link, .viz-svg.up .v-dht-lock { opacity: 1; }
+.viz-svg.up .v-dht-link { animation: viz-flow 1.4s linear infinite; }
+.viz-svg.direct .v-cloud { opacity: .75; }
+.viz-svg.dim .v-cloud { opacity: .35; }
+.viz-svg.direct .v-solid { opacity: 1; }
+.viz-svg.direct .v-node-bg { stroke: var(--accent); }
+.viz-svg.lock .v-lock { opacity: 1; }
+.viz-svg.addr .v-addr, .viz-svg.addr .v-panel, .viz-svg.addr .v-packet { opacity: 1; }
+.viz-svg.addr .v-packet { animation: viz-packet 2.4s ease-in-out infinite; }
+.viz-svg.hop .v-link-nl .v-solid, .viz-svg.hop .v-link-lo .v-solid { animation: viz-hop-solid 1.2s ease-out 1; }
+.viz-svg.hop .v-link-nl .v-dash, .viz-svg.hop .v-link-lo .v-dash { animation: viz-hop-dash 1.2s ease-out 1; }
+.viz-svg.bad .v-link-nl .v-solid, .viz-svg.bad .v-link-lo .v-solid { opacity: 0; }
+.viz-svg.bad .v-link-nl .v-dash, .viz-svg.bad .v-link-lo .v-dash { opacity: 1; stroke: var(--danger); }
+.viz-svg.bad .v-link-nl .v-lock, .viz-svg.bad .v-link-lo .v-lock { opacity: 0; }
+.viz-svg.bad .v-link-nl .v-cross, .viz-svg.bad .v-link-lo .v-cross { opacity: 1; }
+.viz-svg.bad [data-node="laptop"] .v-node-bg { stroke: var(--danger); }
+/* The packet rests at the nas end; it travels from the laptop end. */
+@keyframes viz-flow { to { stroke-dashoffset: -24; } }
+@keyframes viz-packet { 0% { transform: translateX(140px); } 80%, 100% { transform: translateX(0); } }
+@keyframes viz-hop-solid { 0%, 55% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes viz-hop-dash { 0%, 55% { opacity: 1; } 100% { opacity: 0; } }
+
+/* Controls and caption. */
+.viz-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0 0; }
+.viz-controls button { min-width: 40px; min-height: 40px; padding: 6px 14px; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; }
+.viz-controls button:hover:not(:disabled) { border-color: var(--accent); }
+.viz-controls button:disabled { opacity: .5; cursor: default; }
+.viz-controls button[aria-current="step"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.viz-controls button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.viz-controls .viz-sep { flex: 1 1 8px; }
+.viz-caption { margin: 14px 0 0; min-height: 4.5em; }
+.viz-caption .viz-step { display: block; font-size: .85em; color: var(--muted); }
+.viz-frames { padding-left: 1.2em; }
+.viz + p { margin-top: 1.5rem; }
+
+@media (max-width: 600px) {
+  .viz-controls { gap: 6px; }
+  .viz-controls .viz-step-btn { min-width: 38px; padding: 6px 0; }
+  .viz-controls .viz-sep { flex-basis: 100%; height: 0; }
+  .viz-svg .v-nat, .viz-svg .v-antenna, .viz-svg .v-router { display: none; }
+  .viz-svg .v-node-text { font-size: 22px; }
+  .viz-svg .v-place-name, .viz-svg .v-cloud-text { font-size: 24px; }
+  .viz-svg .v-key-text { font-size: 18px; }
+  .viz-svg .v-addr-text, .viz-svg .v-panel-text { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .viz, .viz * { transition: none !important; animation: none !important; }
+  .viz-svg .v-packet { transform: none; }
+}
