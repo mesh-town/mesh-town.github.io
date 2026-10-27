@@ -1,85 +1,41 @@
-/* Mesh Town explainer. Colors come only from the site theme variables. */
+/* Mesh Town explainer: card layout and static scene styles. Colors come only from the site theme variables. */
 .viz { margin: 0; }
+.viz-intro { margin: 0 0 14px; color: var(--muted); }
 .viz-stage { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .viz-svg, .viz-static { display: block; width: 100%; height: auto; max-width: 100%; }
-.viz-svg text { font-family: var(--font-sans); font-size: 15px; fill: var(--fg); }
-.viz-svg .v-node-text, .viz-svg .v-key-text, .viz-svg .v-addr-text, .viz-svg .v-panel-text { font-family: var(--font-mono); }
-.viz-svg .v-place-bg { fill: var(--surface); stroke: var(--border); }
-.viz-svg .v-place-name { fill: var(--muted); font-weight: 600; }
-.viz-svg .v-router { fill: var(--border); }
-.viz-svg .v-antenna { stroke: var(--border); stroke-width: 3; stroke-linecap: round; fill: none; }
-.viz-svg .v-nat { font-size: 14px; fill: var(--muted); }
-.viz-svg .v-node-bg { fill: var(--bg); stroke: var(--muted); stroke-width: 2; transition: stroke .4s; }
-.viz-svg .v-node-text { font-size: 16px; }
-.viz-svg .v-key { opacity: 0; transition: opacity .5s; }
-.viz-svg .v-key-bg { fill: var(--bg); stroke: var(--accent); stroke-width: 1.5; }
-.viz-svg .v-key-text { font-size: 14px; fill: var(--accent); }
-.viz-svg .v-cloud-bg, .viz-svg .v-dht-lock { transition: opacity .5s; }
-.viz-svg .v-cloud-bg { opacity: .6; }
-.viz-svg .v-cloud-bg { fill: var(--surface); stroke: var(--muted); stroke-width: 2.5; }
-.viz-svg .v-cloud-text { fill: var(--muted); font-weight: 600; }
-.viz-svg .v-dht-link { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 3 9; stroke-linecap: round; opacity: 0; transition: opacity .5s; }
-.viz-svg .v-dash, .viz-svg .v-solid { fill: none; stroke: var(--accent); stroke-width: 3; transition: opacity .5s, stroke .4s; }
-.viz-svg .v-dash { stroke-dasharray: 8 8; opacity: 0; }
-.viz-svg .v-solid { opacity: 0; }
-.viz-svg .v-lock, .viz-svg .v-cross, .viz-svg .v-dht-lock, .viz-svg .v-addr, .viz-svg .v-panel, .viz-svg .v-packet { opacity: 0; transition: opacity .5s; }
-.viz-svg .v-lock-bg, .viz-svg .v-cross-bg { fill: var(--bg); stroke: var(--accent); stroke-width: 1.5; }
-.viz-svg .v-lock-arc { fill: none; stroke: var(--accent); stroke-width: 2; }
-.viz-svg .v-lock-body { fill: var(--accent); }
-.viz-svg .v-cross-bg { stroke: var(--danger); }
-.viz-svg .v-cross-x { stroke: var(--danger); stroke-width: 2.5; stroke-linecap: round; }
-.viz-svg .v-addr-bg, .viz-svg .v-panel-bg { fill: var(--bg); stroke: var(--accent); stroke-width: 2; }
-.viz-svg .v-addr-text, .viz-svg .v-panel-text { font-size: 15px; }
-.viz-svg .v-packet { fill: var(--accent); }
-
-/* Frame states (classes set on the svg by scene.js). */
-.viz-svg.k .v-key { opacity: 1; }
-.viz-svg.up .v-cloud-bg, .viz-svg.up .v-dht-link, .viz-svg.up .v-dht-lock { opacity: 1; }
-.viz-svg.up .v-dht-link { animation: viz-flow 1.4s linear infinite; }
-.viz-svg.direct .v-cloud-bg { opacity: .85; }
-.viz-svg.dim .v-cloud-bg { opacity: .6; }
-.viz-svg.direct .v-solid { opacity: 1; }
-.viz-svg.direct .v-node-bg { stroke: var(--accent); }
-.viz-svg.lock .v-lock { opacity: 1; }
-.viz-svg.addr .v-addr, .viz-svg.addr .v-panel, .viz-svg.addr .v-packet { opacity: 1; }
-.viz-svg.addr .v-packet { animation: viz-packet 2.4s ease-in-out infinite; }
-.viz-svg.hop .v-link-nl .v-solid, .viz-svg.hop .v-link-lo .v-solid { animation: viz-hop-solid 1.2s ease-out 1; }
-.viz-svg.hop .v-link-nl .v-dash, .viz-svg.hop .v-link-lo .v-dash { animation: viz-hop-dash 1.2s ease-out 1; }
-.viz-svg.bad .v-link-nl .v-solid, .viz-svg.bad .v-link-lo .v-solid { opacity: 0; }
-.viz-svg.bad .v-link-nl .v-dash, .viz-svg.bad .v-link-lo .v-dash { opacity: 1; stroke: var(--danger); }
-.viz-svg.bad .v-link-nl .v-lock, .viz-svg.bad .v-link-lo .v-lock { opacity: 0; }
-.viz-svg.bad .v-link-nl .v-cross, .viz-svg.bad .v-link-lo .v-cross { opacity: 1; }
-.viz-svg.bad [data-node="laptop"] .v-node-bg { stroke: var(--danger); }
-/* The packet rests at the nas end; it travels from the laptop end. */
-@keyframes viz-flow { to { stroke-dashoffset: -24; } }
-@keyframes viz-packet { 0% { transform: translateX(140px); } 80%, 100% { transform: translateX(0); } }
-@keyframes viz-hop-solid { 0%, 55% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes viz-hop-dash { 0%, 55% { opacity: 1; } 100% { opacity: 0; } }
-
-/* Controls and caption. */
-.viz-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0 0; }
-.viz-controls button { min-width: 40px; min-height: 40px; padding: 6px 14px; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; }
-.viz-controls button:hover:not(:disabled) { border-color: var(--accent); }
-.viz-controls button:disabled { color: var(--muted); border-style: dashed; cursor: default; }
-.viz-controls button[aria-current="step"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
-.viz-controls button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-.viz-controls .viz-sep { flex: 1 1 8px; }
-.viz-intro { margin: 0 0 14px; color: var(--muted); }
-.viz[data-viz-ready] { display: grid; gap: 12px 20px; grid-template-columns: 1fr; grid-template-areas: "cap" "stage" "ctl"; }
-.viz[data-viz-ready] .viz-caption { grid-area: cap; }
-.viz[data-viz-ready] .viz-stage { grid-area: stage; }
-.viz[data-viz-ready] .viz-controls { grid-area: ctl; margin: 0; }
-.viz-caption { margin: 0; padding: 14px 16px; min-height: 11.5em; background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius); }
-.viz-caption .viz-step { display: block; font-size: .8em; color: var(--muted); }
-.viz-caption .viz-title { margin: 2px 0 6px; font-size: 1.4em; font-weight: 700; line-height: 1.2; }
-.viz-caption .viz-text { margin: 0; }
-@media (min-width: 900px) {
-  .viz[data-viz-ready] { grid-template-columns: 320px minmax(0, 1fr); grid-template-areas: "cap stage" "cap ctl"; align-items: start; }
-  .viz-caption { min-height: 0; }
-}
 .viz-frames { padding-left: 1.2em; }
 .viz-frames li { margin-bottom: .5em; }
 .viz + p { margin-top: 1.5rem; }
+
+/* Card: header (title and text), scene, controls. */
+.viz[data-viz-ready] { background: var(--surface); border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px); overflow: hidden; }
+.viz[data-viz-ready] .viz-stage { border: 0; border-radius: 0; border-block: 1px solid var(--border); touch-action: pan-y; }
+.viz-stage:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
+.viz-head { display: grid; padding: 16px 20px 14px; border-top: 4px solid var(--accent); }
+.viz-slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility 0s .25s; }
+.viz-slide.is-active { opacity: 1; visibility: visible; transform: none; transition: opacity .25s ease .05s, transform .25s ease .05s; }
+.viz-title { margin: 0 0 6px; font-size: 1.4em; font-weight: 700; line-height: 1.2; }
+.viz-text { margin: 0; }
+.viz-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Controls: three icon buttons and eight dots in one row. */
+.viz-controls { display: flex; align-items: center; gap: 6px; padding: 10px 14px; }
+.viz-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; cursor: pointer; }
+.viz-btn svg { fill: currentColor; }
+.viz-btn:hover:not(:disabled) { border-color: var(--accent); }
+.viz-btn:disabled { color: var(--muted); border-style: dashed; cursor: default; }
+.viz-dots { display: flex; align-items: center; margin-left: auto; }
+.viz-dot { position: relative; display: block; width: 22px; height: 40px; padding: 0; background: none; border: 0; border-radius: 999px; cursor: pointer; transition: width .3s ease; }
+.viz-dot::before { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; background: var(--muted); border-radius: 999px; transition: width .3s ease, margin .3s ease, background .3s; }
+.viz-dot:hover::before { background: var(--accent); }
+.viz-dot[aria-current="step"] { width: 46px; }
+.viz-dot[aria-current="step"]::before { width: 34px; margin-left: -17px; background: var(--accent); }
+.viz-dot-fill { position: absolute; left: 50%; top: 50%; width: 34px; height: 10px; margin: -5px 0 0 -17px; border-radius: 999px; overflow: hidden; pointer-events: none; display: none; }
+.viz-dot-fill::after { content: ""; position: absolute; inset: 0; background: var(--accent); transform-origin: left; }
+.viz-dot:focus-visible, .viz-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+/* While autoplay runs, the active pill is a track that the accent fills until the next step. */
+.viz[data-playing="true"] .viz-dot[aria-current="step"]::before { background: var(--border); box-shadow: inset 0 0 0 1px var(--muted); }
+.viz[data-playing="true"] .viz-dot[aria-current="step"] .viz-dot-fill { display: block; }
 
 /* Narrow screens: the scene shrinks, so labels grow in scene units (about 10px or more on screen). */
 @media (max-width: 70rem) {
@@ -90,11 +46,14 @@
   .viz-svg .v-addr-text, .viz-svg .v-panel-text { font-size: 23px; }
 }
 @media (max-width: 40rem) {
-  .viz-controls { gap: 6px; }
-  .viz-controls .viz-step-btn { min-width: 38px; padding: 6px 0; }
-  .viz-controls .viz-sep { flex-basis: 100%; height: 0; }
+  .viz-head { padding: 14px 14px 12px; }
+  .viz-title { font-size: 1.25em; }
+  .viz-controls { gap: 4px; padding: 8px 10px; }
+  .viz-btn { width: 36px; height: 36px; }
+  .viz-dot { width: 17px; height: 36px; }
+  .viz-dot[aria-current="step"] { width: 38px; }
+  .viz-dot[aria-current="step"]::before, .viz-dot-fill { width: 28px; margin-left: -14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .viz, .viz * { transition: none !important; animation: none !important; }
-  .viz-svg .v-packet { transform: none; }
 }

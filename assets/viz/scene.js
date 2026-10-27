@@ -11,6 +11,9 @@
     { id: 'office', name: 'Office', x: 550, node: 'pc' }
   ];
 
+  var DHT = ['M202 234Q250 150 340 98', 'M472 234Q440 150 410 100', 'M722 234Q640 130 460 92'];
+  var ROUTES = { nl: 'M190 342H350', lo: 'M450 342H610', no: 'M140 364Q400 450 660 364' };
+
   function el(name, attrs, parent, cls) {
     var e = document.createElementNS(NS, name);
     Object.keys(attrs || {}).forEach(function (k) { e.setAttribute(k, attrs[k]); });
@@ -26,18 +29,20 @@
   }
 
   function lock(parent, x, y, cls) {
-    var g = el('g', { transform: 'translate(' + x + ' ' + y + ')' }, parent, 'v-lock ' + cls);
+    var o = el('g', { transform: 'translate(' + x + ' ' + y + ')' }, parent, 'v-lock ' + cls);
+    var g = el('g', {}, o, 'v-pop');
     el('circle', { r: 13 }, g, 'v-lock-bg');
     el('path', { d: 'M-4 -1V-4a4 4 0 0 1 8 0V-1' }, g, 'v-lock-arc');
     el('rect', { x: -6, y: -1, width: 12, height: 9, rx: 2 }, g, 'v-lock-body');
-    return g;
+    return o;
   }
 
   function cross(parent, x, y, cls) {
-    var g = el('g', { transform: 'translate(' + x + ' ' + y + ')' }, parent, 'v-cross ' + cls);
+    var o = el('g', { transform: 'translate(' + x + ' ' + y + ')' }, parent, 'v-cross ' + cls);
+    var g = el('g', {}, o, 'v-pop');
     el('circle', { r: 13 }, g, 'v-cross-bg');
     el('path', { d: 'M-6 -6L6 6M6 -6L-6 6' }, g, 'v-cross-x');
-    return g;
+    return o;
   }
 
   function place(svg, p) {
@@ -57,10 +62,7 @@
   }
 
   function dhtLinks(svg) {
-    [[0, 'M202 234Q250 150 340 98'], [0, 'M472 234Q440 150 410 100'],
-      [0, 'M722 234Q640 130 460 92']].forEach(function (d) {
-      el('path', { d: d[1] }, svg, 'v-dht-link');
-    });
+    DHT.forEach(function (d) { el('path', { d: d }, svg, 'v-dht-link'); });
   }
 
   function links(svg) {
@@ -68,8 +70,9 @@
       ['no', 'M140 364Q400 450 660 364', 400, 407]];
     defs.forEach(function (d) {
       var g = el('g', {}, svg, 'v-link v-link-' + d[0]);
+      d[1] = ROUTES[d[0]];
       el('path', { d: d[1] }, g, 'v-dash');
-      el('path', { d: d[1] }, g, 'v-solid');
+      el('path', { d: d[1], pathLength: 1 }, g, 'v-solid');
       lock(g, d[2], d[3], 'v-lock-' + d[0]);
       if (d[0] !== 'no') { cross(g, d[2], d[3], 'v-cross-' + d[0]); }
     });
@@ -82,6 +85,30 @@
     lock(svg, 540, 70, 'v-dht-lock');
   }
 
+  // A glowing dot that runs along a path (CSS offset-path); phase in seconds.
+  function packet(svg, d, cls, phase) {
+    var c = el('circle', { r: 5 }, svg, 'v-pk ' + cls);
+    c.style.setProperty('offset-path', "path('" + d + "')");
+    c.style.setProperty('--ph', phase + 's');
+    return c;
+  }
+
+  function packets(svg) {
+    Object.keys(ROUTES).forEach(function (k) {
+      packet(svg, ROUTES[k], 'pk-' + k, 0);
+      packet(svg, ROUTES[k], 'pk-' + k + ' pk-r', 1.5);
+    });
+    DHT.forEach(function (d, i) { packet(svg, d, 'v-wr', i * 0.8); });
+    packet(svg, 'M350 342H190', 'v-req', 0.5);
+  }
+
+  function defs(svg) {
+    var d = el('defs', {}, svg);
+    var g = el('linearGradient', { id: 'v-grad', x1: 0, y1: 0, x2: 0, y2: 1 }, d);
+    el('stop', { offset: 0, 'class': 'v-grad-a' }, g);
+    el('stop', { offset: 1, 'class': 'v-grad-b' }, g);
+  }
+
   function extras(svg) {
     var bar = el('g', {}, svg, 'v-addr');
     el('rect', { x: 256, y: 182, width: 288, height: 38, rx: 19 }, bar, 'v-addr-bg');
@@ -89,7 +116,6 @@
     var panel = el('g', {}, svg, 'v-panel');
     el('rect', { x: 10, y: 182, width: 240, height: 38, rx: 8 }, panel, 'v-panel-bg');
     text(panel, 130, 207, 'NAS · web panel', 'v-panel-text');
-    el('circle', { cx: 196, cy: 342, r: 6 }, svg, 'v-packet');
   }
 
   function build(stage, alt) {
@@ -97,10 +123,12 @@
       'data-frame': '1' }, null, 'viz-svg');
     var title = el('title', { id: 'viz-title' }, svg);
     title.textContent = alt || 'How Mesh Town connects your devices';
+    defs(svg);
     cloud(svg);
     dhtLinks(svg);
     PLACES.forEach(function (p) { place(svg, p); });
     links(svg);
+    packets(svg);
     extras(svg);
     svg._cafe = PLACES[1].label;
     setFrame(svg, 1);
@@ -111,9 +139,11 @@
   function setFrame(svg, n) {
     var i = Math.max(1, Math.min(8, n)) - 1;
     svg.setAttribute('data-frame', String(i + 1));
-    svg.setAttribute('class', ('viz-svg ' + FRAME_CLASSES[i === 7 ? 7 : Math.min(i, 6)]).trim() + ' f' + (i + 1));
+    svg.setAttribute('class', ('viz-svg ' + FRAME_CLASSES[i === 7 ? 7 : Math.min(i, 6)]).trim() + ' f' + (i + 1) + (svg._go ? ' go' : ''));
     if (svg._cafe) { svg._cafe.textContent = CAFE_NAME[i]; }
   }
 
-  window.MeshVizScene = { build: build, setFrame: setFrame, count: 8 };
+  function start(svg) { svg._go = true; svg.classList.add('go'); }
+
+  window.MeshVizScene = { build: build, setFrame: setFrame, start: start, count: 8 };
 }());
