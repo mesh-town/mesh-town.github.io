@@ -3,6 +3,9 @@
 .viz-intro { margin: 0 0 14px; color: var(--muted); }
 .viz-stage { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .viz-svg, .viz-static { display: block; width: 100%; height: auto; max-width: 100%; }
+/* Fit a laptop screen: the scene height is capped by the viewport and the card by a column width; the viewBox letterboxes. */
+.viz-svg { max-height: max(360px, calc(100svh - 400px)); }
+.viz[data-viz-ready] { max-width: 900px; margin-inline: auto; }
 .viz-frames { padding-left: 1.2em; }
 .viz-frames li { margin-bottom: .5em; }
 .viz + p { margin-top: 1.5rem; }
@@ -11,15 +14,15 @@
 .viz[data-viz-ready] { background: var(--surface); border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px); overflow: hidden; }
 .viz[data-viz-ready] .viz-stage { border: 0; border-radius: 0; border-block: 1px solid var(--border); touch-action: pan-y; }
 .viz-stage:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
-.viz-head { display: grid; padding: 16px 20px 14px; border-top: 4px solid var(--accent); }
+.viz-head { display: grid; padding: 12px 20px 10px; border-top: 4px solid var(--accent); }
 .viz-slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility 0s .25s; }
 .viz-slide.is-active { opacity: 1; visibility: visible; transform: none; transition: opacity .25s ease .05s, transform .25s ease .05s; }
-.viz-title { margin: 0 0 6px; font-size: 1.4em; font-weight: 700; line-height: 1.2; }
+.viz-title { margin: 0 0 4px; font-size: 1.25em; font-weight: 700; line-height: 1.2; }
 .viz-text { margin: 0; }
 .viz-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Controls: three icon buttons and eight dots in one row. */
-.viz-controls { display: flex; align-items: center; gap: 6px; padding: 10px 14px; }
+.viz-controls { display: flex; align-items: center; gap: 6px; padding: 8px 14px; }
 .viz-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; cursor: pointer; }
 .viz-btn svg { fill: currentColor; }
 .viz-btn:hover:not(:disabled) { border-color: var(--accent); }

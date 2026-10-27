@@ -119,7 +119,7 @@
   }
 
   function build(stage, alt) {
-    var svg = el('svg', { viewBox: '0 0 800 460', role: 'img', 'aria-labelledby': 'viz-title',
+    var svg = el('svg', { viewBox: '0 20 800 432', role: 'img', 'aria-labelledby': 'viz-title',
       'data-frame': '1' }, null, 'viz-svg');
     var title = el('title', { id: 'viz-title' }, svg);
     title.textContent = alt || 'How Mesh Town connects your devices';
