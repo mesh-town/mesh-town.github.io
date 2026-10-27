@@ -25,7 +25,7 @@ DESKTOP_CHECK_TRAY = desktop_check("The node page opens from the tray icon, or w
 
 DESKTOP_NETWORK = [
     ("p", "On the node page, press Create a new network and give it a name, for example `home-lab`. You become its first administrator; making a second administrator soon is a good idea."),
-    ("p", "To add a device or a person, press Invite a member. You get a single-use string, valid for a day, that does not contain the network key. Hand it over in person."),
+    ("p", "To add a device or a person, press Invite a member. You get a single-use string, valid for a day, that does not contain the network key. Hand it over in person. The node page shows the invite as a link and a QR code; on Android, the Scan QR button reads it."),
     ("p", "On the new device, press Join with an invite and paste the string. In a terminal:"),
     ("cmd", "meshtown run --invite mesh-invite2-…"),
     ("p", "If no member is online yet, the node shows that it is waiting for network members."),
@@ -34,12 +34,13 @@ DESKTOP_NETWORK = [
 DESKTOP_OPEN = [
     ("p", "On the device with the web interface, open the network's Shared services (ports) tab and publish the port, shared with all members or selected ones. Only programs running on that device itself can be shared."),
     ("p", "Each device has a name: two random words by default, such as finch-unwary. The Ports shared with you tab shows the exact link. To use a short name such as nas, set node.name in the settings file."),
-    ("p", "On your computer, set the browser to use the node's proxy: address `127.0.0.1`, port `1080` (it speaks HTTP and SOCKS5). Then type the address with http://, for example `http://nas.meshtown`. The Ports shared with you tab shows each link."),
+    ("p", "On your computer, set the browser to use the node's proxy: address `127.0.0.1`, port `1080` (it speaks HTTP and SOCKS5). Then type the address with http://, for example `http://nas.meshtown`. The Ports shared with you tab shows each link. While the proxy is set, the browser reaches every site through the node, so keep Mesh Town running; if you stop it, remove the proxy."),
     ("p", "For SSH, RDP and other programs, use Open on this computer: a member's port gets a local port, for example 22 becomes `127.0.0.1:2022`."),
 ]
 
 ANDROID_NETWORK = [
-    ("p", "Ask a member of your network to press Invite a member on their node page and give you the single-use string. Open Mesh Town on the phone and join with it."),
+    ("p", "Ask a member of your network to press Invite a member on their node page and give you the single-use string. Open Mesh Town on the phone and join with it: paste the link, or press Scan QR and photograph the QR code shown on their node page."),
+    ("p", "On the first connect Android may ask for permission to show notifications (Android 13 and newer). It then shows a system window asking to allow the app to set up a connection: press OK. Once, it also shows a screen about running in the background and battery use; allow it so the connection is not stopped."),
 ]
 ANDROID_OPEN = [
     ("p", "The phone is a member of the network like any other device. For details, see the [usage reference](" + BLOB + "docs/USAGE.md)."),

@@ -75,14 +75,14 @@ tar -xzf meshtown-linux-x86_64.tar.gz</code></pre>
 <p>On the first visit, the page asks you to set a password. The sign-in link works once and for 10 minutes; after that, sign in with that password.</p>
 <h2>3. Create or join a network</h2>
 <p>On the node page, press Create a new network and give it a name, for example <code>home-lab</code>. You become its first administrator; making a second administrator soon is a good idea.</p>
-<p>To add a device or a person, press Invite a member. You get a single-use string, valid for a day, that does not contain the network key. Hand it over in person.</p>
+<p>To add a device or a person, press Invite a member. You get a single-use string, valid for a day, that does not contain the network key. Hand it over in person. The node page shows the invite as a link and a QR code; on Android, the Scan QR button reads it.</p>
 <p>On the new device, press Join with an invite and paste the string. In a terminal:</p>
 <pre class="cmd"><code>meshtown run --invite mesh-invite2-…</code></pre>
 <p>If no member is online yet, the node shows that it is waiting for network members.</p>
 <h2>4. Open a device by its name</h2>
 <p>On the device with the web interface, open the network's Shared services (ports) tab and publish the port, shared with all members or selected ones. Only programs running on that device itself can be shared.</p>
 <p>Each device has a name: two random words by default, such as finch-unwary. The Ports shared with you tab shows the exact link. To use a short name such as nas, set node.name in the settings file.</p>
-<p>On your computer, set the browser to use the node's proxy: address <code>127.0.0.1</code>, port <code>1080</code> (it speaks HTTP and SOCKS5). Then type the address with http://, for example <code>http://nas.meshtown</code>. The Ports shared with you tab shows each link.</p>
+<p>On your computer, set the browser to use the node's proxy: address <code>127.0.0.1</code>, port <code>1080</code> (it speaks HTTP and SOCKS5). Then type the address with http://, for example <code>http://nas.meshtown</code>. The Ports shared with you tab shows each link. While the proxy is set, the browser reaches every site through the node, so keep Mesh Town running; if you stop it, remove the proxy.</p>
 <p>For SSH, RDP and other programs, use Open on this computer: a member's port gets a local port, for example 22 becomes <code>127.0.0.1:2022</code>.</p>
 <h2>Update and remove</h2>
 <p>Update:</p>
