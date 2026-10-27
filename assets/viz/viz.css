@@ -45,7 +45,8 @@
   .viz-svg .v-nat, .viz-svg .v-antenna, .viz-svg .v-router { display: none; }
   .viz-svg .v-place-name, .viz-svg .v-cloud-text { font-size: 24px; }
   .viz-svg .v-node-text { font-size: 24px; }
-  .viz-svg .v-key-text { font-size: 23px; }
+  .viz-svg .v-net-name { font-size: 26px; }
+  .viz-svg .v-net-sub { font-size: 23px; }
   .viz-svg .v-addr-text, .viz-svg .v-panel-text { font-size: 23px; }
 }
 @media (max-width: 40rem) {

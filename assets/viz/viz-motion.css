@@ -1,6 +1,6 @@
 /* Mesh Town explainer: entrance motion, packets and breathing. All of it is off under prefers-reduced-motion. */
 @media (prefers-reduced-motion: no-preference) {
-  .viz-svg .v-node, .viz-svg .v-key, .viz-svg .v-panel, .viz-svg .v-cloud-bg { transform-box: fill-box; transform-origin: center; }
+  .viz-svg .v-node, .viz-svg .v-panel, .viz-svg .v-cloud-bg { transform-box: fill-box; transform-origin: center; }
   .viz-svg .v-cloud-bg { animation: viz-breathe 6s ease-in-out infinite alternate; }
 
   /* Entrances start when a frame class starts to match, so they replay on every visit of that frame. */
@@ -8,9 +8,9 @@
   .viz-svg.go.f1 [data-place="cafe"] { animation-delay: .12s; }
   .viz-svg.go.f1 [data-place="office"] { animation-delay: .24s; }
   .viz-svg.go.f1 .v-node { animation: viz-pop .5s cubic-bezier(.3, 1.4, .5, 1) .35s both; }
-  .viz-svg.k .v-key { animation: viz-pop .5s cubic-bezier(.3, 1.4, .5, 1) both; }
-  .viz-svg.k [data-place="cafe"] .v-key { animation-delay: .15s; }
-  .viz-svg.k [data-place="office"] .v-key { animation-delay: .3s; }
+  .viz-svg.k .v-node { animation: viz-pop .5s cubic-bezier(.3, 1.4, .5, 1) both; }
+  .viz-svg.k [data-place="cafe"] .v-node { animation-delay: .15s; }
+  .viz-svg.k [data-place="office"] .v-node { animation-delay: .3s; }
   .viz-svg.direct .v-solid { animation: viz-draw .9s ease-out both; }
   .viz-svg.direct .v-link-lo .v-solid { animation-delay: .25s; }
   .viz-svg.direct .v-link-no .v-solid { animation-delay: .5s; }

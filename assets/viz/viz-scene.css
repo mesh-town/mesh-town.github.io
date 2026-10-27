@@ -1,6 +1,6 @@
 /* Mesh Town explainer: scene elements and their frame states. */
 .viz-svg text { font-family: var(--font-sans); font-size: 15px; fill: var(--fg); }
-.viz-svg .v-node-text, .viz-svg .v-key-text, .viz-svg .v-addr-text, .viz-svg .v-panel-text { font-family: var(--font-mono); }
+.viz-svg .v-node-text, .viz-svg .viz-svg .v-addr-text, .viz-svg .v-panel-text { font-family: var(--font-mono); }
 .viz-svg .v-grad-a { stop-color: var(--surface); }
 .viz-svg .v-grad-b { stop-color: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
 .viz-svg .v-place-bg { fill: url(#v-grad); stroke: var(--border); transition: stroke .4s; }
@@ -10,9 +10,9 @@
 .viz-svg .v-nat { font-size: 14px; fill: var(--muted); }
 .viz-svg .v-node-bg { fill: var(--bg); stroke: var(--muted); stroke-width: 2; transition: stroke .4s; }
 .viz-svg .v-node-text { font-size: 16px; }
-.viz-svg .v-key { opacity: 0; transition: opacity .5s; }
-.viz-svg .v-key-bg { fill: var(--bg); stroke: var(--accent); stroke-width: 1.5; }
-.viz-svg .v-key-text { font-size: 14px; fill: var(--accent); }
+.viz-svg .v-net { opacity: 0; transition: opacity .5s; }
+.viz-svg .v-net-name { font-family: var(--font-mono); font-size: 18px; font-weight: 700; fill: var(--accent); }
+.viz-svg .v-net-sub { font-size: 15px; fill: var(--accent); }
 .viz-svg .v-cloud-bg { opacity: .6; fill: var(--surface); stroke: var(--muted); stroke-width: 2.5; transition: opacity .5s; }
 .viz-svg .v-cloud-text { fill: var(--muted); font-weight: 600; }
 .viz-svg .v-dht-link { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 3 9; stroke-linecap: round; opacity: 0; transition: opacity .5s; }
@@ -30,7 +30,8 @@
 .viz-svg .v-pk, .viz-svg .v-wr, .viz-svg .v-req { display: none; fill: var(--accent); }
 
 /* Frame states (classes set on the svg by scene.js). */
-.viz-svg.k .v-key { opacity: 1; }
+.viz-svg.k .v-net { opacity: 1; }
+.viz-svg.k .v-node-bg { stroke: var(--accent); stroke-width: 3; fill: color-mix(in srgb, var(--accent) 12%, var(--bg)); }
 .viz-svg.up .v-cloud-bg, .viz-svg.up .v-dht-link, .viz-svg.up .v-dht-lock { opacity: 1; }
 .viz-svg.up .v-dht-link { animation: viz-flow 1.4s linear infinite; }
 .viz-svg.direct .v-cloud-bg { opacity: .85; }

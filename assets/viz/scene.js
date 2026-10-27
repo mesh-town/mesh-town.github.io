@@ -53,9 +53,6 @@
     el('rect', { x: p.x + 152, y: 240, width: 44, height: 16, rx: 4 }, g, 'v-router');
     el('path', { d: 'M' + (p.x + 164) + ' 240v-6M' + (p.x + 184) + ' 240v-6' }, g, 'v-antenna');
     text(g, p.x + 174, 272, 'NAT', 'v-nat');
-    var key = el('g', { 'class': 'v-key' }, g);
-    el('rect', { x: cx - 64, y: 284, width: 128, height: 30, rx: 15 }, key, 'v-key-bg');
-    text(key, cx, 305, 'home-lab', 'v-key-text');
     var node = el('g', { 'data-node': p.node }, g, 'v-node');
     el('rect', { x: cx - 50, y: 322, width: 100, height: 40, rx: 8 }, node, 'v-node-bg');
     text(node, cx, 347, p.node, 'v-node-text');
@@ -109,6 +106,12 @@
     el('stop', { offset: 1, 'class': 'v-grad-b' }, g);
   }
 
+  function netLabel(svg) {
+    var g = el('g', {}, svg, 'v-net');
+    text(g, 14, 50, 'home-lab', 'v-net-name', 'start');
+    text(g, 14, 80, 'your private network', 'v-net-sub', 'start');
+  }
+
   function extras(svg) {
     var bar = el('g', {}, svg, 'v-addr');
     el('rect', { x: 256, y: 182, width: 288, height: 38, rx: 19 }, bar, 'v-addr-bg');
@@ -129,6 +132,7 @@
     PLACES.forEach(function (p) { place(svg, p); });
     links(svg);
     packets(svg);
+    netLabel(svg);
     extras(svg);
     svg._cafe = PLACES[1].label;
     setFrame(svg, 1);
