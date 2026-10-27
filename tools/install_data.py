@@ -45,7 +45,7 @@ ANDROID_NETWORK = [
     ("p", "On the first connect Android may ask for permission to show notifications (Android 13 and newer). It then shows a system window asking to allow the app to set up a connection: press OK. Once, it also shows a screen about running in the background and battery use; allow it so the connection is not stopped."),
 ]
 ANDROID_OPEN = [
-    ("p", "The phone is a member of the network like any other device. For details, see the [usage reference](" + BLOB + "docs/USAGE.md)."),
+    ("p", "The phone is a network member like any other device. For details, see the [usage reference](" + BLOB + "docs/USAGE.md)."),
 ]
 def router_network(stop, cmd):
     return [

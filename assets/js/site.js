@@ -145,7 +145,7 @@
     if (os === "ios") {
       select("macos", { keepHero: true });
       setHero(IOS_HERO, true);
-      setNote("Mesh Town does not run on iOS. Pick the system of another device.");
+      setNote("Mesh Town does not run on iOS. Pick another device's system.");
     } else if (os) {
       select(os);
       setNote("Detected: " + NAMES[os] + ". Not your system? Pick another one.");

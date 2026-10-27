@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.add('js')</script>
 <title>Mesh Town — reach your home server, NAS or office PC from anywhere</title>
-<meta name="description" content="Open the web panel of a NAS, SSH into a home server or reach a work PC from any network — no port forwarding, no public IP, no central server, no accounts.">
+<meta name="description" content="Open a NAS web panel, SSH into a home server or reach a work PC from any network — no port forwarding, no public IP, no central server, no accounts.">
 <link rel="canonical" href="https://mesh-town.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mesh Town">
 <meta property="og:title" content="Mesh Town — reach your home server, NAS or office PC from anywhere">
-<meta property="og:description" content="Open the web panel of a NAS, SSH into a home server or reach a work PC from any network — no port forwarding, no public IP, no central server, no accounts.">
+<meta property="og:description" content="Open a NAS web panel, SSH into a home server or reach a work PC from any network — no port forwarding, no public IP, no central server, no accounts.">
 <meta property="og:url" content="https://mesh-town.github.io/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/theme.css">
@@ -39,12 +39,12 @@
 
 <section id="top" class="hero">
   <h1>Reach your home server, NAS or office PC from anywhere</h1>
-  <p class="lead">Mesh Town links your own devices directly to each other. Open the web panel of a NAS, SSH into a home server or connect to a work machine by remote desktop from any network — without opening a single port on your router.</p>
+  <p class="lead">Mesh Town links your own devices directly to each other. Open a NAS web panel, SSH into a home server or connect to a work machine by remote desktop from any network — without opening a single port on your router.</p>
   <ul class="chips">
     <li>No port forwarding</li>
     <li>No public IP needed</li>
     <li>No central server or accounts</li>
-    <li>Survives a change of network</li>
+    <li>Survives network change</li>
   </ul>
   <div class="hero-actions">
     <a class="btn btn-primary" data-hero-cta href="install/index.html">Install Mesh Town</a>
@@ -57,7 +57,7 @@
 <section id="use-cases" class="section" aria-labelledby="use-cases-title">
   <h2 id="use-cases-title">Sound familiar?</h2>
   <ul class="cards">
-    <li class="card"><h3>The NAS panel, away from home</h3><p>You want the web panel of your NAS or Home Assistant while you are out, and nothing on your router is open for it.</p><p class="try">You open: <code>http://nas.meshtown</code></p></li>
+    <li class="card"><h3>The NAS panel, away from home</h3><p>You want your NAS or Home Assistant web panel while you are out, and nothing on your router is open for it.</p><p class="try">You open: <code>http://nas.meshtown</code></p></li>
     <li class="card"><h3>No public IP at home</h3><p>Your provider puts you behind its own <abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr>, so port forwarding is not even an option. Mesh Town does not need it.</p></li>
     <li class="card"><h3>A computer at your parents'</h3><p>You look after a machine at a relative's or a client's place, behind a router you do not control.</p><p class="try">You type: <code>ssh -p 2022 user@127.0.0.1</code></p></li>
     <li class="card"><h3>The work PC from home</h3><p>Remote desktop to the office machine, with nothing opened on the office router.</p><p class="try">You connect to: <code>127.0.0.1:5389</code></p></li>
@@ -67,7 +67,7 @@
   <div class="not-for">
     <h3>Not for you if you need</h3>
     <ul>
-      <li>a whole network joined: Mesh Town shares ports of programs, it adds no virtual network adapter;</li>
+      <li>a whole network joined: Mesh Town shares program ports, it adds no virtual network adapter;</li>
       <li>it on an iPhone or iPad;</li>
       <li>anonymity: you trust the members you invite, and an exit sees which hosts you connect to;</li>
       <li>a hardened product today: this is an early release.</li>
@@ -90,7 +90,7 @@
         <li data-frame="4"><strong>Through the routers.</strong> With what they learned there, the nodes get through their routers' address translation (<abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr>) and connect directly. Nothing is opened on the routers.</li>
         <li data-frame="5"><strong>Encrypted, members only.</strong> Every link is encrypted, and a node is let in only after proving it knows the network key. Traffic never goes through the DHT.</li>
         <li data-frame="6"><strong>Open by name.</strong> On the laptop, the browser is set to use Mesh Town as its proxy, so http://nas.meshtown opens the NAS web panel shared with the network.</li>
-        <li data-frame="7"><strong>Change of network.</strong> The laptop moves from café Wi-Fi to a hotel network. Its node notices the switch and reconnects to the others within seconds.</li>
+        <li data-frame="7"><strong>Network change.</strong> The laptop moves from café Wi-Fi to a hotel network. Its node notices the switch and reconnects to the others within seconds.</li>
         <li data-frame="8"><strong>When it cannot connect directly.</strong> Some mobile networks block direct connections. Then a member of your network with a public address passes the traffic on; with no such member, the laptop stays unconnected there.</li>
       </ol>
     </figcaption>
@@ -107,7 +107,7 @@
     <thead><tr><th scope="col">The usual way</th><th scope="col">With Mesh Town</th></tr></thead>
     <tbody>
       <tr><td data-label="The usual way">Port forwarding and dynamic DNS</td><td data-label="With Mesh Town">Nothing to open: only members reach the port</td></tr>
-      <tr><td data-label="The usual way">A tunnel server of your own</td><td data-label="With Mesh Town">No server: members connect to each other directly</td></tr>
+      <tr><td data-label="The usual way">Your own tunnel server</td><td data-label="With Mesh Town">No server: members connect to each other directly</td></tr>
       <tr><td data-label="The usual way">A tunnel or relay service</td><td data-label="With Mesh Town">No account, no provider in the middle</td></tr>
       <tr><td data-label="The usual way">A mesh with a coordination server</td><td data-label="With Mesh Town">The member list lives with the members</td></tr>
     </tbody>
@@ -233,16 +233,16 @@ tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
 <section id="how-it-works" class="section">
   <h2>Under the hood</h2>
   <p class="lead">The short version for specialists. Open any line for the details.</p>
-  <details><summary>Discovery: an encrypted record in the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr></summary><p>Every node of a network knows the network key. From it the node derives a place in the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr> (HyperDHT, a distributed directory nobody owns) and publishes a small record there about once a minute: the list of member nodes, encrypted with ChaCha20-Poly1305. Without the key, one sees only a public signing key, a salt and ciphertext.</p></details>
+  <details><summary>Discovery: an encrypted record in the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr></summary><p>Every network node knows the network key. From it the node derives a place in the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr> (HyperDHT, a distributed directory nobody owns) and publishes a small record there about once a minute: the list of member nodes, encrypted with ChaCha20-Poly1305. Without the key, one sees only a public signing key, a salt and ciphertext.</p></details>
   <details><summary>Connection: direct NAT hole punching; relay only through your own member</summary><p>Nodes connect by <abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr> hole punching, so home routers and most NATs let the connection through with no port opened. If that fails, a member of the same network with a public address relays the connection; nobody outside the network does. A network where every device is behind NAT has no such member, and some mobile operators prevent direct connections.</p></details>
   <details><summary>Encryption: <abbr title="A reliable transport over UDP, used for hole punching">UDX</abbr> streams with <abbr title="A well-studied framework for encrypted, authenticated connections">Noise</abbr>, plus a handshake on the network secret</summary><p>Each connection is an encrypted stream: UDX is a reliable transport over UDP, Noise a well-studied framework for encrypted, authenticated connections. On top of it the nodes run a handshake that checks both sides know the network secret; a node that fails it is disconnected. A stranger who learns a node's id gets an answer only from the sign-in and invite services.</p></details>
   <details><summary>Membership: a private key, administrators and single-use invites</summary><p>A network is a key you keep private: a label you choose plus a random part of about 130 bits. Whoever creates the network is its first administrator, and only administrators invite. An invite is a single-use string, valid for a day, that does not contain the network key. One node can be in up to 8 networks. The node page shows an invite as a link and a QR code (<em>Invite a member</em>); on Android, <em>Scan QR</em> reads it.</p></details>
   <details><summary>Names: http://&lt;device-name&gt;.meshtown through the node's proxy</summary><p>A shared web interface is at <code>http://&lt;device-name&gt;.meshtown</code>. The device name is folded to lowercase ASCII letters, digits and dashes — "Café Router" becomes cafe-router — and two devices with the same name get a short suffix from their id. A port other than 80 is written as usual: <code>http://nas.meshtown:8080</code>. Names work only through the node's proxy, and only over http://.</p></details>
-  <details><summary>Programs: a <abbr title="A standard proxy protocol that most browsers and many programs support">SOCKS5</abbr> and HTTP proxy on 127.0.0.1:1080, or a local port</summary><p>Programs reach the network through the node's proxy at <code>127.0.0.1:1080</code> (SOCKS5, a standard proxy protocol, and HTTP on one port), or through a local port: Open on this computer turns a member's port 22 into <code>127.0.0.1:2022</code>. A device shares ports of programs running on it, TCP or UDP, with all members or selected ones. The node's own page is at <code>http://127.0.0.1:7777</code>: plain HTTP, reachable from your local network unless you run <code>meshtown access localhost</code>. Never share the page port.</p></details>
+  <details><summary>Programs: a <abbr title="A standard proxy protocol that most browsers and many programs support">SOCKS5</abbr> and HTTP proxy on 127.0.0.1:1080, or a local port</summary><p>Programs reach the network through the node's proxy at <code>127.0.0.1:1080</code> (SOCKS5, a standard proxy protocol, and HTTP on one port), or through a local port: Open on this computer turns a member's port 22 into <code>127.0.0.1:2022</code>. A device shares program ports running on it, TCP or UDP, with all members or selected ones. The node's own page is at <code>http://127.0.0.1:7777</code>: plain HTTP, reachable from your local network unless you run <code>meshtown access localhost</code>. Never share the page port.</p></details>
   <details><summary>Exit through a member: one hop, chosen from your list; the exit sees hostnames</summary><p>A member can also agree to be an exit: the others then send traffic out through its internet connection via the proxy, for example to reach a service that accepts connections only from your office IP. The node uses the exits from a list you set, in order. The exit sees which hosts you connect to.</p></details>
   <details><summary>Limits: ports, not networks; UDP over reliable streams; no iPhone app</summary>
     <ul class="limits">
-      <li><strong>Ports, not networks.</strong> Mesh Town connects TCP and UDP ports of programs on the device itself. There is no virtual network interface, no subnet routing and no capture of all traffic.</li>
+      <li><strong>Ports, not networks.</strong> Mesh Town connects TCP and UDP program ports on the device itself. There is no virtual network interface, no subnet routing and no capture of all traffic.</li>
       <li><strong>Programs use the proxy.</strong> A program has to work through a SOCKS5 or HTTP proxy, or connect to a local port on 127.0.0.1.</li>
       <li><strong>UDP rides on reliable streams.</strong> Order is kept, but a stalled link delays everything behind it, and a datagram larger than 2048 bytes is truncated.</li>
       <li><strong>Trust, not anonymity.</strong> Members you invite are trusted, and an exit sees which hosts you connect to. There is no iPhone or iPad app.</li>
@@ -261,7 +261,7 @@ meshtown config-path                      # where the settings file is</code></p
 
 <section id="faq" class="section">
   <h2>Questions</h2>
-  <details><summary>Does it route all my traffic?</summary><p>No. Mesh Town connects ports of programs: a program reaches the network through the node's proxy or a local port. There is no virtual network interface, and other traffic is not touched.</p></details>
+  <details><summary>Does it route all my traffic?</summary><p>No. Mesh Town connects program ports: a program reaches the network through the node's proxy or a local port. There is no virtual network interface, and other traffic is not touched.</p></details>
   <details><summary>What if two devices cannot connect directly?</summary><p>A member of your network with a public address relays between them. With no such member they stay unconnected. Behind home routers and most NATs a direct connection works; some mobile operators prevent it.</p></details>
   <details><summary>Who can reach the services I share?</summary><p>Only members of your network, and for each port you choose: all members or selected ones. A port is shared only after you publish it.</p></details>
   <details><summary>How does the browser setting behave?</summary><p>The address <code>http://127.0.0.1:1080/proxy.pac</code> is an automatic proxy configuration (<abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr>) file served by the node. Ordinary sites go through the node, with a fallback to a direct connection while Mesh Town is stopped; <code>*.meshtown</code> addresses always go through the node, and local addresses go direct. Strict mode (Settings → proxy) removes the direct fallback, so a site never opens outside the chosen exit.</p></details>
