@@ -58,6 +58,7 @@ th { background: var(--surface); }
   tr { margin-bottom: .9rem; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
   td { border: 0; }
   td + td { border-top: 1px solid var(--border); }
+  caption { display: block; }
   td::before { content: attr(data-label); display: block; font-size: .8rem; color: var(--muted); }
 }
 details { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin-bottom: .6rem; }
@@ -79,3 +80,15 @@ dl.trouble dt { font-weight: 600; margin-top: 1em; }
 dl.trouble dd { margin: .2em 0 0; }
 .links-line { color: var(--muted); }
 .links-line a { margin-right: .5rem; }
+abbr[title] { text-decoration: underline dotted; cursor: help; }
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; margin: 1.25rem 0 0; }
+.chips li { margin: 0; padding: .25rem .8rem; font-size: .92rem; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; }
+.cards .try { margin-top: .6rem; font-size: .9rem; color: var(--fg); }
+.cards .try code { overflow-wrap: anywhere; }
+.not-for { padding: 1rem 1.2rem; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1rem; }
+.not-for h3 { margin: 0 0 .4rem; font-size: 1.05rem; }
+.not-for ul { margin: 0; padding-left: 1.2rem; color: var(--muted); }
+.not-for li { margin: .2rem 0; }
+details > .limits, details > pre { margin-block: .2rem 1rem; }
+details > .limits li { background: var(--bg); }
+.os-panel details { margin: .5rem 0; background: var(--bg); }

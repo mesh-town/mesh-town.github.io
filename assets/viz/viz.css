@@ -90,6 +90,11 @@
   .viz-svg .v-key-text { font-size: 18px; }
   .viz-svg .v-addr-text, .viz-svg .v-panel-text { font-size: 17px; }
 }
+@media (max-width: 40rem) {
+  .viz-svg text { font-size: 22px; }
+  .viz-svg .v-node-text { font-size: 24px; }
+  .viz-svg .v-nat, .viz-svg .v-key-text { font-size: 18px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .viz, .viz * { transition: none !important; animation: none !important; }
   .viz-svg .v-packet { transform: none; }

@@ -68,7 +68,7 @@ OSES = [
         "lede": "For Macs with Apple silicon or Intel.",
         "install": [
             ("h3", "With Homebrew (recommended)"),
-            ("cmd", "brew install mesh-town/meshtown/meshtown\nmeshtown"),
+            ("cmd", "brew install mesh-town/macos/meshtown\nmeshtown"),
             ("p", "`meshtown` starts the menu bar app; `meshtown-cli` runs the node in a terminal. A Homebrew install is not marked as downloaded from the internet, so macOS does not stop the first launch."),
             ("h3", "As an app"),
             ("p", "Download for [Apple silicon](" + DIST + "macos/MeshTown-macos-arm64.zip) or for [Intel](" + DIST + "macos/MeshTown-macos-x86_64.zip), unzip and move MeshTown.app to Applications."),
@@ -80,7 +80,7 @@ OSES = [
         "update": [("cmd", "brew upgrade meshtown")],
         "remove": [("cmd", "brew uninstall meshtown")],
         "trouble": [
-            ("Homebrew refuses the formula after brew tap", "Newer Homebrew versions do not trust a new tap until you run:\n`brew trust mesh-town/meshtown`"),
+            ("Homebrew refuses the formula after brew tap", "Newer Homebrew versions do not trust a new tap until you run:\n`brew trust mesh-town/macos`"),
             ("\"MeshTown\" cannot be opened", "See the Gatekeeper note above: Open Anyway, or remove the quarantine mark."),
             ("Where are the settings and logs?", "`~/Library/Application Support/meshtown/` holds config.json and the logs meshtown.log and meshtown-tray.log." + KEEP),
         ],

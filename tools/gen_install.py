@@ -72,7 +72,7 @@ CHROME_TOP = """<a class="skip-link" href="#main">Skip to content</a>
     <a class="brand" href="../../index.html">Mesh Town</a>
     <nav class="site-nav" aria-label="Main">
       <ul>
-        <li><a href="../../index.html#how-it-works">How it works</a></li>
+        <li><a href="../../index.html#see-it">How it works</a></li>
         <li><a href="../index.html">Install</a></li>
         <li><a href="%(r)s/tree/main/docs">Docs</a></li>
         <li><a href="%(r)s">GitHub</a></li>

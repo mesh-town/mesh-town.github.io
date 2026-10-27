@@ -1,5 +1,7 @@
 # mesh-town.github.io
 
+**[Mesh Town](https://mesh-town.github.io/)** — reach your home server, NAS or office PC from anywhere: no port forwarding, no central server, no accounts.
+
 The website of Mesh Town: reach the services on your devices from anywhere.
 
 Plain static files, no build step, no external resources.
