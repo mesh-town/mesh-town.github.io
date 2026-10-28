@@ -68,7 +68,7 @@
     <h3>Not for you if you need</h3>
     <ul>
       <li>a whole network joined: Mesh Town shares program ports, it adds no virtual network adapter;</li>
-      <li>it on an iPhone or iPad;</li>
+      <li>it on an iPhone or iPad without a router running it;</li>
       <li>anonymity: you trust the members you invite, and an exit sees which hosts you connect to;</li>
       <li>a hardened product today: this is an early release.</li>
     </ul>
@@ -223,6 +223,7 @@ tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
       </div>
       </div>The script adds the package feed and installs the meshtown service.</li>
       <li>Join the router to your network with an invite from a member: see the router guide.</li>
+      <li>Connect phones and computers, iPhone and iPad included: <a href="install/openwrt/index.html#devices">connecting devices</a>.</li>
     </ol>
     <p class="links-line"><a href="install/openwrt/index.html">OpenWrt guide →</a> <a href="install/keenetic/index.html">Keenetic guide →</a></p>
   </div>
@@ -245,7 +246,7 @@ tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
       <li><strong>Ports, not networks.</strong> Mesh Town connects TCP and UDP program ports on the device itself. There is no virtual network interface, no subnet routing and no capture of all traffic.</li>
       <li><strong>Programs use the proxy.</strong> A program has to work through a SOCKS5 or HTTP proxy, or connect to a local port on 127.0.0.1.</li>
       <li><strong>UDP rides on reliable streams.</strong> Order is kept, but a stalled link delays everything behind it, and a datagram larger than 2048 bytes is truncated.</li>
-      <li><strong>Trust, not anonymity.</strong> Members you invite are trusted, and an exit sees which hosts you connect to. There is no iPhone or iPad app.</li>
+      <li><strong>Trust, not anonymity.</strong> Members you invite are trusted, and an exit sees which hosts you connect to. There is no iPhone or iPad app. They can use Mesh Town on a router.</li>
       <li><strong>Early software.</strong> Releases of the 0.3.x line are a working network node, not a hardened product.</li>
     </ul>
     <p><a href="https://github.com/mesh-town/meshtown/blob/main/docs/LIMITATIONS.md">All limitations →</a></p>

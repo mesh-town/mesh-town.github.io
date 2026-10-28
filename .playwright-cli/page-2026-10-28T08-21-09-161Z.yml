@@ -1,0 +1,136 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Mesh Town" [ref=e5] [cursor=pointer]:
+        - /url: ../../index.html
+      - navigation "Main" [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "How it works" [ref=e9] [cursor=pointer]:
+              - /url: ../../index.html#see-it
+          - listitem [ref=e10]:
+            - link "Install" [ref=e11] [cursor=pointer]:
+              - /url: ../index.html
+          - listitem [ref=e12]:
+            - link "Docs" [ref=e13] [cursor=pointer]:
+              - /url: https://github.com/mesh-town/meshtown/tree/main/docs
+          - listitem [ref=e14]:
+            - link "GitHub" [ref=e15] [cursor=pointer]:
+              - /url: https://github.com/mesh-town/meshtown
+  - main [ref=e16]:
+    - navigation "Breadcrumb" [ref=e17]:
+      - list [ref=e18]:
+        - listitem [ref=e19]:
+          - link "Home" [ref=e20] [cursor=pointer]:
+            - /url: ../../index.html
+        - listitem [ref=e21]:
+          - text: ›
+          - link "Install" [ref=e22] [cursor=pointer]:
+            - /url: ../index.html
+        - listitem [ref=e23]: ›OpenWrt
+    - heading "Install Mesh Town on an OpenWrt router" [level=1] [ref=e24]
+    - paragraph [ref=e25]: For OpenWrt 24.10 and 25.12 on 64-bit ARM, 32-bit ARM Cortex and x86_64. MIPS, ARMv5/v6 and 32-bit x86 routers are not covered yet.
+    - navigation "Other systems" [ref=e26]:
+      - list [ref=e27]:
+        - listitem [ref=e28]:
+          - link "macOS" [ref=e29] [cursor=pointer]:
+            - /url: ../macos/index.html
+        - listitem [ref=e30]:
+          - link "Windows" [ref=e31] [cursor=pointer]:
+            - /url: ../windows/index.html
+        - listitem [ref=e32]:
+          - link "Linux" [ref=e33] [cursor=pointer]:
+            - /url: ../linux/index.html
+        - listitem [ref=e34]:
+          - link "Android" [ref=e35] [cursor=pointer]:
+            - /url: ../android/index.html
+        - listitem [ref=e36]:
+          - link "OpenWrt" [ref=e37] [cursor=pointer]:
+            - /url: ../openwrt/index.html
+        - listitem [ref=e38]:
+          - link "Keenetic" [ref=e39] [cursor=pointer]:
+            - /url: ../keenetic/index.html
+    - heading "1. Install" [level=2] [ref=e40]
+    - paragraph [ref=e41]: "As root on the router:"
+    - generic [ref=e42]:
+      - code [ref=e43]: wget -O- https://mesh-town.github.io/meshtown-openwrt/install.sh | sh
+      - button "Copy command" [ref=e44] [cursor=pointer]: Copy
+    - paragraph [ref=e45]: The service starts at boot.
+    - heading "2. Join your network" [level=2] [ref=e46]
+    - paragraph [ref=e47]: "A router node usually joins a network you already have. Ask a member for a single-use invite (Invite a member on their node page), then run this once while the service is stopped:"
+    - generic [ref=e48]:
+      - code [ref=e49]: /etc/init.d/meshtown stop meshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…
+      - button "Copy command" [ref=e50] [cursor=pointer]: Copy
+    - paragraph [ref=e51]: The command saves the network to the settings file, so after a restart the service stays in the network without the invite. Stop it with Ctrl+C once it reports joining, then start the service. To share the router's web panel with the network, see the router notes.
+    - paragraph [ref=e52]:
+      - link "Router notes" [ref=e53] [cursor=pointer]:
+        - /url: https://github.com/mesh-town/meshtown/blob/main/platforms/linux/build/openwrt/README.md
+      - text: ·
+      - link "Usage reference" [ref=e54] [cursor=pointer]:
+        - /url: https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md
+    - heading "3. Connect phones and computers" [level=2] [ref=e55]
+    - paragraph [ref=e56]: Phones, tablets and computers on the router's home network open sites through Mesh Town once their Wi‑Fi or network settings point to the router's setup address (PAC). iPhone and iPad work this way too — there is no app for them.
+    - paragraph [ref=e57]:
+      - text: "First open the proxy for the home network: on the router's node page (port 7777) go through the setup steps and click \"Open for the home network\", or set"
+      - code [ref=e58]: "\"socks\": {\"access\": \"localnet\"}"
+      - text: in the settings file and restart the service.
+    - paragraph [ref=e59]:
+      - text: The setup address is
+      - code [ref=e60]: http://<router address>:1080/proxy.pac
+      - text: ", for example"
+      - code [ref=e61]: http://192.168.1.1:1080/proxy.pac
+      - text: . The node page shows the exact one.
+    - list [ref=e62]:
+      - listitem [ref=e63]: "iPhone and iPad: \"Settings\" → \"Wi‑Fi\" → ⓘ next to the network → \"Configure Proxy\" → \"Automatic\", paste the address into \"URL\", \"Save\"."
+      - listitem [ref=e64]: "Android: Wi‑Fi settings → the network → \"Proxy\" → \"Proxy Auto-Config\", paste the address into \"PAC URL\", \"Save\"."
+      - listitem [ref=e65]: "macOS: \"System Settings\" → \"Network\" → the connection → \"Details…\" → \"Proxies\" → \"Automatic Proxy Configuration\"."
+      - listitem [ref=e66]: "Windows: \"Settings\" → \"Network & internet\" → \"Proxy\" → \"Use setup script\" → \"Script address\"."
+      - listitem [ref=e67]: "Linux (GNOME): \"Settings\" → \"Network\" → \"Proxy\" → \"Automatic\" → \"Configuration URL\"."
+    - paragraph [ref=e68]:
+      - strong [ref=e69]: Note.
+      - text: "The proxy has no password: any device on the home network can use it, and so can guest Wi‑Fi unless it is separated. Do not open port 1080 on the WAN side."
+    - heading "Update" [level=2] [ref=e70]
+    - paragraph [ref=e71]: "OpenWrt 24.10:"
+    - generic [ref=e72]:
+      - code [ref=e73]: opkg update && opkg upgrade meshtown
+      - button "Copy command" [ref=e74] [cursor=pointer]: Copy
+    - paragraph [ref=e75]: "OpenWrt 25.12:"
+    - generic [ref=e76]:
+      - code [ref=e77]: apk update && apk upgrade meshtown
+      - button "Copy command" [ref=e78] [cursor=pointer]: Copy
+    - heading "Troubleshooting" [level=2] [ref=e79]
+    - generic [ref=e80]:
+      - term [ref=e81]: My router has a MIPS chip
+      - definition [ref=e82]: MIPS, ARMv5/v6 and 32-bit x86 routers are not covered yet.
+      - term [ref=e83]: Where is the settings file?
+      - definition [ref=e84]:
+        - code [ref=e85]: /etc/meshtown/config.json
+        - text: . Keep it private.
+    - heading "More details" [level=2] [ref=e86]
+    - paragraph [ref=e87]:
+      - link "Router notes" [ref=e88] [cursor=pointer]:
+        - /url: https://github.com/mesh-town/meshtown/blob/main/platforms/linux/build/openwrt/README.md
+      - text: ·
+      - link "Install reference" [ref=e89] [cursor=pointer]:
+        - /url: https://github.com/mesh-town/meshtown/blob/main/docs/INSTALL.md
+      - text: ·
+      - link "Usage reference" [ref=e90] [cursor=pointer]:
+        - /url: https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md
+  - contentinfo [ref=e91]:
+    - list [ref=e93]:
+      - listitem [ref=e94]: Mesh Town
+      - listitem [ref=e95]:
+        - link "Source" [ref=e96] [cursor=pointer]:
+          - /url: https://github.com/mesh-town/meshtown
+      - listitem [ref=e97]:
+        - link "Docs" [ref=e98] [cursor=pointer]:
+          - /url: https://github.com/mesh-town/meshtown/tree/main/docs
+      - listitem [ref=e99]:
+        - link "Downloads" [ref=e100] [cursor=pointer]:
+          - /url: https://github.com/mesh-town/meshtown-dist
+      - listitem [ref=e101]:
+        - text: "License:"
+        - link "AGPL-3.0-only" [ref=e102] [cursor=pointer]:
+          - /url: https://github.com/mesh-town/meshtown/blob/main/LICENSE

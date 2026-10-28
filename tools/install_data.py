@@ -56,6 +56,19 @@ def router_network(stop, cmd):
     ]
 
 
+ROUTER_DEVICES = [
+    ("p", "Phones, tablets and computers on the router's home network open sites through Mesh Town once their Wi‑Fi or network settings point to the router's setup address (PAC). iPhone and iPad work this way too — there is no app for them."),
+    ("p", "First open the proxy for the home network: on the router's node page (port 7777) go through the setup steps and click \"Open for the home network\", or set `\"socks\": {\"access\": \"localnet\"}` in the settings file and restart the service."),
+    ("p", "The setup address is `http://<router address>:1080/proxy.pac`, for example `http://192.168.1.1:1080/proxy.pac`. The node page shows the exact one."),
+    ("ol", [
+        "iPhone and iPad: \"Settings\" → \"Wi‑Fi\" → ⓘ next to the network → \"Configure Proxy\" → \"Automatic\", paste the address into \"URL\", \"Save\".",
+        "Android: Wi‑Fi settings → the network → \"Proxy\" → \"Proxy Auto-Config\", paste the address into \"PAC URL\", \"Save\".",
+        "macOS: \"System Settings\" → \"Network\" → the connection → \"Details…\" → \"Proxies\" → \"Automatic Proxy Configuration\".",
+        "Windows: \"Settings\" → \"Network & internet\" → \"Proxy\" → \"Use setup script\" → \"Script address\".",
+        "Linux (GNOME): \"Settings\" → \"Network\" → \"Proxy\" → \"Automatic\" → \"Configuration URL\".",
+    ]),
+    ("warn", "The proxy has no password: any device on the home network can use it, and so can guest Wi‑Fi unless it is separated. Do not open port 1080 on the WAN side."),
+]
 ROUTER_NETWORK = router_network(" while the service is stopped", "/etc/init.d/meshtown stop\nmeshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…")
 KEENETIC_NETWORK = router_network(" while the service is stopped", "/opt/etc/init.d/S99meshtown stop\nmeshtown run --config /opt/etc/meshtown/config.json --invite mesh-invite2-…")
 
@@ -199,6 +212,7 @@ OSES = [
         ],
         "check": [],
         "network": ("2. Join your network", ROUTER_NETWORK),
+        "devices": ("3. Connect phones and computers", ROUTER_DEVICES, "devices"),
         "open": None,
         "update": [
             ("p", "OpenWrt 24.10:"), ("cmd", "opkg update && opkg upgrade meshtown"),
@@ -224,6 +238,7 @@ OSES = [
         ],
         "check": [],
         "network": ("2. Join your network", KEENETIC_NETWORK),
+        "devices": ("3. Connect phones and computers", ROUTER_DEVICES, "devices"),
         "open": None,
         "update": [("cmd", "opkg update && opkg upgrade meshtown")],
         "remove": [],
@@ -249,7 +264,7 @@ INDEX = {
         ("keenetic", "Keenetic", "routers with Entware (experimental)"),
     ],
     "after": [
-        "Mesh Town does not run on iPhone or iPad.",
+        "There is no app for iPhone or iPad; they can use Mesh Town on a router: see [connecting devices](openwrt/index.html#devices).",
         "Checksums and all release files are in the [downloads repository](https://github.com/mesh-town/meshtown-dist); files without a version in the name are always the latest build.",
     ],
 }

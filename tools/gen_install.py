@@ -47,8 +47,9 @@ def tabs(group, variants):
             % (group, bar, panels))
 
 
-def section(title, blocks):
-    return "<h2>%s</h2>\n%s" % (html.escape(title), "\n".join(block(b) for b in blocks))
+def section(title, blocks, anchor=None):
+    attr = ' id="%s"' % html.escape(anchor) if anchor else ""
+    return "<h2%s>%s</h2>\n%s" % (attr, html.escape(title), "\n".join(block(b) for b in blocks))
 
 
 def head(title, desc, canon):
@@ -138,6 +139,8 @@ def page(o):
     if o["check"]:
         parts.append(section("2. Make sure it works", o["check"]))
     parts.append(section(*o["network"]))
+    if o.get("devices"):
+        parts.append(section(*o["devices"]))
     if o["open"]:
         parts.append(section(*o["open"]))
     up = list(o["update"]) + list(o["remove"])

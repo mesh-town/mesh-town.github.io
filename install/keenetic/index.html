@@ -63,6 +63,18 @@
 meshtown run --config /opt/etc/meshtown/config.json --invite mesh-invite2-…</code></pre>
 <p>The command saves the network to the settings file, so after a restart the service stays in the network without the invite. Stop it with Ctrl+C once it reports joining, then start the service. To share the router's web panel with the network, see the router notes.</p>
 <p><a href="https://github.com/mesh-town/meshtown/blob/main/platforms/linux/build/openwrt/README.md">Router notes</a> · <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference</a></p>
+<h2 id="devices">3. Connect phones and computers</h2>
+<p>Phones, tablets and computers on the router's home network open sites through Mesh Town once their Wi‑Fi or network settings point to the router's setup address (PAC). iPhone and iPad work this way too — there is no app for them.</p>
+<p>First open the proxy for the home network: on the router's node page (port 7777) go through the setup steps and click "Open for the home network", or set <code>"socks": {"access": "localnet"}</code> in the settings file and restart the service.</p>
+<p>The setup address is <code>http://&lt;router address&gt;:1080/proxy.pac</code>, for example <code>http://192.168.1.1:1080/proxy.pac</code>. The node page shows the exact one.</p>
+<ol>
+<li>iPhone and iPad: "Settings" → "Wi‑Fi" → ⓘ next to the network → "Configure Proxy" → "Automatic", paste the address into "URL", "Save".</li>
+<li>Android: Wi‑Fi settings → the network → "Proxy" → "Proxy Auto-Config", paste the address into "PAC URL", "Save".</li>
+<li>macOS: "System Settings" → "Network" → the connection → "Details…" → "Proxies" → "Automatic Proxy Configuration".</li>
+<li>Windows: "Settings" → "Network &amp; internet" → "Proxy" → "Use setup script" → "Script address".</li>
+<li>Linux (GNOME): "Settings" → "Network" → "Proxy" → "Automatic" → "Configuration URL".</li>
+</ol>
+<p class="note-warn"><strong>Note.</strong> The proxy has no password: any device on the home network can use it, and so can guest Wi‑Fi unless it is separated. Do not open port 1080 on the WAN side.</p>
 <h2>Update</h2>
 <pre class="cmd"><code>opkg update &amp;&amp; opkg upgrade meshtown</code></pre>
 <h2>Troubleshooting</h2>

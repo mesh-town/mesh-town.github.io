@@ -12,7 +12,7 @@
   };
   var DEFAULT_HERO = ["Install Mesh Town", "install/index.html"];
   var IOS_HERO = ["See other systems", "#install"];
-  var IOS_LINE = "Mesh Town does not run on iOS. It runs on macOS, Windows, Linux, Android and routers.";
+  var IOS_LINE = "There is no Mesh Town app for iOS. An iPhone or iPad can use Mesh Town on your router.";
 
   var current = null;
   var tabs = [];
@@ -143,9 +143,9 @@
     }
     var os = detectOS(readEnv());
     if (os === "ios") {
-      select("macos", { keepHero: true });
+      select("router", { keepHero: true });
       setHero(IOS_HERO, true);
-      setNote("Mesh Town does not run on iOS. Pick another device's system.");
+      setNote("There is no Mesh Town app for iOS: set it up on a router, then connect the iPhone to it.");
     } else if (os) {
       select(os);
       setNote("Detected: " + NAMES[os] + ". Not your system? Pick another one.");
