@@ -13,8 +13,8 @@
 .v-router rect{fill:var(--line-muted)}
 .v-router line{stroke:var(--line-muted);stroke-width:1.5}
 .v-node rect{fill:var(--bg);stroke:var(--line-muted);stroke-width:1.5}
-.v-net,.v-cloud,.v-dht,.v-rec,.v-link,.v-lock,.v-panel,.v-addr,.v-proxy,.v-service,.v-exit,.v-badge-exit,.v-badge-pub,.v-pkt,.v-place-name-alt{opacity:0}
-.v-net rect,.v-panel rect,.v-badge-exit rect,.v-badge-pub rect{fill:var(--accent-soft)}
+.v-net,.v-cloud,.v-dht,.v-rec,.v-link,.v-lock,.v-panel,.v-addr,.v-proxy,.v-service,.v-exit,.v-badge-exit,.v-badge-exit2,.v-badge-pub,.v-pkt,.v-place-name-alt{opacity:0}
+.v-net rect,.v-panel rect,.v-badge-exit rect,.v-badge-exit2 rect,.v-badge-pub rect{fill:var(--accent-soft)}
 .v-cloud ellipse,.v-service rect{fill:var(--surface);stroke:var(--line-muted);stroke-width:1.5}
 .v-dht{fill:none;stroke:var(--line-muted);stroke-width:1.5;stroke-dasharray:4 5}
 .v-panel line,.v-addr line,.v-proxy line{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:3 4}
@@ -38,6 +38,8 @@
 .name .k-req{offset-distance:clamp(0%,calc(var(--p)*200%),100%);opacity:calc(1 - clamp(0,calc((var(--p) - .5)*4),1))}
 .name .k-res{offset-distance:clamp(0%,calc((var(--p) - .5)*200%),100%);opacity:clamp(0,calc((var(--p) - .5)*4),1)}
 .exit .v-proxy,.exit .v-service,.exit .v-badge-exit{opacity:1}
+.exit .v-badge-exit2{opacity:1}
+.exit .v-badge-exit2 rect{opacity:.6}
 .v-exit{stroke-dasharray:600}
 .exit .v-exit{opacity:1;stroke-dashoffset:calc(600 - clamp(0,calc(var(--p)*2.5),1)*600)}
 .exit .k-exit{offset-distance:clamp(0%,calc((var(--p) - .4)*166%),100%);opacity:clamp(0,calc((var(--p) - .4)*10),1)}

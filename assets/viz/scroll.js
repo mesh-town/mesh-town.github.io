@@ -3,7 +3,7 @@
   'use strict';
   var section = document.querySelector('[data-scene]');
   if (!section || !window.MeshScene) { return; }
-  var STEP_CLASSES = ['', '', 'net', 'net dht', 'net links', 'net links name', 'net links exit', 'net links move'];
+  var STEP_CLASSES = ['', '', 'net', 'net dht', 'net links', 'net links name', 'net links move', 'net links exit'];
   var stage = section.querySelector('[data-scene-stage]');
   var steps = [].slice.call(section.querySelectorAll('li[data-step]'));
   var sr = section.querySelector('[data-scene-sr]');
