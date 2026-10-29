@@ -10,6 +10,7 @@ main > .section:last-child { padding-bottom: var(--s-9); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 0 var(--s-5); }
 .meta, .note-small, .os-note { color: var(--muted); font-size: .9375rem; line-height: 1.5; }
 .meta { max-width: 42rem; }
+.hero .meta { max-width: 36rem; }
 .hero-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--s-5); margin-top: var(--s-6); }
 .hero-card-title { font-size: .875rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 var(--s-4); }
 .hero-card-rows { display: grid; grid-template-columns: auto 1fr; gap: .75rem 1rem; margin: 0; }

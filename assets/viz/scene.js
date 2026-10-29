@@ -53,7 +53,7 @@
   function wide() {
     var a = { px: [40, 290, 540], py: [150, 150, 150], pw: 220, ph: 240, prx: 12, pn: [16, 28, 15],
       rt: [160, 14, 40, 12], nat: [180, 44], nd: [55, 110, 44, 110, 27, 15], ny: function () { return 278; } };
-    var d = ['M150 278L330 86', 'M400 278L400 88', 'M650 278L470 86'], s = frames(a), i;
+    var d = ['M150 278L370 88', 'M400 278L400 88', 'M650 278L430 88'], s = frames(a), i;
     s.push(el('ellipse', { cx: 400, cy: 56, rx: 118, ry: 32, 'class': 'v-cloud-bg' }));
     s[s.length - 1] = g('v-cloud', [s[s.length - 1], text(400, 61, 'public directory (DHT)', 14, 'mu')]);
     for (i = 0; i < 3; i++) { s.push(path(d[i], 'v-dht')); }

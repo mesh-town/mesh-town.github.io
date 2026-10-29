@@ -29,7 +29,7 @@
 .dht .v-cloud,.dht .v-dht,.dht .v-rec{opacity:1}
 .dht .v-rec{offset-distance:calc(var(--p)*100%)}
 .layout-v .v-dht{display:none}
-.links .v-cloud{opacity:.45}
+.links .v-cloud{opacity:1}.links .v-cloud ellipse{opacity:.45}
 .links .v-link{opacity:1;stroke-dasharray:1000;stroke-dashoffset:calc(1000 - var(--p)*1000)}
 .links .v-lock{opacity:clamp(0,calc((var(--p) - .85)*7),1)}
 .name .v-link,.exit .v-link,.move .v-link{stroke-dashoffset:0}
