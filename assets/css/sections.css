@@ -100,9 +100,10 @@ details > .limits li { background: var(--bg); }
 .step + .step { margin-top: var(--s-7); }
 .step > h2 { display: flex; align-items: baseline; gap: var(--s-3); margin: 0 0 var(--s-4); }
 .step > h2::before { content: counter(step); flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent-strong); font-size: 1rem; font-weight: 600; line-height: 1; }
+.step ol, .step ul { max-width: 62ch; }
 pre.out { border-style: dashed; }
 .cmd-label { margin: 0 0 var(--s-2); font-size: .9375rem; font-weight: 600; color: var(--muted); }
 .page-refs { margin-top: var(--s-6); }
 .page-refs a { margin-right: var(--s-4); }
 body.page-fill { min-height: 100vh; display: flex; flex-direction: column; }
-body.page-fill main { flex: 1 0 auto; }
+body.page-fill main { flex: 1 0 auto; padding-top: var(--s-7); }
