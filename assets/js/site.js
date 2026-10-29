@@ -148,7 +148,7 @@
       setNote("There is no Mesh Town app for iOS: set it up on a router, then connect the iPhone to it.");
     } else if (os) {
       select(os);
-      setNote("Detected: " + NAMES[os] + ". Not your system? Pick another one.");
+      setNote("Detected: " + NAMES[os] + ".");
     } else {
       select("macos", { keepHero: true });
       setHero(DEFAULT_HERO, false);

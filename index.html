@@ -16,276 +16,265 @@
 <link rel="stylesheet" href="assets/css/theme.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/sections.css">
-<link rel="stylesheet" href="assets/viz/viz-scene.css">
 <link rel="stylesheet" href="assets/viz/viz.css">
-<link rel="stylesheet" href="assets/viz/viz-motion.css">
+<link rel="stylesheet" href="assets/viz/viz-scene.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="index.html">Mesh Town</a>
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="#see-it">How it works</a></li>
-        <li><a href="install/index.html">Install</a></li>
-        <li><a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs</a></li>
-        <li><a href="https://github.com/mesh-town/meshtown">GitHub</a></li>
-      </ul>
-    </nav>
-  </div>
+<div class="wrap">
+<a class="brand" href="index.html">Mesh Town</a>
+<nav class="site-nav" aria-label="Main">
+<ul>
+<li><a href="#see-it">How it works</a></li>
+<li><a href="install/index.html">Install</a></li>
+<li><a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs</a></li>
+<li><a href="https://github.com/mesh-town/meshtown">GitHub</a></li>
+</ul>
+</nav>
+</div>
 </header>
 <main id="main" class="wrap" tabindex="-1">
 
 <section id="top" class="hero">
-  <h1>Reach your home server, NAS or office PC from anywhere</h1>
-  <p class="lead">Mesh Town links your own devices directly to each other. Open a NAS web panel, SSH into a home server or connect to a work machine by remote desktop from any network — without opening a single port on your router.</p>
-  <ul class="chips">
-    <li>No port forwarding</li>
-    <li>No public IP needed</li>
-    <li>No central server or accounts</li>
-    <li>Survives network change</li>
-  </ul>
-  <div class="hero-actions">
-    <a class="btn btn-primary" data-hero-cta href="install/index.html">Install Mesh Town</a>
-    <a class="btn" href="#see-it">See how it works</a>
-  </div>
-  <p class="note-small" data-ios-note hidden></p>
-  <p class="meta">Free and open source. For macOS, Windows, Linux, Android and OpenWrt or Keenetic routers. Early release: it works, but it is not a hardened product yet.</p>
+<div class="hero-copy">
+<h1>Reach your home server, NAS or office PC from anywhere</h1>
+<p class="lead">Mesh Town joins your devices into a private network: the NAS panel, SSH to the home server, remote desktop to the office PC — from any network, with nothing opened on any router.</p>
+<ul class="hero-facts">
+<li>No port forwarding</li>
+<li>No public IP</li>
+<li>No server, no accounts</li>
+</ul>
+<div class="hero-actions">
+<a class="btn btn-primary" data-hero-cta href="install/index.html">Install Mesh Town</a>
+<a class="btn btn-secondary" href="#see-it">See how it works</a>
+</div>
+<p class="note-small" data-ios-note hidden></p>
+<p class="meta">Free and open source. Early release. macOS, Windows, Linux, Android, OpenWrt and Keenetic routers.</p>
+</div>
+<aside class="hero-card" aria-label="Example addresses">
+<p class="hero-card-title">From the laptop</p>
+<dl class="hero-card-rows">
+<dt><code>http://nas.meshtown</code></dt><dd>NAS web panel</dd>
+<dt><code>ssh -p 2022 user@127.0.0.1</code></dt><dd>home server</dd>
+<dt><code>127.0.0.1:5389</code></dt><dd>office PC, remote desktop</dd>
+</dl>
+</aside>
 </section>
 
-<section id="use-cases" class="section" aria-labelledby="use-cases-title">
-  <h2 id="use-cases-title">Sound familiar?</h2>
-  <ul class="cards">
-    <li class="card"><h3>The NAS panel, away from home</h3><p>You want your NAS or Home Assistant web panel while you are out, and nothing on your router is open for it.</p><p class="try">You open: <code>http://nas.meshtown</code></p></li>
-    <li class="card"><h3>No public IP at home</h3><p>Your provider puts you behind its own <abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr>, so port forwarding is not even an option. Mesh Town does not need it.</p></li>
-    <li class="card"><h3>A computer at your parents'</h3><p>You look after a machine at a relative's or a client's place, behind a router you do not control.</p><p class="try">You type: <code>ssh -p 2022 user@127.0.0.1</code></p></li>
-    <li class="card"><h3>The work PC from home</h3><p>Remote desktop to the office machine, with nothing opened on the office router.</p><p class="try">You connect to: <code>127.0.0.1:5389</code></p></li>
-    <li class="card"><h3>A tool for a few colleagues</h3><p>A dev database or an internal web tool, shared only with the people you pick — no cloud service and no server to look after.</p><p class="try">Shared with: <code>Selected members</code></p></li>
-    <li class="card"><h3>A service that trusts one address</h3><p>A service accepts connections only from your office IP. Point a browser at Mesh Town, and it leaves through a member's node at the office.</p><p class="try">Proxy: <code>socks5h://127.0.0.1:1080</code></p></li>
-  </ul>
-  <div class="not-for">
-    <h3>Not for you if you need</h3>
-    <ul>
-      <li>a whole network joined: Mesh Town shares program ports, it adds no virtual network adapter;</li>
-      <li>it on an iPhone or iPad without a router running it;</li>
-      <li>anonymity: you trust the members you invite, and an exit sees which hosts you connect to;</li>
-      <li>a hardened product today: this is an early release.</li>
-    </ul>
-  </div>
+<section id="see-it" class="section scene" aria-labelledby="see-it-title" data-scene>
+<h2 id="see-it-title">How it works</h2>
+<p class="section-lead">A laptop in a café reaches the NAS at home; nothing is opened on either router.</p>
+<div class="scene-grid">
+<div class="scene-stage" data-scene-stage>
+<picture class="scene-static">
+<source media="(max-width: 47.99rem)" srcset="assets/viz/static-narrow.svg">
+<img src="assets/viz/static.svg" width="800" height="450" alt="Diagram: a NAS at home, a PC at the office and a laptop in a café, each behind its own router. They find each other in the public directory and connect to each other over encrypted links; the laptop opens http://nas.meshtown.">
+</picture>
+<p class="scene-sr visually-hidden" data-scene-sr aria-live="polite"></p>
+</div>
+<ol class="scene-steps" data-scene-steps>
+<li class="scene-step" data-step="1"><h3>Three places</h3><p>A NAS at home, a PC at the office, a laptop in a café — each behind its own router, none with a public address.</p></li>
+<li class="scene-step" data-step="2"><h3>One private network</h3><p>Each device runs Mesh Town and joins one network: a secret key and a member list signed by the members.</p></li>
+<li class="scene-step" data-step="3"><h3>Meeting in a public directory</h3><p>The nodes meet on the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr>, a directory nobody owns, and post small encrypted records only members can read.</p></li>
+<li class="scene-step" data-step="4"><h3>Connected directly</h3><p>With what they learned there, the nodes get through their routers (<abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr>) and connect to each other. Every link is encrypted.</p></li>
+<li class="scene-step" data-step="5"><h3>Open by name</h3><p>The laptop's browser uses the node as its proxy, so <code>http://nas.meshtown</code> opens the NAS web panel. Other programs get a local port.</p></li>
+<li class="scene-step" data-step="6"><h3>Out through a member</h3><p>A member can let the others leave through its internet connection: a program pointed at the local proxy <code>127.0.0.1:1080</code> then leaves from the office address.</p></li>
+<li class="scene-step" data-step="7"><h3>On the move</h3><p>The laptop moves to a mobile network and reconnects within seconds. Where no direct connection is possible, the office PC, having a public address, passes traffic on.</p></li>
+</ol>
+</div>
 </section>
 
-<section id="see-it" class="section" aria-labelledby="see-it-title">
-  <h2 id="see-it-title">How Mesh Town connects your devices</h2>
-  <p class="viz-intro">A laptop in a café opens the NAS at home. Nothing is opened on either router.</p>
-  <figure class="viz" id="mesh-viz" data-viz>
-    <div class="viz-stage" data-viz-stage>
-      <img class="viz-static" src="assets/viz/static.svg" width="800" height="460" alt="Diagram: a NAS at home, a PC at the office and a laptop in a café, each behind its own router. They find each other on the public DHT and connect directly over encrypted links; the laptop opens http://nas.meshtown.">
-    </div>
-    <figcaption>
-      <ol class="viz-frames" data-viz-frames>
-        <li data-frame="1"><strong>Three places.</strong> Your NAS at home, a PC at the office, your laptop in a café. Each sits behind its own router, and none has a public address.</li>
-        <li data-frame="2"><strong>One private network.</strong> Each device runs Mesh Town and joins one private network, home-lab: a secret key and a member list signed by the members.</li>
-        <li data-frame="3"><strong>Meeting in a public directory.</strong> The nodes meet on the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr>, a directory nobody owns. Each posts an encrypted record only members can read.</li>
-        <li data-frame="4"><strong>Through the routers.</strong> With what they learned there, the nodes get through their routers' address translation (<abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr>) and connect directly. Nothing is opened on the routers.</li>
-        <li data-frame="5"><strong>Encrypted, members only.</strong> Every link is encrypted, and a node is let in only after proving it knows the network key. Traffic never goes through the DHT.</li>
-        <li data-frame="6"><strong>Open by name.</strong> On the laptop, the browser is set to use Mesh Town as its proxy, so http://nas.meshtown opens the NAS web panel shared with the network.</li>
-        <li data-frame="7"><strong>Network change.</strong> The laptop moves from café Wi-Fi to a hotel network. Its node notices the switch and reconnects to the others within seconds.</li>
-        <li data-frame="8"><strong>When it cannot connect directly.</strong> Some mobile networks block direct connections. Then a member of your network with a public address passes the traffic on; with no such member, the laptop stays unconnected there.</li>
-      </ol>
-    </figcaption>
-  </figure>
-  <p class="links-line"><a href="#how-it-works">Under the hood ↓</a></p>
+<section id="differs" class="section" aria-labelledby="differs-title">
+<h2 id="differs-title">What you do not have to do</h2>
+<div class="differs-grid">
+<dl class="nots">
+<dt>Open ports or set up dynamic DNS.</dt><dd>Nodes get through <abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr> themselves; only members reach a shared port.</dd>
+<dt>Run a server.</dt><dd>Nodes meet on the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr> and connect to each other directly.</dd>
+<dt>Create an account.</dt><dd>A network is a key and a member list the members sign; newcomers join by invite.</dd>
+<dt>Set up DNS.</dt><dd>Shared panels open by name through the node's proxy; other ports appear locally.</dd>
+<dt>Reconnect by hand.</dt><dd>A device that changes networks is back with the others within seconds.</dd>
+</dl>
+<div class="not-for">
+<h3>Not the tool if you need</h3>
+<ul>
+<li>a whole subnet joined — Mesh Town shares program ports and adds no virtual network adapter;</li>
+<li>an iPhone or iPad app — they can use a router running Mesh Town;</li>
+<li>anonymity — members you invite are trusted, and an exit sees which hosts you connect to.</li>
+</ul>
+</div>
+</div>
 </section>
 
-
-<section id="differs" class="section">
-  <h2>Compared with the usual ways</h2>
-  <div class="table-wrap">
-  <table>
-    <caption>What it takes to reach a device at home</caption>
-    <thead><tr><th scope="col">The usual way</th><th scope="col">With Mesh Town</th></tr></thead>
-    <tbody>
-      <tr><td data-label="The usual way">Port forwarding and dynamic DNS</td><td data-label="With Mesh Town">Nothing to open: only members reach the port</td></tr>
-      <tr><td data-label="The usual way">Your own tunnel server</td><td data-label="With Mesh Town">No server: members connect to each other directly</td></tr>
-      <tr><td data-label="The usual way">A tunnel or relay service</td><td data-label="With Mesh Town">No account, no provider in the middle</td></tr>
-      <tr><td data-label="The usual way">A mesh with a coordination server</td><td data-label="With Mesh Town">The member list lives with the members</td></tr>
-    </tbody>
-  </table>
-  </div>
+<section id="proxy" class="section" aria-labelledby="proxy-title">
+<h2 id="proxy-title">One local proxy, two uses</h2>
+<p class="section-lead">The node runs a proxy at <code>127.0.0.1:1080</code>, <abbr title="A standard proxy protocol that most browsers and many programs support">SOCKS5</abbr> and HTTP on one port.</p>
+<div class="two-col">
+<div><h3>Names</h3><p>A shared web panel opens at <code>http://&lt;device-name&gt;.meshtown</code>; the node serves a <abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr> file that sets this up in the browser.</p></div>
+<div><h3>Exit through a member</h3><p>A member can agree to be an exit: connections through the proxy then leave from its address, for a service that accepts only your office IP. The exit sees the hosts you connect to.</p></div>
+</div>
 </section>
 
-<section id="install" class="section">
-  <h2>Install in 3 steps</h2>
-  <p class="lead">Pick your system.</p>
-  <div class="os-tabs" data-os-tabs hidden>
-    <button type="button" class="os-tab" data-os-tab="macos">macOS</button>
-    <button type="button" class="os-tab" data-os-tab="windows">Windows</button>
-    <button type="button" class="os-tab" data-os-tab="linux">Linux</button>
-    <button type="button" class="os-tab" data-os-tab="android">Android</button>
-    <button type="button" class="os-tab" data-os-tab="router">Router</button>
-  </div>
-  <p class="os-note" data-os-note></p>
+<section id="install" class="section" aria-labelledby="install-title">
+<h2 id="install-title">Install</h2>
+<p class="section-lead">Pick your system.</p>
+<div class="os-tabs" data-os-tabs hidden>
+<button type="button" class="os-tab" data-os-tab="macos">macOS</button>
+<button type="button" class="os-tab" data-os-tab="windows">Windows</button>
+<button type="button" class="os-tab" data-os-tab="linux">Linux</button>
+<button type="button" class="os-tab" data-os-tab="android">Android</button>
+<button type="button" class="os-tab" data-os-tab="router">Router</button>
+</div>
+<p class="os-note" data-os-note></p>
 
-  <div class="os-panel" data-os-panel="macos">
-    <h3>macOS</h3>
-    <ol>
-      <li>Install:
-      <div class="var-group" data-var-group="macos">
-      <div class="var-tabs" data-var-tabs hidden>
-        <button type="button" class="var-tab" data-var-tab="brew">Homebrew</button>
-        <button type="button" class="var-tab" data-var-tab="app">App</button>
-      </div>
-      <div class="var-panel" data-var-panel="brew">
-        <h4>Homebrew</h4>
-        <pre class="cmd"><code>brew install mesh-town/macos/meshtown
+<div class="os-panel" data-os-panel="macos">
+<h3>macOS</h3>
+<ol>
+<li>Install:
+<div class="var-group" data-var-group="macos">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="brew">Homebrew</button>
+<button type="button" class="var-tab" data-var-tab="app">App</button>
+</div>
+<div class="var-panel" data-var-panel="brew">
+<h4>Homebrew</h4>
+<pre class="cmd"><code>brew install mesh-town/macos/meshtown
 meshtown</code></pre>
-      </div>
-      <div class="var-panel" data-var-panel="app">
-        <h4>App</h4>
-        <p>Download for <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-arm64.zip">Apple silicon</a> or <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-x86_64.zip">Intel</a>, unzip and move MeshTown.app to Applications. The app is not notarized: on the first launch press <em>Open Anyway</em> in System Settings → Privacy &amp; Security.</p>
-      </div>
-      </div></li>
-      <li>Start Mesh Town, open the node page from the menu bar icon and set a password.</li>
-      <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. To add the next device, press <em>Invite a member</em>: it shows a link and a QR code.</li>
-    </ol>
-    <details><summary>Open shared web panels by name</summary><p>In your system's proxy settings, turn on automatic proxy configuration (<abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr>) and paste <code>http://127.0.0.1:1080/proxy.pac</code>. A shared panel then opens at <code>http://&lt;device-name&gt;.meshtown</code>. For other programs, press <em>Open on this computer</em> next to a shared port on the node page.</p></details>
-    <p><a href="install/macos/index.html">Full macOS guide →</a></p>
-  </div>
+</div>
+<div class="var-panel" data-var-panel="app">
+<h4>App</h4>
+<p>Download for <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-arm64.zip">Apple silicon</a> or <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-x86_64.zip">Intel</a>, unzip and move MeshTown.app to Applications. The app is not notarized: on the first launch press <em>Open Anyway</em> in System Settings → Privacy &amp; Security.</p>
+</div>
+</div></li>
+<li>Start Mesh Town, open the node page from the menu bar icon and set a password.</li>
+<li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member; <em>Invite a member</em> shows a link and a QR code.</li>
+</ol>
+<details><summary>Open shared web panels by name</summary><p>In your system's proxy settings, turn on automatic proxy configuration (<abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr>) and paste <code>http://127.0.0.1:1080/proxy.pac</code>. A shared panel then opens at <code>http://&lt;device-name&gt;.meshtown</code>. For other programs, press <em>Open on this computer</em> next to a shared port on the node page.</p></details>
+<p><a href="install/macos/index.html">Full macOS guide →</a></p>
+</div>
 
-  <div class="os-panel" data-os-panel="windows">
-    <h3>Windows</h3>
-    <ol>
-      <li>Download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown.exe">meshtown.exe</a>. It is not signed, so SmartScreen may warn on the first launch.</li>
-      <li>Run <code>meshtown</code>, open the node page from the tray icon and set a password.</li>
-      <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. To add the next device, press <em>Invite a member</em>: it shows a link and a QR code.</li>
-    </ol>
-    <details><summary>Open shared web panels by name</summary><p>In your system's proxy settings, turn on automatic proxy configuration (<abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr>) and paste <code>http://127.0.0.1:1080/proxy.pac</code>. A shared panel then opens at <code>http://&lt;device-name&gt;.meshtown</code>. For other programs, press <em>Open on this computer</em> next to a shared port on the node page.</p></details>
-    <p><a href="install/windows/index.html">Full Windows guide →</a></p>
-  </div>
+<div class="os-panel" data-os-panel="windows">
+<h3>Windows</h3>
+<ol>
+<li>Download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown.exe">meshtown.exe</a>. It is not signed, so SmartScreen may warn on the first launch.</li>
+<li>Run <code>meshtown</code>, open the node page from the tray icon and set a password.</li>
+<li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member; <em>Invite a member</em> shows a link and a QR code.</li>
+</ol>
+<details><summary>Open shared web panels by name</summary><p>In your system's proxy settings, turn on automatic proxy configuration (<abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr>) and paste <code>http://127.0.0.1:1080/proxy.pac</code>. A shared panel then opens at <code>http://&lt;device-name&gt;.meshtown</code>. For other programs, press <em>Open on this computer</em> next to a shared port on the node page.</p></details>
+<p><a href="install/windows/index.html">Full Windows guide →</a></p>
+</div>
 
-  <div class="os-panel" data-os-panel="linux">
-    <h3>Linux</h3>
-    <ol>
-      <li>Install:
-      <div class="var-group" data-var-group="linux">
-      <div class="var-tabs" data-var-tabs hidden>
-        <button type="button" class="var-tab" data-var-tab="apt">Debian / Ubuntu</button>
-        <button type="button" class="var-tab" data-var-tab="static">Other Linux</button>
-      </div>
-      <div class="var-panel" data-var-panel="apt">
-        <h4>Debian / Ubuntu</h4>
-        <pre class="cmd"><code>A=$(dpkg --print-architecture)
+<div class="os-panel" data-os-panel="linux">
+<h3>Linux</h3>
+<ol>
+<li>Install:
+<div class="var-group" data-var-group="linux">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="apt">Debian / Ubuntu</button>
+<button type="button" class="var-tab" data-var-tab="static">Other Linux</button>
+</div>
+<div class="var-panel" data-var-panel="apt">
+<h4>Debian / Ubuntu</h4>
+<pre class="cmd"><code>A=$(dpkg --print-architecture)
 wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_${A}.deb
 sudo apt install ./meshtown_${A}.deb</code></pre>
-      </div>
-      <div class="var-panel" data-var-panel="static">
-        <h4>Other Linux</h4>
-        <pre class="cmd"><code>curl -LO https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-linux-$(uname -m).tar.gz
+</div>
+<div class="var-panel" data-var-panel="static">
+<h4>Other Linux</h4>
+<pre class="cmd"><code>curl -LO https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-linux-$(uname -m).tar.gz
 tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
-      </div>
-      </div></li>
-      <li>Run <code>meshtown</code> for the tray app, or <code>meshtown-cli</code> on a server, and open the node page with the sign-in link it prints.</li>
-      <li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member. To add the next device, press <em>Invite a member</em>: it shows a link and a QR code.</li>
-    </ol>
-    <details><summary>Open shared web panels by name</summary><p>In your system's proxy settings, turn on automatic proxy configuration (<abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr>) and paste <code>http://127.0.0.1:1080/proxy.pac</code>. A shared panel then opens at <code>http://&lt;device-name&gt;.meshtown</code>. For other programs, press <em>Open on this computer</em> next to a shared port on the node page.</p></details>
-    <p><a href="install/linux/index.html">Full Linux guide →</a></p>
-  </div>
+</div>
+</div></li>
+<li>Run <code>meshtown</code> for the tray app, or <code>meshtown-cli</code> on a server, and open the node page with the sign-in link it prints.</li>
+<li>Press <em>Create a new network</em>, or <em>Join with an invite</em> from a member; <em>Invite a member</em> shows a link and a QR code.</li>
+</ol>
+<details><summary>Open shared web panels by name</summary><p>In your system's proxy settings, turn on automatic proxy configuration (<abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr>) and paste <code>http://127.0.0.1:1080/proxy.pac</code>. A shared panel then opens at <code>http://&lt;device-name&gt;.meshtown</code>. For other programs, press <em>Open on this computer</em> next to a shared port on the node page.</p></details>
+<p><a href="install/linux/index.html">Full Linux guide →</a></p>
+</div>
 
-  <div class="os-panel" data-os-panel="android">
-    <h3>Android</h3>
-    <ol>
-      <li>On the phone, download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/android/meshtown.apk">meshtown.apk</a>. It needs a 64-bit ARM phone with Android 7.0 or newer.</li>
-      <li>Open the file and allow installing apps from this source when asked.</li>
-      <li>Start Mesh Town and join your network with an invite from a member, or scan its QR code with <em>Scan QR</em>. On the first connect Android asks to allow the app to set up a connection: press OK.</li>
-    </ol>
-    <p><a href="install/android/index.html">Full Android guide →</a></p>
-  </div>
+<div class="os-panel" data-os-panel="android">
+<h3>Android</h3>
+<ol>
+<li>On the phone, download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/android/meshtown.apk">meshtown.apk</a>. It needs a 64-bit ARM phone with Android 7.0 or newer.</li>
+<li>Open the file and allow installing apps from this source when asked.</li>
+<li>Start Mesh Town and join your network with an invite from a member, or scan its QR code with <em>Scan QR</em>. On the first connect Android asks to allow the app to set up a connection: press OK.</li>
+</ol>
+<p><a href="install/android/index.html">Full Android guide →</a></p>
+</div>
 
-  <div class="os-panel" data-os-panel="router">
-    <h3>Router</h3>
-    <ol>
-      <li>Install:
-      <div class="var-group" data-var-group="router">
-      <div class="var-tabs" data-var-tabs hidden>
-        <button type="button" class="var-tab" data-var-tab="openwrt">OpenWrt</button>
-        <button type="button" class="var-tab" data-var-tab="keenetic">Keenetic</button>
-      </div>
-      <div class="var-panel" data-var-panel="openwrt">
-        <h4>OpenWrt</h4>
-        <p>OpenWrt 24.10 or 25.12, as root on the router:</p>
-        <pre class="cmd"><code>wget -O- https://mesh-town.github.io/meshtown-openwrt/install.sh | sh</code></pre>
-      </div>
-      <div class="var-panel" data-var-panel="keenetic">
-        <h4>Keenetic</h4>
-        <p>Keenetic with Entware, over SSH (experimental):</p>
-        <pre class="cmd"><code>wget -O- https://mesh-town.github.io/meshtown-keenetic/install.sh | sh</code></pre>
-      </div>
-      </div>The script adds the package feed and installs the meshtown service.</li>
-      <li>Join the router to your network with an invite from a member: see the router guide.</li>
-      <li>Connect phones and computers, iPhone and iPad included: <a href="install/openwrt/index.html#devices">connecting devices</a>.</li>
-    </ol>
-    <p class="links-line"><a href="install/openwrt/index.html">OpenWrt guide →</a> <a href="install/keenetic/index.html">Keenetic guide →</a></p>
-  </div>
+<div class="os-panel" data-os-panel="router">
+<h3>Router</h3>
+<ol>
+<li>Install:
+<div class="var-group" data-var-group="router">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="openwrt">OpenWrt</button>
+<button type="button" class="var-tab" data-var-tab="keenetic">Keenetic</button>
+</div>
+<div class="var-panel" data-var-panel="openwrt">
+<h4>OpenWrt</h4>
+<p>OpenWrt 24.10 or 25.12, as root on the router:</p>
+<pre class="cmd"><code>wget -O- https://mesh-town.github.io/meshtown-openwrt/install.sh | sh</code></pre>
+</div>
+<div class="var-panel" data-var-panel="keenetic">
+<h4>Keenetic</h4>
+<p>Keenetic with Entware, over SSH (experimental):</p>
+<pre class="cmd"><code>wget -O- https://mesh-town.github.io/meshtown-keenetic/install.sh | sh</code></pre>
+</div>
+</div>The script adds the package feed and installs the meshtown service.</li>
+<li>Join the router to your network with an invite from a member: see the router guide.</li>
+<li>Connect phones and computers, iPhone and iPad included: <a href="install/openwrt/index.html#devices">connecting devices</a>.</li>
+</ol>
+<p class="links-line"><a href="install/openwrt/index.html">OpenWrt guide →</a> <a href="install/keenetic/index.html">Keenetic guide →</a></p>
+</div>
 </section>
 
-
-
-<section id="how-it-works" class="section">
-  <h2>Under the hood</h2>
-  <p class="lead">The short version for specialists. Open any line for the details.</p>
-  <details><summary>Discovery: an encrypted record in the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr></summary><p>Every network node knows the network key. From it the node derives a place in the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr> (HyperDHT, a distributed directory nobody owns) and publishes a small record there about once a minute: the list of member nodes, encrypted with ChaCha20-Poly1305. Without the key, one sees only a public signing key, a salt and ciphertext.</p></details>
-  <details><summary>Connection: direct NAT hole punching; relay only through your own member</summary><p>Nodes connect by <abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr> hole punching, so home routers and most NATs let the connection through with no port opened. If that fails, a member of the same network with a public address relays the connection; nobody outside the network does. A network where every device is behind NAT has no such member, and some mobile operators prevent direct connections.</p></details>
-  <details><summary>Encryption: <abbr title="A reliable transport over UDP, used for hole punching">UDX</abbr> streams with <abbr title="A well-studied framework for encrypted, authenticated connections">Noise</abbr>, plus a handshake on the network secret</summary><p>Each connection is an encrypted stream: UDX is a reliable transport over UDP, Noise a well-studied framework for encrypted, authenticated connections. On top of it the nodes run a handshake that checks both sides know the network secret; a node that fails it is disconnected. A stranger who learns a node's id gets an answer only from the sign-in and invite services.</p></details>
-  <details><summary>Membership: a private key, administrators and single-use invites</summary><p>A network is a key you keep private: a label you choose plus a random part of about 130 bits. Whoever creates the network is its first administrator, and only administrators invite. An invite is a single-use string, valid for a day, that does not contain the network key. One node can be in up to 8 networks. The node page shows an invite as a link and a QR code (<em>Invite a member</em>); on Android, <em>Scan QR</em> reads it.</p></details>
-  <details><summary>Names: http://&lt;device-name&gt;.meshtown through the node's proxy</summary><p>A shared web interface is at <code>http://&lt;device-name&gt;.meshtown</code>. The device name is folded to lowercase ASCII letters, digits and dashes — "Café Router" becomes cafe-router — and two devices with the same name get a short suffix from their id. A port other than 80 is written as usual: <code>http://nas.meshtown:8080</code>. Names work only through the node's proxy, and only over http://.</p></details>
-  <details><summary>Programs: a <abbr title="A standard proxy protocol that most browsers and many programs support">SOCKS5</abbr> and HTTP proxy on 127.0.0.1:1080, or a local port</summary><p>Programs reach the network through the node's proxy at <code>127.0.0.1:1080</code> (SOCKS5, a standard proxy protocol, and HTTP on one port), or through a local port: Open on this computer turns a member's port 22 into <code>127.0.0.1:2022</code>. A device shares program ports running on it, TCP or UDP, with all members or selected ones. The node's own page is at <code>http://127.0.0.1:7777</code>: plain HTTP, reachable from your local network unless you run <code>meshtown access localhost</code>. Never share the page port.</p></details>
-  <details><summary>Exit through a member: one hop, chosen from your list; the exit sees hostnames</summary><p>A member can also agree to be an exit: the others then send traffic out through its internet connection via the proxy, for example to reach a service that accepts connections only from your office IP. The node uses the exits from a list you set, in order. The exit sees which hosts you connect to.</p></details>
-  <details><summary>Limits: ports, not networks; UDP over reliable streams; no iPhone app</summary>
-    <ul class="limits">
-      <li><strong>Ports, not networks.</strong> Mesh Town connects TCP and UDP program ports on the device itself. There is no virtual network interface, no subnet routing and no capture of all traffic.</li>
-      <li><strong>Programs use the proxy.</strong> A program has to work through a SOCKS5 or HTTP proxy, or connect to a local port on 127.0.0.1.</li>
-      <li><strong>UDP rides on reliable streams.</strong> Order is kept, but a stalled link delays everything behind it, and a datagram larger than 2048 bytes is truncated.</li>
-      <li><strong>Trust, not anonymity.</strong> Members you invite are trusted, and an exit sees which hosts you connect to. There is no iPhone or iPad app. They can use Mesh Town on a router.</li>
-      <li><strong>Early software.</strong> Releases of the 0.3.x line are a working network node, not a hardened product.</li>
-    </ul>
-    <p><a href="https://github.com/mesh-town/meshtown/blob/main/docs/LIMITATIONS.md">All limitations →</a></p>
-  </details>
-  <details><summary>Command line: a taste</summary>
-    <pre class="cmd"><code>meshtown keygen home-lab                  # create a network key
-meshtown run --invite mesh-invite2-…      # join with an invite
-meshtown access localhost                 # node page for this computer only
-meshtown config-path                      # where the settings file is</code></pre>
-  </details>
-  <p class="links-line"><a href="https://github.com/mesh-town/meshtown/blob/main/docs/ARCHITECTURE.md">Architecture and threat model →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/CONFIG-FILE.md">Settings file →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/WEB-API.md">HTTP API →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/BUILDING.md">Building from source →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/CHANGELOG.md">Changelog →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/SECURITY.md">Security →</a></p>
+<section id="how-it-works" class="section" aria-labelledby="how-title">
+<h2 id="how-title">Under the hood</h2>
+<p class="section-lead">The short version; open a line for details.</p>
+<details><summary>Discovery: an encrypted record in the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr></summary><p>Every network node knows the network key. From it the node derives a place in the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr> (HyperDHT, a distributed directory nobody owns) and publishes a small record there about once a minute: the list of member nodes, encrypted with ChaCha20-Poly1305. Without the key, one sees only a public signing key, a salt and ciphertext.</p></details>
+<details><summary>Connection: direct NAT hole punching; relay only through your own member</summary><p>Nodes connect by <abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr> hole punching, so home routers and most NATs let the connection through with no port opened. If that fails, a member of the same network with a public address relays the connection; nobody outside the network does. A network where every device is behind NAT has no such member, and some mobile operators prevent direct connections.</p></details>
+<details><summary>Encryption: <abbr title="A reliable transport over UDP, used for hole punching">UDX</abbr> streams with <abbr title="A well-studied framework for encrypted, authenticated connections">Noise</abbr>, plus a handshake on the network secret</summary><p>Each connection is an encrypted stream: UDX is a reliable transport over UDP, Noise a well-studied framework for encrypted, authenticated connections. On top of it the nodes run a handshake that checks both sides know the network secret; a node that fails it is disconnected. A stranger who learns a node's id gets an answer only from the sign-in and invite services.</p></details>
+<details><summary>Membership: a private key, administrators and single-use invites</summary><p>A network is a key you keep private: a label you choose plus a random part of about 130 bits. Whoever creates the network is its first administrator, and only administrators invite. An invite is a single-use string, valid for a day, that does not contain the network key. One node can be in up to 8 networks. The node page shows an invite as a link and a QR code (<em>Invite a member</em>); on Android, <em>Scan QR</em> reads it.</p></details>
+<details><summary>Programs and names: a SOCKS5/HTTP proxy on 127.0.0.1:1080, a local port, http://&lt;device-name&gt;.meshtown</summary><p>Programs reach the network through the node's proxy at <code>127.0.0.1:1080</code> (SOCKS5, a standard proxy protocol, and HTTP on one port), or through a local port: Open on this computer turns a member's port 22 into <code>127.0.0.1:2022</code>. A device shares program ports running on it, TCP or UDP, with all members or selected ones. The node's own page is at <code>http://127.0.0.1:7777</code>: plain HTTP, reachable from your local network unless you run <code>meshtown access localhost</code>. Never share the page port.</p><p>A shared web interface is at <code>http://&lt;device-name&gt;.meshtown</code>. The device name is folded to lowercase ASCII letters, digits and dashes — "Café Router" becomes cafe-router — and two devices with the same name get a short suffix from their id. A port other than 80 is written as usual: <code>http://nas.meshtown:8080</code>. Names work only through the node's proxy, and only over http://.</p></details>
+<details><summary>Limits: ports, not networks; UDP over reliable streams; no iPhone app</summary>
+<ul class="limits">
+<li><strong>Ports, not networks.</strong> Mesh Town connects TCP and UDP program ports on the device itself. There is no virtual network interface, no subnet routing and no capture of all traffic.</li>
+<li><strong>Programs use the proxy.</strong> A program has to work through a SOCKS5 or HTTP proxy, or connect to a local port on 127.0.0.1.</li>
+<li><strong>UDP rides on reliable streams.</strong> Order is kept, but a stalled link delays everything behind it, and a datagram larger than 2048 bytes is truncated.</li>
+<li><strong>Trust, not anonymity.</strong> Members you invite are trusted, and an exit sees which hosts you connect to. There is no iPhone or iPad app. They can use Mesh Town on a router.</li>
+<li><strong>Early software.</strong> Releases of the 0.3.x line are a working network node, not a hardened product.</li>
+</ul>
+<p><a href="https://github.com/mesh-town/meshtown/blob/main/docs/LIMITATIONS.md">All limitations →</a></p>
+</details>
+<p class="links-line"><a href="https://github.com/mesh-town/meshtown/blob/main/docs/ARCHITECTURE.md">Architecture and threat model →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference →</a> <a href="https://github.com/mesh-town/meshtown/tree/main/docs">All docs →</a></p>
 </section>
 
-<section id="faq" class="section">
-  <h2>Questions</h2>
-  <details><summary>Does it route all my traffic?</summary><p>No. Mesh Town connects program ports: a program reaches the network through the node's proxy or a local port. There is no virtual network interface, and other traffic is not touched.</p></details>
-  <details><summary>What if two devices cannot connect directly?</summary><p>A member of your network with a public address relays between them. With no such member they stay unconnected. Behind home routers and most NATs a direct connection works; some mobile operators prevent it.</p></details>
-  <details><summary>Who can reach the services I share?</summary><p>Only members of your network, and for each port you choose: all members or selected ones. A port is shared only after you publish it.</p></details>
-  <details><summary>How does the browser setting behave?</summary><p>The address <code>http://127.0.0.1:1080/proxy.pac</code> is an automatic proxy configuration (<abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr>) file served by the node. Ordinary sites go through the node, with a fallback to a direct connection while Mesh Town is stopped; <code>*.meshtown</code> addresses always go through the node, and local addresses go direct. Strict mode (Settings → proxy) removes the direct fallback, so a site never opens outside the chosen exit.</p></details>
-  <details><summary>Can I share my network key instead of invites?</summary><p>Better not. The key and the settings file are secret. Invite people with single-use invites, and hand them over in person.</p></details>
-  <details><summary>Is it free and open source?</summary><p>Yes, under AGPL-3.0-only. Peer discovery and transport come from <a href="https://github.com/mesh-town/townjump">townjump</a>, a Rust port of Holesail.</p></details>
+<section id="faq" class="section" aria-labelledby="faq-title">
+<h2 id="faq-title">Questions</h2>
+<details><summary>Does it route all my traffic?</summary><p>No. Mesh Town connects program ports: a program reaches the network through the node's proxy or a local port. There is no virtual network interface, and other traffic is not touched.</p></details>
+<details><summary>What if two devices cannot connect directly?</summary><p>A member of your network with a public address relays between them. With no such member they stay unconnected. Behind home routers and most NATs a direct connection works; some mobile operators prevent it.</p></details>
+<details><summary>Who can reach the services I share?</summary><p>Only members of your network, and for each port you choose: all members or selected ones. A port is shared only after you publish it.</p></details>
+<details><summary>Can I share my network key instead of invites?</summary><p>Better not. The key and the settings file are secret. Invite people with single-use invites, and hand them over in person.</p></details>
+<details><summary>Is it free and open source?</summary><p>Yes, under AGPL-3.0-only. Peer discovery and transport come from <a href="https://github.com/mesh-town/townjump">townjump</a>, a Rust port of Holesail.</p></details>
 </section>
 
 </main>
 <footer class="site-footer">
-  <div class="wrap">
-    <ul>
-      <li>Mesh Town</li>
-      <li><a href="https://github.com/mesh-town/meshtown">Source</a></li>
-      <li><a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs</a></li>
-      <li><a href="https://github.com/mesh-town/meshtown-dist">Downloads</a></li>
-      <li>License: <a href="https://github.com/mesh-town/meshtown/blob/main/LICENSE">AGPL-3.0-only</a></li>
-    </ul>
-  </div>
+<div class="wrap">
+<ul>
+<li>Mesh Town</li>
+<li><a href="https://github.com/mesh-town/meshtown">Source</a></li>
+<li><a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs</a></li>
+<li><a href="https://github.com/mesh-town/meshtown-dist">Downloads</a></li>
+<li>License: <a href="https://github.com/mesh-town/meshtown/blob/main/LICENSE">AGPL-3.0-only</a></li>
+</ul>
+</div>
 </footer>
 <script src="assets/js/site.js" defer></script>
 <script src="assets/js/variants.js" defer></script>
 <script src="assets/js/copy.js" defer></script>
 <script src="assets/viz/scene.js" defer></script>
-<script src="assets/viz/player.js" defer></script>
+<script src="assets/viz/scroll.js" defer></script>
 </body>
 </html>
