@@ -1,63 +1,25 @@
-/* Mesh Town explainer: card layout and static scene styles. Colors come only from the site theme variables. */
-.viz { margin: 0; }
-.viz-intro { margin: 0 0 14px; color: var(--muted); }
-.viz-stage { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-.viz-svg, .viz-static { display: block; width: 100%; height: auto; max-width: 100%; }
-/* Fit a laptop screen: the scene height is capped by the viewport and the card by a column width; the viewBox letterboxes. */
-.viz-svg { max-height: max(360px, calc(100svh - 400px)); }
-.viz[data-viz-ready] { max-width: 900px; margin-inline: auto; }
-.viz-frames { padding-left: 1.2em; }
-.viz-frames li { margin-bottom: .5em; }
-.viz + p { margin-top: 1.5rem; }
-
-/* Card: header (title and text), scene, controls. */
-.viz[data-viz-ready] { background: var(--surface); border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px); overflow: hidden; }
-.viz[data-viz-ready] .viz-stage { border: 0; border-radius: 0; border-block: 1px solid var(--border); touch-action: pan-y; }
-.viz-stage:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
-.viz-head { display: grid; padding: 12px 20px 10px; border-top: 4px solid var(--accent); }
-.viz-slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility 0s .25s; }
-.viz-slide.is-active { opacity: 1; visibility: visible; transform: none; transition: opacity .25s ease .05s, transform .25s ease .05s; }
-.viz-title { margin: 0 0 4px; font-size: 1.25em; font-weight: 700; line-height: 1.2; }
-.viz-text { margin: 0; }
-.viz-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
-/* Controls: three icon buttons and eight dots in one row. */
-.viz-controls { display: flex; align-items: center; gap: 6px; padding: 8px 14px; }
-.viz-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; cursor: pointer; }
-.viz-btn svg { fill: currentColor; }
-.viz-btn:hover:not(:disabled) { border-color: var(--accent); }
-.viz-btn:disabled { color: var(--muted); border-style: dashed; cursor: default; }
-.viz-dots { display: flex; align-items: center; margin-left: auto; }
-.viz-dot { position: relative; display: block; width: 22px; height: 40px; padding: 0; background: none; border: 0; border-radius: 999px; cursor: pointer; transition: width .3s ease; }
-.viz-dot::before { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; background: var(--muted); border-radius: 999px; transition: width .3s ease, margin .3s ease, background .3s; }
-.viz-dot:hover::before { background: var(--accent); }
-.viz-dot[aria-current="step"] { width: 46px; }
-.viz-dot[aria-current="step"]::before { width: 34px; margin-left: -17px; background: var(--accent); }
-.viz-dot-fill { position: absolute; left: 50%; top: 50%; width: 34px; height: 10px; margin: -5px 0 0 -17px; border-radius: 999px; overflow: hidden; pointer-events: none; display: none; }
-.viz-dot-fill::after { content: ""; position: absolute; inset: 0; background: var(--accent); transform-origin: left; }
-.viz-dot:focus-visible, .viz-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-/* While autoplay runs, the active pill is a track that the accent fills until the next step. */
-.viz[data-playing="true"] .viz-dot[aria-current="step"]::before { background: var(--border); box-shadow: inset 0 0 0 1px var(--muted); }
-.viz[data-playing="true"] .viz-dot[aria-current="step"] .viz-dot-fill { display: block; }
-
-/* Narrow screens: the scene shrinks, so labels grow in scene units (about 10px or more on screen). */
-@media (max-width: 70rem) {
-  .viz-svg .v-nat, .viz-svg .v-antenna, .viz-svg .v-router { display: none; }
-  .viz-svg .v-place-name, .viz-svg .v-cloud-text { font-size: 24px; }
-  .viz-svg .v-node-text { font-size: 24px; }
-  .viz-svg .v-net-name { font-size: 26px; }
-  .viz-svg .v-net-sub { font-size: 23px; }
-  .viz-svg .v-addr-text, .viz-svg .v-panel-text { font-size: 23px; }
+/* Scene section layout: sticky stage next to (wide) or above (narrow) the scrolling steps. */
+.scene-grid{display:grid;grid-template-columns:minmax(0,1fr)}
+.scene-stage{position:sticky;top:0;z-index:1;background:var(--bg);padding-block:.5rem}
+.scene-stage svg,.scene-stage picture img{display:block;max-height:57vh;width:auto;max-width:100%;margin-inline:auto}
+.scene-steps{list-style:none;margin:0;padding:0;counter-reset:step}
+.scene-step{min-height:60vh;display:flex;flex-direction:column;justify-content:center;padding-block:var(--s-5);opacity:.4;transition:opacity .3s}
+.scene-step:last-child{min-height:40vh}
+.scene-step.is-active,html:not(.js) .scene-step{opacity:1}
+.scene-step h3{display:flex;align-items:center;gap:.6rem;margin:0 0 .4rem;counter-increment:step}
+.scene-step h3::before{content:counter(step);width:1.75rem;height:1.75rem;border-radius:50%;background:var(--accent-soft);color:var(--accent-strong);font-size:.875rem;display:grid;place-items:center;flex:none}
+.scene-step p{margin:0;color:var(--muted)}
+.scene-step.is-active p{color:var(--fg)}
+[data-scene-ready] .scene-static{display:none}
+@media (min-width:48rem){
+  .scene-grid{grid-template-columns:20rem minmax(0,1fr);column-gap:3rem;align-items:start}
+  .scene-stage{order:2;top:5rem;z-index:auto;padding-block:0}
+  .scene-steps{order:1}
+  .scene-stage svg,.scene-stage picture img{width:100%;height:auto;max-height:none;max-width:none}
+  .scene-step{min-height:55vh}
+  .scene-step:last-child{min-height:40vh}
 }
-@media (max-width: 40rem) {
-  .viz-head { padding: 14px 14px 12px; }
-  .viz-title { font-size: 1.25em; }
-  .viz-controls { gap: 4px; padding: 8px 10px; }
-  .viz-btn { width: 36px; height: 36px; }
-  .viz-dot { width: 17px; height: 36px; }
-  .viz-dot[aria-current="step"] { width: 38px; }
-  .viz-dot[aria-current="step"]::before, .viz-dot-fill { width: 28px; margin-left: -14px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .viz, .viz * { transition: none !important; animation: none !important; }
+@media (prefers-reduced-motion:reduce){
+  .scene *,.v-svg *{transition:none !important}
+  .v-pkt,.v-rec{display:none}
 }

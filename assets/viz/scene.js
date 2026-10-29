@@ -1,153 +1,137 @@
-/* Mesh Town explainer: builds the SVG scene and per-frame state classes. */
-(function () {
+/* Mesh Town explainer: builds the scene SVG. Browser: MeshScene.build(layout) returns an SVGElement.
+   Node (no document): returns the SVG markup as a string. layout: 'h' (wide) or 'v' (narrow). */
+(function (root) {
   'use strict';
   var NS = 'http://www.w3.org/2000/svg';
-  var FRAME_CLASSES = ['', 'k', 'k up', 'k direct', 'k direct lock dim', 'k direct lock dim addr',
-    'k direct lock dim hop', 'k direct lock bad'];
-  var CAFE_NAME = ['Café', 'Café', 'Café', 'Café', 'Café', 'Café', 'Hotel', 'Mobile network'];
-  var PLACES = [
-    { id: 'home', name: 'Home', x: 30, node: 'nas' },
-    { id: 'cafe', name: 'Café', x: 290, node: 'laptop' },
-    { id: 'office', name: 'Office', x: 550, node: 'pc' }
-  ];
+  var NAMES = ['nas', 'laptop', 'pc'];
+  var PLACES = ['Home', 'Café', 'Office'];
+  var PCLS = ['p-home', 'p-cafe', 'p-office'];
 
-  var DHT = ['M202 234Q250 150 340 98', 'M472 234Q440 150 410 100', 'M722 234Q640 130 460 92'];
-  var ROUTES = { nl: 'M190 342H350', lo: 'M450 342H610', no: 'M140 364Q400 450 660 364' };
-
-  function el(name, attrs, parent, cls) {
-    var e = document.createElementNS(NS, name);
-    Object.keys(attrs || {}).forEach(function (k) { e.setAttribute(k, attrs[k]); });
-    if (cls) { e.setAttribute('class', cls); }
-    if (parent) { parent.appendChild(e); }
-    return e;
+  function el(n, o, c) {
+    var s = '<' + n, k;
+    for (k in o) { if (o[k] !== undefined) { s += ' ' + k + '="' + o[k] + '"'; } }
+    return s + (c === undefined ? '/>' : '>' + c + '</' + n + '>');
+  }
+  function g(cls, c) { return el('g', { 'class': cls }, c.join('')); }
+  function rect(x, y, w, h, rx, cls) { return el('rect', { 'class': cls, x: x, y: y, width: w, height: h, rx: rx }); }
+  function line(x1, y1, x2, y2, cls) { return el('line', { 'class': cls, x1: x1, y1: y1, x2: x2, y2: y2 }); }
+  function path(d, cls) { return el('path', { 'class': cls, d: d }); }
+  function text(x, y, s, size, cls) { return el('text', { 'class': cls, x: x, y: y, 'font-size': size }, s); }
+  function pkt(cls, d) { return el('circle', { 'class': 'v-pkt ' + cls, r: 4.5, style: "offset-path:path('" + d + "')" }); }
+  function rec(d) { return el('circle', { 'class': 'v-rec', r: 5, style: "offset-path:path('" + d + "')" }); }
+  function lock(cx, cy, cls) {
+    return g('v-lock ' + cls, [
+      el('circle', { cx: cx, cy: cy, r: 9 }),
+      rect(cx - 4, cy - 1, 8, 6, 1),
+      path('M' + (cx - 2.5) + ' ' + (cy - 1) + 'v-2.5a2.5 2.5 0 0 1 5 0v2.5')
+    ]);
   }
 
-  function text(parent, x, y, str, cls, anchor) {
-    var t = el('text', { x: x, y: y, 'text-anchor': anchor || 'middle' }, parent, cls);
-    t.textContent = str;
-    return t;
+  /* One place: frame, name, router with two antennas, NAT label. a = geometry of the layout. */
+  function frame(i, a) { return rect(a.px[i], a.py[i], a.pw, a.ph, a.prx, 'v-place ' + PCLS[i]); }
+
+  /* Labels go above the directory lines. */
+  function place(i, a) {
+    var x = a.px[i], y = a.py[i], r = a.rt, rx = x + r[0], ry = y + r[1];
+    var out = [text(x + a.pn[0], y + a.pn[1], PLACES[i], a.pn[2], 'v-place-name' + (i === 1 ? ' n-cafe' : ''))];
+    if (i === 1) { out.push(text(x + a.pn[0], y + a.pn[1], 'Mobile network', a.pn[2], 'v-place-name v-place-name-alt')); }
+    out.push(g('v-router', [rect(rx, ry, r[2], r[3], 3), line(rx + r[2] / 4, ry, rx + r[2] / 4, ry - 8),
+      line(rx + r[2] * 3 / 4, ry, rx + r[2] * 3 / 4, ry - 8)]));
+    out.push(text(x + a.nat[0], y + a.nat[1], 'NAT', 11, 'v-nat' + (i === 2 ? ' o-nat' : '')));
+    return out.join('');
   }
 
-  function lock(parent, x, y, cls) {
-    var o = el('g', { transform: 'translate(' + x + ' ' + y + ')' }, parent, 'v-lock ' + cls);
-    var g = el('g', {}, o, 'v-pop');
-    el('circle', { r: 13 }, g, 'v-lock-bg');
-    el('path', { d: 'M-4 -1V-4a4 4 0 0 1 8 0V-1' }, g, 'v-lock-arc');
-    el('rect', { x: -6, y: -1, width: 12, height: 9, rx: 2 }, g, 'v-lock-body');
-    return o;
+  function node(i, a) {
+    var n = a.nd, x = a.px[i], y = a.ny(i);
+    return g('v-node n-' + NAMES[i], [rect(x + n[0], y, n[1], n[2], 8),
+      text(x + n[3], y + n[4], NAMES[i], n[5], 'm')]);
   }
 
-  function cross(parent, x, y, cls) {
-    var o = el('g', { transform: 'translate(' + x + ' ' + y + ')' }, parent, 'v-cross ' + cls);
-    var g = el('g', {}, o, 'v-pop');
-    el('circle', { r: 13 }, g, 'v-cross-bg');
-    el('path', { d: 'M-6 -6L6 6M6 -6L-6 6' }, g, 'v-cross-x');
-    return o;
+  function frames(a) { return [frame(0, a), frame(1, a), frame(2, a)]; }
+  function labels(a) { return [place(0, a), place(1, a), place(2, a)].join(''); }
+
+  function wide() {
+    var a = { px: [40, 290, 540], py: [150, 150, 150], pw: 220, ph: 240, prx: 12, pn: [16, 28, 15],
+      rt: [160, 14, 40, 12], nat: [180, 44], nd: [55, 110, 44, 110, 27, 15], ny: function () { return 278; } };
+    var d = ['M150 278L330 86', 'M400 278L400 88', 'M650 278L470 86'], s = frames(a), i;
+    s.push(el('ellipse', { cx: 400, cy: 56, rx: 118, ry: 32, 'class': 'v-cloud-bg' }));
+    s[s.length - 1] = g('v-cloud', [s[s.length - 1], text(400, 61, 'public directory (DHT)', 14, 'mu')]);
+    for (i = 0; i < 3; i++) { s.push(path(d[i], 'v-dht')); }
+    s.push(labels(a));
+    for (i = 0; i < 3; i++) { s.push(node(i, a)); }
+    s.push(g('v-panel', [line(150, 136, 150, 278), rect(50, 104, 200, 32, 8), text(150, 125, 'NAS · web panel', 13, 'as b')]));
+    s.push(g('v-addr', [line(400, 136, 400, 278), rect(300, 104, 200, 32, 16), text(400, 125, 'http://nas.meshtown', 13, 'm')]));
+    s.push(g('v-proxy', [line(400, 136, 400, 278), rect(300, 104, 200, 32, 16), text(400, 125, 'proxy 127.0.0.1:1080', 13, 'm')]));
+    s.push(path('M205 300L345 300', 'v-link l-nl'), path('M455 300L595 300', 'v-link l-lo'),
+      path('M150 322C150 430 650 430 650 322', 'v-link l-no'));
+    s.push(lock(275, 300, 'lk-nl'), lock(525, 300, 'lk-lo'), lock(400, 403, 'lk-no'));
+    s.push(path('M650 278C650 190 706 170 706 82', 'v-exit'));
+    s.push(g('v-service', [rect(632, 28, 148, 52, 10), text(706, 50, 'a service', 13, 'b'),
+      text(706, 68, 'accepts the office IP only', 11, 'mu')]));
+    s.push(g('v-badge-exit', [rect(600, 244, 100, 24, 12), text(650, 260, 'exit', 12, 'as b')]));
+    s.push(g('v-badge-pub', [rect(600, 244, 100, 24, 12), text(650, 260, 'public address', 12, 'as b')]));
+    s.push(g('v-net', [rect(24, 22, 118, 30, 15), text(83, 42, 'home-lab', 14, 'as b m')]));
+    for (i = 0; i < 3; i++) { s.push(rec(d[i])); }
+    s.push(pkt('k-req', 'M345 300L205 300'), pkt('k-res', 'M205 300L345 300'),
+      pkt('k-exit', 'M455 300L650 300C650 190 706 170 706 82'),
+      pkt('k-relay', 'M455 300L650 300L650 322C650 430 150 430 150 322'));
+    return { vb: '0 0 800 450', body: s.join('') };
   }
 
-  function place(svg, p) {
-    var g = el('g', { 'data-place': p.id }, svg, 'v-place');
-    var cx = p.x + 110;
-    el('rect', { x: p.x, y: 230, width: 220, height: 210, rx: 12 }, g, 'v-place-bg');
-    p.label = text(g, p.x + 14, 254, p.name, 'v-place-name', 'start');
-    el('rect', { x: p.x + 152, y: 240, width: 44, height: 16, rx: 4 }, g, 'v-router');
-    el('path', { d: 'M' + (p.x + 164) + ' 240v-6M' + (p.x + 184) + ' 240v-6' }, g, 'v-antenna');
-    text(g, p.x + 174, 272, 'NAT', 'v-nat');
-    var node = el('g', { 'data-node': p.node }, g, 'v-node');
-    el('rect', { x: cx - 50, y: 322, width: 100, height: 40, rx: 8 }, node, 'v-node-bg');
-    text(node, cx, 347, p.node, 'v-node-text');
+  function narrow() {
+    var a = { px: [28, 28, 28], py: [84, 212, 340], pw: 316, ph: 96, prx: 10, pn: [14, 24, 14],
+      rt: [266, 12, 36, 11], nat: [284, 40], nd: [24, 100, 38, 74, 24, 14],
+      ny: function (i) { return [126, 254, 382][i]; } };
+    var d = ['M102 126L218 66', 'M102 254L218 66', 'M102 382L218 66'], s = frames(a), i, y, slot;
+    s.push(g('v-cloud', [el('ellipse', { cx: 218, cy: 40, rx: 100, ry: 26 }), text(218, 44, 'public directory (DHT)', 13, 'mu')]));
+    for (i = 0; i < 3; i++) { s.push(path(d[i], 'v-dht')); }
+    s.push(labels(a));
+    for (i = 0; i < 3; i++) { s.push(node(i, a)); }
+    slot = function (cls, label, size, cap, y0) {
+      return g(cls, [line(152, y0 + 61, 168, y0 + 61), rect(168, y0 + 45, 160, 30, cap), text(248, y0 + 64, label, size, cap === 8 ? 'as b' : 'm')]);
+    };
+    s.push(slot('v-panel', 'NAS · web panel', 13, 8, 84));
+    s.push(slot('v-addr', 'http://nas.meshtown', 12, 15, 212));
+    s.push(slot('v-proxy', 'proxy 127.0.0.1:1080', 12, 15, 212));
+    s.push(path('M102 164L102 254', 'v-link l-nl'), path('M102 292L102 382', 'v-link l-lo'),
+      path('M52 145C8 145 8 401 52 401', 'v-link l-no'));
+    s.push(lock(102, 209, 'lk-nl'), lock(102, 337, 'lk-lo'), lock(19, 273, 'lk-no'));
+    s.push(path('M102 420L102 462Q102 470 110 470L168 470', 'v-exit'));
+    s.push(g('v-service', [rect(168, 452, 160, 36, 8), text(248, 466, 'a service', 12, 'b'),
+      text(248, 481, 'accepts the office IP only', 10.5, 'mu')]));
+    y = 340;
+    s.push(g('v-badge-exit', [rect(168, y + 48, 120, 24, 12), text(228, y + 64, 'exit', 12, 'as b')]));
+    s.push(g('v-badge-pub', [rect(168, y + 48, 120, 24, 12), text(228, y + 64, 'public address', 12, 'as b')]));
+    s.push(g('v-net', [rect(12, 14, 100, 26, 13), text(62, 31, 'home-lab', 13, 'as b m')]));
+    for (i = 0; i < 3; i++) { s.push(rec(d[i])); }
+    s.push(pkt('k-req', 'M102 254L102 164'), pkt('k-res', 'M102 164L102 254'),
+      pkt('k-exit', 'M102 292L102 382L102 420L102 462Q102 470 110 470L168 470'),
+      pkt('k-relay', 'M102 292L102 382L52 401C8 401 8 145 52 145'));
+    return { vb: '0 0 360 500', body: s.join('') };
   }
 
-  function dhtLinks(svg) {
-    DHT.forEach(function (d) { el('path', { d: d }, svg, 'v-dht-link'); });
+  /* Palette for standalone SVG files, which cannot see the page CSS. Same values as the site theme. */
+  function staticStyle() {
+    return '.v-svg{--bg:#fff;--surface:#f4f6f8;--surface-2:#e8ecf0;--border:#d6dce2;--fg:#171b1f;--muted:#4d565f;' +
+      '--accent:#0b6e63;--accent-strong:#085a50;--accent-soft:#dcf1ec;--line-muted:#7c868f;' +
+      '--font-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;' +
+      '--font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}' +
+      '@media(prefers-color-scheme:dark){.v-svg{--bg:#0e1216;--surface:#161c22;--surface-2:#1e262d;--border:#2b353e;' +
+      '--fg:#e7eaed;--muted:#a7b0b9;--accent:#58d0bc;--accent-strong:#86e2d3;--accent-soft:#113b35;--line-muted:#6f7a84}}';
   }
 
-  function links(svg) {
-    var defs = [['nl', 'M190 342H350', 270, 342], ['lo', 'M450 342H610', 530, 342],
-      ['no', 'M140 364Q400 450 660 364', 400, 407]];
-    defs.forEach(function (d) {
-      var g = el('g', {}, svg, 'v-link v-link-' + d[0]);
-      d[1] = ROUTES[d[0]];
-      el('path', { d: d[1] }, g, 'v-dash');
-      el('path', { d: d[1], pathLength: 1 }, g, 'v-solid');
-      lock(g, d[2], d[3], 'v-lock-' + d[0]);
-      if (d[0] !== 'no') { cross(g, d[2], d[3], 'v-cross-' + d[0]); }
-    });
+  /* opts: cls (extra classes), style (inline style), css (embedded stylesheet). */
+  function build(layout, opts) {
+    opts = opts || {};
+    var L = layout === 'v' ? narrow() : wide();
+    var cls = 'v-svg layout-' + layout + (opts.cls ? ' ' + opts.cls : '');
+    var markup = '<svg xmlns="' + NS + '" viewBox="' + L.vb + '" class="' + cls + '"' +
+      (opts.style ? ' style="' + opts.style + '"' : '') + (opts.css ? '' : ' aria-hidden="true"') + '>' +
+      (opts.css ? '<style>' + opts.css + '</style>' : '') + L.body + '</svg>';
+    if (typeof document === 'undefined') { return markup; }
+    return document.importNode(new DOMParser().parseFromString(markup, 'image/svg+xml').documentElement, true);
   }
 
-  function cloud(svg) {
-    var g = el('g', {}, svg, 'v-cloud');
-    el('ellipse', { cx: 400, cy: 66, rx: 120, ry: 34 }, g, 'v-cloud-bg');
-    text(g, 400, 71, 'public DHT', 'v-cloud-text');
-    lock(svg, 540, 70, 'v-dht-lock');
-  }
-
-  // A glowing dot that runs along a path (CSS offset-path); phase in seconds.
-  function packet(svg, d, cls, phase) {
-    var c = el('circle', { r: 5 }, svg, 'v-pk ' + cls);
-    c.style.setProperty('offset-path', "path('" + d + "')");
-    c.style.setProperty('--ph', phase + 's');
-    return c;
-  }
-
-  function packets(svg) {
-    Object.keys(ROUTES).forEach(function (k) {
-      packet(svg, ROUTES[k], 'pk-' + k, 0);
-      packet(svg, ROUTES[k], 'pk-' + k + ' pk-r', 1.5);
-    });
-    DHT.forEach(function (d, i) { packet(svg, d, 'v-wr', i * 0.8); });
-    packet(svg, 'M350 342H190', 'v-req', 0.5);
-  }
-
-  function defs(svg) {
-    var d = el('defs', {}, svg);
-    var g = el('linearGradient', { id: 'v-grad', x1: 0, y1: 0, x2: 0, y2: 1 }, d);
-    el('stop', { offset: 0, 'class': 'v-grad-a' }, g);
-    el('stop', { offset: 1, 'class': 'v-grad-b' }, g);
-  }
-
-  function netLabel(svg) {
-    var g = el('g', {}, svg, 'v-net');
-    text(g, 14, 50, 'home-lab', 'v-net-name', 'start');
-    text(g, 14, 80, 'your private network', 'v-net-sub', 'start');
-  }
-
-  function extras(svg) {
-    var bar = el('g', {}, svg, 'v-addr');
-    el('rect', { x: 256, y: 182, width: 288, height: 38, rx: 19 }, bar, 'v-addr-bg');
-    text(bar, 400, 207, 'http://nas.meshtown', 'v-addr-text');
-    var panel = el('g', {}, svg, 'v-panel');
-    el('rect', { x: 10, y: 182, width: 240, height: 38, rx: 8 }, panel, 'v-panel-bg');
-    text(panel, 130, 207, 'NAS · web panel', 'v-panel-text');
-  }
-
-  function build(stage, alt) {
-    var svg = el('svg', { viewBox: '0 20 800 432', role: 'img', 'aria-labelledby': 'viz-title',
-      'data-frame': '1' }, null, 'viz-svg');
-    var title = el('title', { id: 'viz-title' }, svg);
-    title.textContent = alt || 'How Mesh Town connects your devices';
-    defs(svg);
-    cloud(svg);
-    dhtLinks(svg);
-    PLACES.forEach(function (p) { place(svg, p); });
-    links(svg);
-    packets(svg);
-    netLabel(svg);
-    extras(svg);
-    svg._cafe = PLACES[1].label;
-    setFrame(svg, 1);
-    if (stage) { stage.appendChild(svg); }
-    return svg;
-  }
-
-  function setFrame(svg, n) {
-    var i = Math.max(1, Math.min(8, n)) - 1;
-    svg.setAttribute('data-frame', String(i + 1));
-    svg.setAttribute('class', ('viz-svg ' + FRAME_CLASSES[i === 7 ? 7 : Math.min(i, 6)]).trim() + ' f' + (i + 1) + (svg._go ? ' go' : ''));
-    if (svg._cafe) { svg._cafe.textContent = CAFE_NAME[i]; }
-  }
-
-  function start(svg) { svg._go = true; svg.classList.add('go'); }
-
-  window.MeshVizScene = { build: build, setFrame: setFrame, start: start, count: 8 };
-}());
+  root.MeshScene = { build: build, staticStyle: staticStyle };
+  if (typeof module !== 'undefined' && module.exports) { module.exports = root.MeshScene; }
+})(typeof window !== 'undefined' ? window : this);
