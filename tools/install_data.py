@@ -44,7 +44,7 @@ DESKTOP_NETWORK = ("Create or join a network", [
 DESKTOP_AFTER = ("Open a device by its name", [
     ("p", "On the device that runs the service, open the network's Shared services (ports) tab and publish the port, to all members or to selected ones. Only programs running on that device itself can be shared."),
     ("p", "Each device has a name, two random words by default, such as finch-unwary; for a short one such as nas, set node.name in the settings file. The Ports shared with you tab shows the exact link for every port."),
-    ("p", "In the browser: in your system's proxy settings, turn on automatic proxy configuration (PAC) and paste `http://127.0.0.1:1080/proxy.pac` (Firefox: Settings → General → Network Settings → Automatic proxy configuration URL). Then type the address with http://, for example `http://nas.meshtown`. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped; `*.meshtown` addresses work only through the node."),
+    ("p", "In the browser: in your system's proxy settings, turn on automatic proxy configuration (PAC) and paste `http://127.0.0.1:1080/proxy.pac`. Then type the address with http://, for example `http://nas.meshtown`. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped; `*.meshtown` addresses work only through the node."),
     ("p", "For SSH, RDP and other programs, press Open on this computer: a member's port gets a local port, for example 22 becomes `127.0.0.1:2022`."),
 ])
 
@@ -53,7 +53,7 @@ def router_join(stop, cmd):
     return ("Join your network", [
         ("p", "A router node usually joins a network you already have. Ask a member for a single-use invite (Invite a member on their node page), then run this once while the service is stopped:"),
         ("cmd", stop + "\nmeshtown run --config " + cmd + " --invite mesh-invite2-…"),
-        ("p", "The command saves the network to the settings file, so after a restart the service stays in the network without the invite. Stop it with Ctrl+C once it reports joining, then start the service. To share the router's web panel with the network, see the [router notes](" + DOCS_ROUTER[1] + ")."),
+        ("p", "Stop it with Ctrl+C once it reports joining, then start the service: the network is now saved in the settings file and survives restarts. To share the router's web panel with the network, see the [router notes](" + DOCS_ROUTER[1] + ")."),
     ], None)
 
 
@@ -129,7 +129,7 @@ OSES = [
             OPEN_WIN, DESKTOP_NETWORK,
         ],
         "after": DESKTOP_AFTER,
-        "maintain": ("Update", [("p", "Download the file again from the same link; the files without a version in the name are always the latest build.")]),
+        "maintain": ("Update", [("p", "Download the file again from the same link; it always points to the latest build.")]),
         "trouble": [
             ("SmartScreen warns", "See the note above."),
             ("Where are the settings and logs?", "`%APPDATA%\\meshtown\\` holds config.json and the logs meshtown.log and meshtown-tray.log." + KEEP),
@@ -149,10 +149,10 @@ OSES = [
                     ("apt", "Debian / Ubuntu", [
                         ("cmd", DEB_CMD),
                         ("p", "The package adds a signed apt repository, so later updates come with apt, and installs the meshtown service, stopped. On a desktop, run `meshtown` for the tray app and leave the service off."),
-                        ("p", "On a server, join your network first with an invite from a member (step 3), stop the node with Ctrl+C once it reports joining, then start the service:"),
+                        ("p", "On a server, join your network first with an invite from a member (step 3):"),
                         ("cmd", "sudo meshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…"),
+                        ("p", "Stop it with Ctrl+C once it reports joining, then start the service:"),
                         ("cmd", "sudo systemctl enable --now meshtown"),
-                        ("p", "The service reads `/etc/meshtown/config.json`."),
                     ]),
                     ("static", "Other Linux", [
                         ("cmd", TAR_CMD),
@@ -263,8 +263,8 @@ INDEX = {
         ("windows", "Windows", "Tray app · 64-bit x86"),
         ("linux", "Linux", "Tray app or service · x86 and ARM"),
         ("android", "Android", "App from a file · Android 7.0 or newer"),
-        ("openwrt", "OpenWrt", "Service on the router · OpenWrt 24.10 and 25.12"),
-        ("keenetic", "Keenetic", "Service on the router · Entware, experimental"),
+        ("openwrt", "OpenWrt", "Router service · OpenWrt 24.10 and 25.12"),
+        ("keenetic", "Keenetic", "Router service · Entware, experimental"),
     ],
     "after": [
         "There is no app for iPhone or iPad; they can use Mesh Town on a router: see [connecting devices](openwrt/index.html#devices).",

@@ -68,7 +68,7 @@
 <p>A router node usually joins a network you already have. Ask a member for a single-use invite (Invite a member on their node page), then run this once while the service is stopped:</p>
 <pre class="cmd"><code>/opt/etc/init.d/S99meshtown stop
 meshtown run --config /opt/etc/meshtown/config.json --invite mesh-invite2-…</code></pre>
-<p>The command saves the network to the settings file, so after a restart the service stays in the network without the invite. Stop it with Ctrl+C once it reports joining, then start the service. To share the router's web panel with the network, see the <a href="https://github.com/mesh-town/meshtown/blob/main/platforms/linux/build/openwrt/README.md">router notes</a>.</p>
+<p>Stop it with Ctrl+C once it reports joining, then start the service: the network is now saved in the settings file and survives restarts. To share the router's web panel with the network, see the <a href="https://github.com/mesh-town/meshtown/blob/main/platforms/linux/build/openwrt/README.md">router notes</a>.</p>
 </li>
 <li class="step">
 <h2 id="devices">Connect phones and computers</h2>
