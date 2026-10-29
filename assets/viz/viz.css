@@ -3,20 +3,23 @@
 .scene-stage{position:sticky;top:0;z-index:1;background:var(--bg);padding-block:.5rem}
 .scene-stage svg,.scene-stage picture img{display:block;max-height:57vh;width:auto;max-width:100%;margin-inline:auto}
 .scene-steps{list-style:none;margin:0;padding:0;counter-reset:step}
-.scene-step{min-height:60vh;display:flex;flex-direction:column;justify-content:center;padding-block:var(--s-5);opacity:.4;transition:opacity .3s}
-.scene-step:last-child{min-height:40vh}
+.scene-step{min-height:max(10rem,calc(100vh - var(--stage-h,60vh) - 11rem));display:flex;flex-direction:column;justify-content:flex-start;padding-block:.75rem 0;opacity:.4;transition:opacity .3s}
 .scene-step.is-active,html:not(.js) .scene-step{opacity:1}
 .scene-step h3{display:flex;align-items:center;gap:.6rem;margin:0 0 .4rem;counter-increment:step}
 .scene-step h3::before{content:counter(step);width:1.75rem;height:1.75rem;border-radius:50%;background:var(--accent-soft);color:var(--accent-strong);font-size:.875rem;display:grid;place-items:center;flex:none}
 .scene-step p{margin:0;color:var(--muted)}
 .scene-step.is-active p{color:var(--fg)}
 [data-scene-ready] .scene-static{display:none}
-@media (min-width:48rem){
+@media (min-width:48rem) and (max-width:71.99rem){
+  .scene-stage{top:3.6rem}
+  .scene-stage svg,.scene-stage picture img{width:100%;height:auto;max-height:none;max-width:none}
+}
+@media (min-width:72rem){
   .scene-grid{grid-template-columns:20rem minmax(0,1fr);column-gap:3rem;align-items:start}
   .scene-stage{order:2;top:5rem;z-index:auto;padding-block:0}
   .scene-steps{order:1}
   .scene-stage svg,.scene-stage picture img{width:100%;height:auto;max-height:none;max-width:none}
-  .scene-step{min-height:55vh}
+  .scene-step,.scene-step:last-child{min-height:55vh;justify-content:center;padding-block:var(--s-5)}
   .scene-step:last-child{min-height:40vh}
 }
 @media (prefers-reduced-motion:reduce){

@@ -8,6 +8,7 @@
   var steps = [].slice.call(section.querySelectorAll('li[data-step]'));
   var sr = section.querySelector('[data-scene-sr]');
   var narrow = window.matchMedia('(max-width: 47.99rem)');
+  var wide = window.matchMedia('(min-width: 72rem)');
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var layout, svg, shownStep = 0, lastKey = '', queued = false;
 
@@ -24,8 +25,13 @@
 
   function state() {
     var box = section.getBoundingClientRect();
-    var line = window.innerHeight * (layout === 'v' ? 0.8 : 0.6);
-    var active = 1, p = 0, i, r;
+    var line = window.innerHeight * 0.6;
+    var active = 1, p = 0, i, r, minH;
+    if (!wide.matches) {
+      // Stage is stuck on top: the trigger line sits one step height below it, so the active card stays in the free area.
+      minH = Math.min.apply(null, steps.map(function (el) { return el.offsetHeight; }));
+      line = Math.min(window.innerHeight * 0.8, stageEdge() + minH);
+    }
     if (box.bottom < 0) { return { active: 7, p: 1 }; }
     if (box.top > window.innerHeight) { return { active: 1, p: 0 }; }
     for (i = 0; i < steps.length; i++) {
@@ -50,7 +56,14 @@
     }
   }
 
-  function frame() { queued = false; apply(state()); }
+  function stageEdge() { return stage.offsetHeight + (parseFloat(window.getComputedStyle(stage).top) || 0); }
+
+  function measure() {
+    if (wide.matches) { section.style.removeProperty('--stage-h'); } else { section.style.setProperty('--stage-h', stageEdge() + 'px'); }
+  }
+
+  function frame() { measure(); return frame2(); }
+  function frame2() { queued = false; apply(state()); }
   function request() { if (!queued) { queued = true; window.requestAnimationFrame(frame); } }
   function relayout() { mount(); request(); }
 
@@ -59,6 +72,7 @@
   window.addEventListener('scroll', request, { passive: true });
   window.addEventListener('resize', request);
   if (narrow.addEventListener) { narrow.addEventListener('change', relayout); } else { narrow.addListener(relayout); }
+  if (wide.addEventListener) { wide.addEventListener('change', request); }
   if (motion.addEventListener) { motion.addEventListener('change', request); }
   frame();
 })();
