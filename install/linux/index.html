@@ -40,8 +40,10 @@
 </ol>
 </nav>
 
+<div class="page-head">
 <h1>Install Mesh Town on Linux</h1>
-<p class="lede">For 64-bit x86 and ARM.</p>
+<p class="lede">Three steps: the package, the node page and your network. After that, shared devices open by name.</p>
+<p class="meta">64-bit x86 and ARM.</p>
 <nav class="os-strip" aria-label="Other systems">
 <ul>
 <li><a href="../macos/index.html">macOS</a></li>
@@ -52,7 +54,10 @@
 <li><a href="../keenetic/index.html">Keenetic</a></li>
 </ul>
 </nav>
-<h2>1. Install</h2>
+</div>
+<ol class="steps">
+<li class="step">
+<h2>Install</h2>
 <div class="var-group" data-var-group="linux">
 <div class="var-tabs" data-var-tabs hidden>
 <button type="button" class="var-tab" data-var-tab="apt">Debian / Ubuntu</button>
@@ -63,10 +68,11 @@
 <pre class="cmd"><code>A=$(dpkg --print-architecture)
 wget https://mesh-town.github.io/meshtown-dist/linux/debian/meshtown_${A}.deb
 sudo apt install ./meshtown_${A}.deb</code></pre>
-<p>The package adds a signed apt repository, so later updates come with apt. It also installs a meshtown service, stopped. On a server, first join your network with an invite from a member (it is saved to the service's settings file), stop it with Ctrl+C once it reports joining, then start the service:</p>
+<p>The package adds a signed apt repository, so later updates come with apt, and installs the meshtown service, stopped. On a desktop, run <code>meshtown</code> for the tray app and leave the service off.</p>
+<p>On a server, join your network first with an invite from a member (step 3), stop the node with Ctrl+C once it reports joining, then start the service:</p>
 <pre class="cmd"><code>sudo meshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…</code></pre>
 <pre class="cmd"><code>sudo systemctl enable --now meshtown</code></pre>
-<p>The service reads <code>/etc/meshtown/config.json</code>. On a desktop with the tray app, leave the service off.</p>
+<p>The service reads <code>/etc/meshtown/config.json</code>.</p>
 </div>
 <div class="var-panel" data-var-panel="static">
 <h3>Other Linux</h3>
@@ -75,23 +81,28 @@ tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
 <p>Run <code>meshtown</code> for the tray app, or <code>meshtown-cli</code> in a terminal or on a server. For the console-only archive, use <code>meshtown-cli-linux-$(uname -m).tar.gz</code> in the same place.</p>
 </div>
 </div>
-<h2>2. Make sure it works</h2>
-<p>The node page opens from the tray icon, or with the sign-in link printed at start:</p>
-<pre class="cmd"><code>Mesh Town page: http://127.0.0.1:7777/?token=…</code></pre>
-<p>On the first visit, the page asks you to set a password. The sign-in link works once and for 10 minutes; after that, sign in with that password.</p>
-<h2>3. Create or join a network</h2>
-<p>On the node page, press Create a new network and give it a name, for example <code>home-lab</code>. You become its first administrator; making a second administrator soon is a good idea.</p>
-<p>To add a device or a person, press Invite a member. You get a single-use string, valid for a day, that does not contain the network key. Hand it over in person. The node page shows the invite as a link and a QR code; on Android, the Scan QR button reads it.</p>
-<p>On the new device, press Join with an invite and paste the string. In a terminal:</p>
+</li>
+<li class="step">
+<h2>Open the node page</h2>
+<p>Start <code>meshtown</code> for the tray app, or <code>meshtown-cli</code> in a terminal. The node page opens from the tray icon, or from the sign-in link printed at start (a service writes it to the system log):</p>
+<pre class="out"><code>Mesh Town page: http://127.0.0.1:7777/?token=…</code></pre>
+<p>The link works once and for 10 minutes. On the first visit, set a password; after that, sign in with it.</p>
+</li>
+<li class="step">
+<h2>Create or join a network</h2>
+<p>Press Create a new network and name it, for example <code>home-lab</code>. You become its first administrator; add a second one soon.</p>
+<p>To add a device or a person, press Invite a member: you get a single-use string, valid for a day, that does not contain the network key. Hand it over in person. The page also shows it as a link and a QR code; on Android, Scan QR reads it.</p>
+<p>On the new device, press Join with an invite and paste the string, or in a terminal:</p>
 <pre class="cmd"><code>meshtown run --invite mesh-invite2-…</code></pre>
-<p>If no member is online yet, the node shows that it is waiting for network members.</p>
-<h2>4. Open a device by its name</h2>
-<p>On the device with the web interface, open the network's Shared services (ports) tab and publish the port, shared with all members or selected ones. Only programs running on that device itself can be shared.</p>
-<p>Each device has a name: two random words by default, such as finch-unwary. The Ports shared with you tab shows the exact link. To use a short name such as nas, set node.name in the settings file.</p>
-<p>On your computer, in your system's proxy settings, turn on automatic proxy configuration and paste <code>http://127.0.0.1:1080/proxy.pac</code> (Firefox: Settings → General → Network Settings → Automatic proxy configuration URL). Then type the address with http://, for example <code>http://nas.meshtown</code>. The Ports shared with you tab shows each link. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped; <code>*.meshtown</code> addresses work only through the node.</p>
-<p>For SSH, RDP and other programs, use Open on this computer: a member's port gets a local port, for example 22 becomes <code>127.0.0.1:2022</code>.</p>
+<p>Until a member is online, the node reports that it is waiting for network members.</p>
+</li>
+</ol>
+<h2>Open a device by its name</h2>
+<p>On the device that runs the service, open the network's Shared services (ports) tab and publish the port, to all members or to selected ones. Only programs running on that device itself can be shared.</p>
+<p>Each device has a name, two random words by default, such as finch-unwary; for a short one such as nas, set node.name in the settings file. The Ports shared with you tab shows the exact link for every port.</p>
+<p>In the browser: in your system's proxy settings, turn on automatic proxy configuration (PAC) and paste <code>http://127.0.0.1:1080/proxy.pac</code> (Firefox: Settings → General → Network Settings → Automatic proxy configuration URL). Then type the address with http://, for example <code>http://nas.meshtown</code>. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped; <code>*.meshtown</code> addresses work only through the node.</p>
+<p>For SSH, RDP and other programs, press Open on this computer: a member's port gets a local port, for example 22 becomes <code>127.0.0.1:2022</code>.</p>
 <h2>Update and remove</h2>
-<p>Update:</p>
 <div class="var-group" data-var-group="linux">
 <div class="var-tabs" data-var-tabs hidden>
 <button type="button" class="var-tab" data-var-tab="apt">Debian / Ubuntu</button>
@@ -99,39 +110,22 @@ tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
 </div>
 <div class="var-panel" data-var-panel="apt">
 <h3>Debian / Ubuntu</h3>
+<p class="cmd-label">Update</p>
 <pre class="cmd"><code>sudo apt update &amp;&amp; sudo apt upgrade</code></pre>
-</div>
-<div class="var-panel" data-var-panel="static">
-<h3>Other Linux</h3>
-<p>Download the archive again and unpack it over the old files.</p>
-</div>
-</div>
-<p>Remove:</p>
-<div class="var-group" data-var-group="linux">
-<div class="var-tabs" data-var-tabs hidden>
-<button type="button" class="var-tab" data-var-tab="apt">Debian / Ubuntu</button>
-<button type="button" class="var-tab" data-var-tab="static">Other Linux</button>
-</div>
-<div class="var-panel" data-var-panel="apt">
-<h3>Debian / Ubuntu</h3>
+<p class="cmd-label">Remove</p>
 <pre class="cmd"><code>sudo apt remove meshtown</code></pre>
 </div>
 <div class="var-panel" data-var-panel="static">
 <h3>Other Linux</h3>
-<p>Delete the unpacked files.</p>
+<p>Update: download the archive again and unpack it over the old files.</p>
+<p>Remove: delete the unpacked files.</p>
 </div>
 </div>
 <h2>Troubleshooting</h2>
-<dl class="trouble">
-<dt>The service does not start by itself</dt>
-<dd>It is installed stopped on purpose:<br><code>sudo systemctl enable --now meshtown</code></dd>
-<dt>Where is the settings file?</dt>
-<dd><code>/etc/meshtown/config.json</code> for the service, <code>~/.config/meshtown/config.json</code> for a user. Keep it private; <code>meshtown config-path</code> prints the one in use.</dd>
-<dt>The other devices never appear</dt>
-<dd>One of the networks may prevent direct connections; try another network.</dd>
-</dl>
-<h2>More details</h2>
-<p class="links-line"><a href="https://github.com/mesh-town/meshtown/blob/main/docs/INSTALL.md#debian-ubuntu-apt">Install reference (apt)</a> · <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference</a> · <a href="https://github.com/mesh-town/meshtown/blob/main/docs/CONFIG-FILE.md">Settings file</a> · <a href="https://github.com/mesh-town/meshtown/blob/main/docs/BUILDING.md">Building from source</a></p>
+<details><summary>The service does not start by itself</summary><p>It is installed stopped on purpose:<br><code>sudo systemctl enable --now meshtown</code></p></details>
+<details><summary>Where is the settings file?</summary><p><code>/etc/meshtown/config.json</code> for the service, <code>~/.config/meshtown/config.json</code> for a user. Keep it private; <code>meshtown config-path</code> prints the one in use.</p></details>
+<details><summary>The other devices never appear</summary><p>One of the networks may prevent direct connections; try another network.</p></details>
+<p class="links-line page-refs"><a href="https://github.com/mesh-town/meshtown/blob/main/docs/INSTALL.md#debian-ubuntu-apt">Install reference (apt) →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/CONFIG-FILE.md">Settings file →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/BUILDING.md">Building from source →</a></p>
 </main>
 <footer class="site-footer">
   <div class="wrap">

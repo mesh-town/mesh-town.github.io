@@ -31,6 +31,10 @@ def block(b):
         return '<p class="note-warn"><strong>Note.</strong> %s</p>' % inline(val)
     if kind == "cmd":
         return '<pre class="cmd"><code>%s</code></pre>' % html.escape(val, quote=False)
+    if kind == "out":
+        return '<pre class="out"><code>%s</code></pre>' % html.escape(val, quote=False)
+    if kind == "label":
+        return '<p class="cmd-label">%s</p>' % inline(val)
     if kind == "ol":
         return "<ol>\n" + "\n".join("<li>%s</li>" % inline(x) for x in val) + "\n</ol>"
     if kind == "tabs":
@@ -127,31 +131,28 @@ def breadcrumb(name):
             '<li>%s</li>\n</ol>\n</nav>\n' % html.escape(name))
 
 
+def step(title, blocks, anchor):
+    attr = ' id="%s"' % html.escape(anchor) if anchor else ""
+    return '<li class="step">\n<h2%s>%s</h2>\n%s\n</li>' % (attr, html.escape(title), "\n".join(block(b) for b in blocks))
+
+
 def trouble(items):
-    rows = "\n".join("<dt>%s</dt>\n<dd>%s</dd>" % (html.escape(q), inline(a)) for q, a in items)
-    return '<h2>Troubleshooting</h2>\n<dl class="trouble">\n%s\n</dl>' % rows
+    rows = "\n".join("<details><summary>%s</summary><p>%s</p></details>" % (html.escape(q), inline(a)) for q, a in items)
+    return "<h2>Troubleshooting</h2>\n" + rows
 
 
 def page(o):
-    parts = [breadcrumb(o["name"]), "<h1>%s</h1>" % html.escape(o["title"]),
-             '<p class="lede">%s</p>' % inline(o["lede"]), os_strip(o["slug"]),
-             section("1. Install", o["install"])]
-    if o["check"]:
-        parts.append(section("2. Make sure it works", o["check"]))
-    parts.append(section(*o["network"]))
-    if o.get("devices"):
-        parts.append(section(*o["devices"]))
-    if o["open"]:
-        parts.append(section(*o["open"]))
-    up = list(o["update"]) + list(o["remove"])
-    if up:
-        blocks = [("p", "Update:")] + o["update"] if o["remove"] else list(o["update"])
-        if o["remove"]:
-            blocks += [("p", "Remove:")] + o["remove"]
-        parts.append(section("Update and remove" if o["remove"] else "Update", blocks))
+    steps = "\n".join(step(*st) for st in o["steps"])
+    parts = [breadcrumb(o["name"]),
+             '<div class="page-head">\n<h1>%s</h1>\n<p class="lede">%s</p>\n<p class="meta">%s</p>\n%s\n</div>'
+             % (html.escape(o["title"]), inline(o["lede"]), inline(o["meta"]), os_strip(o["slug"])),
+             '<ol class="steps">\n%s\n</ol>' % steps]
+    if o["after"]:
+        parts.append(section(*o["after"]))
+    parts.append(section(*o["maintain"]))
     parts.append(trouble(o["trouble"]))
-    docs = " · ".join('<a href="%s">%s</a>' % (html.escape(u), html.escape(l)) for l, u in o["docs"])
-    parts.append('<h2>More details</h2>\n<p class="links-line">%s</p>' % docs)
+    docs = " ".join('<a href="%s">%s →</a>' % (html.escape(u), html.escape(l)) for l, u in o["docs"])
+    parts.append('<p class="links-line page-refs">%s</p>' % docs)
     canon = "install/%s/" % o["slug"]
     return head(o["title"], o["description"], canon) + CHROME_TOP + "\n".join(parts) + "\n" + CHROME_BOTTOM
 
@@ -159,9 +160,9 @@ def page(o):
 def index_page():
     cards = "\n".join('<li><a href="%s/index.html"><strong>%s</strong><span>%s</span></a></li>'
                       % (s, html.escape(n), html.escape(d)) for s, n, d in INDEX["cards"])
-    after = "\n".join("<p>%s</p>" % inline(t) for t in INDEX["after"])
+    after = "\n".join('<p class="meta">%s</p>' % inline(t) for t in INDEX["after"])
     body = ('<nav class="breadcrumb" aria-label="Breadcrumb">\n<ol>\n<li><a href="../index.html">Home</a></li>\n'
-            '<li>Install</li>\n</ol>\n</nav>\n<h1>%s</h1>\n<p class="lede">%s</p>\n<ul class="cards">\n%s\n</ul>\n%s\n'
+            '<li>Install</li>\n</ol>\n</nav>\n<div class="page-head">\n<h1>%s</h1>\n<p class="lede">%s</p>\n</div>\n<ul class="cards">\n%s\n</ul>\n%s\n'
             % (html.escape(INDEX["title"]), html.escape(INDEX["lede"]), cards, after))
     top = CHROME_TOP.replace("../../", "../").replace('href="../index.html">Install', 'href="index.html">Install')
     bottom = CHROME_BOTTOM

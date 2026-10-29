@@ -40,8 +40,10 @@
 </ol>
 </nav>
 
+<div class="page-head">
 <h1>Install Mesh Town on an OpenWrt router</h1>
-<p class="lede">For OpenWrt 24.10 and 25.12 on 64-bit ARM, 32-bit ARM Cortex and x86_64. MIPS, ARMv5/v6 and 32-bit x86 routers are not covered yet.</p>
+<p class="lede">Three steps: the package, your network and the phones and computers behind the router.</p>
+<p class="meta">OpenWrt 24.10 and 25.12 on 64-bit ARM, 32-bit ARM Cortex and x86_64. MIPS, ARMv5/v6 and 32-bit x86 routers are not covered yet.</p>
 <nav class="os-strip" aria-label="Other systems">
 <ul>
 <li><a href="../macos/index.html">macOS</a></li>
@@ -52,17 +54,23 @@
 <li><a href="../keenetic/index.html">Keenetic</a></li>
 </ul>
 </nav>
-<h2>1. Install</h2>
+</div>
+<ol class="steps">
+<li class="step">
+<h2>Install</h2>
 <p>As root on the router:</p>
 <pre class="cmd"><code>wget -O- https://mesh-town.github.io/meshtown-openwrt/install.sh | sh</code></pre>
 <p>The service starts at boot.</p>
-<h2>2. Join your network</h2>
+</li>
+<li class="step">
+<h2>Join your network</h2>
 <p>A router node usually joins a network you already have. Ask a member for a single-use invite (Invite a member on their node page), then run this once while the service is stopped:</p>
 <pre class="cmd"><code>/etc/init.d/meshtown stop
 meshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…</code></pre>
-<p>The command saves the network to the settings file, so after a restart the service stays in the network without the invite. Stop it with Ctrl+C once it reports joining, then start the service. To share the router's web panel with the network, see the router notes.</p>
-<p><a href="https://github.com/mesh-town/meshtown/blob/main/platforms/linux/build/openwrt/README.md">Router notes</a> · <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference</a></p>
-<h2 id="devices">3. Connect phones and computers</h2>
+<p>The command saves the network to the settings file, so after a restart the service stays in the network without the invite. Stop it with Ctrl+C once it reports joining, then start the service. To share the router's web panel with the network, see the <a href="https://github.com/mesh-town/meshtown/blob/main/platforms/linux/build/openwrt/README.md">router notes</a>.</p>
+</li>
+<li class="step">
+<h2 id="devices">Connect phones and computers</h2>
 <p>Phones, tablets and computers on the router's home network open sites through Mesh Town once their Wi‑Fi or network settings point to the router's setup address (PAC). iPhone and iPad work this way too — there is no app for them.</p>
 <p>First open the proxy for the home network: on the router's node page (port 7777) go through the setup steps and click "Open for the home network", or set <code>"socks": {"access": "localnet"}</code> in the settings file and restart the service.</p>
 <p>The setup address is <code>http://&lt;router address&gt;:1080/proxy.pac</code>, for example <code>http://192.168.1.1:1080/proxy.pac</code>. The node page shows the exact one.</p>
@@ -74,20 +82,17 @@ meshtown run --config /etc/meshtown/config.json --invite mesh-invite2-…</code>
 <li>Linux (GNOME): "Settings" → "Network" → "Proxy" → "Automatic" → "Configuration URL".</li>
 </ol>
 <p class="note-warn"><strong>Note.</strong> The proxy has no password: any device on the home network can use it, and so can guest Wi‑Fi unless it is separated. Do not open port 1080 on the WAN side.</p>
+</li>
+</ol>
 <h2>Update</h2>
-<p>OpenWrt 24.10:</p>
+<p class="cmd-label">OpenWrt 24.10</p>
 <pre class="cmd"><code>opkg update &amp;&amp; opkg upgrade meshtown</code></pre>
-<p>OpenWrt 25.12:</p>
+<p class="cmd-label">OpenWrt 25.12</p>
 <pre class="cmd"><code>apk update &amp;&amp; apk upgrade meshtown</code></pre>
 <h2>Troubleshooting</h2>
-<dl class="trouble">
-<dt>My router has a MIPS chip</dt>
-<dd>MIPS, ARMv5/v6 and 32-bit x86 routers are not covered yet.</dd>
-<dt>Where is the settings file?</dt>
-<dd><code>/etc/meshtown/config.json</code>. Keep it private.</dd>
-</dl>
-<h2>More details</h2>
-<p class="links-line"><a href="https://github.com/mesh-town/meshtown/blob/main/platforms/linux/build/openwrt/README.md">Router notes</a> · <a href="https://github.com/mesh-town/meshtown/blob/main/docs/INSTALL.md">Install reference</a> · <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference</a></p>
+<details><summary>My router has a MIPS chip</summary><p>MIPS, ARMv5/v6 and 32-bit x86 routers are not covered yet.</p></details>
+<details><summary>Where is the settings file?</summary><p><code>/etc/meshtown/config.json</code>. Keep it private.</p></details>
+<p class="links-line page-refs"><a href="https://github.com/mesh-town/meshtown/blob/main/platforms/linux/build/openwrt/README.md">Router notes →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/INSTALL.md">Install reference →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference →</a></p>
 </main>
 <footer class="site-footer">
   <div class="wrap">
