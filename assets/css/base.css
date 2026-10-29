@@ -116,6 +116,9 @@ pre code { background: none; border: 0; padding: 0; }
 .site-footer a:hover { color: var(--accent); }
 @media (max-width: 30rem) {
   body { font-size: 1rem; }
+  .site-header .wrap { gap: .25rem 1rem; }
+  .site-nav ul { gap: .25rem .75rem; }
+  .site-nav a { font-size: .875rem; }
 }
 @media (max-width: 48rem) { .site-header { position: static; } }
 @media (min-width: 48rem) { .site-header { position: sticky; top: 0; } }
