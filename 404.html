@@ -11,16 +11,49 @@
 <link rel="stylesheet" href="/assets/css/base.css">
 <link rel="stylesheet" href="/assets/css/sections.css">
 </head>
-<body>
+<body class="page-fill">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">Mesh Town</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/#see-it">How it works</a></li>
+        <li><a href="/install/">Install</a></li>
+        <li><a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs</a></li>
+        <li><a href="https://github.com/mesh-town/meshtown">GitHub</a></li>
+      </ul>
+    </nav>
   </div>
 </header>
-<main id="main" class="wrap page">
-  <h1>Page not found</h1>
-  <p class="lede">This page does not exist. Go to the <a href="/">home page</a> or pick your system on the <a href="/install/">install page</a>.</p>
+<main id="main" class="wrap page" tabindex="-1">
+<div class="page-head">
+<h1>Page not found</h1>
+<p class="lede">There is no page at this address: the link may be old or have a typo.</p>
+</div>
+<p class="links-line page-refs"><a href="/">Home →</a> <a href="/install/">Install →</a> <a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs →</a></p>
+<p class="meta">Install guides by system:</p>
+<nav class="os-strip" aria-label="Install guides">
+<ul>
+<li><a href="/install/macos/">macOS</a></li>
+<li><a href="/install/windows/">Windows</a></li>
+<li><a href="/install/linux/">Linux</a></li>
+<li><a href="/install/android/">Android</a></li>
+<li><a href="/install/openwrt/">OpenWrt</a></li>
+<li><a href="/install/keenetic/">Keenetic</a></li>
+</ul>
+</nav>
 </main>
+<footer class="site-footer">
+  <div class="wrap">
+    <ul>
+      <li>Mesh Town</li>
+      <li><a href="https://github.com/mesh-town/meshtown">Source</a></li>
+      <li><a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs</a></li>
+      <li><a href="https://github.com/mesh-town/meshtown-dist">Downloads</a></li>
+      <li>License: <a href="https://github.com/mesh-town/meshtown/blob/main/LICENSE">AGPL-3.0-only</a></li>
+    </ul>
+  </div>
+</footer>
 </body>
 </html>
