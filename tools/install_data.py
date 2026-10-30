@@ -77,7 +77,7 @@ DEB_CMD = ("A=$(dpkg --print-architecture)\n"
 TAR_CMD = ("curl -LO https://github.com/mesh-town/meshtown-dist/raw/main/linux/meshtown-linux-$(uname -m).tar.gz\n"
            "tar -xzf meshtown-linux-$(uname -m).tar.gz")
 
-NO_DIRECT = "one of the networks may prevent direct connections; try another network"
+NO_DIRECT = "one of the networks may prevent direct connections; try another network, or add a member with a public address to the network: it relays the connection"
 KEEP = " Keep config.json private."
 
 OSES = [
@@ -197,7 +197,7 @@ OSES = [
         "trouble": [
             ("Android does not offer to install the file", "Allow installing unknown apps for the browser or file manager you opened it from."),
             ("The app does not install", "It needs a 64-bit ARM phone and Android 7.0 or newer."),
-            ("No connection on mobile data", "Some mobile operators prevent direct connections between nodes; try Wi-Fi."),
+            ("No connection on mobile data", "Some mobile operators prevent direct connections between nodes; try Wi-Fi, or add a member with a public address to the network: it relays the connection."),
         ],
         "docs": [DOCS_INSTALL, DOCS_USAGE],
     },

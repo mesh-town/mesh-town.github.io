@@ -124,7 +124,7 @@ tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
 <h2>Troubleshooting</h2>
 <details><summary>The service does not start by itself</summary><p>It is installed stopped on purpose:<br><code>sudo systemctl enable --now meshtown</code></p></details>
 <details><summary>Where is the settings file?</summary><p><code>/etc/meshtown/config.json</code> for the service, <code>~/.config/meshtown/config.json</code> for a user. Keep it private; <code>meshtown config-path</code> prints the one in use.</p></details>
-<details><summary>The other devices never appear</summary><p>One of the networks may prevent direct connections; try another network.</p></details>
+<details><summary>The other devices never appear</summary><p>One of the networks may prevent direct connections; try another network, or add a member with a public address to the network: it relays the connection.</p></details>
 <p class="links-line page-refs"><a href="https://github.com/mesh-town/meshtown/blob/main/docs/INSTALL.md#debian-ubuntu-apt">Install reference (apt) →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/CONFIG-FILE.md">Settings file →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/BUILDING.md">Building from source →</a></p>
 </main>
 <footer class="site-footer">
