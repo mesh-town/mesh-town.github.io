@@ -85,7 +85,7 @@ def head(title, desc, canon):
 CHROME_TOP = """<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="../../index.html">Mesh Town</a>
+    <a class="brand" href="../../index.html"><img class="brand-logo" src="../../assets/favicon.svg" alt="" width="28" height="28"><span class="brand-name">Mesh Town</span></a>
     <nav class="site-nav" aria-label="Main">
       <ul>
         <li><a href="../../index.html#see-it">How it works</a></li>
