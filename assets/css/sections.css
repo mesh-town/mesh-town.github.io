@@ -26,6 +26,7 @@ main > .section:last-child { padding-bottom: var(--s-9); }
   .hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-7); align-items: center; }
   .hero-card { margin-top: 0; }
 }
+.h-not { background: var(--accent); color: var(--accent-fg); font-style: normal; padding: 0 .28em .04em; border-radius: 5px; }
 .differs-grid { display: grid; gap: var(--s-6); margin-top: var(--s-5); }
 @media (min-width: 48rem) { .differs-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--s-7); align-items: start; } }
 dl.nots { margin: 0; }
