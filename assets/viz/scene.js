@@ -70,7 +70,7 @@
       text(706, 68, 'accepts the office IP only', 11, 'mu')]));
     s.push(g('v-badge-exit', [rect(600, 244, 100, 24, 12), text(650, 260, 'exit 1', 12, 'as b')]));
     s.push(g('v-badge-exit2', [rect(100, 244, 100, 24, 12), text(150, 260, 'exit 2', 12, 'as b')]));
-    s.push(g('v-badge-pub', [rect(600, 244, 100, 24, 12), text(650, 260, 'public address', 12, 'as b')]));
+    s.push(g('v-badge-pub', [rect(600, 244, 100, 24, 12), text(650, 260, 'relay', 12, 'as b')]));
     s.push(g('v-net', [rect(24, 22, 118, 30, 15), text(83, 42, 'home-lab', 14, 'as b m')]));
     for (i = 0; i < 3; i++) { s.push(rec(d[i])); }
     s.push(pkt('k-req', 'M345 300L205 300'), pkt('k-res', 'M205 300L345 300'),
@@ -103,7 +103,7 @@
     y = 340;
     s.push(g('v-badge-exit', [rect(168, y + 48, 120, 24, 12), text(228, y + 64, 'exit 1', 12, 'as b')]));
     s.push(g('v-badge-exit2', [rect(168, y - 208, 120, 24, 12), text(228, y - 192, 'exit 2', 12, 'as b')]));
-    s.push(g('v-badge-pub', [rect(168, y + 48, 120, 24, 12), text(228, y + 64, 'public address', 12, 'as b')]));
+    s.push(g('v-badge-pub', [rect(168, y + 48, 120, 24, 12), text(228, y + 64, 'relay', 12, 'as b')]));
     s.push(g('v-net', [rect(12, 14, 100, 26, 13), text(62, 31, 'home-lab', 13, 'as b m')]));
     for (i = 0; i < 3; i++) { s.push(rec(d[i])); }
     s.push(pkt('k-req', 'M102 254L102 164'), pkt('k-res', 'M102 164L102 254'),
