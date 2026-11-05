@@ -2,11 +2,9 @@
 
 **[Mesh Town](https://mesh-town.github.io/)** — reach your home server, NAS or office PC from anywhere: no port forwarding, no central server, no accounts.
 
-The Mesh Town website: reach the services on your devices from anywhere.
+This repository is the Mesh Town website: plain static files, no build step, no external resources.
 
-Plain static files, no build step, no external resources.
-
-Open locally:
+Open it locally:
 - open `index.html` in a browser, or
 - run `python3 -m http.server 8000` in this folder and go to http://localhost:8000/
 
