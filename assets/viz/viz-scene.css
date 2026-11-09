@@ -45,6 +45,10 @@
 .exit .k-exit{offset-distance:clamp(0%,calc((var(--p) - .4)*166%),100%);opacity:clamp(0,calc((var(--p) - .4)*10),1)}
 .move .n-cafe,.move .lk-nl{opacity:0}
 .move .v-place-name-alt,.move .v-badge-pub{opacity:1}
-.move .l-nl{stroke:var(--line-muted);stroke-dasharray:6 6}
+.move .l-nl{stroke:var(--warn);stroke-dasharray:6 6}
+.v-cut{opacity:0}
+.v-cut circle{fill:var(--bg);stroke:var(--warn);stroke-width:1.5}
+.v-cut line{stroke:var(--warn);stroke-width:2}
+.move .v-cut{opacity:1}
 .move .k-relay{opacity:1;offset-distance:calc(var(--p)*100%)}
 .static .v-pkt,.static .v-rec{display:none}

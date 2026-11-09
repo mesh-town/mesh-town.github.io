@@ -27,6 +27,12 @@
     ]);
   }
 
+  /* A broken link mark: a cross in a circle, shown on the lost direct link in the "move" step. */
+  function cut(cx, cy) {
+    return g('v-cut', [el('circle', { cx: cx, cy: cy, r: 9 }),
+      line(cx - 3.5, cy - 3.5, cx + 3.5, cy + 3.5), line(cx - 3.5, cy + 3.5, cx + 3.5, cy - 3.5)]);
+  }
+
   /* One place: frame, name, router with two antennas, NAT label. a = geometry of the layout. */
   function frame(i, a) { return rect(a.px[i], a.py[i], a.pw, a.ph, a.prx, 'v-place ' + PCLS[i]); }
 
@@ -64,7 +70,7 @@
     s.push(g('v-proxy', [line(400, 136, 400, 278), rect(300, 104, 200, 32, 16), text(400, 125, 'proxy 127.0.0.1:1080', 13, 'm')]));
     s.push(path('M205 300L345 300', 'v-link l-nl'), path('M455 300L595 300', 'v-link l-lo'),
       path('M150 322C150 430 650 430 650 322', 'v-link l-no'));
-    s.push(lock(275, 300, 'lk-nl'), lock(525, 300, 'lk-lo'), lock(400, 403, 'lk-no'));
+    s.push(lock(275, 300, 'lk-nl'), lock(525, 300, 'lk-lo'), lock(400, 403, 'lk-no'), cut(275, 300));
     s.push(path('M650 278C650 190 706 170 706 82', 'v-exit'));
     s.push(g('v-service', [rect(632, 28, 148, 52, 10), text(706, 50, 'a service', 13, 'b'),
       text(706, 68, 'accepts the office IP only', 11, 'mu')]));
@@ -96,7 +102,7 @@
     s.push(slot('v-proxy', 'proxy 127.0.0.1:1080', 12, 15, 212));
     s.push(path('M102 164L102 254', 'v-link l-nl'), path('M102 292L102 382', 'v-link l-lo'),
       path('M52 145C8 145 8 401 52 401', 'v-link l-no'));
-    s.push(lock(102, 209, 'lk-nl'), lock(102, 337, 'lk-lo'), lock(19, 273, 'lk-no'));
+    s.push(lock(102, 209, 'lk-nl'), lock(102, 337, 'lk-lo'), lock(19, 273, 'lk-no'), cut(102, 209));
     s.push(path('M102 420L102 462Q102 470 110 470L168 470', 'v-exit'));
     s.push(g('v-service', [rect(168, 452, 160, 36, 8), text(248, 466, 'a service', 12, 'b'),
       text(248, 481, 'accepts the office IP only', 10.5, 'mu')]));
@@ -115,11 +121,11 @@
   /* Palette for standalone SVG files, which cannot see the page CSS. Same values as the site theme. */
   function staticStyle() {
     return '.v-svg{--bg:#fff;--surface:#f4f6f8;--surface-2:#e8ecf0;--border:#d6dce2;--fg:#171b1f;--muted:#4d565f;' +
-      '--accent:#0b6e63;--accent-strong:#085a50;--accent-soft:#dcf1ec;--line-muted:#7c868f;' +
+      '--accent:#0b6e63;--accent-strong:#085a50;--accent-soft:#dcf1ec;--line-muted:#7c868f;--warn:#7a4a00;' +
       '--font-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;' +
       '--font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}' +
       '@media(prefers-color-scheme:dark){.v-svg{--bg:#0e1216;--surface:#161c22;--surface-2:#1e262d;--border:#2b353e;' +
-      '--fg:#e7eaed;--muted:#a7b0b9;--accent:#58d0bc;--accent-strong:#86e2d3;--accent-soft:#113b35;--line-muted:#6f7a84}}';
+      '--fg:#e7eaed;--muted:#a7b0b9;--accent:#58d0bc;--accent-strong:#86e2d3;--accent-soft:#113b35;--line-muted:#6f7a84;--warn:#f0b45a}}';
   }
 
   /* opts: cls (extra classes), style (inline style), css (embedded stylesheet). */
