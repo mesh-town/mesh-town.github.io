@@ -39,12 +39,12 @@
 <section id="top" class="hero">
 <div class="hero-copy">
 <h1>Reach your home server, NAS or office PC from anywhere</h1>
-<p class="lead">Mesh Town joins your devices into a private network: the NAS panel, SSH to the home server, remote desktop to the office PC — from any network, with nothing opened on any router.</p>
 <ul class="hero-facts">
 <li>No port forwarding</li>
-<li>No public IP</li>
-<li>No server, no accounts</li>
+<li>No central server</li>
+<li>No accounts</li>
 </ul>
+<p class="lead">Mesh Town joins your devices into a private network: the NAS panel, SSH to the home server, remote desktop to the office PC — from any network, with no public IP and nothing opened on any router.</p>
 <div class="hero-actions">
 <a class="btn btn-primary" data-hero-cta href="install/index.html">Install Mesh Town</a>
 <a class="btn btn-secondary" href="#see-it">See how it works</a>
@@ -80,23 +80,30 @@
 <li class="scene-step" data-step="4"><h3>Connected directly</h3><p>With what they learned there, the nodes get through their routers (<abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr>) and connect to each other. Every link is encrypted.</p></li>
 <li class="scene-step" data-step="5"><h3>Open by name</h3><p>The laptop's browser uses the node as its proxy, so <code>http://nas.meshtown</code> opens the NAS web panel. Other programs get a local port.</p></li>
 <li class="scene-step" data-step="6"><h3>On the move</h3><p>The laptop moves to a mobile network and reconnects within seconds. If no direct connection gets through, another member — here the office PC — relays the traffic, still encrypted end to end.</p></li>
-<li class="scene-step" data-step="7"><h3>Exit through a member</h3><p>Any member can agree to be an exit. A browser or program set to the local proxy <code>127.0.0.1:1080</code> then reaches the internet from that member's address — for example, a service that accepts only the office IP. You choose the exits and their order; an exit sees which hosts you connect to.</p></li>
+<li class="scene-step" data-step="7"><h3>Exit through a member</h3><p>Computers and routers in a network serve as exits by default, phones only when turned on; each member can switch it off on its node page. A browser or program set to the local proxy <code>127.0.0.1:1080</code> then reaches the internet from the member you pick — for example, a service that accepts only the office IP. You choose the exits and their order; an exit sees which hosts you connect to.</p></li>
 </ol>
 </div>
 </section>
 
-<section id="differs" class="section" aria-labelledby="differs-title">
-<h2 id="differs-title">What you do <em class="h-not">not</em> have to do</h2>
+<section id="differs" class="section" aria-labelledby="differs-title cans-title">
 <div class="differs-grid">
+<div>
+<h2 id="differs-title">What you do <em class="h-not">not</em> have to do</h2>
 <dl class="nots">
-<dt>Open ports or set up dynamic DNS.</dt><dd>Nodes get through <abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr> themselves; only members reach a shared port.</dd>
-<dt>Run a server.</dt><dd>Nodes meet on the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr> and connect to each other directly.</dd>
-<dt>Pay for a relay.</dt><dd>When two devices cannot connect directly, another member of your network passes the traffic on, still encrypted end to end — no public address needed. That member sees who talks to whom and how much, not the content.</dd>
 <dt>Create an account.</dt><dd>A network is a key and a member list the members sign; newcomers join by invite.</dd>
-<dt>Put every device in one network.</dt><dd>A node can be in several networks — your devices, the family, the team — and a device shows up only in the networks you joined it to. Each port is shared with all members of a network or with selected ones.</dd>
+<dt>Run a server.</dt><dd>Nodes meet on the public <abbr title="Distributed hash table: a public directory run by many computers and owned by nobody">DHT</abbr>, a directory nobody owns, and connect to each other directly.</dd>
+<dt>Open ports or set up dynamic DNS.</dt><dd>Nodes get through <abbr title="Network address translation: how a router shares one public address among the devices behind it">NAT</abbr> themselves, and a device that changes networks is found again within seconds.</dd>
 <dt>Run it as root.</dt><dd>No virtual network adapter, no kernel driver, no system routes: the node runs as an ordinary program. Only installing a system package asks for rights.</dd>
-<dt>Set up DNS.</dt><dd>Shared panels open by name through the node's proxy; other ports appear locally.</dd>
-<dt>Reconnect by hand.</dt><dd>A device that changes networks is back with the others within seconds.</dd>
+<dt>Rely on a relay service.</dt><dd>When two devices cannot connect directly, another member of your network passes the traffic on, still encrypted end to end — no public address needed. That member sees who talks to whom and how much, not the content.</dd>
+</dl>
+</div>
+<div>
+<h2 id="cans-title">What you <em class="h-can">can</em> do</h2>
+<dl class="cans">
+<dt>Keep several networks on one device.</dt><dd>Up to eight at once — your own devices, the family, friends, the team, a client. The node has a separate identity and member list in each, so members of one network see nothing of another.</dd>
+<dt>Share a port, not the whole device.</dt><dd>You publish a port — the NAS panel, SSH, a game server — to all members of a network or only to the members you pick. Other ports on the device and its local network stay closed to members, also through the exit.</dd>
+<dt>Open a shared panel by name.</dt><dd>In the browser, <code>http://nas.meshtown</code> opens the NAS panel through the node's local proxy; a <abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr> file sets the browser up. Other shared ports appear on <code>127.0.0.1</code>.</dd>
+<dt>Use a member as your exit.</dt><dd>Connections through the local proxy leave from the address of a member you pick — for a service that accepts only your office IP. Computers and routers offer this to their network by default, phones do not; the switch is on the node page, and an exit sees the hosts you connect to.</dd>
 </dl>
 <div class="not-for">
 <h3>Not the tool if you need</h3>
@@ -107,20 +114,12 @@
 </ul>
 </div>
 </div>
-</section>
-
-<section id="proxy" class="section" aria-labelledby="proxy-title">
-<h2 id="proxy-title">One local proxy, two uses</h2>
-<p class="section-lead">The node runs a proxy at <code>127.0.0.1:1080</code>, <abbr title="A standard proxy protocol that most browsers and many programs support">SOCKS5</abbr> and HTTP on one port.</p>
-<div class="two-col">
-<div><h3>Names</h3><p>A shared web panel opens at <code>http://&lt;device-name&gt;.meshtown</code>; the node serves a <abbr title="Proxy auto-config: a small file that tells the browser which addresses go through Mesh Town">PAC</abbr> file that sets this up in the browser.</p></div>
-<div><h3>Exit through a member</h3><p>A member can agree to be an exit: connections through the proxy then leave from its address, for a service that accepts only your office IP. The exit sees the hosts you connect to.</p></div>
 </div>
 </section>
 
 <section id="networks" class="section" aria-labelledby="networks-title">
 <h2 id="networks-title">Who sees what</h2>
-<p class="section-lead">A node can be in up to eight networks at once — your own devices, the family, friends, the team, a client. Each network has its own member list; a device that is not in a network does not exist for its members.</p>
+<p class="section-lead">Each network has its own member list; a device that is not in a network does not exist for its members.</p>
 <div class="two-col">
 <div><h3>Networks as boundaries</h3><p><code>home-lab</code> holds the NAS and your laptop, nobody else. The same NAS joins <code>family</code> to share one port, the photo library — the SSH port stays in <code>home-lab</code>. A contractor gets a network of two: your office PC and their laptop.</p></div>
 <div><h3>Admins, invites, removal</h3><p>Whoever creates a network is its first admin; admins invite with single-use invites, make another member an admin and remove a member when the job ends. The network key never changes.</p></div>
@@ -254,7 +253,7 @@ tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
 <li><strong>Ports, not networks.</strong> Mesh Town connects TCP and UDP program ports on the device itself. There is no virtual network interface, no subnet routing and no capture of all traffic.</li>
 <li><strong>Programs use the proxy.</strong> A program has to work through a SOCKS5 or HTTP proxy, or connect to a local port on 127.0.0.1.</li>
 <li><strong>UDP rides on reliable streams.</strong> Order is kept, but a stalled link delays everything behind it, and a datagram larger than 2048 bytes is truncated.</li>
-<li><strong>Trust, not anonymity.</strong> Members you invite are trusted, and an exit sees which hosts you connect to. There is no iPhone or iPad app. They can use Mesh Town on a router.</li>
+<li><strong>Trust, not anonymity.</strong> Members you invite are trusted: they can use your shared ports and, until you switch it off, your internet connection as an exit; an exit sees which hosts you connect to. There is no iPhone or iPad app. They can use Mesh Town on a router.</li>
 <li><strong>Early software.</strong> Releases of the 0.3.x line are a working network node, not a hardened product.</li>
 </ul>
 <p><a href="https://github.com/mesh-town/meshtown/blob/main/docs/LIMITATIONS.md">All limitations →</a></p>
@@ -267,6 +266,7 @@ tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
 <details><summary>Does it route all my traffic?</summary><p>No. Mesh Town connects program ports: a program reaches the network through the node's proxy or a local port. There is no virtual network interface, and other traffic is not touched.</p></details>
 <details><summary>What if two devices cannot connect directly?</summary><p>Another member of your network relays between them — a home server, an office PC or a laptop, whichever is online; the traffic stays encrypted end to end. A member behind a NAT that changes ports for every connection, as some mobile operators do, cannot relay; if every member is behind such a NAT, the two stay unconnected. A freshly started member does not relay right away. Behind home routers and most NATs a direct connection works in the first place.</p></details>
 <details><summary>Who can reach the services I share?</summary><p>Only members of your network, and for each port you choose: all members or selected ones. A port is shared only after you publish it. Members of your other networks are not among them.</p></details>
+<details><summary>Does my computer serve as an exit for others?</summary><p>On a computer or router — yes, by default: members of your networks can open sites through your internet connection, and those sites see your address, not theirs. Through the exit they reach only public addresses, not your local network or the computer itself. Turn it off on the node page or with <code>--no-exit</code>; on a phone it is off until you turn it on.</p></details>
 <details><summary>Can I keep some devices to myself?</summary><p>Yes. Put them in a network nobody else is in. A node can be in several networks, and members of one network see nothing of another: not the devices, not their names, not the shared ports. Where you share a device with others, make a second network for that and share only the ports they need.</p></details>
 <details><summary>Can friends use my home server?</summary><p>Yes, if they run Mesh Town too: make a network for them, invite them and share the ports they need, such as a media library or a game server. Your other devices are not in that network, so your friends never see them.</p></details>
 <details><summary>Can I share my network key instead of invites?</summary><p>Better not. The key and the settings file are secret. Invite people with single-use invites, and hand them over in person.</p></details>
