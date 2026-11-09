@@ -121,11 +121,11 @@
   /* Palette for standalone SVG files, which cannot see the page CSS. Same values as the site theme. */
   function staticStyle() {
     return '.v-svg{--bg:#fff;--surface:#f4f6f8;--surface-2:#e8ecf0;--border:#d6dce2;--fg:#171b1f;--muted:#4d565f;' +
-      '--accent:#0b6e63;--accent-strong:#085a50;--accent-soft:#dcf1ec;--line-muted:#7c868f;--warn:#7a4a00;' +
+      '--accent:#0b6e63;--accent-strong:#085a50;--accent-soft:#dcf1ec;--line-muted:#7c868f;--lost:#b03e1f;' +
       '--font-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;' +
       '--font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}' +
       '@media(prefers-color-scheme:dark){.v-svg{--bg:#0e1216;--surface:#161c22;--surface-2:#1e262d;--border:#2b353e;' +
-      '--fg:#e7eaed;--muted:#a7b0b9;--accent:#58d0bc;--accent-strong:#86e2d3;--accent-soft:#113b35;--line-muted:#6f7a84;--warn:#f0b45a}}';
+      '--fg:#e7eaed;--muted:#a7b0b9;--accent:#58d0bc;--accent-strong:#86e2d3;--accent-soft:#113b35;--line-muted:#6f7a84;--lost:#d9572f}}';
   }
 
   /* opts: cls (extra classes), style (inline style), css (embedded stylesheet). */
