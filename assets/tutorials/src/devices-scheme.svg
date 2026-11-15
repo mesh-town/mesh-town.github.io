@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" width="880" height="400" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<style>
+:root{--bg:#ffffff;--surface:#f4f6f8;--surface2:#e8ecf0;--border:#d6dce2;--fg:#171b1f;--muted:#4d565f;--accent:#0b6e63;--soft:#dcf1ec}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1216;--surface:#161c22;--surface2:#1e262d;--border:#2b353e;--fg:#e7eaed;--muted:#a7b0b9;--accent:#58d0bc;--soft:#113b35}}
+.panel{fill:var(--surface);stroke:var(--border);stroke-width:2}
+.win{fill:var(--bg);stroke:var(--border);stroke-width:2}
+.bar{fill:var(--surface2)}
+.addr{fill:var(--bg);stroke:var(--border);stroke-width:2}
+.t{fill:var(--fg);font-size:22px}
+.h{fill:var(--muted);font-size:20px;font-weight:600;letter-spacing:.5px}
+.m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:var(--fg);font-size:20px}
+.ac{stroke:var(--accent);stroke-width:3.5;fill:none}
+.pill{fill:var(--soft);stroke:var(--accent);stroke-width:2}
+.pt{fill:var(--accent);font-size:20px;font-weight:700}
+.ah{fill:var(--accent)}
+</style>
+<rect width="880" height="400" fill="var(--bg)"/>
+<rect class="panel" x="12" y="12" width="290" height="376" rx="14"/>
+<rect class="panel" x="578" y="12" width="290" height="376" rx="14"/>
+<text class="h" x="157" y="44" text-anchor="middle">LAPTOP</text>
+<text class="h" x="723" y="44" text-anchor="middle">NAS</text>
+<!-- browser -->
+<rect class="win" x="28" y="64" width="258" height="130" rx="10"/>
+<path class="bar" d="M28 74a10 10 0 0 1 10-10h238a10 10 0 0 1 10 10v44H28z"/>
+<rect class="addr" x="38" y="72" width="238" height="38" rx="8"/>
+<text class="m" x="48" y="98" font-size="19" style="font-size:19px">http://nas.meshtown</text>
+<text class="t" x="157" y="170" text-anchor="middle" style="fill:var(--muted)">Browser</text>
+<!-- ssh -->
+<rect class="win" x="28" y="226" width="258" height="130" rx="10"/>
+<path class="bar" d="M28 236a10 10 0 0 1 10-10h238a10 10 0 0 1 10 10v44H28z"/>
+<text class="m" x="44" y="260" style="font-size:19px">127.0.0.1:2022</text>
+<text class="t" x="157" y="334" text-anchor="middle" style="fill:var(--muted)">SSH program</text>
+<!-- nas -->
+<rect class="win" x="594" y="64" width="258" height="130" rx="10"/>
+<text class="t" x="723" y="120" text-anchor="middle">Web page</text>
+<text class="m" x="723" y="156" text-anchor="middle" style="fill:var(--muted)">http</text>
+<rect class="win" x="594" y="226" width="258" height="130" rx="10"/>
+<text class="t" x="723" y="282" text-anchor="middle">SSH server</text>
+<text class="m" x="723" y="318" text-anchor="middle" style="fill:var(--muted)">port 22</text>
+<!-- arrows -->
+<path class="ac" d="M290 129H570"/><path class="ah" d="M586 129l-18-10v20z"/>
+<path class="ac" d="M290 291H570"/><path class="ah" d="M586 291l-18-10v20z"/>
+<rect class="pill" x="345" y="108" width="150" height="42" rx="21"/>
+<text class="pt" x="420" y="137" text-anchor="middle">Mesh Town</text>
+<rect class="pill" x="345" y="270" width="150" height="42" rx="21"/>
+<text class="pt" x="420" y="299" text-anchor="middle">Mesh Town</text>
+</svg>
