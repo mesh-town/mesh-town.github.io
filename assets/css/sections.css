@@ -112,3 +112,8 @@ pre.out { border-style: dashed; }
 .page-refs a { margin-right: var(--s-4); }
 body.page-fill { min-height: 100vh; display: flex; flex-direction: column; }
 body.page-fill main { flex: 1 0 auto; padding-top: var(--s-7); }
+.home-tiles { list-style: none; padding: 0; margin: 0 0 var(--s-5); display: grid; gap: var(--s-3); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 48rem) { .home-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.home-tiles li { margin: 0; }
+.home-tiles a { display: block; padding: var(--s-4); font-weight: 600; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--fg); text-decoration: none; }
+.home-tiles a:hover { border-color: var(--accent); }

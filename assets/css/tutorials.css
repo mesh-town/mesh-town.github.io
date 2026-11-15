@@ -1,0 +1,35 @@
+.tut-q { margin-bottom: var(--s-3); }
+.tut-q-label { margin: 0; font-size: .9375rem; font-weight: 600; color: var(--muted); }
+.tut-q .os-tabs { margin-block: .4rem 0; }
+.tut-controls .btn { min-height: 2.25rem; font-size: .9375rem; }
+.tut-controls[hidden], .tut-strip[hidden], .tut-end[hidden], .tut-os[hidden], .tut-step[hidden] { display: none; }
+.tut-steps { list-style: none; margin: 0; padding: 0; counter-reset: tut; }
+.tut-step { margin: 0; padding: var(--s-5) 0; border-top: 1px solid var(--border); counter-increment: tut; min-width: 0; }
+.tut-step > h2 { display: flex; align-items: baseline; gap: var(--s-3); margin: 0 0 var(--s-3); font-size: clamp(1.25rem, 1.1rem + .6vw, 1.5rem); }
+.tut-num { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--accent-soft); color: var(--accent-strong); font-size: 1rem; font-weight: 700; }
+html:not(.js) .tut-num::before { content: counter(tut); }
+.tut-tag { margin: 0 0 var(--s-3); }
+.js .tut-tag, .js .tut-os-title { display: none; }
+.tut-os-title { margin: var(--s-4) 0 var(--s-2); }
+.tut-note { margin-top: calc(-1 * var(--s-2)); }
+.tut-fig { margin: 0 0 var(--s-4); }
+.tut-fig img { display: block; border: 1px solid var(--border); border-radius: var(--radius); }
+.ui { font-weight: 600; background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 0 .3em; overflow-wrap: anywhere; }
+.tut-toggle { display: flex; align-items: baseline; gap: var(--s-3); width: 100%; padding: 0; margin: 0; font: inherit; color: inherit; text-align: left; background: none; border: 0; cursor: pointer; }
+.tut-toggle:hover .tut-title { color: var(--accent); }
+.tut-step.is-done .tut-num { background: var(--accent); color: var(--accent-fg); }
+.tut-step.is-done .tut-title::after { content: " \2713"; color: var(--accent); }
+.tut-step.is-done:not(.is-open) > h2 { margin-bottom: 0; color: var(--muted); }
+.tut-actions { margin: var(--s-5) 0 0; }
+.tut-strip { position: sticky; top: 0; z-index: 40; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .75rem; padding: .5rem 0; margin-block: var(--s-4); background: var(--bg); border-bottom: 1px solid var(--border); }
+@media (min-width: 48rem) { .tut-strip { top: 3.5rem; } }
+.tut-strip-label { margin: 0; font-weight: 600; white-space: nowrap; }
+.tut-strip ol { display: flex; flex-wrap: nowrap; gap: .3rem; margin: 0; padding: 0; list-style: none; overflow-x: auto; }
+.tut-strip li { margin: 0; }
+.tut-strip button { min-width: 2.25rem; min-height: 2.25rem; font: inherit; font-size: .9375rem; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: 50%; cursor: pointer; }
+.tut-strip button[disabled] { color: var(--muted); cursor: default; opacity: .6; }
+.tut-strip button.is-done { background: var(--accent-soft); color: var(--accent-strong); }
+.tut-strip button[aria-current="step"] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.tut-end { margin-top: var(--s-6); padding: var(--s-5); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.tut-end h2 { margin-bottom: var(--s-3); }
+.tut-q .os-tab[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }

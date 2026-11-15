@@ -24,7 +24,8 @@
     <nav class="site-nav" aria-label="Main">
       <ul>
         <li><a href="../../index.html#see-it">How it works</a></li>
-        <li><a href="../index.html">Install</a></li>
+        <li><a href="../../install/index.html">Install</a></li>
+        <li><a href="../../tutorials/index.html">Tutorials</a></li>
         <li><a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs</a></li>
         <li><a href="https://github.com/mesh-town/meshtown">GitHub</a></li>
       </ul>
@@ -58,8 +59,22 @@
 <ol class="steps">
 <li class="step">
 <h2>Install</h2>
+<div class="var-group" data-var-group="windows">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="installer">Installer</button>
+<button type="button" class="var-tab" data-var-tab="portable">Portable</button>
+</div>
+<div class="var-panel" data-var-panel="installer">
+<h3>Installer</h3>
+<p>Download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown-setup.exe">meshtown-setup.exe</a> and run it. Windows asks for administrator permission, because the installer puts the program in Program Files. On the last page, leave Run Mesh Town ticked.</p>
+<p class="note-warn"><strong>Note.</strong> The program is not signed, so SmartScreen may warn on the first launch. Choose More info, then Run anyway.</p>
+</div>
+<div class="var-panel" data-var-panel="portable">
+<h3>Portable</h3>
 <p>Download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown.exe">meshtown.exe</a>, the tray app. For a terminal or a server there is <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown-cli.exe">meshtown-cli.exe</a>.</p>
 <p class="note-warn"><strong>Note.</strong> The program is not signed, so SmartScreen may warn on the first launch. Choose More info, then Run anyway.</p>
+</div>
+</div>
 </li>
 <li class="step">
 <h2>Open the node page</h2>
@@ -78,16 +93,31 @@
 </ol>
 <h2>Open a device by its name</h2>
 <p>On the device that runs the service, open the network's Shared services (ports) tab and publish the port, to all members or to selected ones. Only programs running on that device itself can be shared.</p>
-<p>Each device has a name, two random words by default, such as finch-unwary; for a short one such as nas, set node.name in the settings file. The Ports shared with you tab shows the exact link for every port.</p>
+<p>Each device has a name, two random words by default, such as finch-unwary; for a short one such as nas, change This computer's name on the node page. The Ports shared with you tab shows the exact link for every port.</p>
 <p>In the browser: in your system's proxy settings, turn on automatic proxy configuration (PAC) and paste <code>http://127.0.0.1:1080/proxy.pac</code>. Then type the address with http://, for example <code>http://nas.meshtown</code>. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped; <code>*.meshtown</code> addresses work only through the node.</p>
 <p>For SSH, RDP and other programs, press Open on this computer: a member's port gets a local port, for example 22 becomes <code>127.0.0.1:2022</code>.</p>
-<h2>Update</h2>
-<p>Download the file again from the same link; it always points to the latest build.</p>
+<h2>Update and remove</h2>
+<div class="var-group" data-var-group="windows">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="installer">Installer</button>
+<button type="button" class="var-tab" data-var-tab="portable">Portable</button>
+</div>
+<div class="var-panel" data-var-panel="installer">
+<h3>Installer</h3>
+<p>Update: download meshtown-setup.exe again from the same link and run it over the old version.</p>
+<p>Remove: uninstall Mesh Town in Windows Settings → Apps.</p>
+</div>
+<div class="var-panel" data-var-panel="portable">
+<h3>Portable</h3>
+<p>Update: download the file again from the same link; it always points to the latest build.</p>
+<p>Remove: delete the file.</p>
+</div>
+</div>
 <h2>Troubleshooting</h2>
 <details><summary>SmartScreen warns</summary><p>See the note above.</p></details>
 <details><summary>Where are the settings and logs?</summary><p><code>%APPDATA%\meshtown\</code> holds config.json and the logs meshtown.log and meshtown-tray.log. Keep config.json private.</p></details>
 <details><summary>The other devices never appear</summary><p>One of the networks may prevent direct connections; try another network, such as home Wi-Fi, or add a member on an ordinary home or office network: it relays the connection.</p></details>
-<p class="links-line page-refs"><a href="https://github.com/mesh-town/meshtown/blob/main/docs/INSTALL.md">Install reference →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/CONFIG-FILE.md">Settings file →</a></p>
+<p class="links-line page-refs"><a href="../../tutorials/index.html">Step by step, with pictures →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/INSTALL.md">Install reference →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/USAGE.md">Usage reference →</a> <a href="https://github.com/mesh-town/meshtown/blob/main/docs/CONFIG-FILE.md">Settings file →</a></p>
 </main>
 <footer class="site-footer">
   <div class="wrap">

@@ -15,6 +15,7 @@ DOCS_INSTALL = ("Install reference", BLOB + "docs/INSTALL.md")
 DOCS_USAGE = ("Usage reference", BLOB + "docs/USAGE.md")
 DOCS_CONFIG = ("Settings file", BLOB + "docs/CONFIG-FILE.md")
 DOCS_BUILD = ("Building from source", BLOB + "docs/BUILDING.md")
+DOCS_TUTORIAL = ("Step by step, with pictures", "../../tutorials/index.html")
 DOCS_ROUTER = ("Router notes", BLOB + "platforms/linux/build/openwrt/README.md")
 
 LEDE_DESKTOP = "Three steps: the %s, the node page and your network. After that, shared devices open by name."
@@ -43,7 +44,7 @@ DESKTOP_NETWORK = ("Create or join a network", [
 
 DESKTOP_AFTER = ("Open a device by its name", [
     ("p", "On the device that runs the service, open the network's Shared services (ports) tab and publish the port, to all members or to selected ones. Only programs running on that device itself can be shared."),
-    ("p", "Each device has a name, two random words by default, such as finch-unwary; for a short one such as nas, set node.name in the settings file. The Ports shared with you tab shows the exact link for every port."),
+    ("p", "Each device has a name, two random words by default, such as finch-unwary; for a short one such as nas, change This computer's name on the node page. The Ports shared with you tab shows the exact link for every port."),
     ("p", "In the browser: in your system's proxy settings, turn on automatic proxy configuration (PAC) and paste `http://127.0.0.1:1080/proxy.pac`. Then type the address with http://, for example `http://nas.meshtown`. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped; `*.meshtown` addresses work only through the node."),
     ("p", "For SSH, RDP and other programs, press Open on this computer: a member's port gets a local port, for example 22 becomes `127.0.0.1:2022`."),
 ])
@@ -113,7 +114,7 @@ OSES = [
             ("\"MeshTown\" cannot be opened", "See the Gatekeeper note above: Open Anyway, or remove the quarantine mark."),
             ("Where are the settings and logs?", "`~/Library/Application Support/meshtown/` holds config.json and the logs meshtown.log and meshtown-tray.log." + KEEP),
         ],
-        "docs": [DOCS_INSTALL, DOCS_USAGE, DOCS_CONFIG],
+        "docs": [DOCS_TUTORIAL, DOCS_INSTALL, DOCS_USAGE, DOCS_CONFIG],
     },
     {
         "slug": "windows", "name": "Windows",
@@ -123,19 +124,30 @@ OSES = [
         "meta": "64-bit Windows on x86.",
         "steps": [
             ("Install", [
-                ("p", "Download [meshtown.exe](" + DIST + "windows/meshtown.exe), the tray app. For a terminal or a server there is [meshtown-cli.exe](" + DIST + "windows/meshtown-cli.exe)."),
-                ("warn", "The program is not signed, so SmartScreen may warn on the first launch. Choose More info, then Run anyway."),
+                ("tabs", ("windows", [
+                    ("installer", "Installer", [
+                        ("p", "Download [meshtown-setup.exe](" + DIST + "windows/meshtown-setup.exe) and run it. Windows asks for administrator permission, because the installer puts the program in Program Files. On the last page, leave Run Mesh Town ticked."),
+                        ("warn", "The program is not signed, so SmartScreen may warn on the first launch. Choose More info, then Run anyway."),
+                    ]),
+                    ("portable", "Portable", [
+                        ("p", "Download [meshtown.exe](" + DIST + "windows/meshtown.exe), the tray app. For a terminal or a server there is [meshtown-cli.exe](" + DIST + "windows/meshtown-cli.exe)."),
+                        ("warn", "The program is not signed, so SmartScreen may warn on the first launch. Choose More info, then Run anyway."),
+                    ]),
+                ])),
             ], None),
             OPEN_WIN, DESKTOP_NETWORK,
         ],
         "after": DESKTOP_AFTER,
-        "maintain": ("Update", [("p", "Download the file again from the same link; it always points to the latest build.")]),
+        "maintain": ("Update and remove", [("tabs", ("windows", [
+            ("installer", "Installer", [("p", "Update: download meshtown-setup.exe again from the same link and run it over the old version."), ("p", "Remove: uninstall Mesh Town in Windows Settings → Apps.")]),
+            ("portable", "Portable", [("p", "Update: download the file again from the same link; it always points to the latest build."), ("p", "Remove: delete the file.")]),
+        ]))]),
         "trouble": [
             ("SmartScreen warns", "See the note above."),
             ("Where are the settings and logs?", "`%APPDATA%\\meshtown\\` holds config.json and the logs meshtown.log and meshtown-tray.log." + KEEP),
             ("The other devices never appear", NO_DIRECT[0].upper() + NO_DIRECT[1:].replace("another network", "another network, such as home Wi-Fi") + "."),
         ],
-        "docs": [DOCS_INSTALL, DOCS_USAGE, DOCS_CONFIG],
+        "docs": [DOCS_TUTORIAL, DOCS_INSTALL, DOCS_USAGE, DOCS_CONFIG],
     },
     {
         "slug": "linux", "name": "Linux",
@@ -199,7 +211,7 @@ OSES = [
             ("The app does not install", "It needs a 64-bit ARM phone and Android 7.0 or newer."),
             ("No connection on mobile data", "Some mobile operators prevent direct connections between nodes; try Wi-Fi, or add a member on an ordinary home or office network: it relays the connection."),
         ],
-        "docs": [DOCS_INSTALL, DOCS_USAGE],
+        "docs": [DOCS_TUTORIAL, DOCS_INSTALL, DOCS_USAGE],
     },
     {
         "slug": "openwrt", "name": "OpenWrt",

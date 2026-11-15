@@ -24,7 +24,8 @@
     <nav class="site-nav" aria-label="Main">
       <ul>
         <li><a href="../../index.html#see-it">How it works</a></li>
-        <li><a href="../index.html">Install</a></li>
+        <li><a href="../../install/index.html">Install</a></li>
+        <li><a href="../../tutorials/index.html">Tutorials</a></li>
         <li><a href="https://github.com/mesh-town/meshtown/tree/main/docs">Docs</a></li>
         <li><a href="https://github.com/mesh-town/meshtown">GitHub</a></li>
       </ul>
@@ -99,7 +100,7 @@ tar -xzf meshtown-linux-$(uname -m).tar.gz</code></pre>
 </ol>
 <h2>Open a device by its name</h2>
 <p>On the device that runs the service, open the network's Shared services (ports) tab and publish the port, to all members or to selected ones. Only programs running on that device itself can be shared.</p>
-<p>Each device has a name, two random words by default, such as finch-unwary; for a short one such as nas, set node.name in the settings file. The Ports shared with you tab shows the exact link for every port.</p>
+<p>Each device has a name, two random words by default, such as finch-unwary; for a short one such as nas, change This computer's name on the node page. The Ports shared with you tab shows the exact link for every port.</p>
 <p>In the browser: in your system's proxy settings, turn on automatic proxy configuration (PAC) and paste <code>http://127.0.0.1:1080/proxy.pac</code>. Then type the address with http://, for example <code>http://nas.meshtown</code>. Ordinary sites go through the node while Mesh Town runs and open directly while it is stopped; <code>*.meshtown</code> addresses work only through the node.</p>
 <p>For SSH, RDP and other programs, press Open on this computer: a member's port gets a local port, for example 22 becomes <code>127.0.0.1:2022</code>.</p>
 <h2>Update and remove</h2>
