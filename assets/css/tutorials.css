@@ -2,7 +2,7 @@
 .tut-q-label { margin: 0; font-size: .9375rem; font-weight: 600; color: var(--muted); }
 .tut-q .os-tabs { margin-block: .4rem 0; }
 .tut-controls .btn { min-height: 2.25rem; font-size: .9375rem; }
-.tut-controls[hidden], .tut-strip[hidden], .tut-end[hidden], .tut-os[hidden], .tut-step[hidden] { display: none; }
+.tut-controls[hidden], .tut-strip[hidden], .tut-end[hidden], .tut-os[hidden], .tut-step[hidden], .tut-q .os-tab[hidden] { display: none; }
 .tut-steps { list-style: none; margin: 0; padding: 0; counter-reset: tut; }
 .tut-step { margin: 0; padding: var(--s-5) 0; border-top: 1px solid var(--border); counter-increment: tut; min-width: 0; }
 .tut-step > h2 { display: flex; align-items: baseline; gap: var(--s-3); margin: 0 0 var(--s-3); font-size: clamp(1.25rem, 1.1rem + .6vw, 1.5rem); }
