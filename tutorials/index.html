@@ -76,7 +76,7 @@
 <h3 class="tut-os-title">Windows</h3>
 <p>Download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown-setup.exe">meshtown-setup.exe</a> and run it. Windows asks for administrator permission, because the installer puts the program in Program Files. On the last page, leave Run Mesh Town ticked.</p>
 <p class="note-warn"><strong>Note.</strong> Windows may warn that the program is not signed. Choose More info, then Run anyway.</p>
-
+<figure class="tut-fig" data-fig="install-w"><picture><img src="../assets/tutorials/install-w.webp" alt="The Windows warning about an unsigned program after More info, with Run anyway" width="534" height="500" loading="lazy"></picture></figure>
 <p>Other ways to install, updating, troubleshooting: <a href="../install/windows/index.html">Windows install guide →</a></p>
 </div>
 <div class="tut-os" data-os-only="macos">
@@ -126,6 +126,7 @@ meshtown</code></pre>
 <p>A Mesh Town icon appears in the menu bar. Click it and choose <span class="ui" data-ui="Join or create a network…">Join or create a network…</span> (later it reads <span class="ui" data-ui="Open Mesh Town…">Open Mesh Town…</span>).</p>
 <p class="meta tut-note">No icon? Check System Settings → Menu Bar.</p>
 </div>
+<div class="tut-os" data-os-only="windows"><figure class="tut-fig" data-fig="icon-w"><picture><img src="../assets/tutorials/icon-w.webp" alt="The Mesh Town tray menu on Windows with the Join or create a network item" width="451" height="218" loading="lazy"></picture></figure></div>
 <p>The page opens in your browser. On <span class="ui" data-ui="Set a password">Set a password</span>, type a password twice and press <span class="ui" data-ui="Continue">Continue</span>. It protects this settings page only.</p>
 <figure class="tut-fig" data-fig="password"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/password-dark.webp"><img src="../assets/tutorials/password-light.webp" alt="The Set a password screen with two fields and the Continue button" width="840" height="786" loading="lazy"></picture></figure>
 </div>
@@ -212,7 +213,7 @@ meshtown</code></pre>
 <li>Next to <span class="ui" data-ui="Use setup script">Use setup script</span>, click <span class="ui" data-ui="Set up">Set up</span>.</li>
 <li>Turn on <span class="ui" data-ui="Use setup script">Use setup script</span>, paste the address into <span class="ui" data-ui="Script address">Script address</span> and click <span class="ui" data-ui="Save">Save</span>.</li>
 </ol>
-
+<figure class="tut-fig" data-fig="browser-w"><picture><img src="../assets/tutorials/browser-w.webp" alt="Edit setup script in Windows proxy settings, with the Mesh Town address" width="330" height="312" loading="lazy"></picture></figure>
 </div>
 <div class="tut-os" data-os-only="macos">
 <h3 class="tut-os-title">macOS</h3>
@@ -225,7 +226,8 @@ meshtown</code></pre>
 
 </div>
 <p>Chrome, Edge, Safari, Brave and most other browsers use this system setting: there is nothing to change in them. Close the browser completely and open it again.</p>
-<p>Firefox: open Settings → General → Network Settings → <span class="ui" data-ui="Settings…">Settings…</span> and make sure Use system proxy settings is selected (it is the default). Opera: turn off its built-in VPN, or sites bypass Mesh Town.</p>
+<p>Firefox: open Settings, type proxy in the search box, open the proxy settings it finds and make sure Use system proxy settings is selected (it is the default). Opera: turn off its built-in VPN, or sites bypass Mesh Town.</p>
+<figure class="tut-fig" data-fig="browser-firefox"><picture><img src="../assets/tutorials/browser-firefox.webp" alt="Firefox Connection Settings" width="755" height="596" loading="lazy"></picture></figure>
 <p>Then pick what happens <span class="ui" data-ui="When Mesh Town is off">When Mesh Town is off</span>: <span class="ui" data-ui="Open sites directly">Open sites directly</span> or <span class="ui" data-ui="Keep sites closed">Keep sites closed</span>.</p>
 <p>Check it: open <a href="http://meshtown/">http://meshtown/</a>. It says “This browser is connected to Mesh Town” and lists the ports shared with you.</p>
 </div>

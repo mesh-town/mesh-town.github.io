@@ -16,7 +16,7 @@ INSTALL_GUIDE = "../install/%s/index.html"
 # Figure id -> (alt text naming the screen in words, own interface?). Own interface: <id>-light.webp and <id>-dark.webp;
 # another program's window: <id>.webp. A figure with no file is left out.
 FIGS = {
-    "install-w": ("The Windows warning about an unsigned program, with More info and Run anyway", False),
+    "install-w": ("The Windows warning about an unsigned program after More info, with Run anyway", False),
     "install-m": ("macOS Privacy & Security with the Open Anyway button", False),
     "install-a": ("Android asking to allow installing apps from this source", False),
     "icon-w": ("The Mesh Town tray menu on Windows with the Join or create a network item", False),
@@ -28,7 +28,7 @@ FIGS = {
     "invite-start": ("The Invite a member button and the optional For whom field", True),
     "invite-ready": ("The ready invite with Send as text, Send as QR code and the invite itself", True),
     "browser-scope": ("The question Where should Mesh Town open sites with the setup address", True),
-    "browser-w": ("Windows proxy settings with Use setup script", False),
+    "browser-w": ("Edit setup script in Windows proxy settings, with the Mesh Town address", False),
     "browser-m": ("macOS Proxies with Automatic Proxy Configuration", False),
     "browser-firefox": ("Firefox Connection Settings", False),
     "exit-choose": ("The Choose an exit screen listing office-pc, nas and Directly, without an exit, and this computer's name laptop", True),
@@ -53,7 +53,7 @@ PAGE = {
 
 BROWSERS = [
     ("p", "Chrome, Edge, Safari, Brave and most other browsers use this system setting: there is nothing to change in them. Close the browser completely and open it again."),
-    ("p", "Firefox: open Settings → General → Network Settings → [[Settings…]] and make sure Use system proxy settings is selected (it is the default). Opera: turn off its built-in VPN, or sites bypass Mesh Town."),
+    ("p", "Firefox: open Settings, type proxy in the search box, open the proxy settings it finds and make sure Use system proxy settings is selected (it is the default). Opera: turn off its built-in VPN, or sites bypass Mesh Town."),
 ]
 CHECK = ("p", "Check it: open [http://meshtown/](http://meshtown/). It says “This browser is connected to Mesh Town” and lists the ports shared with you.")
 
