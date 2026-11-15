@@ -18,7 +18,7 @@ INSTALL_GUIDE = "../install/%s/index.html"
 FIGS = {
     "install-w": ("The Windows warning about an unsigned program after More info, with Run anyway", False),
     "install-m": ("macOS Privacy & Security with the Open Anyway button", False),
-    "install-a": ("Android asking to allow installing apps from this source", False),
+    "install-a": ("Android Install unknown apps with the Allow from this source switch", False),
     "icon-w": ("The Mesh Town tray menu on Windows with the Join or create a network item", False),
     "icon-m": ("The Mesh Town menu bar menu on macOS with the Join or create a network item", False),
     "password": ("The Set a password screen with two fields and the Continue button", True),
@@ -39,7 +39,7 @@ FIGS = {
     "devices-scheme": ("The address http://nas.meshtown in a browser and 127.0.0.1:2022 for SSH", True),
     "android-join": ("The phone join form with the Scan QR button", True),
     "android-exit": ("The phone exit screen and the Connect button", False),
-    "android-vpn": ("The Android window asking to allow a connection", False),
+    "android-vpn": ("The Android Connection request window with the OK button", False),
     "android-connected": ("The phone status line reading Connected via office-pc", False),
 }
 
@@ -81,8 +81,8 @@ STEPS = [
         ]),
         ("os", ["android"], [
             ("ol", [
-                "On the phone, download [meshtown.apk](" + DIST + "android/meshtown.apk).",
-                "Open the file. Android asks to allow installing apps from this source: allow it.",
+                "On the phone, download [meshtown.apk](" + DIST + "android/meshtown.apk). If Chrome warns that the file might be harmful, choose Download anyway.",
+                "Open the file from the notification or from Downloads. Android says it is not allowed to install apps from this source: press Settings, turn on Allow from this source, go back and open the file again.",
                 "Start Mesh Town.",
             ]),
             ("note", "It needs a 64-bit ARM phone with Android 7.0 or newer."),
@@ -144,9 +144,9 @@ STEPS = [
         ("p", "An exit sees which hosts you connect to, so pick members you trust. If the member goes offline, sites stop opening until you choose another."),
     ]),
     ("connect", ("invite",), ("android",), "Connect", "", [
-        ("p", "Tap [[Connect]] at the bottom of the screen. Android asks to allow the app to set up a connection: press OK."),
+        ("p", "Tap [[Connect]] at the bottom of the screen. Allow notifications when asked, so you see when the connection drops. Then Android asks to set up a VPN connection: press OK."),
         ("fig", "android-vpn"),
-        ("p", "Allow notifications and background use when asked, so the connection is not stopped. The status line reads [[Connected via]] and the name of your exit."),
+        ("p", "Once connected, Android may ask to let the app always run in the background: allow it, so the connection is not stopped. The status line reads [[Connected via]] and the name of your exit."),
         ("fig", "android-connected"),
     ]),
     ("browser", BOTH, DESKTOP, "Connect the browser", "", [
@@ -189,7 +189,7 @@ STEPS = [
         ]),
         ("os", ["android"], [
             ("p", "With Mesh Town connected, type the address in any browser on the phone, for example `http://nas.meshtown`. There is nothing to set up in the browser: the app carries all of the phone's traffic."),
-            ("note", "The app does not list shared ports yet: ask the member who shares a device for its address."),
+            ("p", "To see which ports are shared with you, open [http://meshtown/](http://meshtown/) in the phone's browser."),
         ]),
     ]),
 ]

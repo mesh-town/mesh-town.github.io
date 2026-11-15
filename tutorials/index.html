@@ -104,12 +104,12 @@ meshtown</code></pre>
 <div class="tut-os" data-os-only="android">
 <h3 class="tut-os-title">Android</h3>
 <ol>
-<li>On the phone, download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/android/meshtown.apk">meshtown.apk</a>.</li>
-<li>Open the file. Android asks to allow installing apps from this source: allow it.</li>
+<li>On the phone, download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/android/meshtown.apk">meshtown.apk</a>. If Chrome warns that the file might be harmful, choose Download anyway.</li>
+<li>Open the file from the notification or from Downloads. Android says it is not allowed to install apps from this source: press Settings, turn on Allow from this source, go back and open the file again.</li>
 <li>Start Mesh Town.</li>
 </ol>
 <p class="meta tut-note">It needs a 64-bit ARM phone with Android 7.0 or newer.</p>
-
+<figure class="tut-fig" data-fig="install-a"><picture><img src="../assets/tutorials/install-a.webp" alt="Android Install unknown apps with the Allow from this source switch" width="540" height="1132" loading="lazy"></picture></figure>
 <p>Other ways to install, updating, troubleshooting: <a href="../install/android/index.html">Android install guide →</a></p>
 </div>
 </div>
@@ -189,7 +189,7 @@ meshtown</code></pre>
 <div class="tut-os" data-os-only="android">
 <h3 class="tut-os-title">Android</h3>
 <p>The app suggests an exit; change it if you want another member.</p>
-
+<figure class="tut-fig" data-fig="android-exit"><picture><img src="../assets/tutorials/android-exit.webp" alt="The phone exit screen and the Connect button" width="540" height="1132" loading="lazy"></picture></figure>
 </div>
 <p>An exit sees which hosts you connect to, so pick members you trust. If the member goes offline, sites stop opening until you choose another.</p>
 </div>
@@ -197,8 +197,10 @@ meshtown</code></pre>
 <li class="tut-step" id="connect" data-tut-step data-nets="invite" data-oses="android">
 <h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Connect</span></h2>
 <div class="tut-body">
-<p>Tap <span class="ui" data-ui="Connect">Connect</span> at the bottom of the screen. Android asks to allow the app to set up a connection: press OK.</p>
-<p>Allow notifications and background use when asked, so the connection is not stopped. The status line reads <span class="ui" data-ui="Connected via">Connected via</span> and the name of your exit.</p>
+<p>Tap <span class="ui" data-ui="Connect">Connect</span> at the bottom of the screen. Allow notifications when asked, so you see when the connection drops. Then Android asks to set up a VPN connection: press OK.</p>
+<figure class="tut-fig" data-fig="android-vpn"><picture><img src="../assets/tutorials/android-vpn.webp" alt="The Android Connection request window with the OK button" width="540" height="1132" loading="lazy"></picture></figure>
+<p>Once connected, Android may ask to let the app always run in the background: allow it, so the connection is not stopped. The status line reads <span class="ui" data-ui="Connected via">Connected via</span> and the name of your exit.</p>
+<figure class="tut-fig" data-fig="android-connected"><picture><img src="../assets/tutorials/android-connected.webp" alt="The phone status line reading Connected via office-pc" width="540" height="1132" loading="lazy"></picture></figure>
 </div>
 </li>
 <li class="tut-step" id="browser" data-tut-step data-nets="invite create" data-oses="windows macos">
@@ -250,7 +252,7 @@ meshtown</code></pre>
 <div class="tut-os" data-os-only="android">
 <h3 class="tut-os-title">Android</h3>
 <p>With Mesh Town connected, type the address in any browser on the phone, for example <code>http://nas.meshtown</code>. There is nothing to set up in the browser: the app carries all of the phone's traffic.</p>
-<p class="meta tut-note">The app does not list shared ports yet: ask the member who shares a device for its address.</p>
+<p>To see which ports are shared with you, open <a href="http://meshtown/">http://meshtown/</a> in the phone's browser.</p>
 </div>
 </div>
 </li>
