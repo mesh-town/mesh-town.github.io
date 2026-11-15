@@ -22,17 +22,16 @@ FIGS = {
     "icon-w": ("The Mesh Town tray menu on Windows with the Join or create a network item", False),
     "icon-m": ("The Mesh Town menu bar menu on macOS with the Join or create a network item", False),
     "password": ("The Set a password screen with two fields and the Continue button", True),
-    "wizard-start": ("The first screen of the setup: Join with an invite and Create a new network", True),
-    "join-form": ("The Join with an invite form with the invite field and the name laptop", True),
+    "join-form": ("The Join with an invite form with an invite pasted and the Join button", True),
     "joined": ("The page showing You joined the network", True),
     "create-form": ("The Create a new network form with the name family", True),
     "invite-start": ("The Invite a member button and the optional For whom field", True),
-    "invite-ready": ("The invite shown as text and as a QR code", True),
+    "invite-ready": ("The ready invite with Send as text, Send as QR code and the invite itself", True),
     "browser-scope": ("The question Where should Mesh Town open sites with the setup address", True),
     "browser-w": ("Windows proxy settings with Use setup script", False),
     "browser-m": ("macOS Proxies with Automatic Proxy Configuration", False),
     "browser-firefox": ("Firefox Connection Settings", False),
-    "exit-choose": ("The Choose an exit screen listing office-pc, nas and Directly, without an exit", True),
+    "exit-choose": ("The Choose an exit screen listing office-pc, nas and Directly, without an exit, and this computer's name laptop", True),
     "exit-tray": ("The Exit via menu in the macOS menu bar", False),
     "exit-status": ("The Home tab panel showing how sites open right now", True),
     "ports-mine": ("My published ports with the port form and the Publish port button", True),
@@ -104,8 +103,7 @@ STEPS = [
     ("join", ("invite",), ALL, "Join with an invite", "Only with an invite", [
         ("p", "Ask a member of the network for an invite. It works once, for 24 hours."),
         ("os", DESKTOP, [
-            ("p", "Press [[Join with an invite]], paste it into [[Invite you received]] and give this computer a name others will see, for example `laptop`."),
-            ("fig", "wizard-start"),
+            ("p", "Press [[Join with an invite]], paste it into [[Invite you received]] and press [[Join]]."),
             ("fig", "join-form"),
             ("p", "The page waits until a member is online to let you in, then shows [[✓ You joined the network]]."),
             ("fig", "joined"),
@@ -122,7 +120,7 @@ STEPS = [
         ("fig", "create-form"),
     ]),
     ("invite", ("create",), DESKTOP, "Invite a device or a person", "Only when you start a network", [
-        ("p", "Press [[Invite a member]], optionally type who it is for, and confirm. A window shows the invite as text and as a QR code."),
+        ("p", "Press [[Invite a member]], optionally type who it is for, and confirm. A window shows the invite as text; [[Send as QR code]] shows it as a QR code."),
         ("fig", "invite-start"),
         ("fig", "invite-ready"),
         ("p", "Send it to one person in a private message: it works once, for 24 hours. Keep this computer on until they join."),
@@ -132,7 +130,7 @@ STEPS = [
     ("exit", BOTH, ALL, "Choose an exit", "", [
         ("p", "An exit is a member whose internet connection your sites go through: sites see that member's address, not yours."),
         ("os", DESKTOP, [
-            ("p", "On [[Choose an exit]], pick a member, or [[Directly, without an exit]] to keep your own connection. Press [[Next]]."),
+            ("p", "On [[Choose an exit]], pick a member, or [[Directly, without an exit]] to keep your own connection. Below it, in [[This computer's name]], type a name others will see, for example `laptop`. Press [[Next]]."),
             ("fig", "exit-choose"),
             ("p", "Change it any time: tray icon → [[Exit via…]], or the Home tab of the node page."),
             ("fig", "exit-tray"),
@@ -175,7 +173,7 @@ STEPS = [
         BROWSERS[0],
         BROWSERS[1],
         ("fig", "browser-firefox"),
-        ("p", "Then pick what happens [[When Mesh Town is off]]: [[Open sites directly (recommended)]] or [[Keep sites closed]]."),
+        ("p", "Then pick what happens [[When Mesh Town is off]]: [[Open sites directly]] or [[Keep sites closed]]."),
         CHECK,
     ]),
     ("devices", BOTH, ALL, "Open your devices", "", [

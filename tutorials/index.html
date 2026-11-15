@@ -127,6 +127,7 @@ meshtown</code></pre>
 <p class="meta tut-note">No icon? Check System Settings → Menu Bar.</p>
 </div>
 <p>The page opens in your browser. On <span class="ui" data-ui="Set a password">Set a password</span>, type a password twice and press <span class="ui" data-ui="Continue">Continue</span>. It protects this settings page only.</p>
+<figure class="tut-fig" data-fig="password"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/password-dark.webp"><img src="../assets/tutorials/password-light.webp" alt="The Set a password screen with two fields and the Continue button" width="840" height="786" loading="lazy"></picture></figure>
 </div>
 </li>
 <li class="tut-step" id="join" data-tut-step data-nets="invite" data-oses="windows macos android">
@@ -136,17 +137,16 @@ meshtown</code></pre>
 <p>Ask a member of the network for an invite. It works once, for 24 hours.</p>
 <div class="tut-os" data-os-only="windows macos">
 <h3 class="tut-os-title">Windows and macOS</h3>
-<p>Press <span class="ui" data-ui="Join with an invite">Join with an invite</span>, paste it into <span class="ui" data-ui="Invite you received">Invite you received</span> and give this computer a name others will see, for example <code>laptop</code>.</p>
-
-
+<p>Press <span class="ui" data-ui="Join with an invite">Join with an invite</span>, paste it into <span class="ui" data-ui="Invite you received">Invite you received</span> and press <span class="ui" data-ui="Join">Join</span>.</p>
+<figure class="tut-fig" data-fig="join-form"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/join-form-dark.webp"><img src="../assets/tutorials/join-form-light.webp" alt="The Join with an invite form with an invite pasted and the Join button" width="1752" height="750" loading="lazy"></picture></figure>
 <p>The page waits until a member is online to let you in, then shows <span class="ui" data-ui="✓ You joined the network">✓ You joined the network</span>.</p>
-
+<figure class="tut-fig" data-fig="joined"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/joined-dark.webp"><img src="../assets/tutorials/joined-light.webp" alt="The page showing You joined the network" width="1752" height="1024" loading="lazy"></picture></figure>
 <p class="meta tut-note">Nothing after a minute? The person who invited you must keep their device on.</p>
 </div>
 <div class="tut-os" data-os-only="android">
 <h3 class="tut-os-title">Android</h3>
 <p>Open Mesh Town, tap <span class="ui" data-ui="Join with an invite">Join with an invite</span> and paste the invite, or tap <span class="ui" data-ui="Scan QR">Scan QR</span> and point the camera at the QR code on the other person's screen.</p>
-
+<figure class="tut-fig" data-fig="android-join"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/android-join-dark.webp"><img src="../assets/tutorials/android-join-light.webp" alt="The phone join form with the Scan QR button" width="732" height="942" loading="lazy"></picture></figure>
 <p class="meta tut-note">Nothing after a minute? The person who invited you must keep their device on.</p>
 </div>
 </div>
@@ -156,13 +156,16 @@ meshtown</code></pre>
 <p class="meta tut-tag">Only when you start a network</p>
 <div class="tut-body">
 <p>Press <span class="ui" data-ui="Create a new network">Create a new network</span>, type a name members will see in the invite, for example <code>family</code>, and press <span class="ui" data-ui="Create network">Create network</span>. You are its admin.</p>
+<figure class="tut-fig" data-fig="create-form"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/create-form-dark.webp"><img src="../assets/tutorials/create-form-light.webp" alt="The Create a new network form with the name family" width="1752" height="698" loading="lazy"></picture></figure>
 </div>
 </li>
 <li class="tut-step" id="invite" data-tut-step data-nets="create" data-oses="windows macos">
 <h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Invite a device or a person</span></h2>
 <p class="meta tut-tag">Only when you start a network</p>
 <div class="tut-body">
-<p>Press <span class="ui" data-ui="Invite a member">Invite a member</span>, optionally type who it is for, and confirm. A window shows the invite as text and as a QR code.</p>
+<p>Press <span class="ui" data-ui="Invite a member">Invite a member</span>, optionally type who it is for, and confirm. A window shows the invite as text; <span class="ui" data-ui="Send as QR code">Send as QR code</span> shows it as a QR code.</p>
+<figure class="tut-fig" data-fig="invite-start"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/invite-start-dark.webp"><img src="../assets/tutorials/invite-start-light.webp" alt="The Invite a member button and the optional For whom field" width="568" height="396" loading="lazy"></picture></figure>
+<figure class="tut-fig" data-fig="invite-ready"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/invite-ready-dark.webp"><img src="../assets/tutorials/invite-ready-light.webp" alt="The ready invite with Send as text, Send as QR code and the invite itself" width="878" height="926" loading="lazy"></picture></figure>
 <p>Send it to one person in a private message: it works once, for 24 hours. Keep this computer on until they join.</p>
 <p>On the other device, open <a href="index.html?net=invite">this page</a> and follow it with I have an invite.</p>
 <p>Once someone joins, make a second member an admin: <span class="ui" data-ui="Networks">Networks</span> → <span class="ui" data-ui="Members">Members</span> → ⋯ → <span class="ui" data-ui="Make admin">Make admin</span>.</p>
@@ -174,11 +177,11 @@ meshtown</code></pre>
 <p>An exit is a member whose internet connection your sites go through: sites see that member's address, not yours.</p>
 <div class="tut-os" data-os-only="windows macos">
 <h3 class="tut-os-title">Windows and macOS</h3>
-<p>On <span class="ui" data-ui="Choose an exit">Choose an exit</span>, pick a member, or <span class="ui" data-ui="Directly, without an exit">Directly, without an exit</span> to keep your own connection. Press <span class="ui" data-ui="Next">Next</span>.</p>
-
+<p>On <span class="ui" data-ui="Choose an exit">Choose an exit</span>, pick a member, or <span class="ui" data-ui="Directly, without an exit">Directly, without an exit</span> to keep your own connection. Below it, in <span class="ui" data-ui="This computer&#x27;s name">This computer's name</span>, type a name others will see, for example <code>laptop</code>. Press <span class="ui" data-ui="Next">Next</span>.</p>
+<figure class="tut-fig" data-fig="exit-choose"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/exit-choose-dark.webp"><img src="../assets/tutorials/exit-choose-light.webp" alt="The Choose an exit screen listing office-pc, nas and Directly, without an exit, and this computer&#x27;s name laptop" width="1752" height="1200" loading="lazy"></picture></figure>
 <p>Change it any time: tray icon → <span class="ui" data-ui="Exit via…">Exit via…</span>, or the Home tab of the node page.</p>
 
-
+<figure class="tut-fig" data-fig="exit-status"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/exit-status-dark.webp"><img src="../assets/tutorials/exit-status-light.webp" alt="The Home tab panel showing how sites open right now" width="1752" height="286" loading="lazy"></picture></figure>
 <p class="meta tut-note">The list is empty? No member offers an exit yet: computers and routers do by default, phones do not. Until another computer or router joins, sites open directly.</p>
 </div>
 <div class="tut-os" data-os-only="android">
@@ -201,6 +204,7 @@ meshtown</code></pre>
 <div class="tut-body">
 <p>The page asks <span class="ui" data-ui="Where should Mesh Town open sites?">Where should Mesh Town open sites?</span> Choose <span class="ui" data-ui="All apps on this computer (recommended)">All apps on this computer (recommended)</span>.</p>
 <p>Press <span class="ui" data-ui="Copy">Copy</span> next to the setup address (PAC), <code>http://127.0.0.1:1080/proxy.pac</code>.</p>
+<figure class="tut-fig" data-fig="browser-scope"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/browser-scope-dark.webp"><img src="../assets/tutorials/browser-scope-light.webp" alt="The question Where should Mesh Town open sites with the setup address" width="1752" height="518" loading="lazy"></picture></figure>
 <div class="tut-os" data-os-only="windows">
 <h3 class="tut-os-title">Windows</h3>
 <ol>
@@ -222,7 +226,7 @@ meshtown</code></pre>
 </div>
 <p>Chrome, Edge, Safari, Brave and most other browsers use this system setting: there is nothing to change in them. Close the browser completely and open it again.</p>
 <p>Firefox: open Settings → General → Network Settings → <span class="ui" data-ui="Settings…">Settings…</span> and make sure Use system proxy settings is selected (it is the default). Opera: turn off its built-in VPN, or sites bypass Mesh Town.</p>
-<p>Then pick what happens <span class="ui" data-ui="When Mesh Town is off">When Mesh Town is off</span>: <span class="ui" data-ui="Open sites directly (recommended)">Open sites directly (recommended)</span> or <span class="ui" data-ui="Keep sites closed">Keep sites closed</span>.</p>
+<p>Then pick what happens <span class="ui" data-ui="When Mesh Town is off">When Mesh Town is off</span>: <span class="ui" data-ui="Open sites directly">Open sites directly</span> or <span class="ui" data-ui="Keep sites closed">Keep sites closed</span>.</p>
 <p>Check it: open <a href="http://meshtown/">http://meshtown/</a>. It says “This browser is connected to Mesh Town” and lists the ports shared with you.</p>
 </div>
 </li>
@@ -232,9 +236,9 @@ meshtown</code></pre>
 <div class="tut-os" data-os-only="windows macos">
 <h3 class="tut-os-title">Windows and macOS</h3>
 <p>A device is reachable when a program on it is shared. On the device that runs the program, open the node page → <span class="ui" data-ui="Networks">Networks</span> → your network → <span class="ui" data-ui="Shared services (ports)">Shared services (ports)</span> → <span class="ui" data-ui="My published ports">My published ports</span>: enter the port, choose <span class="ui" data-ui="All members">All members</span> or <span class="ui" data-ui="Selected members">Selected members</span> and press <span class="ui" data-ui="Publish port">Publish port</span>.</p>
-
+<figure class="tut-fig" data-fig="ports-mine"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/ports-mine-dark.webp"><img src="../assets/tutorials/ports-mine-light.webp" alt="My published ports with the port form and the Publish port button" width="1752" height="674" loading="lazy"></picture></figure>
 <p>On this computer the same tab lists <span class="ui" data-ui="Ports shared with you">Ports shared with you</span>. For a web panel, click its address, such as <code>http://nas.meshtown</code>: type http://, not https://.</p>
-
+<figure class="tut-fig" data-fig="ports-shared"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/ports-shared-dark.webp"><img src="../assets/tutorials/ports-shared-light.webp" alt="Ports shared with you with an address and Open on this computer" width="1752" height="686" loading="lazy"></picture></figure>
 <p>For SSH, remote desktop and other programs, press <span class="ui" data-ui="Open on this computer">Open on this computer</span>. The port appears on <code>127.0.0.1</code>: for example, 22 becomes <code>127.0.0.1:2022</code>; connect your program there.</p>
 
 <p>To give a device a short name such as <code>nas</code>, change <span class="ui" data-ui="This computer&#x27;s name">This computer's name</span> on its node page.</p>
