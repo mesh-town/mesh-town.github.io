@@ -2,7 +2,8 @@
 
 Step: (id, nets, oses, title, tag, blocks). `id` is also the page anchor. `nets` is the set of paths the step belongs to
 ("invite" = I have an invite, "create" = I am starting a new network), `oses` the systems it applies to.
-Blocks are those of install_data.py plus ("os", [systems], [blocks]), ("note", text) and ("fig", figure id).
+Blocks are those of install_data.py plus ("os", [systems], [blocks]), ("note", text), ("wait", question, answer) and
+("fig", figure id).
 Markup in text: `code`, [label](url), [[button name]]: a button or screen name taken word for word from the program
 texts (tools/check_tutorial_terms.py checks every one against them).
 """
@@ -139,12 +140,12 @@ STEPS = [
             ("fig", "join-form"),
             ("p", "The page waits until a member of the network is online and lets you in. Then it shows [[✓ You joined the network]]."),
             ("fig", "joined"),
-            ("note", "Nothing happens after a minute? The person who invited you must have their device turned on."),
+            ("wait", "Nothing happens after a minute?", "The person who invited you must have their device turned on, with Mesh Town running."),
         ]),
         ("os", ["android"], [
             ("p", "Open Mesh Town, tap [[Join with an invite]] and paste the invite, or tap [[Scan QR]] and point the camera at the QR code on the other person's screen."),
             ("fig", "android-join"),
-            ("note", "Nothing happens after a minute? The person who invited you must have their device turned on."),
+            ("wait", "Nothing happens after a minute?", "The person who invited you must have their device turned on, with Mesh Town running."),
         ]),
     ]),
     ("create", ("create",), DESKTOP, "Create your network", "Only when you start a network", [

@@ -9,7 +9,7 @@ import os
 import re
 import sys
 
-ICONS = ("arrow-left", "arrow-right", "check", "circle-check-big", "circle-plus", "laptop", "mail-open", "monitor",
+ICONS = ("arrow-left", "arrow-right", "check", "circle-check-big", "circle-plus", "clock", "laptop", "mail-open", "monitor",
          "pencil", "smartphone")
 STYLE = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'
 HEAD = '<svg xmlns="http://www.w3.org/2000/svg">\n<!-- Lucide icons, ISC license: see LICENSE-lucide.txt -->\n'

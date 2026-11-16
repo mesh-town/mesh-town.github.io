@@ -96,7 +96,13 @@ def note(text):
     return '<p class="meta tut-note">%s</p>' % inline(text)
 
 
-EXT = {"os": os_block, "fig": figure, "fig-os": fig_os, "note": note}
+def wait(question, answer):
+    """A box for what to do when the step seems stuck: a reader skims past a grey note while waiting."""
+    return ('<div class="tut-wait">%s<p><strong>%s</strong> %s</p></div>'
+            % (icon("clock", UP, "tut-wait-icon"), html.escape(question), inline(answer)))
+
+
+EXT = {"os": os_block, "fig": figure, "fig-os": fig_os, "note": note, "wait": wait}
 
 
 def body(b):
