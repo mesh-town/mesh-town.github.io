@@ -16,7 +16,7 @@ INSTALL_GUIDE = "../install/%s/index.html"
 # Figure id -> (alt text naming the screen in words, own interface?). Own interface: <id>-light.webp and <id>-dark.webp;
 # another program's window: <id>.webp. A figure with no file is left out.
 FIGS = {
-    "install-w": ("The Windows warning about an unsigned program after More info, with Run anyway", False),
+    "install-w": ("The Windows warning after More info, with the Run anyway button", False),
     "install-m": ("macOS Privacy & Security with the Open Anyway button", False),
     "install-a": ("Android Install unknown apps with the Allow from this source switch", False),
     "icon-w": ("The Mesh Town tray menu on Windows with the Join or create a network item", False),
@@ -46,38 +46,38 @@ FIGS = {
 PAGE = {
     "title": "Set up Mesh Town step by step",
     "description": "Install Mesh Town, join a network or start your own, choose an exit, connect the browser and open your devices by name: step by step.",
-    "lede": "At the end this device is in your network, its browser opens your devices by name, and sites open through the member you pick.",
-    "other": "On Linux, a router or an iPhone? See the [install guides](../install/index.html).",
+    "lede": "When you finish, this device is in your network. Its browser opens your devices by their names, and websites open through the member you choose.",
+    "other": "Do you use Linux, a router or an iPhone? See the [install guides](../install/index.html).",
     "android_note": "Start a network on a computer first, then join from the phone",
 }
 
 BROWSERS = [
     ("p", "Chrome, Edge, Safari, Brave and most other browsers use this system setting: there is nothing to change in them. Close the browser completely and open it again."),
-    ("p", "Firefox: open Settings, type proxy in the search box, open the proxy settings it finds and make sure Use system proxy settings is selected (it is the default). Opera: turn off its built-in VPN, or sites bypass Mesh Town."),
+    ("p", "Firefox: open Settings and type proxy in the search box. Open the proxy settings that appear and check that Use system proxy settings is selected (it is selected from the start). Opera: turn off its own VPN, or websites will not go through Mesh Town."),
 ]
 CHECK = ("p", "Check it: open [http://meshtown/](http://meshtown/). It says “This browser is connected to Mesh Town” and lists the ports shared with you.")
 
 STEPS = [
     ("install", BOTH, ALL, "Install Mesh Town", "", [
         ("os", ["windows"], [
-            ("p", "Download [meshtown-setup.exe](" + DIST + "windows/meshtown-setup.exe) and run it. Windows asks for administrator permission, because the installer puts the program in Program Files. On the last page, leave Run Mesh Town ticked."),
-            ("warn", "Windows may warn that the program is not signed. Choose More info, then Run anyway."),
+            ("p", "Download [meshtown-setup.exe](" + DIST + "windows/meshtown-setup.exe) and open it. Windows asks for administrator permission, because the program is installed into Program Files. The last page has a Run Mesh Town box with a check mark: leave the check mark, and the program starts at once."),
+            ("warn", "Windows may show a warning that it does not know this program. Click More info, then Run anyway."),
             ("fig", "install-w"),
-            ("p", "Other ways to install, updating, troubleshooting: [Windows install guide →](" + INSTALL_GUIDE % "windows" + ")"),
+            ("p", "Other ways to install, how to update, what to do if something goes wrong: [Windows install guide →](" + INSTALL_GUIDE % "windows" + ")"),
         ]),
         ("os", ["macos"], [
             ("tabs", ("macos", [
                 ("brew", "Homebrew", [
                     ("cmd", "brew install mesh-town/macos/meshtown\nmeshtown"),
-                    ("p", "A Homebrew install is not marked as downloaded from the internet, so macOS does not stop the first launch."),
+                    ("p", "When you install with Homebrew, macOS does not block the first start."),
                 ]),
                 ("app", "App", [
-                    ("p", "Download for [Apple silicon](" + DIST + "macos/MeshTown-macos-arm64.zip) or for [Intel](" + DIST + "macos/MeshTown-macos-x86_64.zip), unzip and move MeshTown.app to Applications."),
-                    ("warn", "macOS stops the first launch of an app that is not notarized. Open System Settings → Privacy & Security and press Open Anyway."),
+                    ("p", "Download the file for [Apple silicon](" + DIST + "macos/MeshTown-macos-arm64.zip) or for [Intel](" + DIST + "macos/MeshTown-macos-x86_64.zip). Open the zip file and move MeshTown.app to Applications."),
+                    ("warn", "The first time, macOS blocks the app because Apple has not checked it. Open System Settings → Privacy & Security and click Open Anyway."),
                     ("fig", "install-m"),
                 ]),
             ])),
-            ("p", "Other ways to install, updating, troubleshooting: [macOS install guide →](" + INSTALL_GUIDE % "macos" + ")"),
+            ("p", "Other ways to install, how to update, what to do if something goes wrong: [macOS install guide →](" + INSTALL_GUIDE % "macos" + ")"),
         ]),
         ("os", ["android"], [
             ("ol", [
@@ -85,73 +85,73 @@ STEPS = [
                 "Open the file from the notification or from Downloads. Android says it is not allowed to install apps from this source: press Settings, turn on Allow from this source, go back and open the file again.",
                 "Start Mesh Town.",
             ]),
-            ("note", "It needs a 64-bit ARM phone with Android 7.0 or newer."),
+            ("note", "It needs Android 7.0 or newer on a 64-bit phone (ARM)."),
             ("fig", "install-a"),
-            ("p", "Other ways to install, updating, troubleshooting: [Android install guide →](" + INSTALL_GUIDE % "android" + ")"),
+            ("p", "Other ways to install, how to update, what to do if something goes wrong: [Android install guide →](" + INSTALL_GUIDE % "android" + ")"),
         ]),
     ]),
-    ("open", BOTH, DESKTOP, "Open the node page and set a password", "", [
-        ("os", ["windows"], [("p", "A Mesh Town icon appears near the clock. Click it and choose [[Join or create a network…]] (later it reads [[Open Mesh Town…]]).")]),
+    ("open", BOTH, DESKTOP, "Open the Mesh Town page and set a password", "", [
+        ("os", ["windows"], [("p", "A Mesh Town icon appears near the clock. Click it and choose [[Join or create a network…]] (later this item is called [[Open Mesh Town…]]).")]),
         ("os", ["macos"], [
-            ("p", "A Mesh Town icon appears in the menu bar. Click it and choose [[Join or create a network…]] (later it reads [[Open Mesh Town…]])."),
-            ("note", "No icon? Check System Settings → Menu Bar."),
+            ("p", "A Mesh Town icon appears in the menu bar. Click it and choose [[Join or create a network…]] (later this item is called [[Open Mesh Town…]])."),
+            ("note", "You do not see the icon? Look in System Settings → Menu Bar."),
         ]),
         ("fig-os", {"windows": "icon-w", "macos": "icon-m"}),
-        ("p", "The page opens in your browser. On [[Set a password]], type a password twice and press [[Continue]]. It protects this settings page only."),
+        ("p", "The Mesh Town page opens in your browser. On [[Set a password]], type a password two times and click [[Continue]]. This password only protects this page, not your network."),
         ("fig", "password"),
     ]),
     ("join", ("invite",), ALL, "Join with an invite", "Only with an invite", [
-        ("p", "Ask a member of the network for an invite. It works once, for 24 hours."),
+        ("p", "Ask a member of the network for an invite. You can use it only once, within 24 hours."),
         ("os", DESKTOP, [
-            ("p", "Press [[Join with an invite]], paste it into [[Invite you received]] and press [[Join]]."),
+            ("p", "Click [[Join with an invite]], paste the invite into [[Invite you received]] and click [[Join]]."),
             ("fig", "join-form"),
-            ("p", "The page waits until a member is online to let you in, then shows [[✓ You joined the network]]."),
+            ("p", "The page waits until a member of the network is online and lets you in. Then it shows [[✓ You joined the network]]."),
             ("fig", "joined"),
-            ("note", "Nothing after a minute? The person who invited you must keep their device on."),
+            ("note", "Nothing happens after a minute? The person who invited you must have their device turned on."),
         ]),
         ("os", ["android"], [
             ("p", "Open Mesh Town, tap [[Join with an invite]] and paste the invite, or tap [[Scan QR]] and point the camera at the QR code on the other person's screen."),
             ("fig", "android-join"),
-            ("note", "Nothing after a minute? The person who invited you must keep their device on."),
+            ("note", "Nothing happens after a minute? The person who invited you must have their device turned on."),
         ]),
     ]),
     ("create", ("create",), DESKTOP, "Create your network", "Only when you start a network", [
-        ("p", "Press [[Create a new network]], type a name members will see in the invite, for example `family`, and press [[Create network]]. You are its admin."),
+        ("p", "Click [[Create a new network]] and type a name for it, for example `family`. People you invite will see this name. Click [[Create network]]. Now you are the admin: the person who manages this network."),
         ("fig", "create-form"),
     ]),
     ("invite", ("create",), DESKTOP, "Invite a device or a person", "Only when you start a network", [
-        ("p", "Press [[Invite a member]], optionally type who it is for, and confirm. A window shows the invite as text; [[Send as QR code]] shows it as a QR code."),
+        ("p", "Click [[Invite a member]]. You can type who the invite is for, but you do not have to. Confirm. A window shows the invite as text; [[Send as QR code]] shows it as a QR code."),
         ("fig", "invite-start"),
         ("fig", "invite-ready"),
-        ("p", "Send it to one person in a private message: it works once, for 24 hours. Keep this computer on until they join."),
-        ("p", "On the other device, open [this page](index.html?net=invite) and follow it with I have an invite."),
-        ("p", "Once someone joins, make a second member an admin: [[Networks]] → [[Members]] → ⋯ → [[Make admin]]."),
+        ("p", "Send it to one person in a private message. It can be used only once, within 24 hours. Keep this computer turned on until the person joins."),
+        ("p", "On the other device, open [this page](index.html?net=invite) and choose I have an invite."),
+        ("p", "When someone has joined, you can make them a second admin: [[Networks]] → [[Members]] → ⋯ → [[Make admin]]."),
     ]),
     ("exit", BOTH, ALL, "Choose an exit", "", [
-        ("p", "An exit is a member whose internet connection your sites go through: sites see that member's address, not yours."),
+        ("p", "An exit is a member of your network. Websites you open go through that member's internet connection, so the websites see that member's address, not yours."),
         ("os", DESKTOP, [
-            ("p", "On [[Choose an exit]], pick a member, or [[Directly, without an exit]] to keep your own connection. Below it, in [[This computer's name]], type a name others will see, for example `laptop`. Press [[Next]]."),
+            ("p", "On [[Choose an exit]], choose a member. Or choose [[Directly, without an exit]] to use your own internet connection. Below, in [[This computer's name]], type a name that other members will see, for example `laptop`. Click [[Next]]."),
             ("fig", "exit-choose"),
-            ("p", "Change it any time: tray icon → [[Exit via…]], or the Home tab of the node page."),
+            ("p", "You can change the exit at any time: click the Mesh Town icon → [[Exit via…]], or open the Home tab of the Mesh Town page."),
             ("fig", "exit-tray"),
             ("fig", "exit-status"),
-            ("note", "The list is empty? No member offers an exit yet: computers and routers do by default, phones do not. Until another computer or router joins, sites open directly."),
+            ("note", "The list is empty? Then no member can be an exit yet. Computers and routers can be exits from the start, phones cannot. Until another computer or router joins, websites open directly."),
         ]),
         ("os", ["android"], [
-            ("p", "The app suggests an exit; change it if you want another member."),
+            ("p", "The app chooses an exit for you. You can choose another member if you want."),
             ("fig", "android-exit"),
         ]),
-        ("p", "An exit sees which hosts you connect to, so pick members you trust. If the member goes offline, sites stop opening until you choose another."),
+        ("p", "The exit can see the names of the websites you visit, so choose a member you trust. If that member goes offline, websites stop opening until you choose another exit."),
     ]),
     ("connect", ("invite",), ("android",), "Connect", "", [
-        ("p", "Tap [[Connect]] at the bottom of the screen. Allow notifications when asked, so you see when the connection drops. Then Android asks to set up a VPN connection: press OK."),
+        ("p", "Tap [[Connect]] at the bottom of the screen. Allow notifications when asked, so you know when the connection is lost. Then Android asks to set up a VPN connection: press OK."),
         ("fig", "android-vpn"),
-        ("p", "Once connected, Android may ask to let the app always run in the background: allow it, so the connection is not stopped. The status line reads [[Connected via]] and the name of your exit."),
+        ("p", "Once connected, Android may ask to let the app always run in the background: allow it, so the connection is not stopped. Then you see [[Connected via]] and the name of your exit at the bottom of the screen."),
         ("fig", "android-connected"),
     ]),
     ("browser", BOTH, DESKTOP, "Connect the browser", "", [
         ("p", "The page asks [[Where should Mesh Town open sites?]] Choose [[All apps on this computer (recommended)]]."),
-        ("p", "Press [[Copy]] next to the setup address (PAC), `http://127.0.0.1:1080/proxy.pac`."),
+        ("p", "Click [[Copy]] next to the setup address `http://127.0.0.1:1080/proxy.pac`."),
         ("fig", "browser-scope"),
         ("os", ["windows"], [
             ("ol", [
@@ -166,43 +166,43 @@ STEPS = [
                 "Open [[System Settings]] → [[Network]] and choose your connection.",
                 "Click [[Details…]] and open [[Proxies]].",
                 "Turn on [[Automatic Proxy Configuration]] and paste the address into the [[URL]] field.",
-                "Click [[OK]]. Repeat for Ethernet if you use both Wi-Fi and Ethernet.",
+                "Click [[OK]]. If you use both Wi-Fi and a cable (Ethernet), do the same for Ethernet.",
             ]),
             ("fig", "browser-m"),
         ]),
         BROWSERS[0],
         BROWSERS[1],
         ("fig", "browser-firefox"),
-        ("p", "Then pick what happens [[When Mesh Town is off]]: [[Open sites directly]] or [[Keep sites closed]]."),
+        ("p", "Then choose what happens [[When Mesh Town is off]]: [[Open sites directly]] or [[Keep sites closed]]."),
         CHECK,
     ]),
     ("devices", BOTH, ALL, "Open your devices", "", [
         ("os", DESKTOP, [
-            ("p", "A device is reachable when a program on it is shared. On the device that runs the program, open the node page → [[Networks]] → your network → [[Shared services (ports)]] → [[My published ports]]: enter the port, choose [[All members]] or [[Selected members]] and press [[Publish port]]."),
+            ("p", "Other devices can open a program on a device only after you share it. On the device where the program runs, open the Mesh Town page → [[Networks]] → your network → [[Shared services (ports)]] → [[My published ports]]: enter the port number of the program (for example 8080), choose [[All members]] or [[Selected members]] and click [[Publish port]]."),
             ("fig", "ports-mine"),
-            ("p", "On this computer the same tab lists [[Ports shared with you]]. For a web panel, click its address, such as `http://nas.meshtown`: type http://, not https://."),
+            ("p", "On your computer, the same tab shows [[Ports shared with you]]. For a device with a web page, click its address, for example `http://nas.meshtown`. When you type an address yourself, start it with http://, not https://."),
             ("fig", "ports-shared"),
-            ("p", "For SSH, remote desktop and other programs, press [[Open on this computer]]. The port appears on `127.0.0.1`: for example, 22 becomes `127.0.0.1:2022`; connect your program there."),
+            ("p", "For SSH, remote desktop and other programs, click [[Open on this computer]]. The program then works on your computer at `127.0.0.1`: for example, port 22 becomes `127.0.0.1:2022`. Connect your program to that address."),
             ("fig", "devices-scheme"),
-            ("p", "To give a device a short name such as `nas`, change [[This computer's name]] on its node page."),
-            ("note", "Names work only in a browser set up in the previous step, and only over http://. Only programs running on the device itself can be shared, not other machines on its local network."),
+            ("p", "To give a device a short name such as `nas`, change [[This computer's name]] on its Mesh Town page."),
+            ("note", "Names like `nas.meshtown` work only in a browser that you set up in the step before, and only with http://. You can share only programs that run on the device itself, not other devices in its home network."),
         ]),
         ("os", ["android"], [
-            ("p", "With Mesh Town connected, type the address in any browser on the phone, for example `http://nas.meshtown`. There is nothing to set up in the browser: the app carries all of the phone's traffic."),
+            ("p", "When Mesh Town is connected, type the address in any browser on the phone, for example `http://nas.meshtown`. You do not need to set up the browser: all of the phone's internet traffic goes through the app."),
             ("p", "To see which ports are shared with you, open [http://meshtown/](http://meshtown/) in the phone's browser."),
         ]),
     ]),
 ]
 
 END = {
-    "title": "You are set",
+    "title": "You are ready",
     "lines": [
-        "Open your node page: [http://127.0.0.1:7777/](http://127.0.0.1:7777/). If it opens, Mesh Town is running.",
+        "Open the Mesh Town page: [http://127.0.0.1:7777/](http://127.0.0.1:7777/). If it opens, Mesh Town is running.",
         "Open [http://meshtown/](http://meshtown/): it says “This browser is connected to Mesh Town”.",
     ],
     "links": [
         ("Add another device", "index.html?net=invite"),
         ("Invite someone", "index.html?net=create#invite"),
-        ("Update, remove, troubleshooting", "../install/index.html"),
+        ("Update, remove, fix problems", "../install/index.html"),
     ],
 }

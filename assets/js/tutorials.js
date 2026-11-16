@@ -146,6 +146,14 @@
     if (scroll) { scrollTo(stepById(id)); }
   }
 
+  // A step opened from its own heading keeps that heading where it was on screen: the step that closes above it
+  // would otherwise pull it up and out of view, and the step would seem to open upwards.
+  function openInPlace(step, heading) {
+    var before = heading.getBoundingClientRect().top;
+    openStep(step.id, false);
+    window.scrollBy({ top: heading.getBoundingClientRect().top - before, behavior: "instant" });
+  }
+
   function markDone(step) {
     if (!isDone(step)) { state.done.push(step.id); }
     var list = shown();
@@ -181,7 +189,7 @@
     btn.setAttribute("aria-expanded", "true");
     while (h.firstChild) { btn.appendChild(h.firstChild); }
     h.appendChild(btn);
-    btn.addEventListener("click", function () { openStep(step.id, false); });
+    btn.addEventListener("click", function () { openInPlace(step, btn); });
     return title;
   }
 

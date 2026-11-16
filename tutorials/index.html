@@ -43,8 +43,8 @@
 </nav>
 <div class="page-head">
 <h1>Set up Mesh Town step by step</h1>
-<p class="lede">At the end this device is in your network, its browser opens your devices by name, and sites open through the member you pick.</p>
-<p class="meta">On Linux, a router or an iPhone? See the <a href="../install/index.html">install guides</a>.</p>
+<p class="lede">When you finish, this device is in your network. Its browser opens your devices by their names, and websites open through the member you choose.</p>
+<p class="meta">Do you use Linux, a router or an iPhone? See the <a href="../install/index.html">install guides</a>.</p>
 </div>
 <div data-tut>
 <div class="tut-controls" data-tut-controls hidden>
@@ -74,10 +74,10 @@
 <div class="tut-body">
 <div class="tut-os" data-os-only="windows">
 <h3 class="tut-os-title">Windows</h3>
-<p>Download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown-setup.exe">meshtown-setup.exe</a> and run it. Windows asks for administrator permission, because the installer puts the program in Program Files. On the last page, leave Run Mesh Town ticked.</p>
-<p class="note-warn"><strong>Note.</strong> Windows may warn that the program is not signed. Choose More info, then Run anyway.</p>
-<figure class="tut-fig" data-fig="install-w"><picture><img src="../assets/tutorials/install-w.webp" alt="The Windows warning about an unsigned program after More info, with Run anyway" width="534" height="500" loading="lazy"></picture></figure>
-<p>Other ways to install, updating, troubleshooting: <a href="../install/windows/index.html">Windows install guide →</a></p>
+<p>Download <a href="https://github.com/mesh-town/meshtown-dist/raw/main/windows/meshtown-setup.exe">meshtown-setup.exe</a> and open it. Windows asks for administrator permission, because the program is installed into Program Files. The last page has a Run Mesh Town box with a check mark: leave the check mark, and the program starts at once.</p>
+<p class="note-warn"><strong>Note.</strong> Windows may show a warning that it does not know this program. Click More info, then Run anyway.</p>
+<figure class="tut-fig" data-fig="install-w"><picture><img src="../assets/tutorials/install-w.webp" alt="The Windows warning after More info, with the Run anyway button" width="534" height="500" loading="lazy"></picture></figure>
+<p>Other ways to install, how to update, what to do if something goes wrong: <a href="../install/windows/index.html">Windows install guide →</a></p>
 </div>
 <div class="tut-os" data-os-only="macos">
 <h3 class="tut-os-title">macOS</h3>
@@ -90,16 +90,16 @@
 <h3>Homebrew</h3>
 <pre class="cmd"><code>brew install mesh-town/macos/meshtown
 meshtown</code></pre>
-<p>A Homebrew install is not marked as downloaded from the internet, so macOS does not stop the first launch.</p>
+<p>When you install with Homebrew, macOS does not block the first start.</p>
 </div>
 <div class="var-panel" data-var-panel="app">
 <h3>App</h3>
-<p>Download for <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-arm64.zip">Apple silicon</a> or for <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-x86_64.zip">Intel</a>, unzip and move MeshTown.app to Applications.</p>
-<p class="note-warn"><strong>Note.</strong> macOS stops the first launch of an app that is not notarized. Open System Settings → Privacy &amp; Security and press Open Anyway.</p>
+<p>Download the file for <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-arm64.zip">Apple silicon</a> or for <a href="https://github.com/mesh-town/meshtown-dist/raw/main/macos/MeshTown-macos-x86_64.zip">Intel</a>. Open the zip file and move MeshTown.app to Applications.</p>
+<p class="note-warn"><strong>Note.</strong> The first time, macOS blocks the app because Apple has not checked it. Open System Settings → Privacy &amp; Security and click Open Anyway.</p>
 <figure class="tut-fig" data-fig="install-m"><picture><img src="../assets/tutorials/install-m.webp" alt="macOS Privacy &amp; Security with the Open Anyway button" width="1300" height="1137" loading="lazy"></picture></figure>
 </div>
 </div>
-<p>Other ways to install, updating, troubleshooting: <a href="../install/macos/index.html">macOS install guide →</a></p>
+<p>Other ways to install, how to update, what to do if something goes wrong: <a href="../install/macos/index.html">macOS install guide →</a></p>
 </div>
 <div class="tut-os" data-os-only="android">
 <h3 class="tut-os-title">Android</h3>
@@ -108,27 +108,27 @@ meshtown</code></pre>
 <li>Open the file from the notification or from Downloads. Android says it is not allowed to install apps from this source: press Settings, turn on Allow from this source, go back and open the file again.</li>
 <li>Start Mesh Town.</li>
 </ol>
-<p class="meta tut-note">It needs a 64-bit ARM phone with Android 7.0 or newer.</p>
+<p class="meta tut-note">It needs Android 7.0 or newer on a 64-bit phone (ARM).</p>
 <figure class="tut-fig" data-fig="install-a"><picture><img src="../assets/tutorials/install-a.webp" alt="Android Install unknown apps with the Allow from this source switch" width="540" height="1132" loading="lazy"></picture></figure>
-<p>Other ways to install, updating, troubleshooting: <a href="../install/android/index.html">Android install guide →</a></p>
+<p>Other ways to install, how to update, what to do if something goes wrong: <a href="../install/android/index.html">Android install guide →</a></p>
 </div>
 </div>
 </li>
 <li class="tut-step" id="open" data-tut-step data-nets="invite create" data-oses="windows macos">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Open the node page and set a password</span></h2>
+<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Open the Mesh Town page and set a password</span></h2>
 <div class="tut-body">
 <div class="tut-os" data-os-only="windows">
 <h3 class="tut-os-title">Windows</h3>
-<p>A Mesh Town icon appears near the clock. Click it and choose <span class="ui" data-ui="Join or create a network…">Join or create a network…</span> (later it reads <span class="ui" data-ui="Open Mesh Town…">Open Mesh Town…</span>).</p>
+<p>A Mesh Town icon appears near the clock. Click it and choose <span class="ui" data-ui="Join or create a network…">Join or create a network…</span> (later this item is called <span class="ui" data-ui="Open Mesh Town…">Open Mesh Town…</span>).</p>
 </div>
 <div class="tut-os" data-os-only="macos">
 <h3 class="tut-os-title">macOS</h3>
-<p>A Mesh Town icon appears in the menu bar. Click it and choose <span class="ui" data-ui="Join or create a network…">Join or create a network…</span> (later it reads <span class="ui" data-ui="Open Mesh Town…">Open Mesh Town…</span>).</p>
-<p class="meta tut-note">No icon? Check System Settings → Menu Bar.</p>
+<p>A Mesh Town icon appears in the menu bar. Click it and choose <span class="ui" data-ui="Join or create a network…">Join or create a network…</span> (later this item is called <span class="ui" data-ui="Open Mesh Town…">Open Mesh Town…</span>).</p>
+<p class="meta tut-note">You do not see the icon? Look in System Settings → Menu Bar.</p>
 </div>
 <div class="tut-os" data-os-only="windows"><figure class="tut-fig" data-fig="icon-w"><picture><img src="../assets/tutorials/icon-w.webp" alt="The Mesh Town tray menu on Windows with the Join or create a network item" width="451" height="218" loading="lazy"></picture></figure></div>
 <div class="tut-os" data-os-only="macos"><figure class="tut-fig" data-fig="icon-m"><picture><img src="../assets/tutorials/icon-m.webp" alt="The Mesh Town menu bar menu on macOS with the Join or create a network item" width="944" height="462" loading="lazy"></picture></figure></div>
-<p>The page opens in your browser. On <span class="ui" data-ui="Set a password">Set a password</span>, type a password twice and press <span class="ui" data-ui="Continue">Continue</span>. It protects this settings page only.</p>
+<p>The Mesh Town page opens in your browser. On <span class="ui" data-ui="Set a password">Set a password</span>, type a password two times and click <span class="ui" data-ui="Continue">Continue</span>. This password only protects this page, not your network.</p>
 <figure class="tut-fig" data-fig="password"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/password-dark.webp"><img src="../assets/tutorials/password-light.webp" alt="The Set a password screen with two fields and the Continue button" width="840" height="786" loading="lazy"></picture></figure>
 </div>
 </li>
@@ -136,20 +136,20 @@ meshtown</code></pre>
 <h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Join with an invite</span></h2>
 <p class="meta tut-tag">Only with an invite</p>
 <div class="tut-body">
-<p>Ask a member of the network for an invite. It works once, for 24 hours.</p>
+<p>Ask a member of the network for an invite. You can use it only once, within 24 hours.</p>
 <div class="tut-os" data-os-only="windows macos">
 <h3 class="tut-os-title">Windows and macOS</h3>
-<p>Press <span class="ui" data-ui="Join with an invite">Join with an invite</span>, paste it into <span class="ui" data-ui="Invite you received">Invite you received</span> and press <span class="ui" data-ui="Join">Join</span>.</p>
+<p>Click <span class="ui" data-ui="Join with an invite">Join with an invite</span>, paste the invite into <span class="ui" data-ui="Invite you received">Invite you received</span> and click <span class="ui" data-ui="Join">Join</span>.</p>
 <figure class="tut-fig" data-fig="join-form"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/join-form-dark.webp"><img src="../assets/tutorials/join-form-light.webp" alt="The Join with an invite form with an invite pasted and the Join button" width="1752" height="750" loading="lazy"></picture></figure>
-<p>The page waits until a member is online to let you in, then shows <span class="ui" data-ui="✓ You joined the network">✓ You joined the network</span>.</p>
+<p>The page waits until a member of the network is online and lets you in. Then it shows <span class="ui" data-ui="✓ You joined the network">✓ You joined the network</span>.</p>
 <figure class="tut-fig" data-fig="joined"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/joined-dark.webp"><img src="../assets/tutorials/joined-light.webp" alt="The page showing You joined the network" width="1752" height="1024" loading="lazy"></picture></figure>
-<p class="meta tut-note">Nothing after a minute? The person who invited you must keep their device on.</p>
+<p class="meta tut-note">Nothing happens after a minute? The person who invited you must have their device turned on.</p>
 </div>
 <div class="tut-os" data-os-only="android">
 <h3 class="tut-os-title">Android</h3>
 <p>Open Mesh Town, tap <span class="ui" data-ui="Join with an invite">Join with an invite</span> and paste the invite, or tap <span class="ui" data-ui="Scan QR">Scan QR</span> and point the camera at the QR code on the other person's screen.</p>
 <figure class="tut-fig" data-fig="android-join"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/android-join-dark.webp"><img src="../assets/tutorials/android-join-light.webp" alt="The phone join form with the Scan QR button" width="732" height="942" loading="lazy"></picture></figure>
-<p class="meta tut-note">Nothing after a minute? The person who invited you must keep their device on.</p>
+<p class="meta tut-note">Nothing happens after a minute? The person who invited you must have their device turned on.</p>
 </div>
 </div>
 </li>
@@ -157,7 +157,7 @@ meshtown</code></pre>
 <h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Create your network</span></h2>
 <p class="meta tut-tag">Only when you start a network</p>
 <div class="tut-body">
-<p>Press <span class="ui" data-ui="Create a new network">Create a new network</span>, type a name members will see in the invite, for example <code>family</code>, and press <span class="ui" data-ui="Create network">Create network</span>. You are its admin.</p>
+<p>Click <span class="ui" data-ui="Create a new network">Create a new network</span> and type a name for it, for example <code>family</code>. People you invite will see this name. Click <span class="ui" data-ui="Create network">Create network</span>. Now you are the admin: the person who manages this network.</p>
 <figure class="tut-fig" data-fig="create-form"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/create-form-dark.webp"><img src="../assets/tutorials/create-form-light.webp" alt="The Create a new network form with the name family" width="1752" height="698" loading="lazy"></picture></figure>
 </div>
 </li>
@@ -165,41 +165,41 @@ meshtown</code></pre>
 <h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Invite a device or a person</span></h2>
 <p class="meta tut-tag">Only when you start a network</p>
 <div class="tut-body">
-<p>Press <span class="ui" data-ui="Invite a member">Invite a member</span>, optionally type who it is for, and confirm. A window shows the invite as text; <span class="ui" data-ui="Send as QR code">Send as QR code</span> shows it as a QR code.</p>
+<p>Click <span class="ui" data-ui="Invite a member">Invite a member</span>. You can type who the invite is for, but you do not have to. Confirm. A window shows the invite as text; <span class="ui" data-ui="Send as QR code">Send as QR code</span> shows it as a QR code.</p>
 <figure class="tut-fig" data-fig="invite-start"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/invite-start-dark.webp"><img src="../assets/tutorials/invite-start-light.webp" alt="The Invite a member button and the optional For whom field" width="568" height="396" loading="lazy"></picture></figure>
 <figure class="tut-fig" data-fig="invite-ready"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/invite-ready-dark.webp"><img src="../assets/tutorials/invite-ready-light.webp" alt="The ready invite with Send as text, Send as QR code and the invite itself" width="878" height="926" loading="lazy"></picture></figure>
-<p>Send it to one person in a private message: it works once, for 24 hours. Keep this computer on until they join.</p>
-<p>On the other device, open <a href="index.html?net=invite">this page</a> and follow it with I have an invite.</p>
-<p>Once someone joins, make a second member an admin: <span class="ui" data-ui="Networks">Networks</span> → <span class="ui" data-ui="Members">Members</span> → ⋯ → <span class="ui" data-ui="Make admin">Make admin</span>.</p>
+<p>Send it to one person in a private message. It can be used only once, within 24 hours. Keep this computer turned on until the person joins.</p>
+<p>On the other device, open <a href="index.html?net=invite">this page</a> and choose I have an invite.</p>
+<p>When someone has joined, you can make them a second admin: <span class="ui" data-ui="Networks">Networks</span> → <span class="ui" data-ui="Members">Members</span> → ⋯ → <span class="ui" data-ui="Make admin">Make admin</span>.</p>
 </div>
 </li>
 <li class="tut-step" id="exit" data-tut-step data-nets="invite create" data-oses="windows macos android">
 <h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Choose an exit</span></h2>
 <div class="tut-body">
-<p>An exit is a member whose internet connection your sites go through: sites see that member's address, not yours.</p>
+<p>An exit is a member of your network. Websites you open go through that member's internet connection, so the websites see that member's address, not yours.</p>
 <div class="tut-os" data-os-only="windows macos">
 <h3 class="tut-os-title">Windows and macOS</h3>
-<p>On <span class="ui" data-ui="Choose an exit">Choose an exit</span>, pick a member, or <span class="ui" data-ui="Directly, without an exit">Directly, without an exit</span> to keep your own connection. Below it, in <span class="ui" data-ui="This computer&#x27;s name">This computer's name</span>, type a name others will see, for example <code>laptop</code>. Press <span class="ui" data-ui="Next">Next</span>.</p>
+<p>On <span class="ui" data-ui="Choose an exit">Choose an exit</span>, choose a member. Or choose <span class="ui" data-ui="Directly, without an exit">Directly, without an exit</span> to use your own internet connection. Below, in <span class="ui" data-ui="This computer&#x27;s name">This computer's name</span>, type a name that other members will see, for example <code>laptop</code>. Click <span class="ui" data-ui="Next">Next</span>.</p>
 <figure class="tut-fig" data-fig="exit-choose"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/exit-choose-dark.webp"><img src="../assets/tutorials/exit-choose-light.webp" alt="The Choose an exit screen listing office-pc, nas and Directly, without an exit, and this computer&#x27;s name laptop" width="1752" height="1200" loading="lazy"></picture></figure>
-<p>Change it any time: tray icon → <span class="ui" data-ui="Exit via…">Exit via…</span>, or the Home tab of the node page.</p>
+<p>You can change the exit at any time: click the Mesh Town icon → <span class="ui" data-ui="Exit via…">Exit via…</span>, or open the Home tab of the Mesh Town page.</p>
 <figure class="tut-fig" data-fig="exit-tray"><picture><img src="../assets/tutorials/exit-tray.webp" alt="The Exit via menu in the macOS menu bar" width="1314" height="506" loading="lazy"></picture></figure>
 <figure class="tut-fig" data-fig="exit-status"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/exit-status-dark.webp"><img src="../assets/tutorials/exit-status-light.webp" alt="The Home tab panel showing how sites open right now" width="1752" height="286" loading="lazy"></picture></figure>
-<p class="meta tut-note">The list is empty? No member offers an exit yet: computers and routers do by default, phones do not. Until another computer or router joins, sites open directly.</p>
+<p class="meta tut-note">The list is empty? Then no member can be an exit yet. Computers and routers can be exits from the start, phones cannot. Until another computer or router joins, websites open directly.</p>
 </div>
 <div class="tut-os" data-os-only="android">
 <h3 class="tut-os-title">Android</h3>
-<p>The app suggests an exit; change it if you want another member.</p>
+<p>The app chooses an exit for you. You can choose another member if you want.</p>
 <figure class="tut-fig" data-fig="android-exit"><picture><img src="../assets/tutorials/android-exit.webp" alt="The phone exit screen and the Connect button" width="540" height="1132" loading="lazy"></picture></figure>
 </div>
-<p>An exit sees which hosts you connect to, so pick members you trust. If the member goes offline, sites stop opening until you choose another.</p>
+<p>The exit can see the names of the websites you visit, so choose a member you trust. If that member goes offline, websites stop opening until you choose another exit.</p>
 </div>
 </li>
 <li class="tut-step" id="connect" data-tut-step data-nets="invite" data-oses="android">
 <h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Connect</span></h2>
 <div class="tut-body">
-<p>Tap <span class="ui" data-ui="Connect">Connect</span> at the bottom of the screen. Allow notifications when asked, so you see when the connection drops. Then Android asks to set up a VPN connection: press OK.</p>
+<p>Tap <span class="ui" data-ui="Connect">Connect</span> at the bottom of the screen. Allow notifications when asked, so you know when the connection is lost. Then Android asks to set up a VPN connection: press OK.</p>
 <figure class="tut-fig" data-fig="android-vpn"><picture><img src="../assets/tutorials/android-vpn.webp" alt="The Android Connection request window with the OK button" width="540" height="1132" loading="lazy"></picture></figure>
-<p>Once connected, Android may ask to let the app always run in the background: allow it, so the connection is not stopped. The status line reads <span class="ui" data-ui="Connected via">Connected via</span> and the name of your exit.</p>
+<p>Once connected, Android may ask to let the app always run in the background: allow it, so the connection is not stopped. Then you see <span class="ui" data-ui="Connected via">Connected via</span> and the name of your exit at the bottom of the screen.</p>
 <figure class="tut-fig" data-fig="android-connected"><picture><img src="../assets/tutorials/android-connected.webp" alt="The phone status line reading Connected via office-pc" width="540" height="1132" loading="lazy"></picture></figure>
 </div>
 </li>
@@ -207,7 +207,7 @@ meshtown</code></pre>
 <h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Connect the browser</span></h2>
 <div class="tut-body">
 <p>The page asks <span class="ui" data-ui="Where should Mesh Town open sites?">Where should Mesh Town open sites?</span> Choose <span class="ui" data-ui="All apps on this computer (recommended)">All apps on this computer (recommended)</span>.</p>
-<p>Press <span class="ui" data-ui="Copy">Copy</span> next to the setup address (PAC), <code>http://127.0.0.1:1080/proxy.pac</code>.</p>
+<p>Click <span class="ui" data-ui="Copy">Copy</span> next to the setup address <code>http://127.0.0.1:1080/proxy.pac</code>.</p>
 <figure class="tut-fig" data-fig="browser-scope"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/browser-scope-dark.webp"><img src="../assets/tutorials/browser-scope-light.webp" alt="The question Where should Mesh Town open sites with the setup address" width="1752" height="518" loading="lazy"></picture></figure>
 <div class="tut-os" data-os-only="windows">
 <h3 class="tut-os-title">Windows</h3>
@@ -224,14 +224,14 @@ meshtown</code></pre>
 <li>Open <span class="ui" data-ui="System Settings">System Settings</span> → <span class="ui" data-ui="Network">Network</span> and choose your connection.</li>
 <li>Click <span class="ui" data-ui="Details…">Details…</span> and open <span class="ui" data-ui="Proxies">Proxies</span>.</li>
 <li>Turn on <span class="ui" data-ui="Automatic Proxy Configuration">Automatic Proxy Configuration</span> and paste the address into the <span class="ui" data-ui="URL">URL</span> field.</li>
-<li>Click <span class="ui" data-ui="OK">OK</span>. Repeat for Ethernet if you use both Wi-Fi and Ethernet.</li>
+<li>Click <span class="ui" data-ui="OK">OK</span>. If you use both Wi-Fi and a cable (Ethernet), do the same for Ethernet.</li>
 </ol>
 <figure class="tut-fig" data-fig="browser-m"><picture><img src="../assets/tutorials/browser-m.webp" alt="macOS Proxies with Automatic Proxy Configuration" width="1300" height="1137" loading="lazy"></picture></figure>
 </div>
 <p>Chrome, Edge, Safari, Brave and most other browsers use this system setting: there is nothing to change in them. Close the browser completely and open it again.</p>
-<p>Firefox: open Settings, type proxy in the search box, open the proxy settings it finds and make sure Use system proxy settings is selected (it is the default). Opera: turn off its built-in VPN, or sites bypass Mesh Town.</p>
+<p>Firefox: open Settings and type proxy in the search box. Open the proxy settings that appear and check that Use system proxy settings is selected (it is selected from the start). Opera: turn off its own VPN, or websites will not go through Mesh Town.</p>
 <figure class="tut-fig" data-fig="browser-firefox"><picture><img src="../assets/tutorials/browser-firefox.webp" alt="Firefox Connection Settings" width="755" height="596" loading="lazy"></picture></figure>
-<p>Then pick what happens <span class="ui" data-ui="When Mesh Town is off">When Mesh Town is off</span>: <span class="ui" data-ui="Open sites directly">Open sites directly</span> or <span class="ui" data-ui="Keep sites closed">Keep sites closed</span>.</p>
+<p>Then choose what happens <span class="ui" data-ui="When Mesh Town is off">When Mesh Town is off</span>: <span class="ui" data-ui="Open sites directly">Open sites directly</span> or <span class="ui" data-ui="Keep sites closed">Keep sites closed</span>.</p>
 <p>Check it: open <a href="http://meshtown/">http://meshtown/</a>. It says “This browser is connected to Mesh Town” and lists the ports shared with you.</p>
 </div>
 </li>
@@ -240,30 +240,30 @@ meshtown</code></pre>
 <div class="tut-body">
 <div class="tut-os" data-os-only="windows macos">
 <h3 class="tut-os-title">Windows and macOS</h3>
-<p>A device is reachable when a program on it is shared. On the device that runs the program, open the node page → <span class="ui" data-ui="Networks">Networks</span> → your network → <span class="ui" data-ui="Shared services (ports)">Shared services (ports)</span> → <span class="ui" data-ui="My published ports">My published ports</span>: enter the port, choose <span class="ui" data-ui="All members">All members</span> or <span class="ui" data-ui="Selected members">Selected members</span> and press <span class="ui" data-ui="Publish port">Publish port</span>.</p>
+<p>Other devices can open a program on a device only after you share it. On the device where the program runs, open the Mesh Town page → <span class="ui" data-ui="Networks">Networks</span> → your network → <span class="ui" data-ui="Shared services (ports)">Shared services (ports)</span> → <span class="ui" data-ui="My published ports">My published ports</span>: enter the port number of the program (for example 8080), choose <span class="ui" data-ui="All members">All members</span> or <span class="ui" data-ui="Selected members">Selected members</span> and click <span class="ui" data-ui="Publish port">Publish port</span>.</p>
 <figure class="tut-fig" data-fig="ports-mine"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/ports-mine-dark.webp"><img src="../assets/tutorials/ports-mine-light.webp" alt="My published ports with the port form and the Publish port button" width="1752" height="674" loading="lazy"></picture></figure>
-<p>On this computer the same tab lists <span class="ui" data-ui="Ports shared with you">Ports shared with you</span>. For a web panel, click its address, such as <code>http://nas.meshtown</code>: type http://, not https://.</p>
+<p>On your computer, the same tab shows <span class="ui" data-ui="Ports shared with you">Ports shared with you</span>. For a device with a web page, click its address, for example <code>http://nas.meshtown</code>. When you type an address yourself, start it with http://, not https://.</p>
 <figure class="tut-fig" data-fig="ports-shared"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/ports-shared-dark.webp"><img src="../assets/tutorials/ports-shared-light.webp" alt="Ports shared with you with an address and Open on this computer" width="1752" height="686" loading="lazy"></picture></figure>
-<p>For SSH, remote desktop and other programs, press <span class="ui" data-ui="Open on this computer">Open on this computer</span>. The port appears on <code>127.0.0.1</code>: for example, 22 becomes <code>127.0.0.1:2022</code>; connect your program there.</p>
+<p>For SSH, remote desktop and other programs, click <span class="ui" data-ui="Open on this computer">Open on this computer</span>. The program then works on your computer at <code>127.0.0.1</code>: for example, port 22 becomes <code>127.0.0.1:2022</code>. Connect your program to that address.</p>
 <figure class="tut-fig" data-fig="devices-scheme"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/devices-scheme-dark.webp"><img src="../assets/tutorials/devices-scheme-light.webp" alt="The address http://nas.meshtown in a browser and 127.0.0.1:2022 for SSH" width="1760" height="800" loading="lazy"></picture></figure>
-<p>To give a device a short name such as <code>nas</code>, change <span class="ui" data-ui="This computer&#x27;s name">This computer's name</span> on its node page.</p>
-<p class="meta tut-note">Names work only in a browser set up in the previous step, and only over http://. Only programs running on the device itself can be shared, not other machines on its local network.</p>
+<p>To give a device a short name such as <code>nas</code>, change <span class="ui" data-ui="This computer&#x27;s name">This computer's name</span> on its Mesh Town page.</p>
+<p class="meta tut-note">Names like <code>nas.meshtown</code> work only in a browser that you set up in the step before, and only with http://. You can share only programs that run on the device itself, not other devices in its home network.</p>
 </div>
 <div class="tut-os" data-os-only="android">
 <h3 class="tut-os-title">Android</h3>
-<p>With Mesh Town connected, type the address in any browser on the phone, for example <code>http://nas.meshtown</code>. There is nothing to set up in the browser: the app carries all of the phone's traffic.</p>
+<p>When Mesh Town is connected, type the address in any browser on the phone, for example <code>http://nas.meshtown</code>. You do not need to set up the browser: all of the phone's internet traffic goes through the app.</p>
 <p>To see which ports are shared with you, open <a href="http://meshtown/">http://meshtown/</a> in the phone's browser.</p>
 </div>
 </div>
 </li>
 </ol>
 <section class="tut-end" id="done" data-tut-end>
-<h2>You are set</h2>
+<h2>You are ready</h2>
 <ul>
-<li>Open your node page: <a href="http://127.0.0.1:7777/">http://127.0.0.1:7777/</a>. If it opens, Mesh Town is running.</li>
+<li>Open the Mesh Town page: <a href="http://127.0.0.1:7777/">http://127.0.0.1:7777/</a>. If it opens, Mesh Town is running.</li>
 <li>Open <a href="http://meshtown/">http://meshtown/</a>: it says “This browser is connected to Mesh Town”.</li>
 </ul>
-<p class="links-line"><a href="index.html?net=invite">Add another device →</a> <a href="index.html?net=create#invite">Invite someone →</a> <a href="../install/index.html">Update, remove, troubleshooting →</a></p>
+<p class="links-line"><a href="index.html?net=invite">Add another device →</a> <a href="index.html?net=create#invite">Invite someone →</a> <a href="../install/index.html">Update, remove, fix problems →</a></p>
 </section>
 </div>
 </main>
