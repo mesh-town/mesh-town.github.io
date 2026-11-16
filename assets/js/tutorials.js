@@ -1,11 +1,13 @@
 (function () {
   "use strict";
 
-  var KEY = "meshtown.tutorials";
   var OSES = ["windows", "macos", "android"];
   var NETS = ["invite", "create"];
   var root = document.querySelector("[data-tut]");
   if (!root) { return; }
+  // Each tutorial keeps its own progress; one without the network question (data-tut-net) shows its steps by device.
+  var KEY = "meshtown.tutorials" + (root.getAttribute("data-tut") ? "." + root.getAttribute("data-tut") : "");
+  var hasNet = !!root.querySelector("[data-tut-net]");
 
   var steps = Array.prototype.slice.call(root.querySelectorAll("[data-tut-step]"));
   var strip = root.querySelector("[data-tut-strip]");
@@ -39,8 +41,10 @@
     return steps.filter(function (s) { return s.id === id; })[0] || null;
   }
 
+  function ready() { return !!state.os && (!!state.net || !hasNet); }
+
   function visible(step) {
-    return !!state.os && !!state.net && words(step, "data-oses").indexOf(state.os) >= 0 && words(step, "data-nets").indexOf(state.net) >= 0;
+    return ready() && words(step, "data-oses").indexOf(state.os) >= 0 && (!hasNet || words(step, "data-nets").indexOf(state.net) >= 0);
   }
 
   function shown() { return steps.filter(visible); }
@@ -79,7 +83,7 @@
       b.hidden = create && state.os === "android";
       b.setAttribute("aria-pressed", b.getAttribute("data-tut-net") === state.net ? "true" : "false");
     });
-    androidNote.hidden = state.os !== "android";
+    if (androidNote) { androidNote.hidden = state.os !== "android"; }
   }
 
   function setVariants() {
@@ -114,11 +118,11 @@
 
   function render() {
     var list = shown();
-    var ready = !!state.os && !!state.net;
+    var isReady = ready();
     setButtons();
     setVariants();
-    prompt.hidden = ready;
-    strip.hidden = !ready;
+    prompt.hidden = isReady;
+    strip.hidden = !isReady;
     steps.forEach(function (s) { s.hidden = !visible(s); });
     var open = state.open && list.some(function (s) { return s.id === state.open; }) ? state.open : nextOpen(list);
     list.forEach(function (s, i) {
@@ -130,8 +134,8 @@
       s.querySelector("[data-tut-done]").textContent = i === list.length - 1 ? "Done" : "Done — next step";
     });
     var current = list.indexOf(stepById(nextOpen(list)));
-    if (ready) { buildStrip(list, current); }
-    endBox.hidden = !(ready && list.length && nextOpen(list) === null);
+    if (isReady) { buildStrip(list, current); }
+    endBox.hidden = !(isReady && list.length && nextOpen(list) === null);
     syncUrl();
     save();
   }
@@ -174,7 +178,7 @@
 
   function choose(kind, value) {
     state[kind] = value;
-    if (state.os === "android") { state.net = "invite"; }
+    if (state.os === "android" && hasNet) { state.net = "invite"; }
     state.open = null;
     render();
   }
@@ -182,9 +186,14 @@
   function applyHash() {
     var step = topicFromHash();
     if (!step) { return; }
+    if (!hasNet) { openShown(step); return; }
     if (!state.net) { state.net = words(step, "data-nets")[0]; }
     if (state.os === "android" && !visible(step)) { return; }
     if (state.net && !visible(step) && words(step, "data-oses").indexOf(state.os) >= 0) { state.net = words(step, "data-nets")[0]; }
+    openShown(step);
+  }
+
+  function openShown(step) {
     state.open = step.id;
     render();
     if (visible(step)) { scrollTo(step); }
@@ -241,7 +250,8 @@
     state.net = url.net || pick(NETS, saved.net);
     state.done = Array.isArray(saved.done) ? saved.done : [];
     state.open = typeof saved.open === "string" ? saved.open : null;
-    if (state.os === "android") { state.net = "invite"; }
+    if (state.os === "android" && hasNet) { state.net = "invite"; }
+    if (!hasNet) { state.net = null; }
     steps.forEach(function (s) { wrapHeading(s); addDone(s); });
     root.querySelector("[data-tut-controls]").hidden = false;
     bind();

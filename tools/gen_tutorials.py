@@ -1,4 +1,5 @@
-"""Generator: writes tutorials/index.html from tutorials_data.py and fills the home page tile section.
+"""Generator: writes the tutorial pages, tutorials/index.html (set up, tutorials_data.py) and
+tutorials/devices/index.html (open your devices, tutorials_devices.py).
 
 Usage: python3 -I tools/gen_tutorials.py .   (from the repository root, stdlib only)
 A figure is placed only when its file exists in assets/tutorials/ (<id>-light.webp and <id>-dark.webp for the
@@ -11,12 +12,16 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from site_chrome import block, chrome_bottom, chrome_top, head, inline, write  # noqa: E402
-from tutorials_data import END, FIGS, PAGE, STEPS  # noqa: E402
+import tutorials_data  # noqa: E402
+import tutorials_devices  # noqa: E402
+from tutorials_data import FIGS  # noqa: E402
 from tutorials_marks import MARKS  # noqa: E402
 
 OS_NAMES = {"windows": "Windows", "macos": "macOS", "android": "Android"}
 NET_LABELS = {"invite": "I have an invite", "create": "I am starting a new network"}
 SITE = "."
+UP = "../"
+TUTORIALS = (tutorials_data.TUTORIAL, tutorials_devices.TUTORIAL)
 
 
 def webp_size(path):
@@ -60,7 +65,7 @@ def figure(fid):
         return ""
     size = webp_size(paths[0])
     dims = ' width="%d" height="%d"' % size if size else ""
-    src = lambda n: "../assets/tutorials/" + n
+    src = lambda n: UP + "assets/tutorials/" + n
     dark = '<source media="(prefers-color-scheme: dark)" srcset="%s">' % src(names[1]) if own else ""
     img = '<img src="%s" alt="%s"%s loading="lazy">' % (src(names[0]), html.escape(alt), dims)
     pic = '<span class="tut-fig-pic"><picture>%s%s</picture>%s</span>' % (dark, img, rings(fid))
@@ -107,38 +112,54 @@ def choice(label, qid, attr, items):
             % (qid, label, qid, btns))
 
 
-def controls():
-    return ('<div class="tut-controls" data-tut-controls hidden>\n%s\n%s\n<p class="os-note" data-tut-android-note hidden>%s</p>\n'
+def net_question(t):
+    """The network question and its Android note; a tutorial with no "nets" asks only for the device."""
+    if not t["nets"]:
+        return ""
+    return ('%s\n<p class="os-note" data-tut-android-note hidden>%s</p>\n'
+            % (choice("Your network", "tut-q-net", "data-tut-net", NET_LABELS.items()), html.escape(t["page"]["android_note"])))
+
+
+def controls(t):
+    ask = "your device and your network" if t["nets"] else "your device"
+    return ('<div class="tut-controls" data-tut-controls hidden>\n%s\n%s'
             '<p><button type="button" class="btn" data-tut-reset>Start over</button></p>\n</div>\n'
-            '<p class="meta" data-tut-prompt hidden>Pick your device and your network to see the steps.</p>\n'
+            '<p class="meta" data-tut-prompt hidden>Pick %s to see the steps.</p>\n'
             '<div class="tut-strip" data-tut-strip hidden></div>'
-            % (choice("Your device", "tut-q-os", "data-tut-os", OS_NAMES.items()),
-               choice("Your network", "tut-q-net", "data-tut-net", NET_LABELS.items()),
-               html.escape(PAGE["android_note"])))
+            % (choice("Your device", "tut-q-os", "data-tut-os", OS_NAMES.items()), net_question(t), ask))
 
 
-def end_section():
-    lines = "\n".join("<li>%s</li>" % inline(x) for x in END["lines"])
-    links = " ".join('<a href="%s">%s →</a>' % (html.escape(u), html.escape(t)) for t, u in END["links"])
+def end_section(end):
+    lines = "\n".join("<li>%s</li>" % inline(x) for x in end["lines"])
+    links = " ".join('<a href="%s">%s →</a>' % (html.escape(u), html.escape(t)) for t, u in end["links"])
     return ('<section class="tut-end" id="done" data-tut-end>\n<h2>%s</h2>\n<ul>\n%s\n</ul>\n<p class="links-line">%s</p>\n</section>'
-            % (END["title"], lines, links))
+            % (end["title"], lines, links))
 
 
-def page():
-    steps = "\n".join(step(s) for s in STEPS)
-    crumbs = ('<nav class="breadcrumb" aria-label="Breadcrumb">\n<ol>\n<li><a href="../index.html">Home</a></li>\n'
-              '<li>Tutorials</li>\n</ol>\n</nav>\n')
+def crumbs(t):
+    here = '<li>%s</li>' % html.escape(t["page"]["title"]) if t["key"] else ""
+    tut = '<li><a href="../index.html">Tutorials</a></li>' if t["key"] else "<li>Tutorials</li>"
+    return ('<nav class="breadcrumb" aria-label="Breadcrumb">\n<ol>\n<li><a href="%sindex.html">Home</a></li>\n%s%s\n</ol>\n</nav>\n'
+            % (UP, tut, here))
+
+
+def page(t):
+    pg = t["page"]
+    steps = "\n".join(step(s) for s in t["steps"])
     headblock = ('<div class="page-head">\n<h1>%s</h1>\n<p class="lede">%s</p>\n<p class="meta">%s</p>\n</div>\n'
-                 % (html.escape(PAGE["title"]), html.escape(PAGE["lede"]), inline(PAGE["other"])))
-    main = '<div data-tut>\n%s\n<ol class="tut-steps">\n%s\n</ol>\n%s\n</div>\n' % (controls(), steps, end_section())
-    top = head(PAGE["title"], PAGE["description"], "tutorials/", "../", css=("tutorials.css",), js_class=True)
-    return top + chrome_top("../") + crumbs + headblock + main + chrome_bottom("../", ("tutorials.js", "tut-zoom.js", "variants.js", "copy.js"))
+                 % (html.escape(pg["title"]), html.escape(pg["lede"]), inline(pg["other"])))
+    main = ('<div data-tut="%s">\n%s\n<ol class="tut-steps">\n%s\n</ol>\n%s\n</div>\n'
+            % (t["key"], controls(t), steps, end_section(t["end"])))
+    top = head(pg["title"], pg["description"], t["dir"] + "/", UP, css=("tutorials.css",), js_class=True)
+    return top + chrome_top(UP) + crumbs(t) + headblock + main + chrome_bottom(UP, ("tutorials.js", "tut-zoom.js", "variants.js", "copy.js"))
 
 
 def main():
-    global SITE
+    global SITE, UP
     SITE = sys.argv[1]
-    write(os.path.join(SITE, "tutorials", "index.html"), page())
+    for t in TUTORIALS:
+        UP = t["up"]
+        write(os.path.join(SITE, t["dir"], "index.html"), page(t))
 
 
 main()

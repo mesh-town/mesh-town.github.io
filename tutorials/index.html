@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.add('js')</script>
 <title>Set up Mesh Town step by step — Mesh Town</title>
-<meta name="description" content="Install Mesh Town, join a network or start your own, choose an exit, connect the browser and open your devices by name: step by step.">
+<meta name="description" content="Install Mesh Town, join a network or start your own, choose an exit and connect the browser: step by step.">
 <link rel="canonical" href="https://mesh-town.github.io/tutorials/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mesh Town">
 <meta property="og:title" content="Set up Mesh Town step by step — Mesh Town">
-<meta property="og:description" content="Install Mesh Town, join a network or start your own, choose an exit, connect the browser and open your devices by name: step by step.">
+<meta property="og:description" content="Install Mesh Town, join a network or start your own, choose an exit and connect the browser: step by step.">
 <meta property="og:url" content="https://mesh-town.github.io/tutorials/">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../assets/css/theme.css">
@@ -43,10 +43,10 @@
 </nav>
 <div class="page-head">
 <h1>Set up Mesh Town step by step</h1>
-<p class="lede">When you finish, this device is in your network. Its browser opens your devices by their names, and websites open through the member you choose.</p>
-<p class="meta">Do you use Linux, a router or an iPhone? See the <a href="../install/index.html">install guides</a>.</p>
+<p class="lede">When you finish, this device is in your network, and websites open through the member you choose.</p>
+<p class="meta">Do you use Linux, a router or an iPhone? See the <a href="../install/index.html">install guides</a>. Already set up? <a href="devices/index.html">Open your devices →</a></p>
 </div>
-<div data-tut>
+<div data-tut="">
 <div class="tut-controls" data-tut-controls hidden>
 <div class="tut-q">
 <p class="tut-q-label" id="tut-q-os">Your device</p>
@@ -235,27 +235,6 @@ meshtown</code></pre>
 <p>Check it: open <a href="http://meshtown/">http://meshtown/</a>. It says “This browser is connected to Mesh Town” and lists the ports shared with you.</p>
 </div>
 </li>
-<li class="tut-step" id="devices" data-tut-step data-nets="invite create" data-oses="windows macos android">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Open your devices</span></h2>
-<div class="tut-body">
-<div class="tut-os" data-os-only="windows macos">
-<h3 class="tut-os-title">Windows and macOS</h3>
-<p>Other devices can open a program on a device only after you share it. On the device where the program runs, open the Mesh Town page → <span class="ui" data-ui="Networks">Networks</span> → your network → <span class="ui" data-ui="Shared services (ports)">Shared services (ports)</span> → <span class="ui" data-ui="My published ports">My published ports</span>: enter the port number of the program (for example 8080), choose <span class="ui" data-ui="All members">All members</span> or <span class="ui" data-ui="Selected members">Selected members</span> and click <span class="ui" data-ui="Publish port">Publish port</span>.</p>
-<figure class="tut-fig" data-fig="ports-mine"><a class="tut-fig-zoom" href="../assets/tutorials/ports-mine-light.webp" title="Show larger"><span class="tut-fig-pic"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/ports-mine-dark.webp"><img src="../assets/tutorials/ports-mine-light.webp" alt="My published ports with the port form and the Publish port button" width="1752" height="674" loading="lazy"></picture><span class="tut-mark" aria-hidden="true" style="left:87.9%;top:41.1%;width:8.6%;height:4.1%"></span></span></a><figcaption><span class="tut-fig-kind">Screenshot:</span> My published ports with the port form and the Publish port button</figcaption></figure>
-<p>On your computer, the same tab shows <span class="ui" data-ui="Ports shared with you">Ports shared with you</span>. For a device with a web page, click its address, for example <code>http://nas.meshtown</code>. When you type an address yourself, start it with http://, not https://.</p>
-<figure class="tut-fig" data-fig="ports-shared"><a class="tut-fig-zoom" href="../assets/tutorials/ports-shared-light.webp" title="Show larger"><span class="tut-fig-pic"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/ports-shared-dark.webp"><img src="../assets/tutorials/ports-shared-light.webp" alt="Ports shared with you with an address and Open on this computer" width="1752" height="686" loading="lazy"></picture><span class="tut-mark" aria-hidden="true" style="left:29.7%;top:29.6%;width:26.2%;height:4.1%"></span><span class="tut-mark" aria-hidden="true" style="left:79.8%;top:30.0%;width:15.0%;height:4.1%"></span></span></a><figcaption><span class="tut-fig-kind">Screenshot:</span> Ports shared with you with an address and Open on this computer</figcaption></figure>
-<p>For SSH, remote desktop and other programs, click <span class="ui" data-ui="Open on this computer">Open on this computer</span>. The program then works on your computer at <code>127.0.0.1</code>: for example, port 22 becomes <code>127.0.0.1:2022</code>. Connect your program to that address.</p>
-<figure class="tut-fig" data-fig="devices-scheme"><a class="tut-fig-zoom" href="../assets/tutorials/devices-scheme-light.webp" title="Show larger"><span class="tut-fig-pic"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/devices-scheme-dark.webp"><img src="../assets/tutorials/devices-scheme-light.webp" alt="The address http://nas.meshtown in a browser and 127.0.0.1:2022 for SSH" width="1760" height="800" loading="lazy"></picture></span></a><figcaption><span class="tut-fig-kind">Diagram:</span> The address http://nas.meshtown in a browser and 127.0.0.1:2022 for SSH</figcaption></figure>
-<p>To give a device a short name such as <code>nas</code>, change <span class="ui" data-ui="This computer&#x27;s name">This computer's name</span> on its Mesh Town page.</p>
-<p class="meta tut-note">Names like <code>nas.meshtown</code> work only in a browser that you set up in the step before, and only with http://. You can share only programs that run on the device itself, not other devices in its home network.</p>
-</div>
-<div class="tut-os" data-os-only="android">
-<h3 class="tut-os-title">Android</h3>
-<p>When Mesh Town is connected, type the address in any browser on the phone, for example <code>http://nas.meshtown</code>. You do not need to set up the browser: all of the phone's internet traffic goes through the app.</p>
-<p>To see which ports are shared with you, open <a href="http://meshtown/">http://meshtown/</a> in the phone's browser.</p>
-</div>
-</div>
-</li>
 </ol>
 <section class="tut-end" id="done" data-tut-end>
 <h2>You are ready</h2>
@@ -263,7 +242,7 @@ meshtown</code></pre>
 <li>Open the Mesh Town page: <a href="http://127.0.0.1:7777/">http://127.0.0.1:7777/</a>. If it opens, Mesh Town is running.</li>
 <li>Open <a href="http://meshtown/">http://meshtown/</a>: it says “This browser is connected to Mesh Town”.</li>
 </ul>
-<p class="links-line"><a href="index.html?net=invite">Add another device →</a> <a href="index.html?net=create#invite">Invite someone →</a> <a href="../install/index.html">Update, remove, fix problems →</a></p>
+<p class="links-line"><a href="devices/index.html">Open your devices →</a> <a href="index.html?net=invite">Add another device →</a> <a href="index.html?net=create#invite">Invite someone →</a> <a href="../install/index.html">Update, remove, fix problems →</a></p>
 </section>
 </div>
 </main>

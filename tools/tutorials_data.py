@@ -1,4 +1,4 @@
-"""Data of the /tutorials/ page (generator input for gen_tutorials.py).
+"""Data of the /tutorials/ page, set up Mesh Town (generator input for gen_tutorials.py; figures for all tutorials).
 
 Step: (id, nets, oses, title, tag, blocks). `id` is also the page anchor. `nets` is the set of paths the step belongs to
 ("invite" = I have an invite, "create" = I am starting a new network), `oses` the systems it applies to.
@@ -45,9 +45,9 @@ FIGS = {
 
 PAGE = {
     "title": "Set up Mesh Town step by step",
-    "description": "Install Mesh Town, join a network or start your own, choose an exit, connect the browser and open your devices by name: step by step.",
-    "lede": "When you finish, this device is in your network. Its browser opens your devices by their names, and websites open through the member you choose.",
-    "other": "Do you use Linux, a router or an iPhone? See the [install guides](../install/index.html).",
+    "description": "Install Mesh Town, join a network or start your own, choose an exit and connect the browser: step by step.",
+    "lede": "When you finish, this device is in your network, and websites open through the member you choose.",
+    "other": "Do you use Linux, a router or an iPhone? See the [install guides](../install/index.html). Already set up? [Open your devices →](devices/index.html)",
     "android_note": "Start a network on a computer first, then join from the phone",
 }
 
@@ -176,22 +176,6 @@ STEPS = [
         ("p", "Then choose what happens [[When Mesh Town is off]]: [[Open sites directly]] or [[Keep sites closed]]."),
         CHECK,
     ]),
-    ("devices", BOTH, ALL, "Open your devices", "", [
-        ("os", DESKTOP, [
-            ("p", "Other devices can open a program on a device only after you share it. On the device where the program runs, open the Mesh Town page → [[Networks]] → your network → [[Shared services (ports)]] → [[My published ports]]: enter the port number of the program (for example 8080), choose [[All members]] or [[Selected members]] and click [[Publish port]]."),
-            ("fig", "ports-mine"),
-            ("p", "On your computer, the same tab shows [[Ports shared with you]]. For a device with a web page, click its address, for example `http://nas.meshtown`. When you type an address yourself, start it with http://, not https://."),
-            ("fig", "ports-shared"),
-            ("p", "For SSH, remote desktop and other programs, click [[Open on this computer]]. The program then works on your computer at `127.0.0.1`: for example, port 22 becomes `127.0.0.1:2022`. Connect your program to that address."),
-            ("fig", "devices-scheme"),
-            ("p", "To give a device a short name such as `nas`, change [[This computer's name]] on its Mesh Town page."),
-            ("note", "Names like `nas.meshtown` work only in a browser that you set up in the step before, and only with http://. You can share only programs that run on the device itself, not other devices in its home network."),
-        ]),
-        ("os", ["android"], [
-            ("p", "When Mesh Town is connected, type the address in any browser on the phone, for example `http://nas.meshtown`. You do not need to set up the browser: all of the phone's internet traffic goes through the app."),
-            ("p", "To see which ports are shared with you, open [http://meshtown/](http://meshtown/) in the phone's browser."),
-        ]),
-    ]),
 ]
 
 END = {
@@ -201,8 +185,11 @@ END = {
         "Open [http://meshtown/](http://meshtown/): it says “This browser is connected to Mesh Town”.",
     ],
     "links": [
+        ("Open your devices", "devices/index.html"),
         ("Add another device", "index.html?net=invite"),
         ("Invite someone", "index.html?net=create#invite"),
         ("Update, remove, fix problems", "../install/index.html"),
     ],
 }
+
+TUTORIAL = {"dir": "tutorials", "up": "../", "key": "", "nets": True, "page": PAGE, "steps": STEPS, "end": END}

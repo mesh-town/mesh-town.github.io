@@ -1,4 +1,5 @@
-"""Check: every button or screen name marked [[...]] in tutorials_data.py occurs in the program's text files.
+"""Check: every button or screen name marked [[...]] in the tutorials (tutorials_data.py, tutorials_devices.py) occurs
+in the program's text files.
 
 Usage: python3 -I tools/check_tutorial_terms.py <site root> <path to the program sources>
 Text files: web page texts (*-texts.ts), tray texts (*texts*.rs) and the Android app (*.java, *.xml).
@@ -8,7 +9,8 @@ import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from tutorials_data import STEPS  # noqa: E402
+import tutorials_data  # noqa: E402
+import tutorials_devices  # noqa: E402
 
 NAME_TOKENS = ("${NET_NAME}", '" + NET_NAME + "', "{NET_NAME}", "{APP_NAME}")
 ROOTS = ("core/web_gui/ui/vue/src", "core/gui/tray", "platforms/android/gui/app/src/main")
@@ -49,7 +51,8 @@ def walk(x):
 
 def main():
     text = corpus(sys.argv[2])
-    names = sorted(set(strings([s[5] for s in STEPS])))
+    steps = tutorials_data.STEPS + tutorials_devices.STEPS
+    names = sorted(set(strings([s[5] for s in steps])))
     missing = [n for n in names if n not in text]
     for n in missing:
         print("not found in the program texts: %r" % n)
