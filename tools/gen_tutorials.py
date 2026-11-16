@@ -97,7 +97,7 @@ def note(text):
 
 
 def wait(question, answer):
-    """A box for what to do when the step seems stuck: a reader skims past a grey note while waiting."""
+    """What to do when the step seems stuck, with an orange question: a reader skims past a grey note while waiting."""
     return ('<div class="tut-wait">%s<p><span class="tut-wait-q">%s</span> %s</p></div>'
             % (icon("clock", UP, "tut-wait-icon"), html.escape(question), inline(answer)))
 
