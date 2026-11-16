@@ -12,8 +12,14 @@ html:not(.js) .tut-num::before { content: counter(tut); }
 .js .tut-tag, .js .tut-os-title { display: none; }
 .tut-os-title { margin: var(--s-4) 0 var(--s-2); }
 .tut-note { margin-top: calc(-1 * var(--s-2)); }
-.tut-fig { margin: 0 0 var(--s-4); }
-.tut-fig img { display: block; border: 1px solid var(--border); border-radius: var(--radius); }
+.tut-fig { width: fit-content; max-width: 100%; margin: 0 0 var(--s-4); padding: var(--s-3); background: var(--surface-2); border-radius: var(--radius-lg); }
+.tut-fig-zoom { display: block; cursor: zoom-in; }
+.tut-fig img { display: block; width: auto; max-width: 100%; height: auto; max-height: 30rem; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 1px 4px rgb(0 0 0 / .12); }
+.tut-fig figcaption { max-width: 40rem; margin-top: var(--s-2); font-size: .875rem; line-height: 1.45; color: var(--muted); }
+.tut-fig-kind { font-weight: 600; }
+.tut-zoom { max-width: 96vw; max-height: 94vh; padding: 0; border: 0; background: none; cursor: zoom-out; }
+.tut-zoom::backdrop { background: rgb(0 0 0 / .75); }
+.tut-zoom img { display: block; max-width: 96vw; max-height: 94vh; width: auto; height: auto; border-radius: var(--radius); }
 .ui { font-weight: 600; background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 0 .3em; overflow-wrap: anywhere; }
 .tut-toggle { display: flex; align-items: baseline; gap: var(--s-3); width: 100%; padding: 0; margin: 0; font: inherit; color: inherit; text-align: left; background: none; border: 0; cursor: pointer; }
 .tut-toggle:hover .tut-title { color: var(--accent); }

@@ -34,6 +34,11 @@ def webp_size(path):
     return None
 
 
+# A figure is captioned as a screenshot, so nobody takes it for the live page and clicks its buttons; a click opens
+# it larger instead (tut-zoom.js).
+FIG_KIND = {"devices-scheme": "Diagram"}
+
+
 def figure(fid):
     alt, own = FIGS[fid]
     names = [fid + "-light.webp", fid + "-dark.webp"] if own else [fid + ".webp"]
@@ -45,7 +50,9 @@ def figure(fid):
     src = lambda n: "../assets/tutorials/" + n
     dark = '<source media="(prefers-color-scheme: dark)" srcset="%s">' % src(names[1]) if own else ""
     img = '<img src="%s" alt="%s"%s loading="lazy">' % (src(names[0]), html.escape(alt), dims)
-    return '<figure class="tut-fig" data-fig="%s"><picture>%s%s</picture></figure>' % (fid, dark, img)
+    zoom = '<a class="tut-fig-zoom" href="%s" title="Show larger"><picture>%s%s</picture></a>' % (src(names[0]), dark, img)
+    cap = '<figcaption><span class="tut-fig-kind">%s:</span> %s</figcaption>' % (FIG_KIND.get(fid, "Screenshot"), html.escape(alt))
+    return '<figure class="tut-fig" data-fig="%s">%s%s</figure>' % (fid, zoom, cap)
 
 
 def os_block(systems, blocks):
@@ -111,7 +118,7 @@ def page():
                  % (html.escape(PAGE["title"]), html.escape(PAGE["lede"]), inline(PAGE["other"])))
     main = '<div data-tut>\n%s\n<ol class="tut-steps">\n%s\n</ol>\n%s\n</div>\n' % (controls(), steps, end_section())
     top = head(PAGE["title"], PAGE["description"], "tutorials/", "../", css=("tutorials.css",), js_class=True)
-    return top + chrome_top("../") + crumbs + headblock + main + chrome_bottom("../", ("tutorials.js", "variants.js", "copy.js"))
+    return top + chrome_top("../") + crumbs + headblock + main + chrome_bottom("../", ("tutorials.js", "tut-zoom.js", "variants.js", "copy.js"))
 
 
 def main():
