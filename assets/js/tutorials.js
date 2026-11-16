@@ -136,8 +136,18 @@
     save();
   }
 
+  // Lowest edge of what stays pinned on top while scrolling: the step strip (stuck under the site header on wide
+  // screens) or, before it is shown, the site header (scroll-padding-top). A step's heading lands just below it.
+  function pinnedBottom() {
+    if (strip.hidden) { return parseFloat(window.getComputedStyle(document.documentElement).scrollPaddingTop) || 0; }
+    return (parseFloat(window.getComputedStyle(strip).top) || 0) + strip.offsetHeight;
+  }
+
   function scrollTo(el) {
-    if (el && el.scrollIntoView) { el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); }
+    if (!el) { return; }
+    var mark = el.querySelector("h2") || el;
+    var top = mark.getBoundingClientRect().top + window.pageYOffset - pinnedBottom() - 16;
+    window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
   }
 
   function openStep(id, scroll) {
