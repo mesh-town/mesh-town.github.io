@@ -17,16 +17,22 @@
     return Array.prototype.filter.call(all, function (g) { return g.getAttribute("data-var-group") === name; });
   }
 
+  // A group's own tabs and panels, not those of a group nested inside one of its panels.
+  function own(group, selector) {
+    var all = group.querySelectorAll(selector);
+    return Array.prototype.filter.call(all, function (el) { return el.closest("[data-var-group]") === group; });
+  }
+
   function apply(group, key, focus) {
-    var tabs = group.querySelectorAll("[data-var-tab]");
-    var panels = group.querySelectorAll("[data-var-panel]");
-    Array.prototype.forEach.call(tabs, function (tab) {
+    var tabs = own(group, "[data-var-tab]");
+    var panels = own(group, "[data-var-panel]");
+    tabs.forEach( function (tab) {
       var on = tab.getAttribute("data-var-tab") === key;
       tab.setAttribute("aria-selected", on ? "true" : "false");
       tab.setAttribute("tabindex", on ? "0" : "-1");
       if (on && focus) { tab.focus(); }
     });
-    Array.prototype.forEach.call(panels, function (panel) {
+    panels.forEach(function (panel) {
       panel.hidden = panel.getAttribute("data-var-panel") !== key;
     });
   }
@@ -50,11 +56,11 @@
 
   function setup(group) {
     var id = "var" + (counter += 1);
-    var bar = group.querySelector("[data-var-tabs]");
-    var tabs = Array.prototype.slice.call(group.querySelectorAll("[data-var-tab]"));
+    var bar = own(group, "[data-var-tabs]")[0];
+    var tabs = own(group, "[data-var-tab]");
     var name = group.getAttribute("data-var-group");
     bar.setAttribute("role", "tablist");
-    bar.setAttribute("aria-label", "Installation method");
+    bar.setAttribute("aria-label", group.getAttribute("data-var-label") || "Installation method");
     bar.hidden = false;
     tabs.forEach(function (tab) {
       var key = tab.getAttribute("data-var-tab");
@@ -64,7 +70,7 @@
       tab.addEventListener("click", function () { select(name, key, null); });
       tab.addEventListener("keydown", function (e) { onKey(e, group, tabs); });
     });
-    Array.prototype.forEach.call(group.querySelectorAll("[data-var-panel]"), function (panel) {
+    own(group, "[data-var-panel]").forEach(function (panel) {
       var key = panel.getAttribute("data-var-panel");
       var h = panel.querySelector("h3, h4");
       panel.setAttribute("role", "tabpanel");

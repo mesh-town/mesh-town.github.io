@@ -207,9 +207,61 @@ meshtown</code></pre>
 <li class="tut-step" id="browser" data-tut-step data-nets="invite create" data-oses="windows macos">
 <h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Connect the browser</span></h2>
 <div class="tut-body">
-<p>The page asks <span class="ui" data-ui="Where should Mesh Town open sites?">Where should Mesh Town open sites?</span> Choose <span class="ui" data-ui="All apps on this computer (recommended)">All apps on this computer (recommended)</span>.</p>
+<p>The page asks <span class="ui" data-ui="Where should Mesh Town open sites?">Where should Mesh Town open sites?</span> Choose one of the two answers below.</p>
+<figure class="tut-fig" data-fig="browser-scope"><a class="tut-fig-zoom" href="../assets/tutorials/browser-scope-light.webp" title="Show larger"><span class="tut-fig-pic"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/browser-scope-dark.webp"><img src="../assets/tutorials/browser-scope-light.webp" alt="The question Where should Mesh Town open sites and its two answers" width="1752" height="518" loading="lazy"></picture><span class="tut-mark" aria-hidden="true" style="left:32.0%;top:39.4%;width:13.7%;height:7.1%"></span><span class="tut-mark" aria-hidden="true" style="left:69.1%;top:39.4%;width:17.6%;height:7.1%"></span></span></a><figcaption><span class="tut-fig-kind">Screenshot:</span> The question Where should Mesh Town open sites and its two answers</figcaption></figure>
+<div class="var-group" data-var-group="scope" data-var-label="Where Mesh Town opens sites">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="browser">Only in one browser</button>
+<button type="button" class="var-tab" data-var-tab="system">All apps on this computer</button>
+</div>
+<div class="var-panel" data-var-panel="browser">
+<h3>Only in one browser</h3>
+<p>Choose <span class="ui" data-ui="Only in one browser">Only in one browser</span>. Other programs on the computer keep going to the internet directly. Which browser do you use?</p>
+<div class="var-group" data-var-group="browser" data-var-label="Your browser">
+<div class="var-tabs" data-var-tabs hidden>
+<button type="button" class="var-tab" data-var-tab="firefox">Firefox</button>
+<button type="button" class="var-tab" data-var-tab="other">Safari, Chrome, Edge or another</button>
+</div>
+<div class="var-panel" data-var-panel="firefox">
+<h3>Firefox</h3>
+<p>On the Mesh Town page, choose <span class="ui" data-ui="Firefox">Firefox</span>. Click <span class="ui" data-ui="Copy">Copy</span> next to the setup address <code>http://127.0.0.1:1080/proxy.pac</code>.</p>
+<ol>
+<li>In Firefox, open Settings and type proxy in the search box. Click the Settings button that appears.</li>
+<li>Choose Automatic proxy configuration URL and paste the address into the field below it.</li>
+<li>Click OK.</li>
+</ol>
+<figure class="tut-fig" data-fig="browser-firefox-pac"><a class="tut-fig-zoom" href="../assets/tutorials/browser-firefox-pac.webp" title="Show larger"><span class="tut-fig-pic"><picture><img src="../assets/tutorials/browser-firefox-pac.webp" alt="Firefox Connection Settings with Automatic proxy configuration URL" width="755" height="596" loading="lazy"></picture><span class="tut-mark" aria-hidden="true" style="left:2.4%;top:78.4%;width:34.2%;height:3.9%"></span></span></a><figcaption><span class="tut-fig-kind">Screenshot:</span> Firefox Connection Settings with Automatic proxy configuration URL</figcaption></figure>
+</div>
+<div class="var-panel" data-var-panel="other">
+<h3>Safari, Chrome, Edge or another</h3>
+<p>These browsers have no proxy setting of their own: they always use the setting of the whole computer. So they can work with Mesh Town only for all apps. Choose your browser on the Mesh Town page, then click <span class="ui" data-ui="Set up for all apps">Set up for all apps</span> and follow these steps:</p>
 <p>Click <span class="ui" data-ui="Copy">Copy</span> next to the setup address <code>http://127.0.0.1:1080/proxy.pac</code>.</p>
-<figure class="tut-fig" data-fig="browser-scope"><a class="tut-fig-zoom" href="../assets/tutorials/browser-scope-light.webp" title="Show larger"><span class="tut-fig-pic"><picture><source media="(prefers-color-scheme: dark)" srcset="../assets/tutorials/browser-scope-dark.webp"><img src="../assets/tutorials/browser-scope-light.webp" alt="The question Where should Mesh Town open sites with the setup address" width="1752" height="518" loading="lazy"></picture><span class="tut-mark" aria-hidden="true" style="left:28.8%;top:39.4%;width:30.0%;height:7.1%"></span></span></a><figcaption><span class="tut-fig-kind">Screenshot:</span> The question Where should Mesh Town open sites with the setup address</figcaption></figure>
+<div class="tut-os" data-os-only="windows">
+<h3 class="tut-os-title">Windows</h3>
+<ol>
+<li>Open <span class="ui" data-ui="Settings">Settings</span> → <span class="ui" data-ui="Network &amp; internet">Network &amp; internet</span> → <span class="ui" data-ui="Proxy">Proxy</span>.</li>
+<li>Next to <span class="ui" data-ui="Use setup script">Use setup script</span>, click <span class="ui" data-ui="Set up">Set up</span>.</li>
+<li>Turn on <span class="ui" data-ui="Use setup script">Use setup script</span>, paste the address into <span class="ui" data-ui="Script address">Script address</span> and click <span class="ui" data-ui="Save">Save</span>.</li>
+</ol>
+<figure class="tut-fig" data-fig="browser-w"><a class="tut-fig-zoom" href="../assets/tutorials/browser-w.webp" title="Show larger"><span class="tut-fig-pic"><picture><img src="../assets/tutorials/browser-w.webp" alt="Edit setup script in Windows proxy settings, with the Mesh Town address" width="330" height="312" loading="lazy"></picture><span class="tut-mark" aria-hidden="true" style="left:7.3%;top:48.1%;width:27.3%;height:4.5%"></span><span class="tut-mark" aria-hidden="true" style="left:23.6%;top:84.6%;width:9.7%;height:4.5%"></span></span></a><figcaption><span class="tut-fig-kind">Screenshot:</span> Edit setup script in Windows proxy settings, with the Mesh Town address</figcaption></figure>
+</div>
+<div class="tut-os" data-os-only="macos">
+<h3 class="tut-os-title">macOS</h3>
+<ol>
+<li>Open <span class="ui" data-ui="System Settings">System Settings</span> → <span class="ui" data-ui="Network">Network</span> and choose your connection.</li>
+<li>Click <span class="ui" data-ui="Details…">Details…</span> and open <span class="ui" data-ui="Proxies">Proxies</span>.</li>
+<li>Turn on <span class="ui" data-ui="Automatic Proxy Configuration">Automatic Proxy Configuration</span> and paste the address into the <span class="ui" data-ui="URL">URL</span> field.</li>
+<li>Click <span class="ui" data-ui="OK">OK</span>. If you use both Wi-Fi and a cable (Ethernet), do the same for Ethernet.</li>
+</ol>
+<figure class="tut-fig" data-fig="browser-m"><a class="tut-fig-zoom" href="../assets/tutorials/browser-m.webp" title="Show larger"><span class="tut-fig-pic"><picture><img src="../assets/tutorials/browser-m.webp" alt="macOS Proxies with Automatic Proxy Configuration" width="1300" height="1137" loading="lazy"></picture><span class="tut-mark" aria-hidden="true" style="left:35.4%;top:28.7%;width:25.9%;height:2.5%"></span><span class="tut-mark" aria-hidden="true" style="left:39.7%;top:40.8%;width:4.0%;height:1.9%"></span></span></a><figcaption><span class="tut-fig-kind">Screenshot:</span> macOS Proxies with Automatic Proxy Configuration</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+<div class="var-panel" data-var-panel="system">
+<h3>All apps on this computer</h3>
+<p>Choose <span class="ui" data-ui="All apps on this computer">All apps on this computer</span>. Then the browser and all other programs go through Mesh Town.</p>
+<p>Click <span class="ui" data-ui="Copy">Copy</span> next to the setup address <code>http://127.0.0.1:1080/proxy.pac</code>.</p>
 <div class="tut-os" data-os-only="windows">
 <h3 class="tut-os-title">Windows</h3>
 <ol>
@@ -232,6 +284,8 @@ meshtown</code></pre>
 <p>Chrome, Edge, Safari, Brave and most other browsers use this system setting: there is nothing to change in them. Close the browser completely and open it again.</p>
 <p>Firefox: open Settings and type proxy in the search box. Open the proxy settings that appear and check that Use system proxy settings is selected (it is selected from the start). Opera: turn off its own VPN, or websites will not go through Mesh Town.</p>
 <figure class="tut-fig" data-fig="browser-firefox"><a class="tut-fig-zoom" href="../assets/tutorials/browser-firefox.webp" title="Show larger"><span class="tut-fig-pic"><picture><img src="../assets/tutorials/browser-firefox.webp" alt="Firefox Connection Settings" width="755" height="596" loading="lazy"></picture><span class="tut-mark" aria-hidden="true" style="left:2.4%;top:29.8%;width:26.5%;height:3.9%"></span></span></a><figcaption><span class="tut-fig-kind">Screenshot:</span> Firefox Connection Settings</figcaption></figure>
+</div>
+</div>
 <p>Then choose what happens <span class="ui" data-ui="When Mesh Town is off">When Mesh Town is off</span>: <span class="ui" data-ui="Open sites directly">Open sites directly</span> or <span class="ui" data-ui="Keep sites closed">Keep sites closed</span>.</p>
 <p>Check it: open <a href="http://meshtown/">http://meshtown/</a>. It says “This browser is connected to Mesh Town” and lists the ports shared with you.</p>
 </div>

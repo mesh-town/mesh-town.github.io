@@ -48,17 +48,18 @@ def block(b, ext=None):
     if kind == "ol":
         return "<ol>\n" + "\n".join("<li>%s</li>" % inline(x) for x in val) + "\n</ol>"
     if kind == "tabs":
-        return tabs(val[0], val[1], ext)
+        return tabs(val[0], val[1], ext, val[2] if len(val) > 2 else "")
     raise ValueError(kind)
 
 
-def tabs(group, variants, ext=None):
+def tabs(group, variants, ext=None, label=""):
     bar = "\n".join('<button type="button" class="var-tab" data-var-tab="%s">%s</button>'
                     % (k, html.escape(l)) for k, l, _ in variants)
     panels = "\n".join('<div class="var-panel" data-var-panel="%s">\n<h3>%s</h3>\n%s\n</div>'
                        % (k, html.escape(l), "\n".join(block(b, ext) for b in bs)) for k, l, bs in variants)
-    return ('<div class="var-group" data-var-group="%s">\n<div class="var-tabs" data-var-tabs hidden>\n%s\n</div>\n%s\n</div>'
-            % (group, bar, panels))
+    aria = ' data-var-label="%s"' % html.escape(label) if label else ""
+    return ('<div class="var-group" data-var-group="%s"%s>\n<div class="var-tabs" data-var-tabs hidden>\n%s\n</div>\n%s\n</div>'
+            % (group, aria, bar, panels))
 
 
 def head(title, desc, canon, up, css=(), js_class=False):

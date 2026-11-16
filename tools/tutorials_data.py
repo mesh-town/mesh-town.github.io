@@ -27,10 +27,11 @@ FIGS = {
     "create-form": ("The Create a new network form with the name family", True),
     "invite-start": ("The Invite a member button and the optional For whom field", True),
     "invite-ready": ("The ready invite with Send as text, Send as QR code and the invite itself", True),
-    "browser-scope": ("The question Where should Mesh Town open sites with the setup address", True),
+    "browser-scope": ("The question Where should Mesh Town open sites and its two answers", True),
     "browser-w": ("Edit setup script in Windows proxy settings, with the Mesh Town address", False),
     "browser-m": ("macOS Proxies with Automatic Proxy Configuration", False),
     "browser-firefox": ("Firefox Connection Settings", False),
+    "browser-firefox-pac": ("Firefox Connection Settings with Automatic proxy configuration URL", False),
     "exit-choose": ("The Choose an exit screen listing office-pc, nas and Directly, without an exit, and this computer's name laptop", True),
     "exit-tray": ("The Exit via menu in the macOS menu bar", False),
     "exit-status": ("The Home tab panel showing how sites open right now", True),
@@ -55,6 +56,36 @@ PAGE = {
 BROWSERS = [
     ("p", "Chrome, Edge, Safari, Brave and most other browsers use this system setting: there is nothing to change in them. Close the browser completely and open it again."),
     ("p", "Firefox: open Settings and type proxy in the search box. Open the proxy settings that appear and check that Use system proxy settings is selected (it is selected from the start). Opera: turn off its own VPN, or websites will not go through Mesh Town."),
+]
+COPY = ("p", "Click [[Copy]] next to the setup address `http://127.0.0.1:1080/proxy.pac`.")
+SYSTEM_STEPS = [
+    COPY,
+    ("os", ["windows"], [
+        ("ol", [
+            "Open [[Settings]] → [[Network & internet]] → [[Proxy]].",
+            "Next to [[Use setup script]], click [[Set up]].",
+            "Turn on [[Use setup script]], paste the address into [[Script address]] and click [[Save]].",
+        ]),
+        ("fig", "browser-w"),
+    ]),
+    ("os", ["macos"], [
+        ("ol", [
+            "Open [[System Settings]] → [[Network]] and choose your connection.",
+            "Click [[Details…]] and open [[Proxies]].",
+            "Turn on [[Automatic Proxy Configuration]] and paste the address into the [[URL]] field.",
+            "Click [[OK]]. If you use both Wi-Fi and a cable (Ethernet), do the same for Ethernet.",
+        ]),
+        ("fig", "browser-m"),
+    ]),
+]
+FIREFOX_ONLY = [
+    ("p", "On the Mesh Town page, choose [[Firefox]]. " + COPY[1]),
+    ("ol", [
+        "In Firefox, open Settings and type proxy in the search box. Click the Settings button that appears.",
+        "Choose Automatic proxy configuration URL and paste the address into the field below it.",
+        "Click OK.",
+    ]),
+    ("fig", "browser-firefox-pac"),
 ]
 CHECK = ("p", "Check it: open [http://meshtown/](http://meshtown/). It says “This browser is connected to Mesh Town” and lists the ports shared with you.")
 
@@ -151,29 +182,22 @@ STEPS = [
         ("fig", "android-connected"),
     ]),
     ("browser", BOTH, DESKTOP, "Connect the browser", "", [
-        ("p", "The page asks [[Where should Mesh Town open sites?]] Choose [[All apps on this computer (recommended)]]."),
-        ("p", "Click [[Copy]] next to the setup address `http://127.0.0.1:1080/proxy.pac`."),
+        ("p", "The page asks [[Where should Mesh Town open sites?]] Choose one of the two answers below."),
         ("fig", "browser-scope"),
-        ("os", ["windows"], [
-            ("ol", [
-                "Open [[Settings]] → [[Network & internet]] → [[Proxy]].",
-                "Next to [[Use setup script]], click [[Set up]].",
-                "Turn on [[Use setup script]], paste the address into [[Script address]] and click [[Save]].",
+        ("tabs", ("scope", [
+            ("browser", "Only in one browser", [
+                ("p", "Choose [[Only in one browser]]. Other programs on the computer keep going to the internet directly. Which browser do you use?"),
+                ("tabs", ("browser", [
+                    ("firefox", "Firefox", FIREFOX_ONLY),
+                    ("other", "Safari, Chrome, Edge or another", [
+                        ("p", "These browsers have no proxy setting of their own: they always use the setting of the whole computer. So they can work with Mesh Town only for all apps. Choose your browser on the Mesh Town page, then click [[Set up for all apps]] and follow these steps:"),
+                    ] + SYSTEM_STEPS),
+                ], "Your browser")),
             ]),
-            ("fig", "browser-w"),
-        ]),
-        ("os", ["macos"], [
-            ("ol", [
-                "Open [[System Settings]] → [[Network]] and choose your connection.",
-                "Click [[Details…]] and open [[Proxies]].",
-                "Turn on [[Automatic Proxy Configuration]] and paste the address into the [[URL]] field.",
-                "Click [[OK]]. If you use both Wi-Fi and a cable (Ethernet), do the same for Ethernet.",
-            ]),
-            ("fig", "browser-m"),
-        ]),
-        BROWSERS[0],
-        BROWSERS[1],
-        ("fig", "browser-firefox"),
+            ("system", "All apps on this computer", [
+                ("p", "Choose [[All apps on this computer]]. Then the browser and all other programs go through Mesh Town."),
+            ] + SYSTEM_STEPS + [BROWSERS[0], BROWSERS[1], ("fig", "browser-firefox")]),
+        ], "Where Mesh Town opens sites")),
         ("p", "Then choose what happens [[When Mesh Town is off]]: [[Open sites directly]] or [[Keep sites closed]]."),
         CHECK,
     ]),
