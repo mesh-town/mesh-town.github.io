@@ -57,6 +57,8 @@ pre code { background: none; border: 0; padding: 0; }
   cursor: pointer;
 }
 .copy-btn:hover { border-color: var(--accent); }
+/* An icon from assets/icons/lucide.svg: as tall as the text around it, in the colour of that text. */
+.icon { flex: none; display: inline-block; width: 1.25em; height: 1.25em; vertical-align: -.25em; }
 .visually-hidden {
   position: absolute !important;
   width: 1px; height: 1px;

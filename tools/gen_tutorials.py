@@ -11,14 +11,21 @@ import struct
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from site_chrome import block, chrome_bottom, chrome_top, head, inline, write  # noqa: E402
+from site_chrome import block, chrome_bottom, chrome_top, head, icon, inline, write  # noqa: E402
 import tutorials_data  # noqa: E402
 import tutorials_devices  # noqa: E402
 from tutorials_data import FIGS  # noqa: E402
 from tutorials_marks import MARKS  # noqa: E402
 
 OS_NAMES = {"windows": "Windows", "macos": "macOS", "android": "Android"}
-NET_LABELS = {"invite": "I have an invite", "create": "I am starting a new network"}
+# Card: (key, icon, title, text). SHORT is how a choice reads in the line above the steps.
+OS_CARDS = (("windows", "monitor", "Windows", "A PC or a laptop"), ("macos", "laptop", "macOS", "A Mac"),
+            ("android", "smartphone", "Android", "A phone or a tablet"))
+NET_QUESTION = "Do you have an invite?"
+NET_HINT = "An invite is a long text or a QR code. Someone who is already in a network makes it for you."
+NET_CARDS = (("invite", "mail-open", "Yes, I have an invite", "Join a network that already exists."),
+             ("create", "circle-plus", "No, I am starting a new network", "Create your own network here. Then invite your other devices and people."))
+SHORT = {"windows": "Windows", "macos": "macOS", "android": "Android", "invite": "I have an invite", "create": "New network"}
 SITE = "."
 UP = "../"
 TUTORIALS = (tutorials_data.TUTORIAL, tutorials_devices.TUTORIAL)
@@ -101,39 +108,61 @@ def step(s):
     parts = [x for x in (body(b) for b in blocks) if x]
     tagp = '<p class="meta tut-tag">%s</p>\n' % html.escape(tag) if tag else ""
     return ('<li class="tut-step" id="%s" data-tut-step data-nets="%s" data-oses="%s">\n'
-            '<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">%s</span></h2>\n%s'
+            '<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">%s</span></h2>\n%s'
             '<div class="tut-body">\n%s\n</div>\n</li>'
             % (sid, " ".join(nets), " ".join(oses), html.escape(title), tagp, "\n".join(parts)))
 
 
-def choice(label, qid, attr, items):
-    btns = "\n".join('<button type="button" class="os-tab" %s="%s">%s</button>' % (attr, k, html.escape(v)) for k, v in items)
-    return ('<div class="tut-q">\n<p class="tut-q-label" id="%s">%s</p>\n<div class="os-tabs" role="group" aria-labelledby="%s">\n%s\n</div>\n</div>'
-            % (qid, label, qid, btns))
+def card(attr, key, icon_name, title, text):
+    badge = '<span class="tut-card-badge" data-tut-here hidden>This device</span>' if attr == "data-tut-os" else ""
+    return ('<li><button type="button" class="tut-card" %s="%s" data-label="%s">%s<span class="tut-card-words">'
+            '<span class="tut-card-title">%s</span><span class="tut-card-text">%s</span></span>%s</button></li>'
+            % (attr, key, html.escape(SHORT[key]), icon(icon_name, UP, "tut-card-icon"), html.escape(title), html.escape(text), badge))
 
 
-def net_question(t):
-    """The network question and its Android note; a tutorial with no "nets" asks only for the device."""
+def stage(name, qid, question, hint, attr, cards):
+    """One question of the wizard with its answers as cards. Shown by tutorials.js: without it the page reads as a list."""
+    hintp = '<p class="tut-hint">%s</p>\n' % html.escape(hint) if hint else ""
+    items = "\n".join(card(attr, *c) for c in cards)
+    return ('<section class="tut-stage" data-tut-stage="%s" aria-labelledby="%s" hidden>\n<h2 id="%s" tabindex="-1">%s</h2>\n%s'
+            '<ul class="tut-cards tut-cards-%d">\n%s\n</ul>\n</section>\n' % (name, qid, qid, html.escape(question), hintp, len(cards), items))
+
+
+def net_stage(t):
+    """The invite question; a tutorial with no "nets" asks only for the device."""
     if not t["nets"]:
         return ""
-    return ('%s\n<p class="os-note" data-tut-android-note hidden>%s</p>\n'
-            % (choice("Your network", "tut-q-net", "data-tut-net", NET_LABELS.items()), html.escape(t["page"]["android_note"])))
+    return stage("net", "tut-q-net", NET_QUESTION, NET_HINT, "data-tut-net", NET_CARDS)
+
+
+def picked():
+    """What was chosen, with the way back to the first question."""
+    return ('<div class="tut-pick" data-tut-pick hidden>\n<p class="tut-pick-what">%s<span data-tut-pick-text></span></p>\n'
+            '<button type="button" class="tut-change" data-tut-change>%sChange</button>\n</div>\n' % (icon("monitor", UP), icon("pencil", UP)))
+
+
+def strip(t):
+    """The strip of steps; above it, on a phone, why nobody asked about an invite."""
+    note = t["page"]["android_note"]
+    notep = '<p class="tut-pick-note" data-tut-android-note hidden>%s</p>\n' % html.escape(note) if note else ""
+    return notep + '<div class="tut-strip" data-tut-strip hidden></div>'
 
 
 def controls(t):
-    ask = "your device and your network" if t["nets"] else "your device"
-    return ('<div class="tut-controls" data-tut-controls hidden>\n%s\n%s'
-            '<p><button type="button" class="btn" data-tut-reset>Start over</button></p>\n</div>\n'
-            '<p class="meta" data-tut-prompt hidden>Pick %s to see the steps.</p>\n'
-            '<div class="tut-strip" data-tut-strip hidden></div>'
-            % (choice("Your device", "tut-q-os", "data-tut-os", OS_NAMES.items()), net_question(t), ask))
+    return stage("os", "tut-q-os", t["page"]["question"], "", "data-tut-os", OS_CARDS) + picked() + net_stage(t) + strip(t)
+
+
+def nav():
+    return ('<p class="tut-nav" data-tut-nav hidden>\n<button type="button" class="btn" data-tut-back>%sBack</button>\n'
+            '<button type="button" class="btn btn-primary" data-tut-next><span data-tut-next-label>Next step</span>%s</button>\n</p>'
+            % (icon("arrow-left", UP), icon("arrow-right", UP)))
 
 
 def end_section(end):
     lines = "\n".join("<li>%s</li>" % inline(x) for x in end["lines"])
     links = " ".join('<a href="%s">%s →</a>' % (html.escape(u), html.escape(t)) for t, u in end["links"])
-    return ('<section class="tut-end" id="done" data-tut-end>\n<h2>%s</h2>\n<ul>\n%s\n</ul>\n<p class="links-line">%s</p>\n</section>'
-            % (end["title"], lines, links))
+    return ('<section class="tut-end" id="done" data-tut-end>\n<h2 tabindex="-1">%s%s</h2>\n<ul>\n%s\n</ul>\n<p class="links-line">%s</p>\n</section>'
+            % (icon("circle-check-big", UP), end["title"], lines, links))
 
 
 def crumbs(t):
@@ -148,8 +177,8 @@ def page(t):
     steps = "\n".join(step(s) for s in t["steps"])
     headblock = ('<div class="page-head">\n<h1>%s</h1>\n<p class="lede">%s</p>\n<p class="meta">%s</p>\n</div>\n'
                  % (html.escape(pg["title"]), html.escape(pg["lede"]), inline(pg["other"])))
-    main = ('<div data-tut="%s">\n%s\n<ol class="tut-steps">\n%s\n</ol>\n%s\n</div>\n'
-            % (t["key"], controls(t), steps, end_section(t["end"])))
+    main = ('<div data-tut="%s">\n%s\n<ol class="tut-steps">\n%s\n</ol>\n%s\n%s\n</div>\n'
+            % (t["key"], controls(t), steps, end_section(t["end"]), nav()))
     top = head(pg["title"], pg["description"], t["dir"] + "/", UP, css=("tutorials.css",), js_class=True)
     return top + chrome_top(UP) + crumbs(t) + headblock + main + chrome_bottom(UP, ("tutorials.js", "tut-zoom.js", "variants.js", "copy.js"))
 

@@ -47,30 +47,31 @@
 <p class="meta">Do you use Linux, a router or an iPhone? See the <a href="../install/index.html">install guides</a>. Already set up? <a href="devices/index.html">Open your devices →</a></p>
 </div>
 <div data-tut="">
-<div class="tut-controls" data-tut-controls hidden>
-<div class="tut-q">
-<p class="tut-q-label" id="tut-q-os">Your device</p>
-<div class="os-tabs" role="group" aria-labelledby="tut-q-os">
-<button type="button" class="os-tab" data-tut-os="windows">Windows</button>
-<button type="button" class="os-tab" data-tut-os="macos">macOS</button>
-<button type="button" class="os-tab" data-tut-os="android">Android</button>
+<section class="tut-stage" data-tut-stage="os" aria-labelledby="tut-q-os" hidden>
+<h2 id="tut-q-os" tabindex="-1">Which device are you setting up?</h2>
+<ul class="tut-cards tut-cards-3">
+<li><button type="button" class="tut-card" data-tut-os="windows" data-label="Windows"><svg class="icon tut-card-icon" aria-hidden="true" focusable="false"><use href="../assets/icons/lucide.svg#monitor"></use></svg><span class="tut-card-words"><span class="tut-card-title">Windows</span><span class="tut-card-text">A PC or a laptop</span></span><span class="tut-card-badge" data-tut-here hidden>This device</span></button></li>
+<li><button type="button" class="tut-card" data-tut-os="macos" data-label="macOS"><svg class="icon tut-card-icon" aria-hidden="true" focusable="false"><use href="../assets/icons/lucide.svg#laptop"></use></svg><span class="tut-card-words"><span class="tut-card-title">macOS</span><span class="tut-card-text">A Mac</span></span><span class="tut-card-badge" data-tut-here hidden>This device</span></button></li>
+<li><button type="button" class="tut-card" data-tut-os="android" data-label="Android"><svg class="icon tut-card-icon" aria-hidden="true" focusable="false"><use href="../assets/icons/lucide.svg#smartphone"></use></svg><span class="tut-card-words"><span class="tut-card-title">Android</span><span class="tut-card-text">A phone or a tablet</span></span><span class="tut-card-badge" data-tut-here hidden>This device</span></button></li>
+</ul>
+</section>
+<div class="tut-pick" data-tut-pick hidden>
+<p class="tut-pick-what"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/icons/lucide.svg#monitor"></use></svg><span data-tut-pick-text></span></p>
+<button type="button" class="tut-change" data-tut-change><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/icons/lucide.svg#pencil"></use></svg>Change</button>
 </div>
-</div>
-<div class="tut-q">
-<p class="tut-q-label" id="tut-q-net">Your network</p>
-<div class="os-tabs" role="group" aria-labelledby="tut-q-net">
-<button type="button" class="os-tab" data-tut-net="invite">I have an invite</button>
-<button type="button" class="os-tab" data-tut-net="create">I am starting a new network</button>
-</div>
-</div>
-<p class="os-note" data-tut-android-note hidden>Start a network on a computer first, then join from the phone</p>
-<p><button type="button" class="btn" data-tut-reset>Start over</button></p>
-</div>
-<p class="meta" data-tut-prompt hidden>Pick your device and your network to see the steps.</p>
+<section class="tut-stage" data-tut-stage="net" aria-labelledby="tut-q-net" hidden>
+<h2 id="tut-q-net" tabindex="-1">Do you have an invite?</h2>
+<p class="tut-hint">An invite is a long text or a QR code. Someone who is already in a network makes it for you.</p>
+<ul class="tut-cards tut-cards-2">
+<li><button type="button" class="tut-card" data-tut-net="invite" data-label="I have an invite"><svg class="icon tut-card-icon" aria-hidden="true" focusable="false"><use href="../assets/icons/lucide.svg#mail-open"></use></svg><span class="tut-card-words"><span class="tut-card-title">Yes, I have an invite</span><span class="tut-card-text">Join a network that already exists.</span></span></button></li>
+<li><button type="button" class="tut-card" data-tut-net="create" data-label="New network"><svg class="icon tut-card-icon" aria-hidden="true" focusable="false"><use href="../assets/icons/lucide.svg#circle-plus"></use></svg><span class="tut-card-words"><span class="tut-card-title">No, I am starting a new network</span><span class="tut-card-text">Create your own network here. Then invite your other devices and people.</span></span></button></li>
+</ul>
+</section>
+<p class="tut-pick-note" data-tut-android-note hidden>A phone can only join a network. To start a new network, use a computer first.</p>
 <div class="tut-strip" data-tut-strip hidden></div>
 <ol class="tut-steps">
 <li class="tut-step" id="install" data-tut-step data-nets="invite create" data-oses="windows macos android">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Install Mesh Town</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Install Mesh Town</span></h2>
 <div class="tut-body">
 <div class="tut-os" data-os-only="windows">
 <h3 class="tut-os-title">Windows</h3>
@@ -115,7 +116,7 @@ meshtown</code></pre>
 </div>
 </li>
 <li class="tut-step" id="open" data-tut-step data-nets="invite create" data-oses="windows macos">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Open the Mesh Town page and set a password</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Open the Mesh Town page and set a password</span></h2>
 <div class="tut-body">
 <div class="tut-os" data-os-only="windows">
 <h3 class="tut-os-title">Windows</h3>
@@ -133,7 +134,7 @@ meshtown</code></pre>
 </div>
 </li>
 <li class="tut-step" id="join" data-tut-step data-nets="invite" data-oses="windows macos android">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Join with an invite</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Join with an invite</span></h2>
 <p class="meta tut-tag">Only with an invite</p>
 <div class="tut-body">
 <p>Ask a member of the network for an invite. You can use it only once, within 24 hours.</p>
@@ -154,7 +155,7 @@ meshtown</code></pre>
 </div>
 </li>
 <li class="tut-step" id="create" data-tut-step data-nets="create" data-oses="windows macos">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Create your network</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Create your network</span></h2>
 <p class="meta tut-tag">Only when you start a network</p>
 <div class="tut-body">
 <p>Click <span class="ui" data-ui="Create a new network">Create a new network</span> and type a name for it, for example <code>family</code>. People you invite will see this name. Click <span class="ui" data-ui="Create network">Create network</span>. Now you are the admin: the person who manages this network.</p>
@@ -162,7 +163,7 @@ meshtown</code></pre>
 </div>
 </li>
 <li class="tut-step" id="invite" data-tut-step data-nets="create" data-oses="windows macos">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Invite a device or a person</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Invite a device or a person</span></h2>
 <p class="meta tut-tag">Only when you start a network</p>
 <div class="tut-body">
 <p>Click <span class="ui" data-ui="Invite a member">Invite a member</span>. You can type who the invite is for, but you do not have to. Confirm. A window shows the invite as text; <span class="ui" data-ui="Send as QR code">Send as QR code</span> shows it as a QR code.</p>
@@ -174,7 +175,7 @@ meshtown</code></pre>
 </div>
 </li>
 <li class="tut-step" id="exit" data-tut-step data-nets="invite create" data-oses="windows macos android">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Choose an exit</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Choose an exit</span></h2>
 <div class="tut-body">
 <p>An exit is a member of your network. Websites you open go through that member's internet connection, so the websites see that member's address, not yours.</p>
 <div class="tut-os" data-os-only="windows macos">
@@ -195,7 +196,7 @@ meshtown</code></pre>
 </div>
 </li>
 <li class="tut-step" id="connect" data-tut-step data-nets="invite" data-oses="android">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Connect</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Connect</span></h2>
 <div class="tut-body">
 <p>Tap <span class="ui" data-ui="Connect">Connect</span> at the bottom of the screen. Allow notifications when asked, so you know when the connection is lost. Then Android asks to set up a VPN connection: press OK.</p>
 <figure class="tut-fig" data-fig="android-vpn"><a class="tut-fig-zoom" href="../assets/tutorials/android-vpn.webp" title="Show larger"><span class="tut-fig-pic"><picture><img src="../assets/tutorials/android-vpn.webp" alt="The Android Connection request window with the OK button" width="540" height="1132" loading="lazy"></picture><span class="tut-mark" aria-hidden="true" style="left:79.5%;top:60.0%;width:6.5%;height:2.6%"></span></span></a><figcaption><span class="tut-fig-kind">Screenshot:</span> The Android Connection request window with the OK button</figcaption></figure>
@@ -204,7 +205,7 @@ meshtown</code></pre>
 </div>
 </li>
 <li class="tut-step" id="browser" data-tut-step data-nets="invite create" data-oses="windows macos">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Connect the browser</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Connect the browser</span></h2>
 <div class="tut-body">
 <p>The page asks <span class="ui" data-ui="Where should Mesh Town open sites?">Where should Mesh Town open sites?</span> Choose <span class="ui" data-ui="All apps on this computer (recommended)">All apps on this computer (recommended)</span>.</p>
 <p>Click <span class="ui" data-ui="Copy">Copy</span> next to the setup address <code>http://127.0.0.1:1080/proxy.pac</code>.</p>
@@ -237,13 +238,17 @@ meshtown</code></pre>
 </li>
 </ol>
 <section class="tut-end" id="done" data-tut-end>
-<h2>You are ready</h2>
+<h2 tabindex="-1"><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/icons/lucide.svg#circle-check-big"></use></svg>You are ready</h2>
 <ul>
 <li>Open the Mesh Town page: <a href="http://127.0.0.1:7777/">http://127.0.0.1:7777/</a>. If it opens, Mesh Town is running.</li>
 <li>Open <a href="http://meshtown/">http://meshtown/</a>: it says “This browser is connected to Mesh Town”.</li>
 </ul>
 <p class="links-line"><a href="devices/index.html">Open your devices →</a> <a href="index.html?net=invite">Add another device →</a> <a href="index.html?net=create#invite">Invite someone →</a> <a href="../install/index.html">Update, remove, fix problems →</a></p>
 </section>
+<p class="tut-nav" data-tut-nav hidden>
+<button type="button" class="btn" data-tut-back><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/icons/lucide.svg#arrow-left"></use></svg>Back</button>
+<button type="button" class="btn btn-primary" data-tut-next><span data-tut-next-label>Next step</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../assets/icons/lucide.svg#arrow-right"></use></svg></button>
+</p>
 </div>
 </main>
 <footer class="site-footer">

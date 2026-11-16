@@ -10,6 +10,7 @@ PAGE = {
     "description": "Share a program on one of your devices and open it from another one by name: a web page, SSH, remote desktop or a file share. Step by step.",
     "lede": "Open a program on another device in your network by its name: a web page, SSH, remote desktop or a file share.",
     "other": "Both devices need Mesh Town in the same network. Not yet? Start with [Set up Mesh Town step by step](../index.html).",
+    "question": "Which device will you open it from?",
     "android_note": "",
 }
 

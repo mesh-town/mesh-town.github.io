@@ -47,22 +47,22 @@
 <p class="meta">Both devices need Mesh Town in the same network. Not yet? Start with <a href="../index.html">Set up Mesh Town step by step</a>.</p>
 </div>
 <div data-tut="devices">
-<div class="tut-controls" data-tut-controls hidden>
-<div class="tut-q">
-<p class="tut-q-label" id="tut-q-os">Your device</p>
-<div class="os-tabs" role="group" aria-labelledby="tut-q-os">
-<button type="button" class="os-tab" data-tut-os="windows">Windows</button>
-<button type="button" class="os-tab" data-tut-os="macos">macOS</button>
-<button type="button" class="os-tab" data-tut-os="android">Android</button>
+<section class="tut-stage" data-tut-stage="os" aria-labelledby="tut-q-os" hidden>
+<h2 id="tut-q-os" tabindex="-1">Which device will you open it from?</h2>
+<ul class="tut-cards tut-cards-3">
+<li><button type="button" class="tut-card" data-tut-os="windows" data-label="Windows"><svg class="icon tut-card-icon" aria-hidden="true" focusable="false"><use href="../../assets/icons/lucide.svg#monitor"></use></svg><span class="tut-card-words"><span class="tut-card-title">Windows</span><span class="tut-card-text">A PC or a laptop</span></span><span class="tut-card-badge" data-tut-here hidden>This device</span></button></li>
+<li><button type="button" class="tut-card" data-tut-os="macos" data-label="macOS"><svg class="icon tut-card-icon" aria-hidden="true" focusable="false"><use href="../../assets/icons/lucide.svg#laptop"></use></svg><span class="tut-card-words"><span class="tut-card-title">macOS</span><span class="tut-card-text">A Mac</span></span><span class="tut-card-badge" data-tut-here hidden>This device</span></button></li>
+<li><button type="button" class="tut-card" data-tut-os="android" data-label="Android"><svg class="icon tut-card-icon" aria-hidden="true" focusable="false"><use href="../../assets/icons/lucide.svg#smartphone"></use></svg><span class="tut-card-words"><span class="tut-card-title">Android</span><span class="tut-card-text">A phone or a tablet</span></span><span class="tut-card-badge" data-tut-here hidden>This device</span></button></li>
+</ul>
+</section>
+<div class="tut-pick" data-tut-pick hidden>
+<p class="tut-pick-what"><svg class="icon" aria-hidden="true" focusable="false"><use href="../../assets/icons/lucide.svg#monitor"></use></svg><span data-tut-pick-text></span></p>
+<button type="button" class="tut-change" data-tut-change><svg class="icon" aria-hidden="true" focusable="false"><use href="../../assets/icons/lucide.svg#pencil"></use></svg>Change</button>
 </div>
-</div>
-<p><button type="button" class="btn" data-tut-reset>Start over</button></p>
-</div>
-<p class="meta" data-tut-prompt hidden>Pick your device to see the steps.</p>
 <div class="tut-strip" data-tut-strip hidden></div>
 <ol class="tut-steps">
 <li class="tut-step" id="share" data-tut-step data-nets="invite create" data-oses="windows macos android">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Share a program</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Share a program</span></h2>
 <p class="meta tut-tag">On the computer where the program runs</p>
 <div class="tut-body">
 <p>Do this on the computer where the program runs, for example a NAS or the office PC. Other devices can open a program only after you share it.</p>
@@ -73,7 +73,7 @@
 </div>
 </li>
 <li class="tut-step" id="web" data-tut-step data-nets="invite create" data-oses="windows macos android">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Open a web page</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Open a web page</span></h2>
 <div class="tut-body">
 <div class="tut-os" data-os-only="windows macos">
 <h3 class="tut-os-title">Windows and macOS</h3>
@@ -90,7 +90,7 @@
 </div>
 </li>
 <li class="tut-step" id="apps" data-tut-step data-nets="invite create" data-oses="windows macos">
-<h2><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Open it in another program</span></h2>
+<h2 tabindex="-1"><span class="tut-num" aria-hidden="true"></span><span class="tut-title">Open it in another program</span></h2>
 <p class="meta tut-tag">SSH, remote desktop, file sharing</p>
 <div class="tut-body">
 <p>In the same list, click <span class="ui" data-ui="Open on this computer">Open on this computer</span> next to the port. The program then works on your computer at <code>127.0.0.1</code>: for example, port 22 becomes <code>127.0.0.1:2022</code>. Connect your program to that address.</p>
@@ -99,12 +99,16 @@
 </li>
 </ol>
 <section class="tut-end" id="done" data-tut-end>
-<h2>Your devices are open</h2>
+<h2 tabindex="-1"><svg class="icon" aria-hidden="true" focusable="false"><use href="../../assets/icons/lucide.svg#circle-check-big"></use></svg>Your devices are open</h2>
 <ul>
 <li>Open <a href="http://meshtown/">http://meshtown/</a> on any of your devices: it lists the ports shared with you.</li>
 </ul>
 <p class="links-line"><a href="../index.html?net=invite">Add another device →</a> <a href="../index.html?net=create#invite">Invite someone →</a> <a href="../../install/index.html">Update, remove, fix problems →</a></p>
 </section>
+<p class="tut-nav" data-tut-nav hidden>
+<button type="button" class="btn" data-tut-back><svg class="icon" aria-hidden="true" focusable="false"><use href="../../assets/icons/lucide.svg#arrow-left"></use></svg>Back</button>
+<button type="button" class="btn btn-primary" data-tut-next><span data-tut-next-label>Next step</span><svg class="icon" aria-hidden="true" focusable="false"><use href="../../assets/icons/lucide.svg#arrow-right"></use></svg></button>
+</p>
 </div>
 </main>
 <footer class="site-footer">

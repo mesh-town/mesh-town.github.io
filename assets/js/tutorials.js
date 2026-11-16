@@ -1,3 +1,6 @@
+/* Tutorials as a wizard: one question at a time (device, then invite or new network), then one step at a time.
+   Nothing is stored: the answers and the open step live in the address (?os=&net=#step), so a link or a reload
+   opens the same place, and the plain address starts from the first question. Without JS the page reads as a list. */
 (function () {
   "use strict";
 
@@ -5,20 +8,24 @@
   var NETS = ["invite", "create"];
   var root = document.querySelector("[data-tut]");
   if (!root) { return; }
-  // Each tutorial keeps its own progress; one without the network question (data-tut-net) shows its steps by device.
-  var KEY = "meshtown.tutorials" + (root.getAttribute("data-tut") ? "." + root.getAttribute("data-tut") : "");
-  var hasNet = !!root.querySelector("[data-tut-net]");
 
-  var steps = Array.prototype.slice.call(root.querySelectorAll("[data-tut-step]"));
-  var strip = root.querySelector("[data-tut-strip]");
-  var prompt = root.querySelector("[data-tut-prompt]");
-  var endBox = root.querySelector("[data-tut-end]");
-  var androidNote = root.querySelector("[data-tut-android-note]");
-  var state = { os: null, net: null, done: [], open: null };
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
+  function one(sel) { return root.querySelector(sel); }
+  function all(sel) { return Array.prototype.slice.call(root.querySelectorAll(sel)); }
   function pick(list, value) { return list.indexOf(value) >= 0 ? value : null; }
   function words(el, name) { return (el.getAttribute(name) || "").split(" "); }
+
+  var steps = all("[data-tut-step]");
+  var ui = {
+    os: one('[data-tut-stage="os"]'), net: one('[data-tut-stage="net"]'), pick: one("[data-tut-pick]"),
+    note: one("[data-tut-android-note]"), strip: one("[data-tut-strip]"), list: one(".tut-steps"),
+    end: one("[data-tut-end]"), nav: one("[data-tut-nav]"), back: one("[data-tut-back]"), next: one("[data-tut-next]")
+  };
+  // A tutorial without the invite question shows its steps by device alone.
+  var hasNet = !!ui.net;
+  // os, net: the answers. at: the open step, counted among the shown ones. reached: the furthest step opened.
+  // ended: the closing box is open. want: a step a link asked for; it opens when the answers are known.
+  var state = { os: null, net: null, at: 0, reached: 0, ended: false, want: null };
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function detectOS() {
     var nav = window.navigator || {};
@@ -29,30 +36,26 @@
     return /Macintosh/.test(ua) ? "macos" : null;
   }
 
-  function load() {
-    try { return JSON.parse(window.localStorage.getItem(KEY)) || {}; } catch (e) { return {}; }
-  }
-
-  function save() {
-    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* storage blocked */ }
-  }
-
   function stepById(id) {
     return steps.filter(function (s) { return s.id === id; })[0] || null;
   }
 
-  function ready() { return !!state.os && (!!state.net || !hasNet); }
-
-  function visible(step) {
-    return ready() && words(step, "data-oses").indexOf(state.os) >= 0 && (!hasNet || words(step, "data-nets").indexOf(state.net) >= 0);
+  function stage() {
+    if (!state.os) { return "os"; }
+    return hasNet && !state.net ? "net" : "steps";
   }
 
-  function shown() { return steps.filter(visible); }
-  function isDone(step) { return state.done.indexOf(step.id) >= 0; }
+  function visible(step) {
+    return words(step, "data-oses").indexOf(state.os) >= 0 && (!hasNet || words(step, "data-nets").indexOf(state.net) >= 0);
+  }
 
-  function nextOpen(list) {
-    var left = list.filter(function (s) { return !isDone(s); });
-    return left.length ? left[0].id : null;
+  function shown() { return stage() === "steps" ? steps.filter(visible) : []; }
+
+  // What the current screen starts with: a question, the open step or the closing box.
+  function current() {
+    var st = stage();
+    if (st !== "steps") { return ui[st]; }
+    return state.ended ? ui.end : shown()[state.at];
   }
 
   function fromUrl() {
@@ -60,9 +63,14 @@
     return { os: pick(OSES, q.get("os")), net: pick(NETS, q.get("net")) };
   }
 
-  function topicFromHash() {
+  function stepFromHash() {
     var id = window.location.hash.replace("#", "");
     return id ? stepById(id) : null;
+  }
+
+  function hashNow() {
+    if (stage() !== "steps") { return state.want ? "#" + state.want : ""; }
+    return "#" + current().id;
   }
 
   function syncUrl() {
@@ -70,193 +78,200 @@
     var q = [];
     if (state.os) { q.push("os=" + state.os); }
     if (state.net) { q.push("net=" + state.net); }
-    var search = q.length ? "?" + q.join("&") : "";
-    window.history.replaceState(null, "", window.location.pathname + search + window.location.hash);
+    window.history.replaceState(null, "", window.location.pathname + (q.length ? "?" + q.join("&") : "") + hashNow());
   }
 
-  function setButtons() {
-    Array.prototype.forEach.call(root.querySelectorAll("[data-tut-os]"), function (b) {
-      b.setAttribute("aria-pressed", b.getAttribute("data-tut-os") === state.os ? "true" : "false");
-    });
-    Array.prototype.forEach.call(root.querySelectorAll("[data-tut-net]"), function (b) {
-      var create = b.getAttribute("data-tut-net") === "create";
-      b.hidden = create && state.os === "android";
-      b.setAttribute("aria-pressed", b.getAttribute("data-tut-net") === state.net ? "true" : "false");
-    });
-    if (androidNote) { androidNote.hidden = state.os !== "android"; }
+  function setIcon(holder, name) {
+    var use = holder.querySelector("use");
+    use.setAttribute("href", use.getAttribute("href").replace(/#.*$/, "#" + name));
+  }
+
+  function card(kind, value) { return one("[data-tut-" + kind + '="' + value + '"]'); }
+
+  function setPick(st) {
+    var osCard = state.os && card("os", state.os);
+    ui.pick.hidden = st === "os";
+    if (ui.note) { ui.note.hidden = !(st === "steps" && state.os === "android"); }
+    if (!osCard) { return; }
+    var text = [osCard.getAttribute("data-label")];
+    if (hasNet && state.net) { text.push(card("net", state.net).getAttribute("data-label")); }
+    one("[data-tut-pick-text]").textContent = text.join(" · ");
+    setIcon(ui.pick, osCard.querySelector("use").getAttribute("href").split("#")[1]);
   }
 
   function setVariants() {
-    Array.prototype.forEach.call(root.querySelectorAll("[data-os-only]"), function (el) {
-      el.hidden = !state.os || words(el, "data-os-only").indexOf(state.os) < 0;
+    all("[data-os-only]").forEach(function (el) {
+      el.hidden = words(el, "data-os-only").indexOf(state.os) < 0;
     });
   }
 
-  function buildStrip(list, current) {
-    strip.textContent = "";
+  function dot(step, i) {
+    var li = document.createElement("li");
+    var b = document.createElement("button");
+    var here = i === state.at && !state.ended;
+    b.type = "button";
+    b.textContent = String(i + 1);
+    b.setAttribute("aria-label", "Step " + (i + 1) + ": " + step.querySelector(".tut-title").textContent);
+    b.disabled = i > state.reached && !state.ended;
+    if (!b.disabled && !here) { b.className = "is-done"; }
+    if (here) { b.setAttribute("aria-current", "step"); }
+    b.addEventListener("click", function () { openAt(i); });
+    li.appendChild(b);
+    return li;
+  }
+
+  function buildStrip(list) {
     var label = document.createElement("p");
-    label.className = "tut-strip-label";
-    var n = current < 0 ? list.length : current + 1;
-    label.textContent = "Step " + n + " of " + list.length;
     var ol = document.createElement("ol");
-    list.forEach(function (step, i) {
-      var li = document.createElement("li");
-      var b = document.createElement("button");
-      b.type = "button";
-      b.textContent = String(i + 1);
-      b.setAttribute("aria-label", "Step " + (i + 1) + ": " + step.querySelector(".tut-title").textContent);
-      b.disabled = !isDone(step) && i !== current;
-      if (isDone(step)) { b.className = "is-done"; }
-      if (i === current) { b.setAttribute("aria-current", "step"); }
-      b.addEventListener("click", function () { openStep(step.id, true); });
-      li.appendChild(b);
-      ol.appendChild(li);
-    });
-    strip.appendChild(label);
-    strip.appendChild(ol);
+    label.className = "tut-strip-label";
+    label.textContent = state.ended ? "All steps done" : "Step " + (state.at + 1) + " of " + list.length;
+    list.forEach(function (step, i) { ol.appendChild(dot(step, i)); });
+    ui.strip.replaceChildren(label, ol);
+  }
+
+  function setNav(list) {
+    var last = state.at === list.length - 1;
+    ui.back.hidden = !state.ended && state.at === 0;
+    ui.next.hidden = state.ended;
+    one("[data-tut-next-label]").textContent = last ? "Finish" : "Next step";
+    setIcon(ui.next, last ? "check" : "arrow-right");
   }
 
   function render() {
+    var st = stage();
     var list = shown();
-    var isReady = ready();
-    setButtons();
+    var open = st === "steps" && !state.ended ? list[state.at] : null;
+    ui.os.hidden = st !== "os";
+    if (ui.net) { ui.net.hidden = st !== "net"; }
+    [ui.strip, ui.list, ui.nav].forEach(function (el) { el.hidden = st !== "steps"; });
+    ui.end.hidden = !(st === "steps" && state.ended);
+    steps.forEach(function (s) { s.hidden = s !== open; });
+    list.forEach(function (s, i) { s.querySelector(".tut-num").textContent = String(i + 1); });
+    setPick(st);
     setVariants();
-    prompt.hidden = isReady;
-    strip.hidden = !isReady;
-    steps.forEach(function (s) { s.hidden = !visible(s); });
-    var open = state.open && list.some(function (s) { return s.id === state.open; }) ? state.open : nextOpen(list);
-    list.forEach(function (s, i) {
-      s.querySelector(".tut-num").textContent = String(i + 1);
-      s.classList.toggle("is-done", isDone(s));
-      s.classList.toggle("is-open", s.id === open);
-      s.querySelector(".tut-body").hidden = s.id !== open;
-      s.querySelector(".tut-toggle").setAttribute("aria-expanded", s.id === open ? "true" : "false");
-      s.querySelector("[data-tut-done]").textContent = i === list.length - 1 ? "Done" : "Done — next step";
-    });
-    var current = list.indexOf(stepById(nextOpen(list)));
-    if (isReady) { buildStrip(list, current); }
-    endBox.hidden = !(isReady && list.length && nextOpen(list) === null);
-    syncUrl();
-    save();
+    buildStrip(list);
+    setNav(list);
   }
 
-  // Lowest edge of what stays pinned on top while scrolling: the step strip (stuck under the site header on wide
-  // screens) or, before it is shown, the site header (scroll-padding-top). A step's heading lands just below it.
-  function pinnedBottom() {
-    if (strip.hidden) { return parseFloat(window.getComputedStyle(document.documentElement).scrollPaddingTop) || 0; }
-    return (parseFloat(window.getComputedStyle(strip).top) || 0) + strip.offsetHeight;
+  // Height of what stays pinned on top while scrolling: the site header on wide screens and, above a step, the strip.
+  function pinned(el) {
+    var header = document.querySelector(".site-header");
+    var top = header && window.getComputedStyle(header).position === "sticky" ? header.offsetHeight : 0;
+    return top + (ui.strip.hidden || el === ui.pick ? 0 : ui.strip.offsetHeight);
   }
 
-  function scrollTo(el) {
-    if (!el) { return; }
+  function scrollTo(el, jump) {
     var mark = el.querySelector("h2") || el;
-    var top = mark.getBoundingClientRect().top + window.pageYOffset - pinnedBottom() - 16;
-    window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+    var top = mark.getBoundingClientRect().top + window.pageYOffset - pinned(el) - 16;
+    window.scrollTo({ top: Math.max(0, top), behavior: jump || reduce ? "auto" : "smooth" });
   }
 
-  function openStep(id, scroll) {
-    state.open = id;
+  function whenLoaded(run) {
+    if (document.readyState === "complete") { run(); return; }
+    window.addEventListener("load", run);
+  }
+
+  // A page opened by a link to a step: the browser puts the step under the site header, this puts it under the strip
+  // as well, and once more when the page has loaded and the browser has done its own jump.
+  function landOnLoad() {
+    scrollTo(current(), true);
+    whenLoaded(function () { scrollTo(current(), true); });
+  }
+
+  // Draws the screen and brings its start into view. `fromPick` starts the view from the line with the answers.
+  function go(fromPick) {
     render();
-    if (scroll) { scrollTo(stepById(id)); }
+    syncUrl();
+    var el = current();
+    scrollTo(fromPick && !ui.pick.hidden ? ui.pick : el);
+    el.querySelector("h2").focus({ preventScroll: true });
   }
 
-  // A step opened from its own heading keeps that heading where it was on screen: the step that closes above it
-  // would otherwise pull it up and out of view, and the step would seem to open upwards.
-  function openInPlace(step, heading) {
-    var before = heading.getBoundingClientRect().top;
-    openStep(step.id, false);
-    window.scrollBy({ top: heading.getBoundingClientRect().top - before, behavior: "instant" });
+  // What follows from the answers alone: a phone can only join, and a linked step may belong to one path only.
+  function settle() {
+    var step = stepById(state.want);
+    if (!hasNet || !state.os) { return; }
+    if (state.os === "android") { state.net = "invite"; return; }
+    if (step && words(step, "data-nets").length === 1) { state.net = words(step, "data-nets")[0]; }
   }
 
-  function markDone(step) {
-    if (!isDone(step)) { state.done.push(step.id); }
-    var list = shown();
-    state.open = nextOpen(list);
-    render();
-    scrollTo(state.open ? stepById(state.open) : endBox);
+  // Once the answers are known: opens the step a link asked for, or the first one.
+  function begin() {
+    settle();
+    if (stage() !== "steps") { return; }
+    state.at = Math.max(0, shown().indexOf(stepById(state.want)));
+    state.reached = state.at;
+    state.ended = false;
+    state.want = null;
   }
 
   function choose(kind, value) {
     state[kind] = value;
-    if (state.os === "android" && hasNet) { state.net = "invite"; }
-    state.open = null;
-    render();
+    begin();
+    go(true);
   }
 
-  function applyHash() {
-    var step = topicFromHash();
+  function change() {
+    state = { os: null, net: null, at: 0, reached: 0, ended: false, want: null };
+    go(false);
+  }
+
+  function openAt(i) {
+    state.at = i;
+    state.reached = Math.max(state.reached, i);
+    state.ended = false;
+    go(false);
+  }
+
+  function back() {
+    openAt(state.ended ? state.at : state.at - 1);
+  }
+
+  function next() {
+    if (state.at < shown().length - 1) { openAt(state.at + 1); return; }
+    state.ended = true;
+    go(false);
+  }
+
+  function onHash() {
+    var step = stepFromHash();
     if (!step) { return; }
-    if (!hasNet) { openShown(step); return; }
-    if (!state.net) { state.net = words(step, "data-nets")[0]; }
-    if (state.os === "android" && !visible(step)) { return; }
-    if (state.net && !visible(step) && words(step, "data-oses").indexOf(state.os) >= 0) { state.net = words(step, "data-nets")[0]; }
-    openShown(step);
+    state.want = step.id;
+    begin();
+    go(false);
   }
 
-  function openShown(step) {
-    state.open = step.id;
-    render();
-    if (visible(step)) { scrollTo(step); }
-  }
-
-  function wrapHeading(step) {
-    var h = step.querySelector("h2");
-    var title = h.querySelector(".tut-title");
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "tut-toggle";
-    btn.setAttribute("aria-expanded", "true");
-    while (h.firstChild) { btn.appendChild(h.firstChild); }
-    h.appendChild(btn);
-    btn.addEventListener("click", function () { openInPlace(step, btn); });
-    return title;
-  }
-
-  function addDone(step) {
-    var p = document.createElement("p");
-    p.className = "tut-actions";
-    var b = document.createElement("button");
-    b.type = "button";
-    b.className = "btn btn-primary";
-    b.setAttribute("data-tut-done", "");
-    b.addEventListener("click", function () { markDone(step); });
-    p.appendChild(b);
-    step.querySelector(".tut-body").appendChild(p);
-  }
-
-  function reset() {
-    try { window.localStorage.removeItem(KEY); } catch (e) { /* storage blocked */ }
-    state = { os: detectOS(), net: null, done: [], open: null };
-    window.history.replaceState(null, "", window.location.pathname);
-    render();
-    window.scrollTo(0, 0);
+  function markHere() {
+    var here = card("os", detectOS());
+    if (here) { here.querySelector("[data-tut-here]").hidden = false; }
   }
 
   function bind() {
-    Array.prototype.forEach.call(root.querySelectorAll("[data-tut-os]"), function (b) {
+    all("[data-tut-os]").forEach(function (b) {
       b.addEventListener("click", function () { choose("os", b.getAttribute("data-tut-os")); });
     });
-    Array.prototype.forEach.call(root.querySelectorAll("[data-tut-net]"), function (b) {
+    all("[data-tut-net]").forEach(function (b) {
       b.addEventListener("click", function () { choose("net", b.getAttribute("data-tut-net")); });
     });
-    root.querySelector("[data-tut-reset]").addEventListener("click", reset);
-    window.addEventListener("hashchange", applyHash);
+    one("[data-tut-change]").addEventListener("click", change);
+    ui.back.addEventListener("click", back);
+    ui.next.addEventListener("click", next);
+    window.addEventListener("hashchange", onHash);
   }
 
   function init() {
-    var saved = load();
     var url = fromUrl();
-    state.os = url.os || pick(OSES, saved.os) || detectOS();
-    state.net = url.net || pick(NETS, saved.net);
-    state.done = Array.isArray(saved.done) ? saved.done : [];
-    state.open = typeof saved.open === "string" ? saved.open : null;
-    if (state.os === "android" && hasNet) { state.net = "invite"; }
-    if (!hasNet) { state.net = null; }
-    steps.forEach(function (s) { wrapHeading(s); addDone(s); });
-    root.querySelector("[data-tut-controls]").hidden = false;
+    var step = stepFromHash();
+    state.os = url.os;
+    state.net = hasNet ? url.net : null;
+    state.want = step ? step.id : null;
+    markHere();
     bind();
+    begin();
     render();
-    applyHash();
+    // The address gets its #step only after the page has loaded: a browser jumps to the #step it finds at that moment.
+    whenLoaded(syncUrl);
+    if (step) { landOnLoad(); }
   }
 
   init();

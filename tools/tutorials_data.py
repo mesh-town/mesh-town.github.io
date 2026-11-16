@@ -48,7 +48,8 @@ PAGE = {
     "description": "Install Mesh Town, join a network or start your own, choose an exit and connect the browser: step by step.",
     "lede": "When you finish, this device is in your network, and websites open through the member you choose.",
     "other": "Do you use Linux, a router or an iPhone? See the [install guides](../install/index.html). Already set up? [Open your devices →](devices/index.html)",
-    "android_note": "Start a network on a computer first, then join from the phone",
+    "question": "Which device are you setting up?",
+    "android_note": "A phone can only join a network. To start a new network, use a computer first.",
 }
 
 BROWSERS = [

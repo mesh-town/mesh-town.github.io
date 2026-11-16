@@ -10,6 +10,12 @@ REPO = "https://github.com/mesh-town/meshtown"
 DEFAULT_SCRIPTS = ("variants.js", "copy.js")
 
 
+def icon(name, up, cls=""):
+    """An icon from the sprite assets/icons/lucide.svg (tools/build_icons.py); it takes the colour of the text."""
+    return ('<svg class="icon%s" aria-hidden="true" focusable="false"><use href="%sassets/icons/lucide.svg#%s"></use></svg>'
+            % (" " + cls if cls else "", up, name))
+
+
 def inline(text):
     """Escapes text; `code`, [label](url) and [[button name]] (a program button, checked against the program texts)."""
     ui = []

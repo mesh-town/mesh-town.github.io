@@ -1,8 +1,44 @@
-.tut-q { margin-bottom: var(--s-3); }
-.tut-q-label { margin: 0; font-size: .9375rem; font-weight: 600; color: var(--muted); }
-.tut-q .os-tabs { margin-block: .4rem 0; }
-.tut-controls .btn { min-height: 2.25rem; font-size: .9375rem; }
-.tut-controls[hidden], .tut-strip[hidden], .tut-end[hidden], .tut-os[hidden], .tut-step[hidden], .tut-q .os-tab[hidden] { display: none; }
+/* The wizard: a question with its answers as cards, then the line with the answers, the strip of steps and one step. */
+[data-tut] [hidden] { display: none; }
+[data-tut] h2:focus { outline: none; }
+.tut-stage > h2 { margin: 0 0 var(--s-3); font-size: clamp(1.375rem, 1.2rem + .8vw, 1.75rem); }
+.tut-hint { max-width: 40rem; margin: 0 0 var(--s-4); color: var(--muted); }
+.tut-cards { list-style: none; display: grid; gap: var(--s-3); grid-template-columns: minmax(0, 1fr); max-width: 56rem; margin: var(--s-4) 0 0; padding: 0; }
+.tut-cards > li { margin: 0; }
+@media (min-width: 40rem) { .tut-cards { gap: var(--s-4); } .tut-cards-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tut-cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.tut-card { position: relative; display: flex; align-items: center; gap: var(--s-4); width: 100%; height: 100%; padding: var(--s-4); font: inherit; color: var(--fg); text-align: left; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); cursor: pointer; }
+.tut-card:hover, .tut-card:focus-visible { border-color: var(--accent); background: var(--accent-soft); }
+.tut-card-icon { box-sizing: content-box; width: 1.75rem; height: 1.75rem; padding: .75rem; border-radius: var(--radius); background: var(--accent-soft); color: var(--accent-strong); }
+.tut-card:hover .tut-card-icon, .tut-card:focus-visible .tut-card-icon { background: var(--bg); }
+.tut-card-words { display: grid; gap: .15rem; min-width: 0; }
+.tut-card-title { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
+.tut-card-text { font-size: .9375rem; line-height: 1.45; color: var(--muted); }
+.tut-card-badge { position: absolute; top: .5rem; right: .5rem; padding: .05rem .5rem; font-size: .8125rem; font-weight: 600; color: var(--accent-strong); background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 999px; }
+@media (min-width: 40rem) { .tut-card { flex-direction: column; align-items: flex-start; padding: var(--s-5); } }
+.tut-pick { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem var(--s-4); margin-bottom: var(--s-4); }
+.tut-pick-what { display: inline-flex; align-items: center; gap: var(--s-2); margin: 0; padding: .3rem .8rem; font-weight: 600; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; }
+.tut-pick-what .icon { color: var(--accent); }
+.tut-change { display: inline-flex; align-items: center; gap: .35rem; min-height: 2.25rem; padding: 0 .25rem; font: inherit; font-size: .9375rem; color: var(--accent); background: none; border: 0; cursor: pointer; }
+.tut-change:hover { text-decoration: underline; }
+.tut-pick-note { max-width: 42rem; margin: 0 0 var(--s-4); font-size: .9375rem; color: var(--muted); }
+.tut-strip { position: sticky; top: 0; z-index: 40; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .75rem; padding: .5rem 0; background: var(--bg); border-bottom: 1px solid var(--border); }
+@media (min-width: 48rem) { .tut-strip { top: 3.5rem; } }
+.tut-strip-label { margin: 0; font-weight: 600; white-space: nowrap; }
+.tut-strip ol { display: flex; flex-wrap: nowrap; gap: .3rem; margin: 0; padding: 0; list-style: none; overflow-x: auto; }
+.tut-strip li { margin: 0; }
+.tut-strip button { min-width: 2.25rem; min-height: 2.25rem; padding: 0; font: inherit; font-size: .9375rem; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: 50%; cursor: pointer; }
+.tut-strip button[disabled] { color: var(--muted); cursor: default; opacity: .6; }
+.tut-strip button.is-done { background: var(--accent-soft); border-color: var(--accent-soft); color: var(--accent-strong); }
+.tut-strip button[aria-current="step"] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); font-weight: 700; }
+.js .tut-step { border-top: 0; }
+.tut-body > ol, .tut-os > ol { max-width: 42rem; }
+.tut-nav { max-width: none; display: flex; flex-wrap: wrap; gap: var(--s-3); margin: var(--s-4) 0 0; padding-top: var(--s-5); border-top: 1px solid var(--border); }
+.tut-nav .btn { gap: var(--s-2); }
+.tut-end { margin-top: var(--s-6); padding: var(--s-5); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.tut-end h2 { display: flex; align-items: center; gap: var(--s-2); margin-bottom: var(--s-3); }
+.tut-end h2 .icon { color: var(--accent); }
+.tut-end .links-line a { display: inline-block; margin-top: var(--s-2); }
+.js .tut-end { margin-top: var(--s-5); }
 .tut-steps { list-style: none; margin: 0; padding: 0; counter-reset: tut; }
 .tut-step { margin: 0; padding: var(--s-5) 0; border-top: 1px solid var(--border); counter-increment: tut; min-width: 0; }
 .tut-step > h2 { display: flex; align-items: baseline; gap: var(--s-3); margin: 0 0 var(--s-3); font-size: clamp(1.25rem, 1.1rem + .6vw, 1.5rem); }
@@ -30,21 +66,3 @@ html:not(.js) .tut-num::before { content: counter(tut); }
 @media (prefers-color-scheme: dark) { .tut-mark-light { display: none; } }
 @media not (prefers-color-scheme: dark) { .tut-mark-dark { display: none; } }
 .ui { font-weight: 600; background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 0 .3em; overflow-wrap: anywhere; }
-.tut-toggle { display: flex; align-items: baseline; gap: var(--s-3); width: 100%; padding: 0; margin: 0; font: inherit; color: inherit; text-align: left; background: none; border: 0; cursor: pointer; }
-.tut-toggle:hover .tut-title { color: var(--accent); }
-.tut-step.is-done .tut-num { background: var(--accent); color: var(--accent-fg); }
-.tut-step.is-done .tut-title::after { content: " \2713"; color: var(--accent); }
-.tut-step.is-done:not(.is-open) > h2 { margin-bottom: 0; color: var(--muted); }
-.tut-actions { margin: var(--s-5) 0 0; }
-.tut-strip { position: sticky; top: 0; z-index: 40; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .75rem; padding: .5rem 0; margin-block: var(--s-4); background: var(--bg); border-bottom: 1px solid var(--border); }
-@media (min-width: 48rem) { .tut-strip { top: 3.5rem; } }
-.tut-strip-label { margin: 0; font-weight: 600; white-space: nowrap; }
-.tut-strip ol { display: flex; flex-wrap: nowrap; gap: .3rem; margin: 0; padding: 0; list-style: none; overflow-x: auto; }
-.tut-strip li { margin: 0; }
-.tut-strip button { min-width: 2.25rem; min-height: 2.25rem; font: inherit; font-size: .9375rem; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: 50%; cursor: pointer; }
-.tut-strip button[disabled] { color: var(--muted); cursor: default; opacity: .6; }
-.tut-strip button.is-done { background: var(--accent-soft); color: var(--accent-strong); }
-.tut-strip button[aria-current="step"] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
-.tut-end { margin-top: var(--s-6); padding: var(--s-5); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
-.tut-end h2 { margin-bottom: var(--s-3); }
-.tut-q .os-tab[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
