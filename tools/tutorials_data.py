@@ -21,7 +21,7 @@ FIGS = {
     "install-a": ("Android Install unknown apps with the Allow from this source switch", False),
     "icon-w": ("The Mesh Town tray menu on Windows with the Join or create a network item", False),
     "icon-m": ("The Mesh Town menu bar menu on macOS with the Join or create a network item", False),
-    "password": ("The Set a password screen with two fields and the Continue button", True),
+    "password": ("The Set a password screen with two fields and the Set password button", True),
     "join-form": ("The Join with an invite form with an invite pasted and the Join button", True),
     "joined": ("The page showing You joined the network", True),
     "create-form": ("The Create a new network form with the name family", True),
@@ -97,7 +97,7 @@ STEPS = [
             ("note", "You do not see the icon? Look in System Settings → Menu Bar."),
         ]),
         ("fig-os", {"windows": "icon-w", "macos": "icon-m"}),
-        ("p", "The Mesh Town page opens in your browser. On [[Set a password]], type a password two times and click [[Continue]]. This password only protects this page, not your network."),
+        ("p", "The Mesh Town page opens in your browser. On [[Set a password]], type a password two times and click [[Set password]]. This password only protects this page, not your network."),
         ("fig", "password"),
     ]),
     ("join", ("invite",), ALL, "Join with an invite", "Only with an invite", [

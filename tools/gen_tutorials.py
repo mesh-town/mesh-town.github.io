@@ -12,6 +12,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from site_chrome import block, chrome_bottom, chrome_top, head, inline, write  # noqa: E402
 from tutorials_data import END, FIGS, PAGE, STEPS  # noqa: E402
+from tutorials_marks import MARKS  # noqa: E402
 
 OS_NAMES = {"windows": "Windows", "macos": "macOS", "android": "Android"}
 NET_LABELS = {"invite": "I have an invite", "create": "I am starting a new network"}
@@ -39,6 +40,18 @@ def webp_size(path):
 FIG_KIND = {"devices-scheme": "Diagram"}
 
 
+def ring_set(boxes, theme):
+    box = '<span class="tut-mark%s" aria-hidden="true" style="left:%.1f%%;top:%.1f%%;width:%.1f%%;height:%.1f%%"></span>'
+    return "".join(box % ((theme,) + tuple(v * 100 for v in b)) for b in boxes)
+
+
+def rings(fid):
+    """Rings over a figure; a "<fid>-dark" entry gives the dark picture its own rings when it is laid out differently."""
+    if fid + "-dark" not in MARKS:
+        return ring_set(MARKS.get(fid, []), "")
+    return ring_set(MARKS[fid], " tut-mark-light") + ring_set(MARKS[fid + "-dark"], " tut-mark-dark")
+
+
 def figure(fid):
     alt, own = FIGS[fid]
     names = [fid + "-light.webp", fid + "-dark.webp"] if own else [fid + ".webp"]
@@ -50,7 +63,8 @@ def figure(fid):
     src = lambda n: "../assets/tutorials/" + n
     dark = '<source media="(prefers-color-scheme: dark)" srcset="%s">' % src(names[1]) if own else ""
     img = '<img src="%s" alt="%s"%s loading="lazy">' % (src(names[0]), html.escape(alt), dims)
-    zoom = '<a class="tut-fig-zoom" href="%s" title="Show larger"><picture>%s%s</picture></a>' % (src(names[0]), dark, img)
+    pic = '<span class="tut-fig-pic"><picture>%s%s</picture>%s</span>' % (dark, img, rings(fid))
+    zoom = '<a class="tut-fig-zoom" href="%s" title="Show larger">%s</a>' % (src(names[0]), pic)
     cap = '<figcaption><span class="tut-fig-kind">%s:</span> %s</figcaption>' % (FIG_KIND.get(fid, "Screenshot"), html.escape(alt))
     return '<figure class="tut-fig" data-fig="%s">%s%s</figure>' % (fid, zoom, cap)
 
